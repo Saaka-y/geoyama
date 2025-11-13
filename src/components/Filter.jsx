@@ -3,17 +3,40 @@
 import { useEffect, useState } from "react";
 
 
-export function Filter({ distance, setDistance, courseTime, setCourseTime }) {
+export function Filter({ distance, setDistance, courseTime, setCourseTime, mountains, setMountains }) {
 
   const allMountains = [
-    { name: "Mount Chausu", distance: 2, courseTime: 5 },
-    { name: "Mount Tanigawa", distance: 2, courseTime: 1 },
-    { name: "Mount Jimba", distance: 1, courseTime: 2 },
-    { name: "Mount Nabewari", distance: 1, courseTime: 3 },
-    { name: "Mount Oyama", distance: 1, courseTime: 4 },
-    { name: "Mount Kintoki", distance: 2, courseTime: 6 },]
+    { name: "Mount Chausu", 
+      distance: 2, 
+      courseTime: 5,
+      coodinates: [139.9629289, 37.1248415]
+    },
+    { name: "Mount Tanigawa", 
+      distance: 2, 
+      courseTime: 1, 
+      cppdinates: [138.9303258224096, 36.83582764641854]
+    },
+    { name: "Mount Jimba", 
+      distance: 1, 
+      courseTime: 2,
+      coodinates: [139.166601, 35.652254]
+    },
+    { name: "Mount Nabewari", 
+      distance: 1, 
+      courseTime: 3,
+      coodinates: [139.14161914045997, 35.445043691827536]},
+    { name: "Mount Kinpu", 
+      distance: 2, 
+      courseTime: 6,
+      coodinates: [138.8289016391101, 35.5275878479893]
+    },
+    { name: "Mount Kintoki", 
+      distance: 2, 
+      courseTime: 6,
+      coodinates: [139.00452128748336, 35.29100532254763]
+    },]
 
-  const [mountains, setMountains] = useState([]);
+ 
 
   useEffect(() => {
     let filtered = allMountains;
