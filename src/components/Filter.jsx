@@ -1,67 +1,33 @@
 // Filter.jsx
 
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 
-
-export function Filter({ distance, setDistance, courseTime, setCourseTime, mountains, setMountains }) {
-
-  const allMountains = [
-    { name: "Mount Chausu", 
-      distance: 2, 
-      courseTime: 5,
-      coodinates: [139.9629289, 37.1248415]
-    },
-    { name: "Mount Tanigawa", 
-      distance: 2, 
-      courseTime: 1, 
-      cppdinates: [138.9303258224096, 36.83582764641854]
-    },
-    { name: "Mount Jimba", 
-      distance: 1, 
-      courseTime: 2,
-      coodinates: [139.166601, 35.652254]
-    },
-    { name: "Mount Nabewari", 
-      distance: 1, 
-      courseTime: 3,
-      coodinates: [139.14161914045997, 35.445043691827536]},
-    { name: "Mount Kinpu", 
-      distance: 2, 
-      courseTime: 6,
-      coodinates: [138.8289016391101, 35.5275878479893]
-    },
-    { name: "Mount Kintoki", 
-      distance: 2, 
-      courseTime: 6,
-      coodinates: [139.00452128748336, 35.29100532254763]
-    },]
-
- 
-
+export function Filter({ distance, setDistance, courseTime, setCourseTime, filteredMountains, setFilteredMountains, allMountains }) {
+  
   useEffect(() => {
     let filtered = allMountains;
 
     if (distance) {
-     filtered = filtered.filter(
-        (mountain) => mountain.distance <= parseInt(distance)
+      filtered = filtered.filter(
+        (mountain) => mountain.properties.distance <= parseInt(distance)
       );
     }
 
     if (courseTime) {
       filtered = filtered.filter(
-        (mountain) => mountain.courseTime <= parseInt(courseTime)
+        (mountain) => mountain.properties.courseTime <= parseInt(courseTime)
       );
     }
-    console.log("Filtered:", filtered);
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setMountains(filtered);
+
+    setFilteredMountains(filtered);
   }
     , [distance, courseTime]);
 
 
   return (
-    <div className="h-1/3 p-4 flex items-start justify-start gap-3">
+    <div className="p-6 md:p-8 flex md:flex-col  items-start justify-center md:justify-start gap-6 bg-(var(--color-surface)) w-full md:w-1/3 h-1/3 md:h-full text-md md:text-xl">
       <select
+        className="m-1"
         value={distance}
         onChange={(e) => setDistance(e.target.value)}>
         <option value="">Distance from Tokyo</option>
@@ -73,6 +39,7 @@ export function Filter({ distance, setDistance, courseTime, setCourseTime, mount
       </select>
 
       <select
+        className="m-1"
         value={courseTime}
         onChange={(e) => setCourseTime(e.target.value)}>
         <option value="">Approx course time</option>
@@ -82,15 +49,15 @@ export function Filter({ distance, setDistance, courseTime, setCourseTime, mount
         <option value="7">Less than 7 hours</option>
       </select>
 
-      <div className="mt-2">
+      {/* <div>
         {mountains.length > 0 ? (
           mountains.map((m, i) => (
-            <p key={i}>{m.name}</p>
+            <p className="m-1 pl-1" key={i}>{m.name}</p>
           ))
         ) : (
           <p>No mountains match the filter</p>
         )}
-      </div>
+      </div> */}
 
     </div>
   );
