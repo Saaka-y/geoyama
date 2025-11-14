@@ -1,9 +1,15 @@
 // Filter.jsx
 
 import { useEffect } from "react";
+import { DateSelect } from "@/components/DateSelect"
 
-export function Filter({ distance, setDistance, courseTime, setCourseTime, setFilteredMountains,filteredMountains, setSelectedMountain, allMountains, initialView, setMapView }) {
-  
+export function Filter({ filterState, mapState, mountainState }) {
+  // props
+  const { distance, setDistance, courseTime, setCourseTime, selectedDate, setSelectedDate } = filterState;
+  const { setMapView, initialView, selectedMountain, setSelectedMountain } = mapState;
+  const { allMountains, filteredMountains, setFilteredMountains } = mountainState;
+
+  // filtered mountains
   useEffect(() => {
     let filtered = allMountains;
 
@@ -23,14 +29,17 @@ export function Filter({ distance, setDistance, courseTime, setCourseTime, setFi
   }
     , [distance, courseTime]);
 
-  
-    const handleClearFilter = () => {
-      setFilteredMountains(allMountains);
-      setDistance("");
-      setCourseTime("");
-      setMapView(initialView);
-      setSelectedMountain(null);
-    }
+
+  // clear button
+  const handleClearFilter = () => {
+    setFilteredMountains(allMountains);
+    setDistance("");
+    setCourseTime("");
+    setSelectedDate(null)
+    setMapView(initialView);
+    setSelectedMountain(null);
+
+  }
 
 
   return (
@@ -50,21 +59,29 @@ export function Filter({ distance, setDistance, courseTime, setCourseTime, setFi
       <select
         className="m-1"
         value={courseTime}
-        onChange={(e) => setCourseTime(e.target.value)}>
+        onChange={(e) => setCourseTime(e.target.value)}
+      >
         <option value="">Hike duration</option>
         <option value="1">Less than an hour</option>
         <option value="3">Less than 3 hours</option>
         <option value="5">Less than 5 hours</option>
         <option value="7">Less than 7 hours</option>
       </select>
-      {filteredMountains.length <= 0 ?  <p  className="m-1 px-1 text-red-500">No mountains match the filter</p> : ""}
 
-      <button 
+      <DateSelect
+        selectedDate={selectedDate}
+        setSelectedDate={setSelectedDate}
+      />
+
+      {/* show alert when no mountains being matched */}
+      {filteredMountains.length <= 0 ? <p className="m-1 px-1 text-red-500">No mountains match the filter</p> : ""}
+
+      <button
         className="m-1 px-2 bg-white"
         onClick={handleClearFilter}
-        >
-      Clear
-    </button>
+      >
+        Clear
+      </button>
     </div>
   );
 }

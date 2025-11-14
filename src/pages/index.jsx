@@ -89,8 +89,11 @@ export default function Home() {
     ]
   };
 
+  // select elements
   const [distance, setDistance] = useState("");
   const [courseTime, setCourseTime] = useState("");
+  const [selectedDate, setSelectedDate] = useState(null);
+  // mountains
   const [allMountains] = useState(geojson.features);
   const [filteredMountains, setFilteredMountains] = useState(allMountains);
 
@@ -102,6 +105,7 @@ export default function Home() {
     bearing: -17,
   }
 
+  // map
   const [mapView, setMapView] = useState(initialView);
   const [selectedMountain, setSelectedMountain] = useState(null);
 
@@ -110,24 +114,39 @@ export default function Home() {
     setMapView(initialView);
   }
 
+  // props for Filter.jsx
+  const filterState = {
+    distance,
+    setDistance,
+    courseTime,
+    setCourseTime,
+    selectedDate,
+    setSelectedDate
+  };
+
+  const mapState = {
+    setMapView,
+    initialView,
+    selectedMountain,
+    setSelectedMountain
+  };
+
+  const mountainState = {
+    allMountains,
+    filteredMountains,
+    setFilteredMountains
+  };
+
   return (
     <div className="w-screen h-screen flex flex-col-reverse md:flex-row justify-center bg-(var(--color-background))">
       {/* 上部：フィルター */}
       <Filter
-        distance={distance}
-        setDistance={setDistance}
-        courseTime={courseTime}
-        setCourseTime={setCourseTime}
-        filteredMountains={filteredMountains}
-        setFilteredMountains={setFilteredMountains}
-        setSelectedMountain={setSelectedMountain}
-        allMountains={allMountains}
-        mapView={mapView}
-        setMapView={setMapView}
-        initialView={initialView}  
+        filterState={filterState}
+        mapState={mapState}
+        mountainState={mountainState}
       />
-      <button 
-        className="bg-white cursor-pointer" 
+      <button
+        className="bg-white cursor-pointer"
         onClick={handleBackToMap}
       >
         Back to Map
@@ -137,10 +156,10 @@ export default function Home() {
       <JapanMap
         filteredMountains={filteredMountains}
         mapView={mapView}
-        setMapView={setMapView} 
+        setMapView={setMapView}
         selectedMountain={selectedMountain}
         setSelectedMountain={setSelectedMountain}
-        />
+      />
     </div>
   );
 }

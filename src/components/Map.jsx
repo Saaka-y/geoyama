@@ -17,7 +17,7 @@ const skyLayer = {
   }
 }
 
-export function JapanMap({ filteredMountains, mapView, setMapView, selectedMountain, setSelectedMountain }) {
+export function JapanMap({ filteredMountains, mapView, setMapView, selectedMountain, setSelectedMountain, selectedDate }) {
 
   const handleMarkerClick = (m) => {
     setMapView({
