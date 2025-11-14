@@ -95,6 +95,18 @@ export default function Home() {
   const [allMountains] = useState(geojson.features);
   const [filteredMountains, setFilteredMountains] = useState(allMountains);
 
+  const initialView = {
+    latitude: 35.6895,
+    longitude: 139.6917,
+    zoom: 7,
+    pitch: 45,
+    bearing: -17,
+  }
+
+  const [mapView, setMapView] = useState(initialView);
+  const [selectedMountain, setSelectedMountain] = useState(null);
+
+
   return (
     <div className="w-screen h-screen flex flex-col md:flex-row justify-center bg-(var(--color-background))">
       {/* 上部：フィルター */}
@@ -105,10 +117,24 @@ export default function Home() {
         setCourseTime={setCourseTime}
         filteredMountains={filteredMountains}
         setFilteredMountains={setFilteredMountains}
-        allMountains={allMountains} />
+        allMountains={allMountains}
+        mapView={mapView}
+        setMapView={setMapView}
+        initialView={initialView}  
+      />
+      <button 
+        className="bg-white cursor-pointer" 
+        onClick={() => setMapView(initialView)}
+      >
+        Back to Map
+      </button>
 
       {/* 下部：地図 */}
-      <JapanMap filteredMountains={filteredMountains}/>
+      <JapanMap
+        filteredMountains={filteredMountains}
+        mapView={mapView}
+        setMapView={setMapView} 
+        />
     </div>
   );
 }

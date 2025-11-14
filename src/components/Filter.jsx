@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-export function Filter({ distance, setDistance, courseTime, setCourseTime, filteredMountains, setFilteredMountains, allMountains }) {
+export function Filter({ distance, setDistance, courseTime, setCourseTime, setFilteredMountains, allMountains, initialView, setMapView }) {
   
   useEffect(() => {
     let filtered = allMountains;
@@ -23,9 +23,17 @@ export function Filter({ distance, setDistance, courseTime, setCourseTime, filte
   }
     , [distance, courseTime]);
 
+  
+    const handleClearFilter = () => {
+      setFilteredMountains(allMountains);
+      setDistance("");
+      setCourseTime("");
+      setMapView(initialView);
+    }
+
 
   return (
-    <div className="p-6 md:p-8 flex md:flex-col  items-start justify-center md:justify-start gap-6 bg-(var(--color-surface)) w-full md:w-1/3 h-1/3 md:h-full text-md md:text-xl">
+    <div className="p-6 md:p-8 flex md:flex-col  items-start justify-center md:justify-start gap-4 bg-(var(--color-surface)) w-full md:w-1/3 h-1/3 md:h-full text-md md:text-xl">
       <select
         className="m-1"
         value={distance}
@@ -48,6 +56,13 @@ export function Filter({ distance, setDistance, courseTime, setCourseTime, filte
         <option value="5">Less than 5 hours</option>
         <option value="7">Less than 7 hours</option>
       </select>
+
+      <button 
+        className="m-1 px-2 bg-white"
+        onClick={handleClearFilter}
+        >
+      Clear
+    </button>
 
       {/* <div>
         {mountains.length > 0 ? (
