@@ -17,7 +17,7 @@ const skyLayer = {
   }
 }
 
-export function JapanMap({ filteredMountains, mapView, setMapView }) {
+export function JapanMap({ filteredMountains, mapView, setMapView, selectedMountain, setSelectedMountain }) {
 
 
   const handleMarkerClick = (m) => {
@@ -28,10 +28,11 @@ export function JapanMap({ filteredMountains, mapView, setMapView }) {
       pitch: 60, // 3D 表示寄り
       bearing: 0
     })
+    setSelectedMountain(m)
   }
 
   return (
-    <div className="h-2/3 md:h-full md:w-2/3 relative z-10">
+    <div className="h-2/3 md:h-full w-full md:w-2/3 relative z-10">
       <Map
         {...mapView}
         onMove={evt => setMapView(evt.viewState)}
@@ -57,8 +58,23 @@ export function JapanMap({ filteredMountains, mapView, setMapView }) {
             key={i}
             longitude={m.geometry.coordinates[0]}
             latitude={m.geometry.coordinates[1]}
-            onClick={() => handleMarkerClick(m)}
-          />
+          // onClick={() => handleMarkerClick(m)}
+          >
+            <div className="relative">
+              {/* カスタムピン */}
+              <div
+                className="w-4 h-4 bg-blue-600 rounded-full cursor-pointer"
+                onClick={() => handleMarkerClick(m)}
+              />
+
+              {/* 選択中の山だけ情報ボックス表示 */}
+              {selectedMountain?.properties.description === m.properties.description && (
+                <div className="absolute top-0 left-full w-30 ml-2 p-2 bg-white/70 text-black rounded shadow-md z-20">
+                  Shinjuku to the start: {m.properties.distance} hrs
+                </div>
+              )}
+            </div>
+          </Marker>
         ))}
       </Map>
     </div>

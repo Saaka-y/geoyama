@@ -106,9 +106,13 @@ export default function Home() {
   const [mapView, setMapView] = useState(initialView);
   const [selectedMountain, setSelectedMountain] = useState(null);
 
+  const handleBackToMap = () => {
+    setSelectedMountain(null);
+    setMapView(initialView);
+  }
 
   return (
-    <div className="w-screen h-screen flex flex-col md:flex-row justify-center bg-(var(--color-background))">
+    <div className="w-screen h-screen flex flex-col-reverse md:flex-row justify-center bg-(var(--color-background))">
       {/* 上部：フィルター */}
       <Filter
         distance={distance}
@@ -117,6 +121,7 @@ export default function Home() {
         setCourseTime={setCourseTime}
         filteredMountains={filteredMountains}
         setFilteredMountains={setFilteredMountains}
+        setSelectedMountain={setSelectedMountain}
         allMountains={allMountains}
         mapView={mapView}
         setMapView={setMapView}
@@ -124,7 +129,7 @@ export default function Home() {
       />
       <button 
         className="bg-white cursor-pointer" 
-        onClick={() => setMapView(initialView)}
+        onClick={handleBackToMap}
       >
         Back to Map
       </button>
@@ -134,6 +139,8 @@ export default function Home() {
         filteredMountains={filteredMountains}
         mapView={mapView}
         setMapView={setMapView} 
+        selectedMountain={selectedMountain}
+        setSelectedMountain={setSelectedMountain}
         />
     </div>
   );

@@ -2,7 +2,7 @@
 
 import { useEffect } from "react";
 
-export function Filter({ distance, setDistance, courseTime, setCourseTime, setFilteredMountains, allMountains, initialView, setMapView }) {
+export function Filter({ distance, setDistance, courseTime, setCourseTime, setFilteredMountains,filteredMountains, setSelectedMountain, allMountains, initialView, setMapView }) {
   
   useEffect(() => {
     let filtered = allMountains;
@@ -29,11 +29,12 @@ export function Filter({ distance, setDistance, courseTime, setCourseTime, setFi
       setDistance("");
       setCourseTime("");
       setMapView(initialView);
+      setSelectedMountain(null);
     }
 
 
   return (
-    <div className="p-6 md:p-8 flex md:flex-col  items-start justify-center md:justify-start gap-4 bg-(var(--color-surface)) w-full md:w-1/3 h-1/3 md:h-full text-md md:text-xl">
+    <div className="p-6 md:p-8 mt-2 flex flex-col justify-start md:justify-start gap-4 bg-(var(--color-surface)) w-full md:w-1/3 h-1/3 md:h-full text-md md:text-xl">
       <select
         className="m-1"
         value={distance}
@@ -50,12 +51,13 @@ export function Filter({ distance, setDistance, courseTime, setCourseTime, setFi
         className="m-1"
         value={courseTime}
         onChange={(e) => setCourseTime(e.target.value)}>
-        <option value="">Approx course time</option>
+        <option value="">Hike duration</option>
         <option value="1">Less than an hour</option>
         <option value="3">Less than 3 hours</option>
         <option value="5">Less than 5 hours</option>
         <option value="7">Less than 7 hours</option>
       </select>
+      {filteredMountains.length <= 0 ?  <p  className="m-1 px-1 text-red-500">No mountains match the filter</p> : ""}
 
       <button 
         className="m-1 px-2 bg-white"
@@ -63,17 +65,6 @@ export function Filter({ distance, setDistance, courseTime, setCourseTime, setFi
         >
       Clear
     </button>
-
-      {/* <div>
-        {mountains.length > 0 ? (
-          mountains.map((m, i) => (
-            <p className="m-1 pl-1" key={i}>{m.name}</p>
-          ))
-        ) : (
-          <p>No mountains match the filter</p>
-        )}
-      </div> */}
-
     </div>
   );
 }
