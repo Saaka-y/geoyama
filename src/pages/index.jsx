@@ -15,9 +15,9 @@ export default function Home() {
           coordinates: [139.9629289, 37.1248415]
         },
         properties: {
-          title: 'Mapbox',
+          title: 'Mt.Chausu',
           description: 'Mount Chausu',
-          distance: 5,
+          distance: 3.5,
           courseTime: 3
         }
       },
@@ -28,9 +28,9 @@ export default function Home() {
           coordinates: [138.9303258224096, 36.83582764641854]
         },
         properties: {
-          title: 'Mapbox',
+          title: 'Mt.Tanigawa',
           description: 'Mount Tanigawa',
-          distance: 4,
+          distance: 3,
           courseTime: 1
         }
       },
@@ -41,9 +41,9 @@ export default function Home() {
           coordinates: [139.166601, 35.652254]
         },
         properties: {
-          title: 'Mapbox',
+          title: 'Mt.Jimba',
           description: 'Mount Jimba',
-          distance: 1,
+          distance: 1.5,
           courseTime: 2
         }
       },
@@ -54,7 +54,7 @@ export default function Home() {
           coordinates: [139.14161914045997, 35.445043691827536]
         },
         properties: {
-          title: 'Mapbox',
+          title: 'Mt.Nabewari',
           description: 'Mount Nabewari',
           distance: 2,
           courseTime: 4
@@ -69,7 +69,7 @@ export default function Home() {
         properties: {
           title: 'Mapbox',
           description: 'Mount Kintoki',
-          distance: 3,
+          distance: 2.5,
           courseTime: 4
         }
       },
@@ -80,11 +80,10 @@ export default function Home() {
           coordinates: [138.8289016391101, 35.5275878479893]
         },
         properties: {
-          title: 'Mapbox',
+          title: 'Mt.Kinpu',
           description: 'Mount Kinpu',
-          distance: 4,
+          distance: 3.25,
           courseTime: 6
-
         }
       },
     ]

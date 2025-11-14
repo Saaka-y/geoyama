@@ -19,7 +19,6 @@ const skyLayer = {
 
 export function JapanMap({ filteredMountains, mapView, setMapView, selectedMountain, setSelectedMountain }) {
 
-
   const handleMarkerClick = (m) => {
     setMapView({
       latitude: m.geometry.coordinates[1],
@@ -70,7 +69,9 @@ export function JapanMap({ filteredMountains, mapView, setMapView, selectedMount
               {/* 選択中の山だけ情報ボックス表示 */}
               {selectedMountain?.properties.description === m.properties.description && (
                 <div className="absolute top-0 left-full w-30 ml-2 p-2 bg-white/70 text-black rounded shadow-md z-20">
-                  Shinjuku to the start: {m.properties.distance} hrs
+                  Shinjuku to car park: {m.properties.distance} {m.properties.distance === 1 ? "hr" : "hrs"}
+                  <br/>
+                  Duration to return: {m.properties.courseTime} {m.properties.courseTime === 1 ? "hr" : "hrs"}
                 </div>
               )}
             </div>
