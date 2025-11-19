@@ -44,7 +44,7 @@ export function Filter({ filterState, mapState, mountainState }) {
     <div className="p-6 md:p-8 mt-2 flex flex-col justify-start items-center md:justify-start gap-4 bg-(--color-surface) w-full md:w-1/3 h-1/3 md:h-full">
 
       <button
-        className="w-[90%] bg-(--select-bg) border-[#767676]"
+        className="w-[90%] bg-(--select-bg) border-(--border)"
         onClick={handleClearFilter}
       >
         Clear
@@ -53,7 +53,7 @@ export function Filter({ filterState, mapState, mountainState }) {
       <div className="w-[90%] flex flex-row md:flex-col items-center md:items-start  gap-2">
         <p className="w-1/2 md:w-full text-left text-xs ">Driving hours from Shinjuku:</p>
         <select
-          className="w-2/3 md:w-full border border-gray-400 rounded px-2 py-1"
+          className="w-2/3 md:w-full rounded px-2 py-1"
           value={distance}
           onChange={(e) => setDistance(e.target.value)}>
           <option value="1">Within an hour</option>
@@ -67,7 +67,7 @@ export function Filter({ filterState, mapState, mountainState }) {
       <div className=" w-[90%] flex flex-row md:flex-col items-center md:items-start gap-2">
         <p className="w-1/2 md:w-full text-left text-xs">Approx. Hike duration:</p>
         <select
-          className="w-2/3 md:w-full border border-gray-400 rounded px-2 py-1"
+          className="w-2/3 md:w-full rounded px-2 py-1"
 
           value={courseTime}
           onChange={(e) => setCourseTime(e.target.value)}
