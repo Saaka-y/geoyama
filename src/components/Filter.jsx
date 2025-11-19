@@ -41,8 +41,8 @@ export function Filter({ filterState, mapState, mountainState }) {
 
 
   return (
-    <div className="p-6 md:p-8 mt-2 flex flex-col justify-start items-center md:justify-start gap-4 bg-(--color-surface) w-full md:w-1/3 h-1/3 md:h-full">
-
+    <>
+      {/* Clear btn */}
       <button
         className="w-[90%] bg-(--select-bg) border-(--border)"
         onClick={handleClearFilter}
@@ -50,6 +50,7 @@ export function Filter({ filterState, mapState, mountainState }) {
         Clear
       </button>
 
+      {/* Hours from Shinjuku */}
       <div className="w-[90%] flex flex-row md:flex-col items-center md:items-start  gap-2">
         <p className="w-1/2 md:w-full text-left text-xs ">Driving hours from Shinjuku:</p>
         <select
@@ -63,7 +64,7 @@ export function Filter({ filterState, mapState, mountainState }) {
           <option value="5">Over 5 hours</option>
         </select>
       </div>
-
+      {/* Course time */}
       <div className=" w-[90%] flex flex-row md:flex-col items-center md:items-start gap-2">
         <p className="w-1/2 md:w-full text-left text-xs">Approx. Hike duration:</p>
         <select
@@ -78,7 +79,7 @@ export function Filter({ filterState, mapState, mountainState }) {
           <option value="7">Less than 7 hours</option>
         </select>
       </div>
-
+       {/* Date */}
       <div className=" w-[90%] flex flex-row md:flex-col items-center md:items-start gap-2">
         <p className="w-1/2 md:w-full text-left text-xs">Select Date:</p>
         <DateSelect
@@ -87,11 +88,8 @@ export function Filter({ filterState, mapState, mountainState }) {
           className="w-2/3 md:w-full border border-gray-400 rounded px-2 py-1"
         />
       </div>
-
-
       {/* show alert when no mountains being matched */}
       {filteredMountains.length === 0 && (<p className="m-1 px-1 text-red-500">No mountains match the filter</p>)}
-    </div>
-
+    </>
   );
 }
