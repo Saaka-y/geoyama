@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { Filter } from "@/components/Filter";
 import { JapanMap } from "@/components/Map"
+import { WeatherInfo } from "@/components/WeatherInfo";
 
 export default function Home() {
   const geojson = {
@@ -138,13 +139,17 @@ export default function Home() {
   };
 
   return (
-    <div className="w-screen h-screen flex flex-col-reverse md:flex-row justify-center bg-[var(--color-background)]">
-      {/* 上部：フィルター */}
-      <Filter
-        filterState={filterState}
-        mapState={mapState}
-        mountainState={mountainState}
+    <div className="w-screen h-screen flex flex-col md:flex-row justify-center bg-[var(--color-background)]">
+
+      {/* Map*/}
+      <JapanMap
+        filteredMountains={filteredMountains}
+        mapView={mapView}
+        setMapView={setMapView}
+        selectedMountain={selectedMountain}
+        setSelectedMountain={setSelectedMountain}
       />
+
       {selectedMountain && (
         <button
           className="bg-white cursor-pointer"
@@ -154,14 +159,19 @@ export default function Home() {
         </button>
       )}
 
-      {/* 下部：地図 */}
-      <JapanMap
-        filteredMountains={filteredMountains}
-        mapView={mapView}
-        setMapView={setMapView}
-        selectedMountain={selectedMountain}
-        setSelectedMountain={setSelectedMountain}
-      />
+      {/* Information part */}
+      <div className="p-6 md:p-8 mt-2 flex flex-col justify-start items-center md:justify-start gap-4 bg-(--color-surface) w-full md:w-1/3 h-1/3 md:h-full">
+        {!selectedMountain ? (
+          <Filter
+            filterState={filterState}
+            mapState={mapState}
+            mountainState={mountainState}
+          />) : (
+          <WeatherInfo
+            selectedDate={selectedDate}
+            setSelectedDate={setSelectedDate}
+          />)}
+      </div>
     </div>
   );
 }
