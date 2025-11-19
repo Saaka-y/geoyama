@@ -1,8 +1,10 @@
 @import "tailwindcss";
 
 :root {
-  --background: #f9f9f9;
+  --background: #f3f3f3;
   --foreground: #171717;
+  --select-bg: #fefefe;
+  --border: #767676;
   margin: 0;
   padding: 0;
   box-sizing: border-box;
@@ -11,8 +13,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-select-bg: var(select-bg);
+  --border: var(--border)
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -28,3 +30,21 @@ body {
   font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif, sans-serif;
 }
 
+label {
+  margin-right: 1rem;
+}
+
+select {
+  background-color: var(--select-bg);   
+  border: 1px solid var(--border);   
+  border-radius: 6px;        
+  padding: 0.2rem 1rem;     
+  font-size: 0.8rem;        
+  color: #333;            
+  cursor: pointer;            
+  transition: all 0.2s ease-in-out; 
+}
+
+select:focus {
+  box-shadow: 0 0 0 3px rgba(38, 69, 172, 0.2); 
+}

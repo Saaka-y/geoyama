@@ -1,4 +1,4 @@
-// Map/index.jsx
+// components/Map.jsx
 "use client";
 import { Map, Marker, Source, Layer } from 'react-map-gl';
 import { useState } from "react"

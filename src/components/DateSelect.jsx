@@ -1,6 +1,8 @@
+/* eslint-disable react-hooks/set-state-in-effect */
+// components/DateSelect.jsx
 import { useState, useEffect } from "react";
 
-export function DateSelect({ selectedDate, setSelectedDate }) {
+export function DateSelect({ selectedDate, setSelectedDate, className }) {
 
   const [dateOptions, setDateOptions] = useState([]);
 
@@ -16,17 +18,21 @@ export function DateSelect({ selectedDate, setSelectedDate }) {
 
       const label =
         i === 0 ? "Today" :
-        i === 1 ? "Tomorrow" :
-        `${i} days later`;
+          i === 1 ? "Tomorrow" :
+            `${i} days later`;
 
+      // 日付は後々国際対応に変える
       options.push({
         date,
         label,
-        value: date.toISOString().split("T")[0]
+        value: date.toISOString().split("T")[0],
+        string: date.toLocaleDateString("en-UK", {
+          weekday: "short",
+          month: "short",
+          day: "numeric"
+        })
       });
     }
-
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setDateOptions(options);
   }, []);
 
@@ -40,13 +46,11 @@ export function DateSelect({ selectedDate, setSelectedDate }) {
     <select
       value={selectedDate?.value || ""}
       onChange={handleDateSelect}
-      className="m-1"
+      className={className}
     >
-      <option value="">Select a date</option>
-
       {dateOptions.map((opt) => (
         <option key={opt.value} value={opt.value}>
-          {opt.label} ({opt.date.toDateString()})
+          {opt.label} ({opt.string})
         </option>
       ))}
     </select>

@@ -138,19 +138,21 @@ export default function Home() {
   };
 
   return (
-    <div className="w-screen h-screen flex flex-col-reverse md:flex-row justify-center bg-(var(--color-background))">
+    <div className="w-screen h-screen flex flex-col-reverse md:flex-row justify-center bg-[var(--color-background)]">
       {/* 上部：フィルター */}
       <Filter
         filterState={filterState}
         mapState={mapState}
         mountainState={mountainState}
       />
-      <button
-        className="bg-white cursor-pointer"
-        onClick={handleBackToMap}
-      >
-        Back to Map
-      </button>
+      {selectedMountain && (
+        <button
+          className="bg-white cursor-pointer"
+          onClick={handleBackToMap}
+        >
+          Back to Map
+        </button>
+      )}
 
       {/* 下部：地図 */}
       <JapanMap
