@@ -23,8 +23,8 @@ export function JapanMap({ filteredMountains, mapView, setMapView, selectedMount
     setMapView({
       latitude: m.geometry.coordinates[1],
       longitude: m.geometry.coordinates[0],
-      zoom: 14,
-      pitch: 60, // 3D 表示寄り
+      zoom: 10,
+      pitch: 40, // 3D 表示寄り
       bearing: 0
     })
     setSelectedMountain(m)
