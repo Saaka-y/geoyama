@@ -1,94 +1,14 @@
 // pages/index.jsx
 "use client";
 import { useState } from "react";
-import { Filter } from "@/components/Filter";
-import { JapanMap } from "@/components/Map"
-import { WeatherInfo } from "@/components/WeatherInfo";
+import { geojson } from "@/components/data/mountains";
+import { MainView } from "@/components/MainView/MainView";
 
 export default function Home() {
-  const geojson = {
-    type: 'FeatureCollection',
-    features: [
-      {
-        type: 'Feature',
-        geometry: {
-          type: 'Point',
-          coordinates: [139.9629289, 37.1248415]
-        },
-        properties: {
-          title: 'Mt.Chausu',
-          description: 'Mount Chausu',
-          distance: 3.5,
-          courseTime: 3
-        }
-      },
-      {
-        type: 'Feature',
-        geometry: {
-          type: 'Point',
-          coordinates: [138.9303258224096, 36.83582764641854]
-        },
-        properties: {
-          title: 'Mt.Tanigawa',
-          description: 'Mount Tanigawa',
-          distance: 3,
-          courseTime: 1
-        }
-      },
-      {
-        type: 'Feature',
-        geometry: {
-          type: 'Point',
-          coordinates: [139.166601, 35.652254]
-        },
-        properties: {
-          title: 'Mt.Jimba',
-          description: 'Mount Jimba',
-          distance: 1.5,
-          courseTime: 2
-        }
-      },
-      {
-        type: 'Feature',
-        geometry: {
-          type: 'Point',
-          coordinates: [139.14161914045997, 35.445043691827536]
-        },
-        properties: {
-          title: 'Mt.Nabewari',
-          description: 'Mount Nabewari',
-          distance: 2,
-          courseTime: 4
-        }
-      },
-      {
-        type: 'Feature',
-        geometry: {
-          type: 'Point',
-          coordinates: [139.00452128748336, 35.29100532254763]
-        },
-        properties: {
-          title: 'Mapbox',
-          description: 'Mount Kintoki',
-          distance: 2.5,
-          courseTime: 4
-        }
-      },
-      {
-        type: 'Feature',
-        geometry: {
-          type: 'Point',
-          coordinates: [138.8289016391101, 35.5275878479893]
-        },
-        properties: {
-          title: 'Mt.Kinpu',
-          description: 'Mount Kinpu',
-          distance: 3.25,
-          courseTime: 6
-        }
-      },
-    ]
-  };
+
+  //**************************/
+  // STATES /
+  //**************************/
 
   // select elements
   const [distance, setDistance] = useState("");
@@ -110,12 +30,43 @@ export default function Home() {
   const [mapView, setMapView] = useState(initialView);
   const [selectedMountain, setSelectedMountain] = useState(null);
 
+  // screen size
+  const smallScreenClass = "w-full md:w-1/3 h-1/3 md:h-full";
+  const fullScreenClass = "h-full md:w-full  p-0 m-0";
+  const normalMapClass = " h-2/3 md:w-2/3";
+  const zeroMapClass = "h-0 md:w-0";
+
+  const [infoViewClass, setInfoViewClass] = useState(smallScreenClass)
+  const [mapViewClass, setMapViewClass] = useState(normalMapClass)
+  const [isFullScreen, setIsFullScreen] = useState(false)
+
+
+  //**************************/
+  // EVENTS /
+  //**************************/
   const handleBackToMap = () => {
     setSelectedMountain(null);
     setMapView(initialView);
+    setInfoViewClass(smallScreenClass);
+    setIsFullScreen(false);
+    setMapViewClass(normalMapClass);
   }
 
-  // props for Filter.jsx
+  const handleToFullScreen = () => {
+    if (!isFullScreen) setIsFullScreen(true);
+    setInfoViewClass(fullScreenClass);
+    setMapViewClass(zeroMapClass);
+  }
+
+  const handleShrinkScreen = () => {
+    if (isFullScreen) setIsFullScreen(false);
+    setInfoViewClass(smallScreenClass);
+    setMapViewClass(normalMapClass);
+  }
+
+  //**************************/
+  // PROPS  /
+  //**************************/
   const filterState = {
     distance,
     setDistance,
@@ -126,6 +77,7 @@ export default function Home() {
   };
 
   const mapState = {
+    mapView,
     setMapView,
     initialView,
     selectedMountain,
@@ -138,40 +90,28 @@ export default function Home() {
     setFilteredMountains
   };
 
+  const screenSizeState = {
+    infoViewClass,
+    setInfoViewClass,
+    mapViewClass,
+    setMapViewClass,
+    isFullScreen,
+    setIsFullScreen
+  }
+
+  const events = {
+    handleBackToMap,
+    handleToFullScreen,
+    handleShrinkScreen,
+  }
+
   return (
-    <div className="w-screen h-screen flex flex-col md:flex-row justify-center bg-[var(--color-background)]">
-
-      {/* Map*/}
-      <JapanMap
-        filteredMountains={filteredMountains}
-        mapView={mapView}
-        setMapView={setMapView}
-        selectedMountain={selectedMountain}
-        setSelectedMountain={setSelectedMountain}
-      />
-
-      {selectedMountain && (
-        <button
-          className="bg-white cursor-pointer"
-          onClick={handleBackToMap}
-        >
-          Back to Map
-        </button>
-      )}
-
-      {/* Information part */}
-      <div className="p-6 md:p-8 mt-2 flex flex-col justify-start items-center md:justify-start gap-4 bg-(--color-surface) w-full md:w-1/3 h-1/3 md:h-full">
-        {!selectedMountain ? (
-          <Filter
-            filterState={filterState}
-            mapState={mapState}
-            mountainState={mountainState}
-          />) : (
-          <WeatherInfo
-            selectedDate={selectedDate}
-            setSelectedDate={setSelectedDate}
-          />)}
-      </div>
-    </div>
+    <MainView
+      filterState={filterState}
+      mapState={mapState}
+      mountainState={mountainState}
+      screenSizeState={screenSizeState}
+      events={events}
+    />
   );
 }

@@ -1,8 +1,8 @@
 // components/Map.jsx
 "use client";
 import { Map, Marker, Source, Layer } from 'react-map-gl';
-import { useState } from "react"
 import 'mapbox-gl/dist/mapbox-gl.css';
+import { MountainInfoBox } from '@/components/Map/MountainInfoBox';
 
 const accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
@@ -17,7 +17,25 @@ const skyLayer = {
   }
 }
 
-export function JapanMap({ filteredMountains, mapView, setMapView, selectedMountain, setSelectedMountain, selectedDate }) {
+export function JapanMap({ mapState, mountainState }) {
+
+  //**************************/
+  // PROPS  /
+  //**************************/
+  const {
+    mapView,
+    setMapView,
+    initialView,
+    selectedMountain,
+    setSelectedMountain
+  } = mapState;
+
+  const {
+    allMountains,
+    filteredMountains,
+    setFilteredMountains
+  } = mountainState;
+
 
   const handleMarkerClick = (m) => {
     setMapView({
@@ -31,7 +49,7 @@ export function JapanMap({ filteredMountains, mapView, setMapView, selectedMount
   }
 
   return (
-    <div className="h-2/3 md:h-full w-full md:w-2/3 relative z-10">
+    <>
       <Map
         {...mapView}
         onMove={evt => setMapView(evt.viewState)}
@@ -57,7 +75,6 @@ export function JapanMap({ filteredMountains, mapView, setMapView, selectedMount
             key={i}
             longitude={m.geometry.coordinates[0]}
             latitude={m.geometry.coordinates[1]}
-          // onClick={() => handleMarkerClick(m)}
           >
             <div className="relative">
               {/* カスタムピン */}
@@ -65,19 +82,11 @@ export function JapanMap({ filteredMountains, mapView, setMapView, selectedMount
                 className="w-4 h-4 bg-blue-600 rounded-full cursor-pointer"
                 onClick={() => handleMarkerClick(m)}
               />
-
-              {/* 選択中の山だけ情報ボックス表示 */}
-              {selectedMountain?.properties.description === m.properties.description && (
-                <div className="absolute top-0 left-full w-30 ml-2 p-2 bg-white/70 text-black rounded shadow-md z-20">
-                  Shinjuku to car park: {m.properties.distance} {m.properties.distance === 1 ? "hr" : "hrs"}
-                  <br/>
-                  Duration to return: {m.properties.courseTime} {m.properties.courseTime === 1 ? "hr" : "hrs"}
-                </div>
-              )}
+              <MountainInfoBox mountain={m} selectedMountain={selectedMountain} />
             </div>
           </Marker>
         ))}
       </Map>
-    </div>
+    </>
   );
 }

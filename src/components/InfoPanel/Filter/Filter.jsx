@@ -2,7 +2,7 @@
 // components/Filter.jsx
 
 import { useEffect } from "react";
-import { DateSelect } from "@/components/DateSelect"
+import { DateSelect } from "@/components/InfoPanel/Filter/DateSelect"
 
 export function Filter({ filterState, mapState, mountainState }) {
   // props
@@ -11,8 +11,9 @@ export function Filter({ filterState, mapState, mountainState }) {
   const { allMountains, filteredMountains, setFilteredMountains } = mountainState;
 
 
-
-  // filter mountains
+  //**************************/
+  // Filter function  /
+  //**************************/
   const applyFilters = ({ distance, courseTime, allMountains }) => {
     return allMountains.filter(mountain => {
       if (distance && mountain.properties.distance > distance) return false;
@@ -28,7 +29,9 @@ export function Filter({ filterState, mapState, mountainState }) {
   }, [distance, courseTime, allMountains]);
 
 
-  // clear button
+  //**************************/
+  // Clear button  /
+  //**************************/
   const handleClearFilter = () => {
     setFilteredMountains(allMountains);
     setDistance("");
@@ -51,7 +54,7 @@ export function Filter({ filterState, mapState, mountainState }) {
       </button>
 
       {/* Hours from Shinjuku */}
-      <div className="w-[90%] flex flex-row md:flex-col items-center md:items-start  gap-2">
+      <div className="w-[90%] flex flex-row md:flex-col items-center md:items-start gap-2">
         <p className="w-1/2 md:w-full text-left text-xs ">Driving hours from Shinjuku:</p>
         <select
           className="w-2/3 md:w-full rounded px-2 py-1"
