@@ -14,7 +14,7 @@ export function MainView({
 
   return (
     <div className="w-screen h-screen flex flex-col md:flex-row-reverse justify-center bg-(--color-background)">
-      
+
       {/* Map */}
       <div className={`${screenSizeState.mapViewClass} md:h-full w-full relative z-10`}>
         <JapanMap
@@ -30,7 +30,7 @@ export function MainView({
             className="bg-white border w-1/2 cursor-pointer"
             onClick={events.handleBackToMap}
           >
-            Back to Map
+            Back to Japan Map
           </button>
 
           {!screenSizeState.isFullScreen ? (
@@ -52,12 +52,15 @@ export function MainView({
       )}
 
       {/* Info Panel */}
-      <InfoPanel
-        mapState={mapState}
-        mountainState={mountainState}
-        filterState={filterState}
-        screenSizeState={screenSizeState}
-      />
+      <div className={`${screenSizeState.infoViewClass} p-6 md:p-8 mt-2 flex flex-col justify-start items-center md:justify-start gap-4 bg-(--color-surface)`}>
+        <InfoPanel
+          mapState={mapState}
+          mountainState={mountainState}
+          filterState={filterState}
+          events={events}
+        />
+        
+      </div>
 
     </div>
   );
