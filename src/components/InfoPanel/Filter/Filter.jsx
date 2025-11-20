@@ -6,7 +6,7 @@ import { DateSelect } from "@/components/InfoPanel/Filter/DateSelect"
 
 export function Filter({ filterState, mapState, mountainState }) {
   // props
-  const { distance, setDistance, courseTime, setCourseTime, selectedDate, setSelectedDate } = filterState;
+  const { distance, setDistance, courseTime, setCourseTime, selectedDate, setSelectedDate, dateOptions, setDateOptions } = filterState;
   const { setMapView, initialView, selectedMountain, setSelectedMountain } = mapState;
   const { allMountains, filteredMountains, setFilteredMountains } = mountainState;
 
@@ -83,14 +83,16 @@ export function Filter({ filterState, mapState, mountainState }) {
         </select>
       </div>
        {/* Date */}
-      <div className=" w-[90%] flex flex-row md:flex-col items-center md:items-start gap-2">
+      {/* <div className=" w-[90%] flex flex-row md:flex-col items-center md:items-start gap-2">
         <p className="w-1/2 md:w-full text-left text-xs">Select Date:</p>
         <DateSelect
           selectedDate={selectedDate}
           setSelectedDate={setSelectedDate}
+          dateOptions={dateOptions}
+          setDateOptions={setDateOptions}
           className="w-2/3 md:w-full border border-gray-400 rounded px-2 py-1"
         />
-      </div>
+      </div> */}
       {/* show alert when no mountains being matched */}
       {filteredMountains.length === 0 && (<p className="m-1 px-1 text-red-500">No mountains match the filter</p>)}
     </>

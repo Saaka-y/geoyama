@@ -4,9 +4,9 @@ import { useState, useEffect } from "react";
 
 export function DateSelect({ selectedDate, setSelectedDate, className }) {
 
-  const [dateOptions, setDateOptions] = useState([]);
+    const [dateOptions, setDateOptions] = useState([]);
 
-  // 初回レンダー時に選択肢を生成
+  // create date options at the first rendering
   useEffect(() => {
     const today = new Date();
     const days = 5;
@@ -21,11 +21,10 @@ export function DateSelect({ selectedDate, setSelectedDate, className }) {
           i === 1 ? "Tomorrow" :
             `${i} days later`;
 
-      // 日付は後々国際対応に変える
       options.push({
         date,
         label,
-        value: date.toISOString().split("T")[0],
+        value: date.toISOString().split("T")[0], // YYYY-MM-DD
         string: date.toLocaleDateString("en-UK", {
           weekday: "short",
           month: "short",
@@ -34,9 +33,14 @@ export function DateSelect({ selectedDate, setSelectedDate, className }) {
       });
     }
     setDateOptions(options);
+
+    if (!selectedDate) {
+      setSelectedDate(options[0]);
+    }
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // 日付を選んだ時
   const handleDateSelect = (e) => {
     const selected = dateOptions.find(opt => opt.value === e.target.value);
     setSelectedDate(selected);
