@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { geojson } from "@/components/data/mountains";
 import { MainView } from "@/components/MainView/MainView";
+import { DateSelect } from "@/components/InfoPanel/Filter/DateSelect";
 
 export default function Home() {
 
@@ -73,7 +74,7 @@ export default function Home() {
     courseTime,
     setCourseTime,
     selectedDate,
-    setSelectedDate
+    setSelectedDate,
   };
 
   const mapState = {
