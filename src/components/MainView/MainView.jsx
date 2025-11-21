@@ -36,7 +36,7 @@ export function MainView({
       )}
 
       {/* Info Panel */}
-      <div className="h-1/3 md:h-full w-full md:w-1/3  p-6 md:p-8 flex flex-col justify-start items-center md:justify-start gap-4 bg-(--color-surface)">
+      <div className="overflow-x-auto h-1/3 md:h-full w-full md:w-1/3  p-6 md:p-8 flex flex-col justify-start items-center md:justify-start gap-4 bg-(--color-surface)">
         <InfoPanel
           mapState={mapState}
           mountainState={mountainState}
