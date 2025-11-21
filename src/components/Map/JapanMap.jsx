@@ -37,7 +37,7 @@ export function JapanMap({ mapState, mountainState }) {
   } = mountainState;
 
 
-  const handleMarkerClick = (m) => {
+  const handleShowDetail = (m) => {
     setMapView({
       latitude: m.geometry.coordinates[1],
       longitude: m.geometry.coordinates[0],
@@ -80,7 +80,7 @@ export function JapanMap({ mapState, mountainState }) {
               {/* カスタムピン */}
               <div
                 className="w-4 h-4 bg-blue-600 rounded-full cursor-pointer"
-                onClick={() => handleMarkerClick(m)}
+                onClick={() => handleShowDetail(m)}
               />
               <MountainInfoBox mountain={m} selectedMountain={selectedMountain} />
             </div>

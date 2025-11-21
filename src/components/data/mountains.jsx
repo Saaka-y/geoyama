@@ -14,7 +14,10 @@ export const geojson = {
         title: 'Mt.Chausu',
         description: 'Mount Chausu',
         distance: 3.5,
-        courseTime: 3
+        courseTime: 3,
+        routeName: "",
+        elevation: 450,
+        summit: 1915,
       }
     },
     {
@@ -26,8 +29,11 @@ export const geojson = {
       properties: {
         title: 'Mt.Tanigawa',
         description: 'Mount Tanigawa',
-        distance: 3,
-        courseTime: 1
+        distance: 2.4,
+        courseTime: 4.5,
+        routeName: "Tenjin-ridge return",
+        elevation: 719,
+        summit: 1977,
       }
     },
     {
@@ -40,7 +46,10 @@ export const geojson = {
         title: 'Mt.Jimba',
         description: 'Mount Jimba',
         distance: 1.5,
-        courseTime: 2
+        courseTime: 5,
+        routeName: "Tochiya-ridge return",
+        elevation: 764,
+        summit: 854,
       }
     },
     {
@@ -53,7 +62,10 @@ export const geojson = {
         title: 'Mt.Nabewari',
         description: 'Mount Nabewari',
         distance: 2,
-        courseTime: 4
+        courseTime: 7.5,
+        routeName: "Yadorigi start",
+        elevation: 1332,
+        summit: 1272,
       }
     },
     {
@@ -63,10 +75,13 @@ export const geojson = {
         coordinates: [139.00452128748336, 35.29100532254763]
       },
       properties: {
-        title: 'Mapbox',
+        title: 'Mt.Kintoki',
         description: 'Mount Kintoki',
         distance: 2.5,
-        courseTime: 4
+        courseTime: 3.5,
+        routeName: "Kintoki shrine loop",
+        elevation: 651,
+        summit: 1213,
       }
     },
     {
@@ -79,7 +94,10 @@ export const geojson = {
         title: 'Mt.Kinpu',
         description: 'Mount Kinpu',
         distance: 3.25,
-        courseTime: 6
+        courseTime: 4.5,
+        routeName: "Odarumi pass start",
+        elevation: 570,
+        summit: 2599,
       }
     },
   ]

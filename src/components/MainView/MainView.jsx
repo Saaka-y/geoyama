@@ -38,14 +38,14 @@ export function MainView({
               className="bg-white border w-1/2 cursor-pointer"
               onClick={events.handleToFullScreen}
             >
-              See with full screen
+              Show weather with full screen
             </button>
           ) : (
             <button
               className="bg-white border w-1/2 cursor-pointer"
               onClick={events.handleShrinkScreen}
             >
-              See Map
+              Show Map
             </button>
           )}
         </div>
