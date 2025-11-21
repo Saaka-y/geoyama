@@ -2,11 +2,15 @@
 
 // components/ShowWeather.jsx
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 
 export function ShowWeather({ selectedMountain, selectedDate, setSelectedDate }) {
   const [forecast, setForecast] = useState([]);
+  const scrollRef = useRef(null);
 
+  //**************************/
+  // fetch /
+  //**************************/
   useEffect(() => {
 
     if (!selectedMountain || !selectedDate) return;
@@ -43,41 +47,77 @@ export function ShowWeather({ selectedMountain, selectedDate, setSelectedDate })
     fetchWeather();
   }, [selectedDate, selectedMountain]);
 
-
+  //**************************/
+  // wind direction /
+  //**************************/
   function degToCardinal(deg) {
     const directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
     const index = Math.round(deg / 45) % 8;
     return directions[index];
   }
 
+  //**************************/
+  // Group forecast by date  /
+  //**************************/
+  const grouped = forecast.reduce((acc, item) => {
+    const date = item.dt_txt.slice(0, 10);
+    if (!acc[date]) acc[date] = [];
+    acc[date].push(item);
+    return acc;
+  }, {});
+
+
+  //**************************/
+  // scroll to selected date  /
+  //**************************/
+  useEffect(() => {
+    if (!scrollRef.current) return;
+    const el = document.getElementById(`date-${selectedDate.value}`);
+    if (el) {
+      el.scrollIntoView({ behavior: "smooth", inline: "center" });
+    }
+  }, [forecast, selectedDate]);
+
+
+
   if (!selectedMountain || forecast.length === 0) return <p>Loading weather...</p>;
 
-
   return (
-    <div className="">
-      <div className="flex space-x-3 pb-2">
-        {forecast.map((item, i) => {
-          const date = item.dt_txt.slice(0, 10);
-          const time = item.dt_txt.slice(11, 16);
+<div
+  ref={scrollRef}
+  className="flex md:flex-col gap-4 overflow-x-auto md:overflow-x-hidden md:overflow-y-auto snap-x snap-mandatory px-2 md:px-4"
+>
+  {Object.keys(grouped).map((date) => (
+    <div
+      key={date}
+      id={`date-${date}`}
+      className="snap-start bg-white border-2 rounded-lg p-2 flex flex-col gap-2"
+      style={{
+        backgroundColor: date === selectedDate.value ? "cadetblue" : "#BDB76B",
+        borderColor: date === selectedDate.value ? "black" : "gray"
+      }}
+    >
+      {/* 日付ヘッダー */}
+      <p className="text-sm font-bold mb-2 text-center">{date}</p>
 
+      {/* カード群 */}
+      <div className="flex flex-row md:flex-col gap-2">
+        {grouped[date].map((item, i) => {
+          const time = item.dt_txt.slice(11, 16);
           return (
             <div
               key={i}
-              className="min-w-[120px] h-fit p-2 border rounded text-center bg-white"
+              className="w-[120px] md:w-full border rounded p-2 text-center bg-gray-300 flex-shrink-0"
             >
-              <p className="text-xs font-bold">{date}</p>
-              <p className="text-sm">{time}</p>
-
+              <p className="text-xs mb-1">{time}</p>
               <img
                 src={`https://openweathermap.org/img/wn/${item.weather[0].icon}.png`}
                 alt={item.weather[0].description}
                 className="mx-auto"
               />
-
               <p className="text-sm font-bold">{item.main.temp}°C</p>
               <p className="text-sm font-bold">
-                <span>{degToCardinal(item.wind.deg)} </span>
-                <span>{item.wind.speed} m/s</span>
+                {degToCardinal(item.wind.deg)} {item.wind.speed} m/s
               </p>
               <p className="text-xs">{item.weather[0].description}</p>
             </div>
@@ -85,5 +125,8 @@ export function ShowWeather({ selectedMountain, selectedDate, setSelectedDate })
         })}
       </div>
     </div>
+  ))}
+</div>
+
   );
 }

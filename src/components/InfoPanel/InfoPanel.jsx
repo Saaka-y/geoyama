@@ -1,11 +1,13 @@
 // components/InfoPanel.jsx
 "use client";
 
+import { useState } from "react";
 import { Filter } from "@/components/InfoPanel/Filter/Filter";
 import { ShowWeather } from "@/components/InfoPanel/Weather/ShowWeather";
 import { DateSelect } from "@/components/InfoPanel/Filter/DateSelect";
 
 export function InfoPanel({ mapState, mountainState, filterState, showWeather }) {
+  const [dateOptions, setDateOptions] = useState([]);
 
   const {
     distance,
@@ -28,6 +30,7 @@ export function InfoPanel({ mapState, mountainState, filterState, showWeather })
           mapState={mapState}
           mountainState={mountainState}
           filterState={filterState}
+          dateOptions={dateOptions}
         />
       )
       }
@@ -40,6 +43,8 @@ export function InfoPanel({ mapState, mountainState, filterState, showWeather })
           <DateSelect
             selectedDate={selectedDate}
             setSelectedDate={setSelectedDate}
+            dateOptions={dateOptions}
+            setDateOptions={setDateOptions}
             className=" w-2/3 md:w-full border border-gray-400 rounded px-2 py-1"
           />
         </div>
