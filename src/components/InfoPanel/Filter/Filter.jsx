@@ -4,9 +4,9 @@
 import { useEffect } from "react";
 import { DateSelect } from "@/components/InfoPanel/Filter/DateSelect"
 
-export function Filter({ filterState, mapState, mountainState }) {
+export function Filter({ filterState, mapState, mountainState, dateOptions }) {
   // props
-  const { distance, setDistance, courseTime, setCourseTime, selectedDate, setSelectedDate, dateOptions, setDateOptions } = filterState;
+  const { distance, setDistance, courseTime, setCourseTime, selectedDate, setSelectedDate } = filterState;
   const { setMapView, initialView, selectedMountain, setSelectedMountain } = mapState;
   const { allMountains, filteredMountains, setFilteredMountains } = mountainState;
 
@@ -39,7 +39,7 @@ export function Filter({ filterState, mapState, mountainState }) {
     setSelectedDate(null)
     setMapView(initialView);
     setSelectedMountain(null);
-
+    setSelectedDate(dateOptions[0]);
   }
 
 

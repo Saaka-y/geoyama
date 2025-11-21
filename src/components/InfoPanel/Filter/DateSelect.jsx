@@ -2,9 +2,7 @@
 // components/DateSelect.jsx
 import { useState, useEffect } from "react";
 
-export function DateSelect({ selectedDate, setSelectedDate, className }) {
-
-    const [dateOptions, setDateOptions] = useState([]);
+export function DateSelect({ selectedDate, setSelectedDate, className, dateOptions, setDateOptions }) {
 
   // create date options at the first rendering
   useEffect(() => {
