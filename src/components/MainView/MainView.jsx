@@ -8,17 +8,16 @@ export function MainView({
   mapState,
   mountainState,
   filterState,
-  screenSizeState,
   showWeather,
   setShowWeather,
-  events
+  handleBackToMap
 }) {
 
   return (
     <div className="w-screen h-screen flex flex-col md:flex-row-reverse justify-center bg-(--color-background)">
 
       {/* Map */}
-      <div className={`${screenSizeState.mapViewClass} md:h-full w-full relative z-10`}>
+      <div className="h-2/3 md:h-full w-full md:w-2/3 relative z-10">
         <JapanMap
           mapState={mapState}
           mountainState={mountainState}
@@ -27,47 +26,24 @@ export function MainView({
         />
       </div>
 
-      {/* Fullscreen / Info Buttons + Panel */}
       {showWeather && (
-        <div className="flex">
-          <button
-            className="bg-white border w-1/2 cursor-pointer"
-            onClick={events.handleBackToMap}
-          >
-            Back to Japan Map
-          </button>
-
-          {!screenSizeState.isFullScreen ? (
-            <button
-              className="bg-white border w-1/2 cursor-pointer"
-              onClick={events.handleToFullScreen}
-            >
-              Show weather with full screen
-            </button>
-          ) : (
-            <button
-              className="bg-white border w-1/2 cursor-pointer"
-              onClick={events.handleShrinkScreen}
-            >
-              Show Map
-            </button>
-          )}
-        </div>
+        <button
+          className="bg-white w-full md:w-[10%] cursor-pointer"
+          onClick={handleBackToMap}
+        >
+          Back to Japan Map
+        </button>
       )}
 
       {/* Info Panel */}
-      <div className={`${screenSizeState.infoViewClass} p-6 md:p-8 mt-2 flex flex-col justify-start items-center md:justify-start gap-4 bg-(--color-surface)`}>
+      <div className=" h-1/3 md:h-full w-full md:w-1/3  p-6 md:p-8 flex flex-col justify-start items-center md:justify-start gap-4 bg-(--color-surface)">
         <InfoPanel
           mapState={mapState}
           mountainState={mountainState}
           filterState={filterState}
-          events={events}
           showWeather={showWeather}
-          screenSizeState={screenSizeState}
         />
-
       </div>
-
     </div>
   );
 }

@@ -5,7 +5,7 @@ import { Filter } from "@/components/InfoPanel/Filter/Filter";
 import { ShowWeather } from "@/components/InfoPanel/Weather/ShowWeather";
 import { DateSelect } from "@/components/InfoPanel/Filter/DateSelect";
 
-export function InfoPanel({ mapState, mountainState, filterState, screenSizeState, showWeather }) {
+export function InfoPanel({ mapState, mountainState, filterState, showWeather }) {
 
   const {
     distance,

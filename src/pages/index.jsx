@@ -30,16 +30,6 @@ export default function Home() {
   const [mapView, setMapView] = useState(initialView);
   const [selectedMountain, setSelectedMountain] = useState(null);
 
-  // screen size
-  const smallScreenClass = "w-full md:w-1/3 h-1/3 md:h-full"; // infoPanel
-  const fullScreenClass = "h-full md:w-full  p-0 m-0"; // infoPanel
-  const normalMapClass = " h-2/3 md:w-2/3";
-  const zeroMapClass = "h-0 md:w-0";
-  const [isFullScreen, setIsFullScreen] = useState(false)
-
-  const [infoViewClass, setInfoViewClass] = useState(smallScreenClass)
-  const [mapViewClass, setMapViewClass] = useState(normalMapClass)
-
   // weather
   const [showWeather, setShowWeather] = useState(false)
 
@@ -49,22 +39,7 @@ export default function Home() {
   const handleBackToMap = () => {
     setSelectedMountain(null);
     setMapView(initialView);
-    setInfoViewClass(smallScreenClass);
-    setIsFullScreen(false);
-    setMapViewClass(normalMapClass);
     setShowWeather(false)
-  }
-
-  const handleToFullScreen = () => {
-    if (!isFullScreen) setIsFullScreen(true);
-    setInfoViewClass(fullScreenClass);
-    setMapViewClass(zeroMapClass);
-  }
-
-  const handleShrinkScreen = () => {
-    if (isFullScreen) setIsFullScreen(false);
-    setInfoViewClass(smallScreenClass);
-    setMapViewClass(normalMapClass);
   }
 
   //**************************/
@@ -93,28 +68,12 @@ export default function Home() {
     setFilteredMountains
   };
 
-  const screenSizeState = {
-    infoViewClass,
-    setInfoViewClass,
-    mapViewClass,
-    setMapViewClass,
-    isFullScreen,
-    setIsFullScreen
-  }
-
-  const events = {
-    handleBackToMap,
-    handleToFullScreen,
-    handleShrinkScreen,
-  }
-
   return (
     <MainView
       filterState={filterState}
       mapState={mapState}
       mountainState={mountainState}
-      screenSizeState={screenSizeState}
-      events={events}
+      handleBackToMap={handleBackToMap}
       showWeather={showWeather}
       setShowWeather={setShowWeather}
     />
