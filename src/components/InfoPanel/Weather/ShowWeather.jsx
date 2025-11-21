@@ -44,13 +44,17 @@ export function ShowWeather({ selectedMountain, selectedDate, setSelectedDate })
   }, [selectedDate, selectedMountain]);
 
 
+  function degToCardinal(deg) {
+    const directions = ['N', 'NE', 'E', 'SE', 'S', 'SW', 'W', 'NW'];
+    const index = Math.round(deg / 45) % 8;
+    return directions[index];
+  }
 
   if (!selectedMountain || forecast.length === 0) return <p>Loading weather...</p>;
 
 
   return (
-    <div className="overflow-x-scroll">
-      {/* 横スクロール可能なエリア */}
+    <div className="">
       <div className="flex space-x-3 pb-2">
         {forecast.map((item, i) => {
           const date = item.dt_txt.slice(0, 10);
@@ -59,7 +63,7 @@ export function ShowWeather({ selectedMountain, selectedDate, setSelectedDate })
           return (
             <div
               key={i}
-              className="min-w-[120px] p-2 border rounded text-center bg-white"
+              className="min-w-[120px] h-fit p-2 border rounded text-center bg-white"
             >
               <p className="text-xs font-bold">{date}</p>
               <p className="text-sm">{time}</p>
@@ -71,6 +75,10 @@ export function ShowWeather({ selectedMountain, selectedDate, setSelectedDate })
               />
 
               <p className="text-sm font-bold">{item.main.temp}°C</p>
+              <p className="text-sm font-bold">
+                <span>{degToCardinal(item.wind.deg)} </span>
+                <span>{item.wind.speed} m/s</span>
+              </p>
               <p className="text-xs">{item.weather[0].description}</p>
             </div>
           );
