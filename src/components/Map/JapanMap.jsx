@@ -3,7 +3,6 @@
 import { Map, Marker, Source, Layer } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { MountainInfoBox } from '@/components/Map/MountainInfoBox';
-import { useState } from 'react';
 
 const accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 

@@ -1,11 +1,11 @@
-/* eslint-disable react-hooks/exhaustive-deps */
-// components/WeatherInfo.jsx
+/* eslint-disable @next/next/no-img-element */
 
-import { DateSelect } from "@/components/InfoPanel/Filter/DateSelect";
+// components/ShowWeather.jsx
+
 import { useEffect, useState } from "react";
 
 export function ShowWeather({ selectedMountain, selectedDate, setSelectedDate }) {
-  const [weather, setWeather] = useState(null);
+  const [forecast, setForecast] = useState([]);
 
   useEffect(() => {
 
@@ -19,9 +19,22 @@ export function ShowWeather({ selectedMountain, selectedDate, setSelectedDate })
       try {
         const res = await fetch(`/api/weather?lat=${lat}&lon=${lon}`);
         const data = await res.json();
-        const targetDateStr = selectedDate.value; // YYYY-MM-DD
-        const dailyWeather = data.list.find(item => item.dt_txt.startsWith(targetDateStr));
-        setWeather(dailyWeather);
+        const targetDate = new Date(selectedDate.value);
+
+        const datesToShow = [];
+        for (let i = -1; i <= 1; i++) {
+          const d = new Date(targetDate);
+          d.setDate(d.getDate() + i);
+          datesToShow.push(d.toISOString().slice(0, 10)); // YYYY-MM-DD 
+        }
+
+        const filtered = data.list.filter(item =>
+          datesToShow.some(d => item.dt_txt.startsWith(d))
+        );
+
+        setForecast(filtered);
+        console.log("3日分", filtered);
+
       } catch (err) {
         console.error(err);
       }
@@ -30,16 +43,39 @@ export function ShowWeather({ selectedMountain, selectedDate, setSelectedDate })
     fetchWeather();
   }, [selectedDate, selectedMountain]);
 
-  if (!weather) return <p>Loading weather...</p>;
+
+
+  if (!selectedMountain || forecast.length === 0) return <p>Loading weather...</p>;
+
 
   return (
-    <div>
-      <h3>{selectedMountain.properties.description} - {selectedDate.string}</h3>
-      <p>Temp: {weather.main.temp}°C</p>
-      <p>Feels like: {weather.main.feels_like}°C</p>
-      <p>Weather: {weather.weather[0].description}</p>
-      <p>Humidity: {weather.main.humidity}%</p>
-      <p>Wind: {weather.wind.speed} m/s</p>
+    <div className="">
+      {/* 横スクロール可能なエリア */}
+      <div className="flex flex-row overflow-x-auto md:flex-col md:overflow-x-hidden space-x-3 md:space-x-0 md:space-y-3 pb-2">
+        {forecast.map((item, i) => {
+          const date = item.dt_txt.slice(0, 10);
+          const time = item.dt_txt.slice(11, 16);
+
+          return (
+            <div
+              key={i}
+              className="min-w-[120px] p-2 border rounded text-center bg-white"
+            >
+              <p className="text-xs font-bold">{date}</p>
+              <p className="text-sm">{time}</p>
+
+              <img
+                src={`https://openweathermap.org/img/wn/${item.weather[0].icon}.png`}
+                alt={item.weather[0].description}
+                className="mx-auto"
+              />
+
+              <p className="text-sm font-bold">{item.main.temp}°C</p>
+              <p className="text-xs">{item.weather[0].description}</p>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }
