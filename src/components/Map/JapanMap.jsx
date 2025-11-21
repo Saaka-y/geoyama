@@ -3,6 +3,7 @@
 import { Map, Marker, Source, Layer } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { MountainInfoBox } from '@/components/Map/MountainInfoBox';
+import { useState } from 'react';
 
 const accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
@@ -17,7 +18,7 @@ const skyLayer = {
   }
 }
 
-export function JapanMap({ mapState, mountainState }) {
+export function JapanMap({ mapState, mountainState, showWeather, setShowWeather }) {
 
   //**************************/
   // PROPS  /
@@ -36,15 +37,7 @@ export function JapanMap({ mapState, mountainState }) {
     setFilteredMountains
   } = mountainState;
 
-
-  const handleShowDetail = (m) => {
-    setMapView({
-      latitude: m.geometry.coordinates[1],
-      longitude: m.geometry.coordinates[0],
-      zoom: 13,
-      pitch: 60, // 3D 表示寄り
-      bearing: 0
-    })
+  const handleSelectedMountain = (m) => {
     setSelectedMountain(m)
   }
 
@@ -80,9 +73,17 @@ export function JapanMap({ mapState, mountainState }) {
               {/* カスタムピン */}
               <div
                 className="w-4 h-4 bg-blue-600 rounded-full cursor-pointer"
-                onClick={() => handleShowDetail(m)}
+                onClick={() => handleSelectedMountain(m)}
               />
-              <MountainInfoBox mountain={m} selectedMountain={selectedMountain} />
+              {selectedMountain === m && (
+                <MountainInfoBox 
+                  mountain={m} 
+                  selectedMountain={selectedMountain} 
+                  showWeather={showWeather}
+                  setShowWeather={setShowWeather}
+                  setMapView={setMapView}
+                />
+              )}
             </div>
           </Marker>
         ))}

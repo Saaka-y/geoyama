@@ -9,6 +9,8 @@ export function MainView({
   mountainState,
   filterState,
   screenSizeState,
+  showWeather,
+  setShowWeather,
   events
 }) {
 
@@ -20,11 +22,13 @@ export function MainView({
         <JapanMap
           mapState={mapState}
           mountainState={mountainState}
+          showWeather={showWeather}
+          setShowWeather={setShowWeather}
         />
       </div>
 
       {/* Fullscreen / Info Buttons + Panel */}
-      {mapState.selectedMountain && (
+      {showWeather && (
         <div className="flex">
           <button
             className="bg-white border w-1/2 cursor-pointer"
@@ -58,8 +62,10 @@ export function MainView({
           mountainState={mountainState}
           filterState={filterState}
           events={events}
+          showWeather={showWeather}
+          screenSizeState={screenSizeState}
         />
-        
+
       </div>
 
     </div>
