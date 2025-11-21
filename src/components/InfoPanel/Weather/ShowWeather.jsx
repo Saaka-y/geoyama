@@ -49,9 +49,9 @@ export function ShowWeather({ selectedMountain, selectedDate, setSelectedDate })
 
 
   return (
-    <div className="">
+    <div className="overflow-x-scroll">
       {/* 横スクロール可能なエリア */}
-      <div className="flex flex-row overflow-x-auto md:flex-col md:overflow-x-hidden space-x-3 md:space-x-0 md:space-y-3 pb-2">
+      <div className="flex space-x-3 pb-2">
         {forecast.map((item, i) => {
           const date = item.dt_txt.slice(0, 10);
           const time = item.dt_txt.slice(11, 16);
