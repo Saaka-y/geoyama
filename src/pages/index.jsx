@@ -3,7 +3,6 @@
 import { useState } from "react";
 import { geojson } from "@/components/data/mountains";
 import { MainView } from "@/components/MainView/MainView";
-import { DateSelect } from "@/components/InfoPanel/Filter/DateSelect";
 
 export default function Home() {
 
@@ -32,15 +31,17 @@ export default function Home() {
   const [selectedMountain, setSelectedMountain] = useState(null);
 
   // screen size
-  const smallScreenClass = "w-full md:w-1/3 h-1/3 md:h-full";
-  const fullScreenClass = "h-full md:w-full  p-0 m-0";
+  const smallScreenClass = "w-full md:w-1/3 h-1/3 md:h-full"; // infoPanel
+  const fullScreenClass = "h-full md:w-full  p-0 m-0"; // infoPanel
   const normalMapClass = " h-2/3 md:w-2/3";
   const zeroMapClass = "h-0 md:w-0";
+  const [isFullScreen, setIsFullScreen] = useState(false)
 
   const [infoViewClass, setInfoViewClass] = useState(smallScreenClass)
   const [mapViewClass, setMapViewClass] = useState(normalMapClass)
-  const [isFullScreen, setIsFullScreen] = useState(false)
 
+  // weather
+  const [showWeather, setShowWeather] = useState(false)
 
   //**************************/
   // EVENTS /
@@ -51,6 +52,7 @@ export default function Home() {
     setInfoViewClass(smallScreenClass);
     setIsFullScreen(false);
     setMapViewClass(normalMapClass);
+    setShowWeather(false)
   }
 
   const handleToFullScreen = () => {
@@ -113,6 +115,8 @@ export default function Home() {
       mountainState={mountainState}
       screenSizeState={screenSizeState}
       events={events}
+      showWeather={showWeather}
+      setShowWeather={setShowWeather}
     />
   );
 }
