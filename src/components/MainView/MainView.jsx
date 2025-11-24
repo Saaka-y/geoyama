@@ -13,11 +13,14 @@ export function MainView({
   handleBackToMap
 }) {
 
+  // h-1/3 md:h-full w-full md:w-1/3
+  // h-2/3 md:h-full w-full md:w-2/3
+
   return (
-    <div className="w-screen h-screen flex flex-col md:flex-row-reverse justify-center bg-(--color-background)">
+    <div className="w-screen h-screen flex flex-col md:flex-row-reverse bg-(--color-background)">
 
       {/* Map */}
-      <div className="h-2/3 md:h-full w-full md:w-2/3 relative z-10">
+      <div className="relative flex-2 z-10">
         <JapanMap
           mapState={mapState}
           mountainState={mountainState}
@@ -38,10 +41,10 @@ export function MainView({
       {/* Info Panel */}
       <div
         className={
-          `flex flex-col h-1/3 md:h-full w-full md:w-1/3 bg-(--color-surface)` +
+          `flex-1 bg-(--color-surface)` +
           (showWeather
-            ? ` pt-6`
-            : ` pt-6 md:p-8 items-center md:justify-start gap-4`
+            ? ` pt-5`
+            : ` flex flex-col pt-6 md:pt-10 items-center gap-5`
           )
         }
       >

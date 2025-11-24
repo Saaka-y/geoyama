@@ -36,9 +36,9 @@ export function JapanMap({ mapState, mountainState, showWeather, setShowWeather 
     setFilteredMountains
   } = mountainState;
 
-  const handleSelectedMountain = (m) => {
-    setSelectedMountain(m)
-  }
+
+  //***** parent div ******/
+  // relative flex-2 z-10
 
   return (
     <>
@@ -72,7 +72,7 @@ export function JapanMap({ mapState, mountainState, showWeather, setShowWeather 
               {/* カスタムピン */}
               <div
                 className="w-4 h-4 bg-blue-600 rounded-full cursor-pointer"
-                onClick={() => handleSelectedMountain(m)}
+                onClick={() => setSelectedMountain(m)}
               />
               {selectedMountain === m && (
                 <MountainInfoBox 
