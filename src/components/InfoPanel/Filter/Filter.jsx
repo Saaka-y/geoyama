@@ -42,6 +42,9 @@ export function Filter({ filterState, mapState, mountainState, dateOptions }) {
     setSelectedDate(dateOptions[0]);
   }
 
+  // ****** parent div ******
+  // `flex-1 bg-(--color-surface)` +
+  //   ` flex flex-col pt-6 md:pt-10 items-center gap-5`
 
   return (
     <>

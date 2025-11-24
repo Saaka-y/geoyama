@@ -18,6 +18,7 @@ export default function Home() {
   const [allMountains] = useState(geojson.features);
   const [filteredMountains, setFilteredMountains] = useState(allMountains);
 
+  // map
   const initialView = {
     latitude: 35.6895,
     longitude: 139.6917,
@@ -25,8 +26,6 @@ export default function Home() {
     pitch: 45,
     bearing: -17,
   }
-
-  // map
   const [mapView, setMapView] = useState(initialView);
   const [selectedMountain, setSelectedMountain] = useState(null);
 
