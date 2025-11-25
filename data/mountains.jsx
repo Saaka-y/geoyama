@@ -18,6 +18,7 @@ export const geojson = {
         routeName: "",
         elevation: 450,
         summit: 1915,
+        routeApiUrl: ""
       }
     },
     {
@@ -34,6 +35,7 @@ export const geojson = {
         routeName: "Tenjin-ridge return",
         elevation: 719,
         summit: 1977,
+        routeApiUrl: ""
       }
     },
     {
@@ -50,6 +52,7 @@ export const geojson = {
         routeName: "Tochiya-ridge return",
         elevation: 764,
         summit: 854,
+        routeApiUrl: ""
       }
     },
     {
@@ -66,6 +69,7 @@ export const geojson = {
         routeName: "Yadorigi start",
         elevation: 1332,
         summit: 1272,
+        routeApiUrl: ""
       }
     },
     {
@@ -82,6 +86,7 @@ export const geojson = {
         routeName: "Kintoki shrine loop",
         elevation: 651,
         summit: 1213,
+        routeApiUrl: "/api/kintokiGeoJson"
       }
     },
     {
@@ -98,6 +103,7 @@ export const geojson = {
         routeName: "Odarumi pass start",
         elevation: 570,
         summit: 2599,
+        routeApiUrl: ""
       }
     },
   ]
