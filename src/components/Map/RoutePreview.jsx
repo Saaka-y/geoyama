@@ -26,8 +26,12 @@ export function RoutePreview({ apiUrl }) {
         id="route-line"
         type="line"
         paint={{
-          'line-color': 'black',
-          'line-width': 4
+          'line-color': '#FF8C00',
+          'line-width': 5
+        }}
+        layout={{
+          'line-cap': 'round',  
+          'line-join': 'round'  
         }}
       />
     </Source>

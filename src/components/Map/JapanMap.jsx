@@ -1,9 +1,10 @@
-// components/Map.jsx
+// components/JapanMap.jsx
 "use client";
 import { Map, Marker, Source, Layer, Popup } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useState } from 'react';
 import { RoutePreview } from '@/components/Map/RoutePreview';
+import { GiMountainCave } from "react-icons/gi";
 
 
 const accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
@@ -60,7 +61,7 @@ export function JapanMap({ mapState, mountainState, showWeather, setShowWeather 
           type="raster-dem"
           url="mapbox://mapbox.mapbox-terrain-dem-v1"
           tileSize={512}
-          maxzoom={14}
+          maxzoom={15}
         />
         {/* sky レイヤー */}
         <Layer {...skyLayer} />
@@ -74,12 +75,14 @@ export function JapanMap({ mapState, mountainState, showWeather, setShowWeather 
             anchor="center"
           >
             <div
-              className="w-4 h-4 bg-blue-600 rounded-full cursor-pointer"
+              className="relative flex items-center justify-center w-10 h-10 bg-white border-1 rounded-tl-[50%] rounded-tr-[50%] rounded-bl-[50%] rotate-45"
               onClick={(e) => {
                 e.stopPropagation();
                 setSelectedMountain(m)
               }}
-            />
+            >
+              <GiMountainCave size={24} className='rotate-[-45deg]' />
+            </div>
           </Marker>
         ))}
 
