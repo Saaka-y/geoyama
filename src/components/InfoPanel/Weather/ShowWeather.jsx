@@ -7,7 +7,8 @@ import { useEffect, useState, useRef } from "react";
 export function ShowWeather({ selectedMountain, selectedDate, setSelectedDate }) {
   const [forecast, setForecast] = useState([]);
   const scrollRef = useRef(null);
-  const elevation = selectedMountain.properties.summit
+  const summit = selectedMountain.properties.summit
+
 
   //**************************/
   // fetch /
@@ -106,7 +107,7 @@ export function ShowWeather({ selectedMountain, selectedDate, setSelectedDate })
           }}
         >
           {/* 日付ヘッダー */}
-          <p className="text-sm font-bold mb-2 text-center">{date} <span className="text-gray-400"> - Temp: around the summit ({elevation}m) </span></p>
+          <p className="text-sm font-bold mb-2 text-center">{date} <span className="text-gray-400"> - Temp: around the summit ({summit}m) </span></p>
 
           {/* カード群 */}
           <div className="flex flex-row md:flex-col gap-2">
