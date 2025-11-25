@@ -1,8 +1,9 @@
 // components/Map.jsx
 "use client";
-import { Map, Marker, Source, Layer } from 'react-map-gl';
+import { Map, Marker, Source, Layer, Popup } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import { MountainInfoBox } from '@/components/Map/MountainInfoBox';
+import { useState } from 'react';
+
 
 const accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
@@ -36,6 +37,7 @@ export function JapanMap({ mapState, mountainState, showWeather, setShowWeather 
     setFilteredMountains
   } = mountainState;
 
+  const [showPopup, setShowPopup] = useState(false);
 
   //***** parent div ******/
   // relative flex-2 z-10
@@ -61,6 +63,7 @@ export function JapanMap({ mapState, mountainState, showWeather, setShowWeather 
         />
         {/* sky レイヤー */}
         <Layer {...skyLayer} />
+
         {/* 山のピン */}
         {filteredMountains.map((m, i) => (
           <Marker
@@ -68,24 +71,50 @@ export function JapanMap({ mapState, mountainState, showWeather, setShowWeather 
             longitude={m.geometry.coordinates[0]}
             latitude={m.geometry.coordinates[1]}
           >
-            <div className="relative">
-              {/* カスタムピン */}
-              <div
-                className="w-4 h-4 bg-blue-600 rounded-full cursor-pointer"
-                onClick={() => setSelectedMountain(m)}
-              />
-              {selectedMountain === m && (
-                <MountainInfoBox 
-                  mountain={m} 
-                  selectedMountain={selectedMountain} 
-                  showWeather={showWeather}
-                  setShowWeather={setShowWeather}
-                  setMapView={setMapView}
-                />
-              )}
-            </div>
+            <div
+              className="w-4 h-4 bg-blue-600 rounded-full cursor-pointer"
+              onClick={(e) => {
+                e.stopPropagation();
+                setSelectedMountain(m)
+              }}
+            />
           </Marker>
         ))}
+
+        {selectedMountain && !showWeather && (
+          <Popup
+            longitude={selectedMountain.geometry.coordinates[0]}
+            latitude={selectedMountain.geometry.coordinates[1]}
+            onClose={() => {!showWeather && setSelectedMountain(null)}}
+            closeOnClick={true}
+            closeButton={false}
+            anchor="top"
+          >
+            <div className="p-2 bg-gray-300/40 text-black rounded shadow-md">
+              <span className="font-bold">{selectedMountain.properties.title} ({selectedMountain.properties.summit}m)</span>
+              <span className="italic">{selectedMountain.properties.routeName && `- ${selectedMountain.properties.routeName} `}</span>
+              <br />
+              Shinjuku to car park: {selectedMountain.properties.distance} {selectedMountain.properties.distance === 1 ? "hr" : "hrs"}
+              <br />
+              Return walk time: {selectedMountain.properties.courseTime} {selectedMountain.properties.courseTime === 1 ? "hr" : "hrs"}
+              <br />
+              Elevation gain: {selectedMountain.properties.elevation}m
+              <br />
+              {!showWeather && (
+                <button className="underline" onClick={() => {
+                  setMapView({
+                    latitude: selectedMountain.geometry.coordinates[1],
+                    longitude: selectedMountain.geometry.coordinates[0],
+                    zoom: 13,
+                    pitch: 60,
+                    bearing: 0
+                  });
+                  setShowWeather(true);
+                }}>Weather and trail map</button>
+              )}
+            </div>
+          </Popup>
+        )}
       </Map>
     </>
   );

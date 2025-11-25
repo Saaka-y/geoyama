@@ -67,6 +67,8 @@ export default function Home() {
     setFilteredMountains
   };
 
+  console.log(selectedMountain)
+
   return (
     <MainView
       filterState={filterState}
