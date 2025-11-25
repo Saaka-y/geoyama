@@ -14,9 +14,9 @@ export const geojson = {
         title: 'Mt.Chausu',
         description: 'Mount Chausu',
         distance: 3.5,
-        courseTime: 3,
+        courseTime: 2.5,
         routeName: "",
-        elevation: 450,
+        elevation: 454,
         summit: 1915,
         routeApiUrl: ""
       }
@@ -48,7 +48,7 @@ export const geojson = {
         title: 'Mt.Jimba',
         description: 'Mount Jimba',
         distance: 1.5,
-        courseTime: 5,
+        courseTime: 3.5,
         routeName: "Tochiya-ridge return",
         elevation: 764,
         summit: 854,
@@ -65,11 +65,11 @@ export const geojson = {
         title: 'Mt.Nabewari',
         description: 'Mount Nabewari',
         distance: 2,
-        courseTime: 7.5,
+        courseTime: 6.5,
         routeName: "Yadorigi start",
-        elevation: 1332,
+        elevation: 1265,
         summit: 1272,
-        routeApiUrl: ""
+        routeApiUrl: "/api/nabewariGeoJson"
       }
     },
     {
@@ -82,9 +82,9 @@ export const geojson = {
         title: 'Mt.Kintoki',
         description: 'Mount Kintoki',
         distance: 2.5,
-        courseTime: 3.5,
+        courseTime: 4.5,
         routeName: "Kintoki shrine loop",
-        elevation: 651,
+        elevation: 539,
         summit: 1213,
         routeApiUrl: "/api/kintokiGeoJson"
       }
@@ -93,16 +93,33 @@ export const geojson = {
       type: 'Feature',
       geometry: {
         type: 'Point',
-        coordinates: [138.8289016391101, 35.5275878479893]
+        coordinates: [138.624997434027, 35.87344715198021], 
       },
       properties: {
         title: 'Mt.Kinpu',
         description: 'Mount Kinpu',
-        distance: 3.25,
+        distance: 3,
         courseTime: 4.5,
         routeName: "Odarumi pass start",
-        elevation: 570,
+        elevation: 538,
         summit: 2599,
+        routeApiUrl: "/api/kinpuGeoJson"
+      }
+    },
+    {
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: [139.49109834098047, 36.767387231585836]
+      },
+      properties: {
+        title: 'Nantai-san',
+        description: 'Mount Nantai',
+        distance: 2.5,
+        courseTime: 7,
+        routeName: "",
+        elevation: 1230,
+        summit: 2486,
         routeApiUrl: ""
       }
     },
