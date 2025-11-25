@@ -20,7 +20,7 @@ export function MainView({
     <div className="w-screen h-screen flex flex-col md:flex-row-reverse bg-(--color-background)">
 
       {/* Map */}
-      <div className="relative flex-2 z-10">
+      <div className="flex-2 z-10">
         <JapanMap
           mapState={mapState}
           mountainState={mountainState}

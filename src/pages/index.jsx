@@ -1,8 +1,9 @@
 // pages/index.jsx
 "use client";
 import { useState } from "react";
-import { geojson } from "@/components/data/mountains";
+import { geojson } from "../../data/mountains";
 import { MainView } from "@/components/MainView/MainView";
+import { RoutePreview } from "@/components/Map/RoutePreview";
 
 export default function Home() {
 
@@ -70,13 +71,16 @@ export default function Home() {
   console.log(selectedMountain)
 
   return (
+
+
+    <>
     <MainView
       filterState={filterState}
       mapState={mapState}
       mountainState={mountainState}
       handleBackToMap={handleBackToMap}
       showWeather={showWeather}
-      setShowWeather={setShowWeather}
-    />
+      setShowWeather={setShowWeather} />
+      </>
   );
 }
