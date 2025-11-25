@@ -3,6 +3,7 @@
 import { Map, Marker, Source, Layer, Popup } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useState } from 'react';
+import { RoutePreview } from '@/components/Map/RoutePreview';
 
 
 const accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
@@ -70,6 +71,7 @@ export function JapanMap({ mapState, mountainState, showWeather, setShowWeather 
             key={i}
             longitude={m.geometry.coordinates[0]}
             latitude={m.geometry.coordinates[1]}
+            anchor="center"
           >
             <div
               className="w-4 h-4 bg-blue-600 rounded-full cursor-pointer"
@@ -81,11 +83,16 @@ export function JapanMap({ mapState, mountainState, showWeather, setShowWeather 
           </Marker>
         ))}
 
+        {/* 山が選択され、Weather表示の時だけルート描画 */}
+        {showWeather && selectedMountain && (
+          <RoutePreview apiUrl={selectedMountain.properties.routeApiUrl} />
+        )}
+
         {selectedMountain && !showWeather && (
           <Popup
             longitude={selectedMountain.geometry.coordinates[0]}
             latitude={selectedMountain.geometry.coordinates[1]}
-            onClose={() => {!showWeather && setSelectedMountain(null)}}
+            onClose={() => { !showWeather && setSelectedMountain(null) }}
             closeOnClick={true}
             closeButton={false}
             anchor="top"
