@@ -73,15 +73,22 @@ export function JapanMap({ mapState, mountainState, showWeather, setShowWeather 
             longitude={m.geometry.coordinates[0]}
             latitude={m.geometry.coordinates[1]}
             anchor="center"
+            onClick={() => {
+              setMapView({
+                ...initialView,
+                latitude: m.geometry.coordinates[1],
+                longitude: m.geometry.coordinates[0],
+              })
+            }}
           >
             <div
-              className="relative flex items-center justify-center w-10 h-10 bg-white border-1 rounded-tl-[50%] rounded-tr-[50%] rounded-bl-[50%] rotate-45"
+              className="relative flex items-center justify-center w-8 h-8 bg-white border-1 rounded-tl-[50%] rounded-tr-[50%] rounded-bl-[50%] rotate-45"
               onClick={(e) => {
                 e.stopPropagation();
                 setSelectedMountain(m)
               }}
             >
-              <GiMountainCave size={24} className='rotate-[-45deg]' />
+              <GiMountainCave size={20} className='rotate-[-45deg]' />
             </div>
           </Marker>
         ))}
@@ -96,22 +103,25 @@ export function JapanMap({ mapState, mountainState, showWeather, setShowWeather 
             longitude={selectedMountain.geometry.coordinates[0]}
             latitude={selectedMountain.geometry.coordinates[1]}
             onClose={() => { !showWeather && setSelectedMountain(null) }}
-            closeOnClick={true}
-            closeButton={false}
+            closeOnClick={true} // 画面タップでクローズ
+            closeButton={false} //closeボタン表示なし
             anchor="top"
           >
-            <div className="p-2 bg-gray-300/40 text-black rounded shadow-md">
+            <div 
+              className="p-1 m-1 bg-gray-300/40 text-black rounded shadow-md"
+              onClick={(e) => e.stopPropagation()}
+            >
               <span className="font-bold">{selectedMountain.properties.title} ({selectedMountain.properties.summit}m)</span>
               <span className="italic">{selectedMountain.properties.routeName && `- ${selectedMountain.properties.routeName} `}</span>
               <br />
-              Shinjuku to car park: {selectedMountain.properties.distance} {selectedMountain.properties.distance === 1 ? "hr" : "hrs"}
+              Shinjuku to <a target="_blank" href={selectedMountain.properties.carPark} className='underline'>car park</a>: {selectedMountain.properties.distance} {selectedMountain.properties.distance === 1 ? "hr" : "hrs"}
               <br />
               Return walk time: {selectedMountain.properties.courseTime} {selectedMountain.properties.courseTime === 1 ? "hr" : "hrs"}
               <br />
               Elevation gain: {selectedMountain.properties.elevation}m
               <br />
               {!showWeather && (
-                <button className="underline" onClick={() => {
+                <button className="underline cursor-pointer"  onClick={() => {
                   setMapView({
                     latitude: selectedMountain.geometry.coordinates[1],
                     longitude: selectedMountain.geometry.coordinates[0],
