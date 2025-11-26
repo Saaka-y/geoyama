@@ -20,7 +20,7 @@ export const geojson = {
         elevation: 454,
         summit: 1915,
         carPark: "https://maps.app.goo.gl/dVs1xtc3kr4egp6o9",
-        routeApiUrl: ""
+        routeApiUrl: "",
       }
     },
     {
@@ -55,7 +55,7 @@ export const geojson = {
         distance: 1.25,
         courseTime: 3.5,
         routeName: "Tochiya-ridge return",
-        elevation: 764,
+        elevation: 649,
         summit: 854,
         carPark: "https://maps.app.goo.gl/XSUQ3T1R18RFDWjm9",
         routeApiUrl: ""
