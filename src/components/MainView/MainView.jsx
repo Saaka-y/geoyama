@@ -31,10 +31,21 @@ export function MainView({
 
       {showWeather && (
         <button
-          className="bg-white border w-full md:w-[10%] cursor-pointer"
+          className="
+          bg-white/90 backdrop-blur-sm
+            border border-gray-300 shadow-md
+            px-4 py-2
+            text-sm font-semibold
+            flex items-center justify-center
+            gap-1
+            w-full md:w-25
+          hover:bg-white
+            hover:shadow-lg
+            cursor-pointer
+          "
           onClick={handleBackToMap}
         >
-          &lt; &nbsp; Back to Japan Map
+          <span className="text-lg">&lt; &nbsp;</span> Back
         </button>
       )}
 
