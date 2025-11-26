@@ -2,7 +2,7 @@
 "use client";
 import { Map, Marker, Source, Layer, Popup } from 'react-map-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import { RoutePreview } from '@/components/Map/RoutePreview';
 import { GiMountainCave } from "react-icons/gi";
 
@@ -66,6 +66,7 @@ export function JapanMap({ mapState, mountainState, showWeather, setShowWeather 
         {/* sky レイヤー */}
         <Layer {...skyLayer} />
 
+
         {/* 山のピン */}
         {filteredMountains.map((m, i) => (
           <Marker
@@ -95,7 +96,7 @@ export function JapanMap({ mapState, mountainState, showWeather, setShowWeather 
 
         {/* 山が選択され、Weather表示の時だけルート描画 */}
         {showWeather && selectedMountain && (
-          <RoutePreview apiUrl={selectedMountain.properties.routeApiUrl} />
+          <RoutePreview apiUrl={selectedMountain.properties.routeApiUrl}  />
         )}
 
         {selectedMountain && !showWeather && (
@@ -107,7 +108,7 @@ export function JapanMap({ mapState, mountainState, showWeather, setShowWeather 
             closeButton={false} //closeボタン表示なし
             anchor="top"
           >
-            <div 
+            <div
               className="p-1 m-1 bg-gray-300/40 text-black rounded shadow-md"
               onClick={(e) => e.stopPropagation()}
             >
@@ -121,7 +122,7 @@ export function JapanMap({ mapState, mountainState, showWeather, setShowWeather 
               Elevation gain: {selectedMountain.properties.elevation}m
               <br />
               {!showWeather && (
-                <button className="underline cursor-pointer"  onClick={() => {
+                <button className="underline cursor-pointer" onClick={() => {
                   setMapView({
                     latitude: selectedMountain.geometry.coordinates[1],
                     longitude: selectedMountain.geometry.coordinates[0],
