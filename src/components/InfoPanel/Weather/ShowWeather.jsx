@@ -103,16 +103,16 @@ export function ShowWeather({ selectedMountain, selectedDate, setSelectedDate })
         <div
           key={date}
           id={`date-${date}`}
-          className="snap-start bg-white p-2 flex flex-col gap-1"
+          className="snap-start bg-white p-2 flex flex-col gap-1 shadow-sm"
           style={{
             border: date === selectedDate.value
-              ? "2px solid #3399FF"
-              : "1px solid black"
+              ? "2px solid #6495ED"
+              : "1px solid #e5e7eb"
           }}
         >
           {/* 日付ヘッダー */}
           <p className="text-sm font-bold mb-2 text-center">
-            {date}<span className="text-gray-400"> - Temp: around the summit ({summit}m)</span>
+            {date}<span className="text-gray-400 text-xs"> - Temp: around the summit ({summit}m)</span>
           </p>
 
           {/* カード群 */}
@@ -123,7 +123,10 @@ export function ShowWeather({ selectedMountain, selectedDate, setSelectedDate })
               return (
                 <div
                   key={i}
-                  className="w-[120px] md:w-full border rounded p-2 text-center bg-gray-300 shrink-0"
+                  className="w-[120px] md:w-full bg-gray-100 p-3 
+                    border border-gray-300 rounded-lg 
+                    text-center shadow-sm shrink-0 
+                    hover:shadow-md transition-shadow"
                 >
                   <p className="text-xs mb-1">{time}</p>
                   <img
