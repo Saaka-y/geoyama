@@ -92,7 +92,11 @@ export function ShowWeather({ selectedMountain, selectedDate, setSelectedDate })
   return (
     <div
       ref={scrollRef}
-      className="flex md:flex-col gap-4 overflow-x-auto md:overflow-x-hidden md:overflow-y-auto px-4 pb-4 md:px-4"
+      className="
+        flex md:flex-col gap-4 
+        overflow-x-auto md:overflow-x-hidden md:overflow-y-auto 
+        px-4 pb-4 md:px-4 md:h-full 
+      "
     > 
     {/* 天気スクロールカードと画面端の距離を変える場合、親ではなく ↑ のpaddingを変える。親のMainView divを変えるとカードが見切れてしまう */}
       {Object.keys(grouped).map((date) => (
@@ -107,7 +111,9 @@ export function ShowWeather({ selectedMountain, selectedDate, setSelectedDate })
           }}
         >
           {/* 日付ヘッダー */}
-          <p className="text-sm font-bold mb-2 text-center">{date} <span className="text-gray-400"> - Temp: around the summit ({summit}m) </span></p>
+          <p className="text-sm font-bold mb-2 text-center">
+            {date}<span className="text-gray-400"> - Temp: around the summit ({summit}m)</span>
+          </p>
 
           {/* カード群 */}
           <div className="flex flex-row md:flex-col gap-2">
