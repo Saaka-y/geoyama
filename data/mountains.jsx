@@ -120,7 +120,7 @@ export const geojson = {
         routeName: "",
         elevation: 1230,
         summit: 2486,
-        routeApiUrl: ""
+        routeApiUrl: "/api/nantaiGeoJson"
       }
     },
   ]

@@ -34,7 +34,7 @@ export function MainView({
           className="bg-white border w-full md:w-[10%] cursor-pointer"
           onClick={handleBackToMap}
         >
-          Back to Japan Map
+          &lt; &nbsp; Back to Japan Map
         </button>
       )}
 
