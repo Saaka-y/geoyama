@@ -22,6 +22,8 @@ const skyLayer = {
 
 export function JapanMap({ mapState, mountainState, showWeather, setShowWeather }) {
 
+  const mapRef = useRef();
+
   //**************************/
   // PROPS  /
   //**************************/
@@ -47,6 +49,7 @@ export function JapanMap({ mapState, mountainState, showWeather, setShowWeather 
   return (
     <>
       <Map
+        ref={mapRef}
         {...mapView}
         onMove={evt => setMapView(evt.viewState)}
         mapStyle="mapbox://styles/mapbox/outdoors-v12"
@@ -68,38 +71,49 @@ export function JapanMap({ mapState, mountainState, showWeather, setShowWeather 
 
 
         {/* 山のピン */}
-        {filteredMountains.map((m, i) => (
-          <Marker
-            key={i}
-            longitude={m.geometry.coordinates[0]}
-            latitude={m.geometry.coordinates[1]}
-            anchor="center"
-            onClick={() => {
-              setMapView({
-                ...initialView,
-                latitude: m.geometry.coordinates[1],
-                longitude: m.geometry.coordinates[0],
-              })
-            }}
-          >
-            <div
-              className="relative flex items-center justify-center w-8 h-8 bg-white border-1 rounded-tl-[50%] rounded-tr-[50%] rounded-bl-[50%] rotate-45"
-              onClick={(e) => {
-                e.stopPropagation();
-                setSelectedMountain(m)
-              }}
-            >
-              <GiMountainCave size={20} className='rotate-[-45deg]' />
-            </div>
-          </Marker>
-        ))}
+        {!showWeather &&
+          <>
+            {filteredMountains.map((m, i) => (
+              <Marker
+                key={i}
+                longitude={m.geometry.coordinates[0]}
+                latitude={m.geometry.coordinates[1]}
+                anchor="center"
+                onClick={() => {
+                  mapRef.current?.flyTo({
+                    center: [
+                      m.geometry.coordinates[0],
+                      m.geometry.coordinates[1]
+                    ],
+                    zoom: 7,
+                    duration: 900, 
+                  });
+                }}
+              >
+                <div
+                  className="relative flex items-center justify-center w-8 h-8 bg-white border-1 rounded-tl-[50%] rounded-tr-[50%] rounded-bl-[50%] rotate-45"
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    setSelectedMountain(m)
+                  }}
+                >
+                  <GiMountainCave size={20} className='rotate-[-45deg]' />
+                </div>
+              </Marker>
+            ))}
+          </>
+        }
 
         {/* 山が選択され、Weather表示の時だけルート描画 */}
         {showWeather && selectedMountain && (
-          <RoutePreview apiUrl={selectedMountain.properties.routeApiUrl}  />
+          <RoutePreview 
+            apiUrl={selectedMountain.properties.routeApiUrl} 
+            setMapView={setMapView}
+            mapRef={mapRef}
+          />
         )}
 
-        {selectedMountain && !showWeather && (
+        {!showWeather && selectedMountain && (
           <Popup
             longitude={selectedMountain.geometry.coordinates[0]}
             latitude={selectedMountain.geometry.coordinates[1]}
@@ -124,8 +138,8 @@ export function JapanMap({ mapState, mountainState, showWeather, setShowWeather 
               {!showWeather && (
                 <button className="underline cursor-pointer" onClick={() => {
                   setMapView({
-                    latitude: selectedMountain.geometry.coordinates[1],
-                    longitude: selectedMountain.geometry.coordinates[0],
+                    latitude: selectedMountain.geometry.carParkCoordinates[1],
+                    longitude: selectedMountain.geometry.carParkCoordinates[0],
                     zoom: 13,
                     pitch: 60,
                     bearing: 0
