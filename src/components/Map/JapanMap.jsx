@@ -40,15 +40,15 @@ export function JapanMap({ japanMapRef, filteredMountains, initialView, selected
       // 山情報
       const info = document.createElement("div");
       info.innerHTML = `
-    <span class="font-bold">${m.properties.title} (${m.properties.summit}m)</span>
-    <span class="italic">${m.properties.routeName ? `- ${m.properties.routeName}` : ""}</span>
-    <br/>
-    Shinjuku to <a target="_blank" href="${m.properties.carPark}" class="underline">car park</a>: ${m.properties.distance} ${m.properties.distance === 1 ? "hr" : "hrs"}
-    <br/>
-    Return walk time: ${m.properties.courseTime} ${m.properties.courseTime === 1 ? "hr" : "hrs"}
-    <br/>
-    Elevation gain: ${m.properties.elevation}m
-  `;
+        <span class="font-bold">${m.properties.title} (${m.properties.summit}m)</span>
+        <span class="italic">${m.properties.routeName ? `- ${m.properties.routeName}` : ""}</span>
+        <br/>
+        Shinjuku to <a target="_blank" href="${m.properties.carPark}" class="underline">car park</a>: ${m.properties.distance} ${m.properties.distance === 1 ? "hr" : "hrs"}
+        <br/>
+        Return walk time: ${m.properties.courseTime} ${m.properties.courseTime === 1 ? "hr" : "hrs"}
+        <br/>
+        Elevation gain: ${m.properties.elevation}m
+      `;
       popupEl.appendChild(info);
 
       // ボタン
