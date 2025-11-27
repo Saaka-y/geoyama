@@ -42,7 +42,7 @@ export function ShowWeather({ selectedMountain, selectedDate, setSelectedDate })
         console.log("3日分", filtered);
 
       } catch (err) {
-        console.error(err);
+        console.error("天気APIのエラー：", err);
       }
     }
 
@@ -86,7 +86,7 @@ export function ShowWeather({ selectedMountain, selectedDate, setSelectedDate })
 
   // ****** parent div ******
   // flex-1 bg-(--color-surface)` +
-  //   (showWeather? ` pt-6` ...)　
+  //   (showFocusMap? ` pt-5` ...)　
 
   
   return (
