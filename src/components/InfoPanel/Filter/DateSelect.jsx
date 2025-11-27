@@ -1,6 +1,6 @@
 /* eslint-disable react-hooks/set-state-in-effect */
 // components/DateSelect.jsx
-import { useState, useEffect } from "react";
+import { useEffect } from "react";
 
 export function DateSelect({ selectedDate, setSelectedDate, className, dateOptions, setDateOptions }) {
 

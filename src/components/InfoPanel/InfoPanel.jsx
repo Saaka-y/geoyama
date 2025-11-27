@@ -6,8 +6,23 @@ import { Filter } from "@/components/InfoPanel/Filter/Filter";
 import { ShowWeather } from "@/components/InfoPanel/Weather/ShowWeather";
 import { DateSelect } from "@/components/InfoPanel/Filter/DateSelect";
 
-export function InfoPanel({ mapState, mountainState, filterState, showWeather }) {
-  const [dateOptions, setDateOptions] = useState([]);
+export function InfoPanel({
+  showFocusMap,
+  filterState,
+  //mountain marker state
+  allMountains,
+  filteredMountains,
+  setFilteredMountains,
+  // mapView state
+  mapView,
+  setMapView,
+  initialView,
+  // mountain focus state
+  selectedMountain,
+  setSelectedMountain
+}) {
+
+  const [dateOptions, setDateOptions] = useState([]); // date options
 
   const {
     distance,
@@ -19,23 +34,33 @@ export function InfoPanel({ mapState, mountainState, filterState, showWeather })
 
   return (
     <>
-      {showWeather ? (
+      {showFocusMap ? (
         <ShowWeather
           selectedDate={selectedDate}
           setSelectedDate={setSelectedDate}
-          selectedMountain={mapState.selectedMountain}
+          selectedMountain={selectedMountain}
         />
       ) : (
         <Filter
-          mapState={mapState}
-          mountainState={mountainState}
           filterState={filterState}
+          //mountain marker state
+          allMountains={allMountains}
+          filteredMountains={filteredMountains}
+          setFilteredMountains={setFilteredMountains}
+          // date options
           dateOptions={dateOptions}
+          // mapView state
+          mapView={mapView}
+          setMapView={setMapView}
+          initialView={initialView}
+          // mountain focus state
+          selectedMountain={selectedMountain}
+          setSelectedMountain={setSelectedMountain}
         />
       )
       }
 
-      {!showWeather &&
+      {!showFocusMap &&
         <div className="w-[90%] flex flex-row md:flex-col justify-center items-center md:items-start gap-2">
 
           <p className="w-1/2 md:w-full text-left text-xs">Select Date:</p>
