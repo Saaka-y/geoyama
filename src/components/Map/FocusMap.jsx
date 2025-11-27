@@ -4,6 +4,18 @@
 import { useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
+import * as mountains from "@/data/mountains"; // index.js 経由で全山を import
+
+const mountainGeoMap = {
+  "Mt.Jimba": mountains.jimbaGeojson,
+  "Mt.Tanigawa": mountains.tanigawaGeojson,
+  "Mt.Chausu": mountains.chausuGeojson,
+  "Mt.Kinpu": mountains.kinpuGeojson,
+  "Mt.Kintoki": mountains.kintokiGeojson,
+  "Mt.Nabewari": mountains.nabewariGeojson,
+  "Mt.Nantai": mountains.nantaiGeojson,
+  // 他の山も同じように追加
+};
 
 const accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
@@ -16,22 +28,20 @@ export function FocusMap({ showFocusMap, selectedMountain, focusMapRef }) {
 
     focusMapRef.current = new mapboxgl.Map({
       container: focusMapContainerRef.current,
-      style: "mapbox://styles/mapbox/satellite-streets-v12",
+      style: "mapbox://styles/saaka/cmih5nkg600dl01r934o9fiph",
       center: selectedMountain.geometry.coordinates,
       zoom: 13,
-      pitch: 70,
+      pitch: 60,
       bearing: -17,
     });
 
-    focusMapRef.current.on("style.load", () => {
-      // DEM ソース追加
-      focusMapRef.current.addSource("mapbox-dem", {
-        type: "raster-dem",
-        url: "mapbox://mapbox.mapbox-terrain-dem-v1",
-        tileSize: 512,
-        maxzoom: 14,
-      });
+    // selectedMountain に応じて GeoJSON を取得
+    const mountainGeo = mountainGeoMap[selectedMountain.properties.title] || {
+      type: "FeatureCollection",
+      features: []
+    };
 
+    focusMapRef.current.on("style.load", () => {
       // terrain 設定
       focusMapRef.current.setTerrain({ source: "mapbox-dem", exaggeration: 1.4 });
 
@@ -41,9 +51,24 @@ export function FocusMap({ showFocusMap, selectedMountain, focusMapRef }) {
         type: "hillshade",
         source: "mapbox-dem",
       });
-    });
 
-    console.log(focusMapRef.current);
+      //3D時のLayer追加
+      focusMapRef.current.addSource('mountain-points', {
+        'type': 'geojson',
+        'data': selectedMountain
+      });
+
+      focusMapRef.current.addLayer({
+        id: 'mountain-points',
+        type: 'symbol',
+        source: 'mountain-points',
+        layout: {
+          'icon-image': 'mountain-icon',
+          'icon-size': 0.8,
+          'icon-allow-overlap': true,
+        }
+      })
+    });
 
     return () => focusMapRef.current?.remove();
   }, []);
@@ -58,21 +83,3 @@ export function FocusMap({ showFocusMap, selectedMountain, focusMapRef }) {
 }
 
 
-// 3D時のLayer追加
-
-// focusMapRef.current.on("load", () => {
-// focusMapRef.current.addSource('geojson-source', {
-//         'type': 'geojson',
-//         'data': geojson
-//       });
-
-// focusMapRef.current.addLayer({
-//         id: 'mountain-symbol',
-//         type: 'symbol',
-//         source: 'geojson-source',
-//         layout: {
-//           'icon-image': 'mountain-icon', 
-//           'icon-size': 0.8,
-//           'icon-allow-overlap': true,
-//         }
-//       })}
