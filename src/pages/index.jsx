@@ -1,11 +1,16 @@
 // pages/index.jsx
 "use client";
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { geojson } from "../../data/mountains";
 import { MainView } from "@/components/MainView/MainView";
-import { RoutePreview } from "@/components/Map/RoutePreview";
 
 export default function Home() {
+
+  //**************************/
+  // Mapbox instance /
+  //**************************/
+  const japanMapRef = useRef();
+  const focusMapRef = useRef();
 
   //**************************/
   // STATES /
@@ -15,31 +20,29 @@ export default function Home() {
   const [distance, setDistance] = useState("");
   const [courseTime, setCourseTime] = useState("");
   const [selectedDate, setSelectedDate] = useState(null);
-  // mountains
+  // mountain marker state
   const [allMountains] = useState(geojson.features);
   const [filteredMountains, setFilteredMountains] = useState(allMountains);
 
-  // map
+  // mapView state
   const initialView = {
-    latitude: 35.6895,
-    longitude: 139.6917,
+    center: [139.6917, 35.6895],
     zoom: 7,
-    pitch: 45,
+    pitch: 50,
     bearing: -17,
+    touchZoomRotate: true
   }
   const [mapView, setMapView] = useState(initialView);
   const [selectedMountain, setSelectedMountain] = useState(null);
-
-  // weather
-  const [showWeather, setShowWeather] = useState(false)
+  const [showFocusMap, setShowFocusMap] = useState(false);
 
   //**************************/
   // EVENTS /
   //**************************/
   const handleBackToMap = () => {
+    setShowFocusMap(false)
     setSelectedMountain(null);
     setMapView(initialView);
-    setShowWeather(false)
   }
 
   //**************************/
@@ -54,33 +57,30 @@ export default function Home() {
     setSelectedDate,
   };
 
-  const mapState = {
-    mapView,
-    setMapView,
-    initialView,
-    selectedMountain,
-    setSelectedMountain
-  };
-
-  const mountainState = {
-    allMountains,
-    filteredMountains,
-    setFilteredMountains
-  };
-
-  console.log(selectedMountain)
-
   return (
 
 
     <>
-    <MainView
-      filterState={filterState}
-      mapState={mapState}
-      mountainState={mountainState}
-      handleBackToMap={handleBackToMap}
-      showWeather={showWeather}
-      setShowWeather={setShowWeather} />
-      </>
+      <MainView
+        filterState={filterState}
+        // Map インスタンス関連
+        japanMapRef={japanMapRef}
+        focusMapRef={focusMapRef}
+        showFocusMap={showFocusMap}
+        setShowFocusMap={setShowFocusMap}
+        //mountain marker state
+        allMountains={allMountains}
+        filteredMountains={filteredMountains}
+        setFilteredMountains={setFilteredMountains}
+        handleBackToMap={handleBackToMap}
+        // mapView state
+        mapView={mapView}
+        setMapView={setMapView}
+        initialView={initialView}
+        // mountain focus state
+        selectedMountain={selectedMountain}
+        setSelectedMountain={setSelectedMountain}
+      />
+    </>
   );
 }

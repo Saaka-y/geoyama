@@ -2,13 +2,19 @@
 // components/Filter.jsx
 
 import { useEffect } from "react";
-import { DateSelect } from "@/components/InfoPanel/Filter/DateSelect"
 
-export function Filter({ filterState, mapState, mountainState, dateOptions }) {
-  // props
+export function Filter({ 
+  filterState, 
+  allMountains,
+  filteredMountains,
+  setFilteredMountains,
+  dateOptions,
+  setMapView,
+  initialView,
+  setSelectedMountain
+}) {
+
   const { distance, setDistance, courseTime, setCourseTime, selectedDate, setSelectedDate } = filterState;
-  const { setMapView, initialView, selectedMountain, setSelectedMountain } = mapState;
-  const { allMountains, filteredMountains, setFilteredMountains } = mountainState;
 
 
   //**************************/
