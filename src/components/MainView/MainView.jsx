@@ -1,16 +1,28 @@
 // components/MainView.jsx
 "use client";
-
 import { JapanMap } from "@/components/Map/JapanMap";
+import { FocusMap } from "@/components/Map/FocusMap";
 import { InfoPanel } from "@/components/InfoPanel/InfoPanel";
 
 export function MainView({
-  mapState,
-  mountainState,
   filterState,
-  showWeather,
-  setShowWeather,
-  handleBackToMap
+  // Map インスタンス関連
+  japanMapRef,
+  focusMapRef,
+  showFocusMap,
+  setShowFocusMap,
+  //mountain marker state
+  allMountains,
+  filteredMountains,
+  setFilteredMountains,
+  handleBackToMap,
+  // mapView state
+  mapView,
+  setMapView,
+  initialView,
+  // mountain focus state
+  selectedMountain,
+  setSelectedMountain,
 }) {
 
   // h-1/3 md:h-full w-full md:w-1/3
@@ -21,15 +33,26 @@ export function MainView({
 
       {/* Map */}
       <div className="relative flex-2 z-10">
-        <JapanMap
-          mapState={mapState}
-          mountainState={mountainState}
-          showWeather={showWeather}
-          setShowWeather={setShowWeather}
-        />
+        {!showFocusMap ? (
+          <JapanMap
+            japanMapRef={japanMapRef}
+            filteredMountains={filteredMountains}
+            initialView={initialView}
+            selectedMountain={selectedMountain}
+            setSelectedMountain={setSelectedMountain}
+            setShowFocusMap={setShowFocusMap}
+          />
+        ) : (
+          <FocusMap
+            showFocusMap={showFocusMap}
+            selectedMountain={selectedMountain}
+            focusMapRef={focusMapRef}
+          />
+        )}
       </div>
 
-      {showWeather && (
+      {/* Back button */}
+      {showFocusMap && (
         <button
           className="
           bg-white/90 backdrop-blur-sm
@@ -53,17 +76,26 @@ export function MainView({
       <div
         className={
           `flex-1 bg-(--color-surface)` +
-          (showWeather
+          (showFocusMap
             ? ` pt-5`
             : ` flex flex-col pt-6 md:pt-10 items-center gap-5`
           )
         }
       >
         <InfoPanel
-          mapState={mapState}
-          mountainState={mountainState}
+          showFocusMap={showFocusMap}
           filterState={filterState}
-          showWeather={showWeather}
+          //mountain marker state
+          allMountains={allMountains}
+          filteredMountains={filteredMountains}
+          setFilteredMountains={setFilteredMountains}
+          mapView={mapView}
+          // mapView state
+          setMapView={setMapView}
+          initialView={initialView}
+          // mountain focus state
+          selectedMountain={selectedMountain}
+          setSelectedMountain={setSelectedMountain}
         />
       </div>
     </div>
