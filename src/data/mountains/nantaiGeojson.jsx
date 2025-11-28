@@ -7,7 +7,7 @@ export const nantaiGeojson = {
     {
       type: "Feature",
       geometry: { type: "Point", coordinates: [139.4907250423291, 36.766102722061035] },
-      properties: { icon: "mountain-icon", title: "Summit" }
+      properties: { icon: "mountain-icon", title: "Mt.Nantai" }
     },
     {
       type: "Feature",
