@@ -3,9 +3,9 @@
 export { chausuGeojson } from "./chausuGeojson";
 export { tanigawaGeojson } from "./tanigawaGeojson";
 export { jimbaGeojson } from "./jimbaGeojson";
-export { NabewariGeojson } from "./NabewariGeojson";
-export { KinpuGeojson } from "./KinpuGeojson";
-export { KintokiGeojson } from "./KintokiGeojson";
-export { NantaiGeojson } from "./NantaiGeojson";
+export { NabewariGeojson } from "./nabewariGeojson";
+export { KinpuGeojson } from "./kinpuGeojson";
+export { KintokiGeojson } from "./kintokiGeojson";
+export { NantaiGeojson } from "./nantaiGeojson";
 
 
