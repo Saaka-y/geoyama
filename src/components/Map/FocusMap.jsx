@@ -7,6 +7,8 @@ import { useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import * as mountains from "@/data/mountains"; // index.js 経由で全山を import
+import { geojson } from "@/data/mountains/allMountains";
+import { RoutePreview } from "@/components/Map/RoutePreview";
 
 const mountainGeoMap = {
   "Mt.Jimba": mountains.jimbaGeojson,
@@ -54,22 +56,71 @@ export function FocusMap({ showFocusMap, selectedMountain, focusMapRef }) {
         source: "mapbox-dem",
       });
 
-      //3D時のLayer追加 https://docs.mapbox.com/mapbox-gl-js/example/add-image/ 参照する
+      //カスタムピン追加 https://docs.mapbox.com/mapbox-gl-js/example/add-image/ 参照
+      // imageをMapに読み込み
+      focusMapRef.current.loadImage(
+        "/icon/mountain-icon.png",
+        (error, image) => {
+          if (error) throw error;
+          focusMapRef.current.addImage("mountain-icon", image);
+        }
+      )
+
+      // imageを表示する source(geojson)を指定
+      // mountain icon
       focusMapRef.current.addSource('mountain-points', {
         'type': 'geojson',
-        'data': mountainGeo
+        'data': mountainGeo.features[0]
       });
 
+      // 指定した source に Layer-symbolを追加してMapに表示する
       focusMapRef.current.addLayer({
         id: 'mountain-points',
         type: 'symbol',
         source: 'mountain-points',
         layout: {
           'icon-image': 'mountain-icon',
-          'icon-size': 1,
-          'icon-allow-overlap': true,
+          'icon-size': 0.7,
+          anchor: "top",
+          // 'icon-allow-overlap': true,
         }
       })
+
+      // carpark icon
+      focusMapRef.current.loadImage(
+        "/icon/carpark-icon.png",
+        (error, image) => {
+          if (error) throw error;
+          focusMapRef.current.addImage("carpark-icon", image);
+        }
+      )
+
+      focusMapRef.current.addSource('carpark-point', {
+        'type': 'geojson',
+        'data': mountainGeo.features[1]
+      });
+
+      focusMapRef.current.addLayer({
+        id: 'carpark-point',
+        type: 'symbol',
+        source: 'carpark-point',
+        layout: {
+          'icon-image': 'carpark-icon',
+          'icon-size': 0.7,
+          anchor: "top",
+          // 'icon-allow-overlap': true,
+        }
+      })
+
+
+      // hiking trail を表示する
+      // focusMapRef.current.addSource("route", {
+      //   "tpye": geojson,
+      //   "data": geojson // APIでGPXから変換したデータに変更予定
+      // })
+
+
+
     });
 
     return () => focusMapRef.current?.remove();
