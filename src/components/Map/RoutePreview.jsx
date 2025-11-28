@@ -48,38 +48,7 @@ export function RoutePreview({ apiUrl, mapRef, setMapView }) {
   const currentPos = geojson?.features[0].geometry.coordinates[progress];
 
   return (
-    <>
-      <Source id="route" type="geojson" data={geojson} lineMetrics={true}  >
-        <Layer
-          id="route-progress"
-          type="line"
-          layout={{ 'line-cap': 'round', 'line-join': 'round' }}
-          paint={{
-            'line-width': 3,
-            'line-gradient': [
-              'interpolate',
-              ['linear'],
-              ['line-progress'],
-              0, 'blue',        // 線の先頭から青
-              progress / totalPoints, 'blue', // 進行した部分は青
-              progress / totalPoints + 0.0001, 'transparent', // ここから残りは透明
-              1, 'transparent'
-            ]
-          }}
-        />
-      </Source>
-      {currentPos && (
-        <Marker
-          longitude={currentPos[0]}
-          latitude={currentPos[1]}
-          pitchAlignment="map"
-          anchor="center"
-        >
-          <div className="w-4 h-4 rotate-45 bg-red-500 clip-path-triangle" />
-        </Marker>
-      )}
-      )
-    </>
+    <></>
   );
 }
 
