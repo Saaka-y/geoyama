@@ -7,7 +7,7 @@ import { gpx } from '@mapbox/togeojson';
 export default function KinpuGeoJson(req, res) {
   try {
     // GPXファイルパス
-    const gpxFilePath = path.join(process.cwd(), 'public', 'Kinpu.gpx');
+    const gpxFilePath = path.join(process.cwd(), 'public','GPX', 'Kinpu.gpx');
 
     // ファイル読み込み
     const gpxData = fs.readFileSync(gpxFilePath, 'utf-8');
