@@ -16,7 +16,7 @@ export function JapanMap({ japanMapRef, filteredMountains, initialView, selected
     mapboxgl.accessToken = accessToken;
 
     japanMapRef.current = new mapboxgl.Map({
-      ...initialView, // homeで state管理 => [mapView, setMapView] = useState(initialView)
+      ...initialView, // japanMapRef.current.flyTo()でカメラ位置管理
       container: japanMapContainerRef.current, // container ID
       style: 'mapbox://styles/saaka/cmigzixmw00d701r9d48afpqe', // style URL
     });
