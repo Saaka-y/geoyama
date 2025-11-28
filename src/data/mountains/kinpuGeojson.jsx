@@ -1,4 +1,4 @@
-// data/Kinpu.jsx
+// data/mountains/kinpuGeojson.jsx
 
 // 金峰山
 export const kinpuGeojson = {
@@ -7,7 +7,11 @@ export const kinpuGeojson = {
     {
       type: "Feature",
       geometry: { type: "Point", coordinates: [138.62557411143555, 35.87264656520422] },
-      properties: { icon: "mountain-icon", title: "Mt.Kinpu" }
+      properties: {
+        icon: "mountain-icon",
+        title: "Mt.Kinpu",
+        routeApiUrl: "kinpuGeoJson",
+      }
     },
     {
       type: "Feature",

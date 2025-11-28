@@ -1,4 +1,4 @@
-// data/Chausu.jsx
+// data/mountains/chausuGeojson.jsx
 
 
 //　茶臼岳
@@ -8,7 +8,11 @@ export const chausuGeojson = {
     {
       type: "Feature",
       geometry: { type: "Point", coordinates: [139.96470378835457, 37.125682960009954] },
-      properties: { icon: "mountain-icon", title: "Mt.Chausu" }
+      properties: { 
+        icon: "mountain-icon", 
+        title: "Mt.Chausu", 
+        routeApiUrl: "", 
+      }
     },
     {
       type: "Feature",

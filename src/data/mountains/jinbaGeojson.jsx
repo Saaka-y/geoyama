@@ -1,7 +1,7 @@
-// data/Jimba.jsx
+// data/mountains/jinbaGeojson.jsx
 
 // 陣馬山
-export const jimbaGeojson = {
+export const jinbaGeojson = {
   type: "FeatureCollection",
   features: [
     {
@@ -12,7 +12,8 @@ export const jimbaGeojson = {
       },
       properties: {
         icon: "mountain-icon",
-        title: "Mt.Jimba"
+        title: "Mt.Jinba",
+        routeApiUrl: "",
       }
     },
     {

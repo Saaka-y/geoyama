@@ -11,7 +11,7 @@ import { geojson } from "@/data/mountains/allMountains";
 import { RoutePreview } from "@/components/Map/RoutePreview";
 
 const mountainGeoMap = {
-  "Mt.Jimba": mountains.jimbaGeojson,
+  "Mt.Jinba": mountains.jinbaGeojson,
   "Mt.Tanigawa": mountains.tanigawaGeojson,
   "Mt.Chausu": mountains.chausuGeojson,
   "Mt.Kinpu": mountains.kinpuGeojson,
@@ -26,6 +26,14 @@ const accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 export function FocusMap({ showFocusMap, selectedMountain, focusMapRef }) {
   const focusMapContainerRef = useRef();
 
+  // mountainGeoはpropsで使いたいから...
+  const mountainGeo = useMemo(() => {
+    return mountainGeoMap[selectedMountain?.properties?.title] || {
+      type: "FeatureCollection",
+      features: []
+    };
+  }, [selectedMountain]);
+
   useEffect(() => {
     if (!selectedMountain || !showFocusMap) return;
     mapboxgl.accessToken = accessToken;
@@ -33,7 +41,7 @@ export function FocusMap({ showFocusMap, selectedMountain, focusMapRef }) {
     focusMapRef.current = new mapboxgl.Map({
       container: focusMapContainerRef.current,
       style: "mapbox://styles/saaka/cmih5nkg600dl01r934o9fiph",
-      center: selectedMountain.geometry.coordinates, //data/allMountains.jsx
+      center: selectedMountain.geometry.coordinates, //@/data/allMountains.jsx
       zoom: 13,
       pitch: 60,
       bearing: -17,
@@ -44,6 +52,8 @@ export function FocusMap({ showFocusMap, selectedMountain, focusMapRef }) {
       type: "FeatureCollection",
       features: []
     };
+
+    console.log("mountain Geo：", mountainGeo)
 
     focusMapRef.current.on("load", () => {
       // terrain 設定
@@ -107,31 +117,26 @@ export function FocusMap({ showFocusMap, selectedMountain, focusMapRef }) {
         layout: {
           'icon-image': 'carpark-icon',
           'icon-size': 0.7,
-          anchor: "top",
           // 'icon-allow-overlap': true,
         }
       })
-
-
-      // hiking trail を表示する
-      // focusMapRef.current.addSource("route", {
-      //   "tpye": geojson,
-      //   "data": geojson // APIでGPXから変換したデータに変更予定
-      // })
-
-
-
+      
     });
 
     return () => focusMapRef.current?.remove();
   }, []);
 
   return (
-    <div
-      ref={focusMapContainerRef}
-      style={{ width: "100%", height: "100%" }}
-      className="focus-map"
-    />
+    <>
+      <div
+        ref={focusMapContainerRef}
+        style={{ width: "100%", height: "100%" }}
+        className="focus-map"
+      />
+      <RoutePreview
+        focusMapRef={focusMapRef}
+        apiUrl={`/api/toGeoJson/${mountainGeo.features[0].properties.routeApiUrl}`} />
+    </>
   );
 }
 

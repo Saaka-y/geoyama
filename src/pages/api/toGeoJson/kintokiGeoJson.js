@@ -16,9 +16,9 @@ export default function KintokiGeoJson(req, res) {
     const dom = new DOMParser().parseFromString(gpxData, 'text/xml');
 
     // GeoJSON に変換
-    const geojson = gpx(dom);
+    const trailGeojson = gpx(dom);
 
-    res.status(200).json({ geojson });
+    res.status(200).json({ trailGeojson });
   } catch (err) {
     console.error(err);
     res.status(500).json({ error: 'Failed to convert GPX to GeoJSON' });

@@ -19,8 +19,6 @@ export const geojson = {
         elevation: 454,
         summit: 1915,
         carPark: "https://maps.app.goo.gl/dVs1xtc3kr4egp6o9",
-        routeApiUrl: "",
-        carParkCoordinates: [139.97581886188752, 37.12982310145938], 
       }
     },
     {
@@ -38,8 +36,6 @@ export const geojson = {
         elevation: 719,
         summit: 1977,
         carPark: "https://maps.app.goo.gl/5pwpRYddrjCo44GA9",
-        routeApiUrl: "",
-        carParkCoordinates: [138.96291285741043, 36.83678024439758], 
       }
     },
     {
@@ -49,16 +45,14 @@ export const geojson = {
         coordinates: [139.1664777423291, 35.65269336784197],
       },
       properties: {
-        title: 'Mt.Jimba',
-        description: 'Mount Jimba',
+        title: 'Mt.Jinba',
+        description: 'Mount Jinba',
         distance: 1.25,
         courseTime: 3.5,
         routeName: "Tochiya-ridge return",
         elevation: 649,
         summit: 854,
         carPark: "https://maps.app.goo.gl/XSUQ3T1R18RFDWjm9",
-        routeApiUrl: "",
-        carParkCoordinates: [139.14365400503866, 35.631750255656875],
       }
     },
     {
@@ -76,8 +70,6 @@ export const geojson = {
         elevation: 1265,
         summit: 1272,
         carPark: "https://maps.app.goo.gl/bftoUSya6pZRyHeX6",
-        routeApiUrl: "/api/nabewariGeoJson",
-        carParkCoordinates: [139.13779380571876, 35.401821833908905], 
       }
     },
     {
@@ -95,8 +87,6 @@ export const geojson = {
         elevation: 539,
         summit: 1213,
         carPark: "https://maps.app.goo.gl/4JaEwRXxGWo3sP4g6",
-        routeApiUrl: "/api/kintokiGeoJson",
-        carParkCoordinates: [139.00254682976754, 35.278273848045835], 
       }
     },
     {
@@ -114,8 +104,6 @@ export const geojson = {
         elevation: 538,
         summit: 2599,
         carPark: "https://maps.app.goo.gl/1DS4SRiBYSKB4cPM6",
-        routeApiUrl: "/api/kinpuGeoJson",
-        carParkCoordinates: [138.66295337618013, 35.87344639129921], 
       }
     },
     {
@@ -133,8 +121,6 @@ export const geojson = {
         elevation: 1230,
         summit: 2486,
         carPark: "https://maps.app.goo.gl/oXNErHN3ASRJWksDA",
-        routeApiUrl: "/api/nantaiGeoJson",
-        carParkCoordinates: [139.48799315790674, 36.741902686946624], 
       }
     },
   ]
