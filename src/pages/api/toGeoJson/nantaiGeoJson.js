@@ -1,13 +1,13 @@
-// pages/api/kinpuGeoJson.js
+// pages/api/toGeoJson/nantaiGeoJson.js
 import fs from 'fs';
 import path from 'path';
 import { DOMParser } from '@xmldom/xmldom';
 import { gpx } from '@mapbox/togeojson';
 
-export default function KinpuGeoJson(req, res) {
+export default function NabewariGeoJson(req, res) {
   try {
     // GPXファイルパス
-    const gpxFilePath = path.join(process.cwd(), 'public','GPX', 'Kinpu.gpx');
+    const gpxFilePath = path.join(process.cwd(), 'public','GPX', 'Nantai.gpx');
 
     // ファイル読み込み
     const gpxData = fs.readFileSync(gpxFilePath, 'utf-8');
