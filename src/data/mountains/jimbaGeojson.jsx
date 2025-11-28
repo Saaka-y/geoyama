@@ -12,7 +12,7 @@ export const jimbaGeojson = {
       },
       properties: {
         icon: "mountain-icon",
-        title: "Summit"
+        title: "Mt.Jimba"
       }
     },
     {

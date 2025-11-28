@@ -7,7 +7,7 @@ export const nabewariGeojson = {
     {
       type: "Feature",
       geometry: { type: "Point", coordinates: [139.14178132960086, 35.44431802028864] },
-      properties: { icon: "mountain-icon", title: "Summit" }
+      properties: { icon: "mountain-icon", title: "Mt.Nabewari" }
     },
     {
       type: "Feature",

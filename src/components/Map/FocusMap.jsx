@@ -29,7 +29,7 @@ export function FocusMap({ showFocusMap, selectedMountain, focusMapRef }) {
     focusMapRef.current = new mapboxgl.Map({
       container: focusMapContainerRef.current,
       style: "mapbox://styles/saaka/cmih5nkg600dl01r934o9fiph",
-      center: selectedMountain.geometry.coordinates,
+      center: selectedMountain.geometry.coordinates, //data/allMountains.jsx
       zoom: 13,
       pitch: 60,
       bearing: -17,
@@ -41,7 +41,7 @@ export function FocusMap({ showFocusMap, selectedMountain, focusMapRef }) {
       features: []
     };
 
-    focusMapRef.current.on("style.load", () => {
+    focusMapRef.current.on("load", () => {
       // terrain 設定
       focusMapRef.current.setTerrain({ source: "mapbox-dem", exaggeration: 1.4 });
 
@@ -52,10 +52,10 @@ export function FocusMap({ showFocusMap, selectedMountain, focusMapRef }) {
         source: "mapbox-dem",
       });
 
-      //3D時のLayer追加
+      //3D時のLayer追加 https://docs.mapbox.com/mapbox-gl-js/example/add-image/ 参照する
       focusMapRef.current.addSource('mountain-points', {
         'type': 'geojson',
-        'data': selectedMountain
+        'data': mountainGeo
       });
 
       focusMapRef.current.addLayer({
@@ -64,7 +64,7 @@ export function FocusMap({ showFocusMap, selectedMountain, focusMapRef }) {
         source: 'mountain-points',
         layout: {
           'icon-image': 'mountain-icon',
-          'icon-size': 0.8,
+          'icon-size': 1,
           'icon-allow-overlap': true,
         }
       })

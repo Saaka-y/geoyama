@@ -8,7 +8,7 @@ export const chausuGeojson = {
     {
       type: "Feature",
       geometry: { type: "Point", coordinates: [139.96470378835457, 37.125682960009954] },
-      properties: { icon: "mountain-icon", title: "Summit" }
+      properties: { icon: "mountain-icon", title: "Mt.Chausu" }
     },
     {
       type: "Feature",
