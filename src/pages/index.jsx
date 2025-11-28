@@ -30,7 +30,7 @@ export default function Home() {
     zoom: 7,
     pitch: 50,
     bearing: -17,
-    touchZoomRotate: true
+    logoPosition: "top-left",
   }
   const [mapView, setMapView] = useState(initialView);
   const [selectedMountain, setSelectedMountain] = useState(null);
