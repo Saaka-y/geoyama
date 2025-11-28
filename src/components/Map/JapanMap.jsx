@@ -62,8 +62,9 @@ export function JapanMap({ japanMapRef, filteredMountains, initialView, selected
       popupEl.appendChild(button);
 
       // Popup
-      const popup = new mapboxgl.Popup({ offset: 25 })
-        .setDOMContent(popupEl);
+      const popup = new mapboxgl.Popup({ offset: 25, anchor: "top" })
+        .setDOMContent(popupEl)
+        
 
       // Marker作成、Popupを紐付ける
       const marker = new mapboxgl.Marker()
