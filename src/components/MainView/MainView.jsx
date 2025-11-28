@@ -38,6 +38,7 @@ export function MainView({
             japanMapRef={japanMapRef}
             filteredMountains={filteredMountains}
             initialView={initialView}
+            mapView={mapView}
             selectedMountain={selectedMountain}
             setSelectedMountain={setSelectedMountain}
             setShowFocusMap={setShowFocusMap}
@@ -86,12 +87,11 @@ export function MainView({
           showFocusMap={showFocusMap}
           filterState={filterState}
           //mountain marker state
+          japanMapRef={japanMapRef}
           allMountains={allMountains}
           filteredMountains={filteredMountains}
           setFilteredMountains={setFilteredMountains}
-          mapView={mapView}
           // mapView state
-          setMapView={setMapView}
           initialView={initialView}
           // mountain focus state
           selectedMountain={selectedMountain}

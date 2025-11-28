@@ -32,7 +32,7 @@ export default function Home() {
     bearing: -17,
     logoPosition: "top-left",
   }
-  const [mapView, setMapView] = useState(initialView);
+
   const [selectedMountain, setSelectedMountain] = useState(null);
   const [showFocusMap, setShowFocusMap] = useState(false);
 
@@ -42,7 +42,10 @@ export default function Home() {
   const handleBackToMap = () => {
     setShowFocusMap(false)
     setSelectedMountain(null);
-    setMapView(initialView);
+    
+    japanMapRef.current.flyTo({
+      ...initialView,
+    })
   }
 
   //**************************/
@@ -74,8 +77,6 @@ export default function Home() {
         setFilteredMountains={setFilteredMountains}
         handleBackToMap={handleBackToMap}
         // mapView state
-        mapView={mapView}
-        setMapView={setMapView}
         initialView={initialView}
         // mountain focus state
         selectedMountain={selectedMountain}

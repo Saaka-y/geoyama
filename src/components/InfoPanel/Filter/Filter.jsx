@@ -3,13 +3,13 @@
 
 import { useEffect } from "react";
 
-export function Filter({ 
-  filterState, 
+export function Filter({
+  filterState,
+  japanMapRef,
   allMountains,
   filteredMountains,
   setFilteredMountains,
   dateOptions,
-  setMapView,
   initialView,
   setSelectedMountain
 }) {
@@ -43,9 +43,12 @@ export function Filter({
     setDistance("");
     setCourseTime("");
     setSelectedDate(null)
-    setMapView(initialView);
     setSelectedMountain(null);
     setSelectedDate(dateOptions[0]);
+
+    japanMapRef.current.flyTo({
+      ...initialView,
+    })
   }
 
   // ****** parent div ******

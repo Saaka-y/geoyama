@@ -1,5 +1,7 @@
 // components/Map/FocusMap.jsx
 
+// styleを衛生画像に変える（今のmapは読み込みが遅い）
+
 "use client"
 import { useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";

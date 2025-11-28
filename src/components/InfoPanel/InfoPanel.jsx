@@ -10,12 +10,10 @@ export function InfoPanel({
   showFocusMap,
   filterState,
   //mountain marker state
+  japanMapRef,
   allMountains,
   filteredMountains,
   setFilteredMountains,
-  // mapView state
-  mapView,
-  setMapView,
   initialView,
   // mountain focus state
   selectedMountain,
@@ -44,14 +42,13 @@ export function InfoPanel({
         <Filter
           filterState={filterState}
           //mountain marker state
+          japanMapRef={japanMapRef}
           allMountains={allMountains}
           filteredMountains={filteredMountains}
           setFilteredMountains={setFilteredMountains}
           // date options
           dateOptions={dateOptions}
           // mapView state
-          mapView={mapView}
-          setMapView={setMapView}
           initialView={initialView}
           // mountain focus state
           selectedMountain={selectedMountain}
