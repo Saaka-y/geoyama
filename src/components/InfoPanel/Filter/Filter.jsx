@@ -69,6 +69,7 @@ export function Filter({
           className="w-2/3 md:w-full rounded px-2 py-1"
           value={distance}
           onChange={(e) => setDistance(e.target.value)}>
+          <option value="">Not selected</option>
           <option value="1">Within an hour</option>
           <option value="2">Within 2 hours</option>
           <option value="3">Within 3 hours</option>
@@ -85,10 +86,12 @@ export function Filter({
           value={courseTime}
           onChange={(e) => setCourseTime(e.target.value)}
         >
+          <option value="">Not selected</option>
           <option value="1">Less than an hour</option>
           <option value="3">Less than 3 hours</option>
           <option value="5">Less than 5 hours</option>
           <option value="7">Less than 7 hours</option>
+          <option value="7">Over 7 hours</option>
         </select>
       </div>
       {/* show alert when no mountains being matched */}
