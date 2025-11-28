@@ -1,4 +1,4 @@
-// data/Nantai.jsx
+// @/data/mountains/nantaiGeojson.jsx
 
 //　男体山
 export const nantaiGeojson = {
@@ -7,7 +7,11 @@ export const nantaiGeojson = {
     {
       type: "Feature",
       geometry: { type: "Point", coordinates: [139.4907250423291, 36.766102722061035] },
-      properties: { icon: "mountain-icon", title: "Mt.Nantai" }
+      properties: {
+        icon: "mountain-icon",
+        title: "Mt.Nantai",
+        routeApiUrl: "nantaiGeoJson",
+      }
     },
     {
       type: "Feature",

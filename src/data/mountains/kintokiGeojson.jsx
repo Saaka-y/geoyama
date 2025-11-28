@@ -1,4 +1,4 @@
-// data/Kintoki.jsx
+// data/mountains/kintokiGeojson.jsx
 
 // 金時山
 export const kintokiGeojson = {
@@ -7,7 +7,11 @@ export const kintokiGeojson = {
     {
       type: "Feature",
       geometry: { type: "Point", coordinates: [139.00490776875867, 35.29128729757679] },
-      properties: { icon: "mountain-icon", title: "Mt.Kintoki" }
+      properties: {
+        icon: "mountain-icon",
+        title: "Mt.Kintoki",
+        routeApiUrl: "kintokiGeoJson",
+      }
     },
     {
       type: "Feature",

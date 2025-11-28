@@ -1,8 +1,8 @@
-// data/index.jsx
+// data/mountains/index.jsx
 
 export { chausuGeojson } from "./chausuGeojson";
 export { tanigawaGeojson } from "./tanigawaGeojson";
-export { jimbaGeojson } from "./jimbaGeojson";
+export { jinbaGeojson } from "./jinbaGeojson";
 export { nabewariGeojson } from "./nabewariGeojson";
 export { kinpuGeojson } from "./kinpuGeojson";
 export { kintokiGeojson } from "./kintokiGeojson";

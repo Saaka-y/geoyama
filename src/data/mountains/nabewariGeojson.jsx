@@ -1,4 +1,4 @@
-// data/Nabewari.jsx
+// data/mountains/nabewariGeojson.jsx
 
 //　鍋割山
 export const nabewariGeojson = {
@@ -7,7 +7,11 @@ export const nabewariGeojson = {
     {
       type: "Feature",
       geometry: { type: "Point", coordinates: [139.14178132960086, 35.44431802028864] },
-      properties: { icon: "mountain-icon", title: "Mt.Nabewari" }
+      properties: {
+        icon: "mountain-icon",
+        title: "Mt.Nabewari",
+        routeApiUrl: "nabewariGeoJson",
+      }
     },
     {
       type: "Feature",

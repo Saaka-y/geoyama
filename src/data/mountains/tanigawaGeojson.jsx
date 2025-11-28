@@ -1,4 +1,4 @@
-// data/Tanigawa.jsx
+// data/mountains/tanigawaGeojson.jsx
 
 // 谷川岳
 export const tanigawaGeojson = {
@@ -12,7 +12,8 @@ export const tanigawaGeojson = {
       },
       properties: {
         icon: "mountain-icon",
-        title: "Summit"
+        title: "Summit",
+        routeApiUrl: "",
       }
     },
     {
