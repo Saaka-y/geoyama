@@ -6,11 +6,11 @@
 import { useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import * as mountains from "@/data/mountains"; // index.js 経由で全山を import
-import { geojson } from "@/data/mountains/allMountains";
+import * as mountains from "@/data/spotPins"; // index.js 経由で全山のピン情報を import
+import { geojson } from "@/data/allMountains";
 import { RoutePreview } from "@/components/Map/RoutePreview";
 
-const mountainGeoMap = {
+const spotPins = {
   "Mt.Jinba": mountains.jinbaGeojson,
   "Mt.Tanigawa": mountains.tanigawaGeojson,
   "Mt.Chausu": mountains.chausuGeojson,
@@ -27,8 +27,8 @@ export function FocusMap({ showFocusMap, selectedMountain, focusMapRef }) {
   const focusMapContainerRef = useRef();
 
   // mountainGeoはpropsで使いたいから...
-  const mountainGeo = useMemo(() => {
-    return mountainGeoMap[selectedMountain?.properties?.title] || {
+  const spotPinsForEachMountain = useMemo(() => {
+    return spotPins[selectedMountain?.properties?.title] || {
       type: "FeatureCollection",
       features: []
     };
@@ -48,12 +48,12 @@ export function FocusMap({ showFocusMap, selectedMountain, focusMapRef }) {
     });
 
     // selectedMountain に応じて GeoJSON を取得
-    const mountainGeo = mountainGeoMap[selectedMountain.properties.title] || {
+    const spotPinsForEachMountain = spotPins[selectedMountain.properties.title] || {
       type: "FeatureCollection",
       features: []
     };
 
-    console.log("mountain Geo：", mountainGeo)
+    console.log("mountain Geo：", spotPinsForEachMountain)
 
     focusMapRef.current.on("load", () => {
       // terrain 設定
@@ -80,7 +80,7 @@ export function FocusMap({ showFocusMap, selectedMountain, focusMapRef }) {
       // mountain icon
       focusMapRef.current.addSource('mountain-points', {
         'type': 'geojson',
-        'data': mountainGeo.features[0]
+        'data': spotPinsForEachMountain.features[0]
       });
 
       // 指定した source に Layer-symbolを追加してMapに表示する
@@ -107,7 +107,7 @@ export function FocusMap({ showFocusMap, selectedMountain, focusMapRef }) {
 
       focusMapRef.current.addSource('carpark-point', {
         'type': 'geojson',
-        'data': mountainGeo.features[1]
+        'data': spotPinsForEachMountain.features[1]
       });
 
       focusMapRef.current.addLayer({
@@ -135,7 +135,7 @@ export function FocusMap({ showFocusMap, selectedMountain, focusMapRef }) {
       />
       <RoutePreview
         focusMapRef={focusMapRef}
-        apiUrl={`/api/toGeoJson/${mountainGeo.features[0].properties.routeApiUrl}`} />
+      />
     </>
   );
 }
