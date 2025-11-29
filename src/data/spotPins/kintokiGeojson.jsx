@@ -1,4 +1,4 @@
-// data/mountains/kintokiGeojson.jsx
+// data/spotPins/kintokiGeojson.jsx
 
 // 金時山
 export const kintokiGeojson = {

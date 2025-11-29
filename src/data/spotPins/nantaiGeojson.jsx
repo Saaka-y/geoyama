@@ -1,4 +1,4 @@
-// @/data/mountains/nantaiGeojson.jsx
+// @/data/spotPins/nantaiGeojson.jsx
 
 //　男体山
 export const nantaiGeojson = {

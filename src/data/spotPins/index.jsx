@@ -1,4 +1,4 @@
-// data/mountains/index.jsx
+// data/spotPins/index.jsx
 
 export { chausuGeojson } from "./chausuGeojson";
 export { tanigawaGeojson } from "./tanigawaGeojson";

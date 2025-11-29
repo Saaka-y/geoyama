@@ -1,4 +1,4 @@
-// data/mountains/allMountains.jsx
+// data/allMountains.jsx
 
 // all mountains
 export const geojson = {
@@ -12,7 +12,7 @@ export const geojson = {
       },
       properties: {
         title: 'Mt.Chausu',
-        description: 'Mount Chausu',
+        description: 'Chausu',
         distance: 3.5,
         courseTime: 2.5,
         routeName: "",
@@ -29,7 +29,7 @@ export const geojson = {
       },
       properties: {
         title: 'Mt.Tanigawa',
-        description: 'Mount Tanigawa',
+        description: 'Tanigawa',
         distance: 2.4,
         courseTime: 4.5,
         routeName: "Tenjin-ridge return",
@@ -46,7 +46,7 @@ export const geojson = {
       },
       properties: {
         title: 'Mt.Jinba',
-        description: 'Mount Jinba',
+        description: 'Jinba',
         distance: 1.25,
         courseTime: 3.5,
         routeName: "Tochiya-ridge return",
@@ -63,7 +63,7 @@ export const geojson = {
       },
       properties: {
         title: 'Mt.Nabewari',
-        description: 'Mount Nabewari',
+        description: 'Nabewari',
         distance: 1.5,
         courseTime: 6.5,
         routeName: "Yadorigi start",
@@ -80,7 +80,7 @@ export const geojson = {
       },
       properties: {
         title: 'Mt.Kintoki',
-        description: 'Mount Kintoki',
+        description: 'Kintoki',
         distance: 2.5,
         courseTime: 4.5,
         routeName: "Kintoki shrine loop",
@@ -97,7 +97,7 @@ export const geojson = {
       },
       properties: {
         title: 'Mt.Kinpu',
-        description: 'Mount Kinpu',
+        description: 'Kinpu',
         distance: 3,
         courseTime: 4.5,
         routeName: "Odarumi pass start",
@@ -114,7 +114,7 @@ export const geojson = {
       },
       properties: {
         title: 'Mt.Nantai',
-        description: 'Mount Nantai',
+        description: 'Nantai',
         distance: 2.5,
         courseTime: 7,
         routeName: "",

@@ -1,4 +1,4 @@
-// data/mountains/kinpuGeojson.jsx
+// data/spotPins/kinpuGeojson.jsx
 
 // 金峰山
 export const kinpuGeojson = {

@@ -1,7 +1,7 @@
 // pages/index.jsx
 "use client";
 import { useState, useRef } from "react";
-import { geojson } from "../data/mountains/allMountains";
+import { geojson } from "../data/allMountains";
 import { MainView } from "@/components/MainView/MainView";
 
 export default function Home() {
