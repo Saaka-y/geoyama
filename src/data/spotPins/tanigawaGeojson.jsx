@@ -1,18 +1,18 @@
-// data/mountains/jinbaGeojson.jsx
+// data/spotPins/tanigawaGeojson.jsx
 
-// 陣馬山
-export const jinbaGeojson = {
+// 谷川岳
+export const tanigawaGeojson = {
   type: "FeatureCollection",
   features: [
     {
       type: "Feature",
       geometry: {
         type: "Point",
-        coordinates: [139.96470378835457, 37.125682960009954] // 山頂
+        coordinates: [138.92989016075813, 36.837969505311655] // 山頂
       },
       properties: {
         icon: "mountain-icon",
-        title: "Mt.Jinba",
+        title: "Summit",
         routeApiUrl: "",
       }
     },
@@ -20,7 +20,7 @@ export const jinbaGeojson = {
       type: "Feature",
       geometry: {
         type: "Point",
-        coordinates: [139.97581886188752, 37.12982310145938] // 駐車場
+        coordinates: [138.96291285741043, 36.83678024439758] // 駐車場
       },
       properties: {
         icon: "carpark-icon",

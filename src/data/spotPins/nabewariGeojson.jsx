@@ -1,4 +1,4 @@
-// data/mountains/nabewariGeojson.jsx
+// data/spotPins/nabewariGeojson.jsx
 
 //　鍋割山
 export const nabewariGeojson = {

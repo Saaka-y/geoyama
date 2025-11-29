@@ -1,4 +1,4 @@
-// data/mountains/chausuGeojson.jsx
+// data/spotPins/chausuGeojson.jsx
 
 
 //　茶臼岳
