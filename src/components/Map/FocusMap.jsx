@@ -7,7 +7,6 @@ import { useEffect, useRef } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import * as mountains from "@/data/spotPins"; // index.js 経由で全山のピン情報を import
-import { geojson } from "@/data/allMountains";
 import { RoutePreview } from "@/components/Map/RoutePreview";
 
 const spotPins = {
@@ -40,9 +39,9 @@ export function FocusMap({ showFocusMap, selectedMountain, focusMapRef }) {
 
     focusMapRef.current = new mapboxgl.Map({
       container: focusMapContainerRef.current,
-      style: "mapbox://styles/saaka/cmih5nkg600dl01r934o9fiph",
+      style: "mapbox://styles/saaka/cmileb4cv00f701sn38ir8mn7",
       center: selectedMountain.geometry.coordinates, //@/data/allMountains.jsx
-      zoom: 13,
+      zoom: 12,
       pitch: 60,
       bearing: -17,
     });
@@ -53,18 +52,19 @@ export function FocusMap({ showFocusMap, selectedMountain, focusMapRef }) {
       features: []
     };
 
-    console.log("mountain Geo：", spotPinsForEachMountain)
+    console.log("山のピン：", spotPinsForEachMountain)
 
     focusMapRef.current.on("load", () => {
-      // terrain 設定
-      focusMapRef.current.setTerrain({ source: "mapbox-dem", exaggeration: 1.4 });
-
-      // hillshade レイヤー追加
-      focusMapRef.current.addLayer({
-        id: "hillshading",
-        type: "hillshade",
-        source: "mapbox-dem",
+      // 3Dソース設定
+      focusMapRef.current.addSource("terrain-dem", {
+        "type": "raster-dem",
+        "url": "mapbox://mapbox.mapbox-terrain-dem-v1",
+        "tileSize": 512,
+        "maxzoom": 14
       });
+      // ↑にterrain 設定
+      focusMapRef.current.setTerrain({ source: "terrain-dem", exaggeration: 1.4 });
+
 
       //カスタムピン追加 https://docs.mapbox.com/mapbox-gl-js/example/add-image/ 参照
       // imageをMapに読み込み
@@ -120,7 +120,7 @@ export function FocusMap({ showFocusMap, selectedMountain, focusMapRef }) {
           // 'icon-allow-overlap': true,
         }
       })
-      
+
     });
 
     return () => focusMapRef.current?.remove();

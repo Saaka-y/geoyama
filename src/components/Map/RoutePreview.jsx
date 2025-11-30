@@ -4,92 +4,83 @@
 import { useEffect, useState, useRef } from "react";
 
 export function RoutePreview({ focusMapRef }) {
-  // const [trailGeojson, settrailGeojson] = useState(null);
 
+  //ルート表示
+  useEffect(() => {
+    if (!focusMapRef.current) return;
 
-  // // ルートデータを取得
-  // useEffect(() => {
-  //   if(!pmtilesUrl) return;
-  //   // eslint-disable-next-line react-hooks/set-state-in-effect
-  //   settrailGeojson(pmtilesUrl);
-  // }, [pmtilesUrl]);
+    const map = focusMapRef.current
+    //ルートの標高だけを取得
+    const elevations = trailGeojson.features[0].geometry.coordinates.map(c => c[2]);
 
-  // //ルート表示
-  // useEffect(() => {
-  //   if (!focusMapRef.current || !trailGeojson) return;
+    // "There is already a source with ID "route"." のエラーに悩まされた結果…
+    const addRoute = () => {
+      // 古いレイヤーとソースを削除
+      if (map.getLayer("route-gradient")) map.removeLayer("route-gradient");
+      if (map.getLayer("route-main")) map.removeLayer("route-main");
+      if (map.getSource("route")) map.removeSource("route");
 
-  //   const map = focusMapRef.current
-  //   //ルートの標高だけを取得
-  //   const elevations = trailGeojson.features[0].geometry.coordinates.map(c => c[2]);
+      map.addSource("route", {
+        type: "geojson",
+        data: trailGeojson,
+        "lineMetrics": true
+      });
 
-  //   // "There is already a source with ID "route"." のエラーに悩まされた結果…
-  //   const addRoute = () => {
-  //     // 古いレイヤーとソースを削除
-  //     if (map.getLayer("route-gradient")) map.removeLayer("route-gradient");
-  //     if (map.getLayer("route-main")) map.removeLayer("route-main");
-  //     if (map.getSource("route")) map.removeSource("route");
+      map.addLayer({
+        id: "route-main",     // 白線を下に
+        type: "line",
+        source: "route",
+        paint: {
+          "line-color": "black",
+          "line-width": 6,      // 緑線より少し太めに
+          "line-opacity": 0.9
+        }
+      });
 
-  //     map.addSource("route", {
-  //       type: "geojson",
-  //       data: trailGeojson,
-  //       "lineMetrics": true
-  //     });
+      // 線の進行度ごとに色を作る
+      map.addLayer({
+        id: "route-gradient",
+        type: "line",
+        source: "route",
+        layout: {
+          "line-cap": "round",
+          "line-join": "round",
+        },
+        paint: {
+          "line-width": 4,
+          "line-gradient": [
+            "interpolate",
+            ["linear"],
+            ["line-progress"],  // 線の進行度
+            0, colorForElevation(elevations[0]),
+            0.1, colorForElevation(elevations[Math.floor(elevations.length * 0.1)]),
+            0.3, colorForElevation(elevations[Math.floor(elevations.length * 0.3)]),
+            0.5, colorForElevation(elevations[Math.floor(elevations.length * 0.5)]),
+            0.7, colorForElevation(elevations[Math.floor(elevations.length * 0.7)]),
+            1, colorForElevation(elevations[elevations.length - 1])
+          ]
+        }
+      });
 
-  //     map.addLayer({
-  //       id: "route-main",     // 白線を下に
-  //       type: "line",
-  //       source: "route",
-  //       paint: {
-  //         "line-color": "black",
-  //         "line-width": 6,      // 緑線より少し太めに
-  //         "line-opacity": 0.9
-  //       }
-  //     });
+      // 標高を色に変換する関数（0〜1をカラーグラデーションにマッピング）
+      function colorForElevation(e) {
+        if (e < 500) return "blue";
+        if (e < 1000) return "cyan";
+        if (e < 1500) return "lime";
+        if (e < 2000) return "yellow";
+        if (e < 2500) return "orange";
+        return "red"; //2500m以上は赤
+      }
 
-  //     // 線の進行度ごとに色を作る
-  //     map.addLayer({
-  //       id: "route-gradient",
-  //       type: "line",
-  //       source: "route",
-  //       layout: {
-  //         "line-cap": "round",
-  //         "line-join": "round",
-  //       },
-  //       paint: {
-  //         "line-width": 4,
-  //         "line-gradient": [
-  //           "interpolate",
-  //           ["linear"],
-  //           ["line-progress"],  // 線の進行度
-  //           0, colorForElevation(elevations[0]),
-  //           0.1, colorForElevation(elevations[Math.floor(elevations.length * 0.1)]),
-  //           0.3, colorForElevation(elevations[Math.floor(elevations.length * 0.3)]),
-  //           0.5, colorForElevation(elevations[Math.floor(elevations.length * 0.5)]),
-  //           0.7, colorForElevation(elevations[Math.floor(elevations.length * 0.7)]),
-  //           1, colorForElevation(elevations[elevations.length - 1])
-  //         ]
-  //       }
-  //     });
+    };
 
-  //     // 標高を色に変換する関数（0〜1をカラーグラデーションにマッピング）
-  //     function colorForElevation(e) {
-  //       if (e < 500) return "blue";
-  //       if (e < 1000) return "cyan";
-  //       if (e < 1500) return "lime";
-  //       if (e < 2000) return "yellow";
-  //       if (e < 2500) return "orange";
-  //       return "red"; //2500m以上は赤
-  //     }
-
-  //   };
-
-  //   // "There is already a source with ID "route"." のエラーに悩まされた結果…
-  //   if (map.isStyleLoaded()) {
-  //     addRoute();           // マップロード済みなら即追加
-  //   } else {
-  //     map.once("load", addRoute); // 未ロードなら once で1回だけ
-  //   }
-  // }, [trailGeojson])
+    // "There is already a source with ID "route"." のエラーに悩まされた結果…
+    if (map.isStyleLoaded()) {
+      addRoute();           // マップロード済みなら即追加
+    } else {
+      map.once("load", addRoute); // 未ロードなら once で1回だけ
+    }
+  }, [trailGeojson])
   
 
   return (
