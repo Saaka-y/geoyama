@@ -39,20 +39,12 @@ export function FocusMap({ showFocusMap, selectedMountain, focusMapRef }) {
 
     focusMapRef.current = new mapboxgl.Map({
       container: focusMapContainerRef.current,
-      style: "mapbox://styles/saaka/cmileb4cv00f701sn38ir8mn7",
+      style: "mapbox://styles/mapbox/outdoors-v12", //vector地図に変更
       center: selectedMountain.geometry.coordinates, //@/data/allMountains.jsx
-      zoom: 12,
+      zoom: 13,
       pitch: 60,
       bearing: -17,
     });
-
-    // selectedMountain に応じて GeoJSON を取得
-    const spotPinsForEachMountain = spotPins[selectedMountain.properties.title] || {
-      type: "FeatureCollection",
-      features: []
-    };
-
-    console.log("山のピン：", spotPinsForEachMountain)
 
     focusMapRef.current.on("load", () => {
       // 3Dソース設定
@@ -65,61 +57,31 @@ export function FocusMap({ showFocusMap, selectedMountain, focusMapRef }) {
       // ↑にterrain 設定
       focusMapRef.current.setTerrain({ source: "terrain-dem", exaggeration: 1.4 });
 
+      // ピン表示
+      const features = spotPinsForEachMountain.features;
+      features.forEach((feature, i) => {
+        const iconName = i === 0 ? "mountain-icon" : "carpark-icon";
+        const iconPath = i === 0 ? "/icon/mountain-icon.png" : "/icon/carpark-icon.png";
 
-      //カスタムピン追加 https://docs.mapbox.com/mapbox-gl-js/example/add-image/ 参照
-      // imageをMapに読み込み
-      focusMapRef.current.loadImage(
-        "/icon/mountain-icon.png",
-        (error, image) => {
-          if (error) throw error;
-          focusMapRef.current.addImage("mountain-icon", image);
-        }
-      )
+        focusMapRef.current.loadImage(iconPath, (err, image) => {
+          if (err) throw err;
+          if (!focusMapRef.current.hasImage(iconName)) {
+            focusMapRef.current.addImage(iconName, image);
+          }
 
-      // imageを表示する source(geojson)を指定
-      // mountain icon
-      focusMapRef.current.addSource('mountain-points', {
-        'type': 'geojson',
-        'data': spotPinsForEachMountain.features[0]
+          focusMapRef.current.addSource(`${iconName}-source`, {
+            type: "geojson",
+            data: feature,
+          });
+
+          focusMapRef.current.addLayer({
+            id: `${iconName}-layer`,
+            type: "symbol",
+            source: `${iconName}-source`,
+            layout: { "icon-image": iconName, "icon-size": 0.7, anchor: "top" },
+          });
+        });
       });
-
-      // 指定した source に Layer-symbolを追加してMapに表示する
-      focusMapRef.current.addLayer({
-        id: 'mountain-points',
-        type: 'symbol',
-        source: 'mountain-points',
-        layout: {
-          'icon-image': 'mountain-icon',
-          'icon-size': 0.7,
-          anchor: "top",
-          // 'icon-allow-overlap': true,
-        }
-      })
-
-      // carpark icon
-      focusMapRef.current.loadImage(
-        "/icon/carpark-icon.png",
-        (error, image) => {
-          if (error) throw error;
-          focusMapRef.current.addImage("carpark-icon", image);
-        }
-      )
-
-      focusMapRef.current.addSource('carpark-point', {
-        'type': 'geojson',
-        'data': spotPinsForEachMountain.features[1]
-      });
-
-      focusMapRef.current.addLayer({
-        id: 'carpark-point',
-        type: 'symbol',
-        source: 'carpark-point',
-        layout: {
-          'icon-image': 'carpark-icon',
-          'icon-size': 0.7,
-          // 'icon-allow-overlap': true,
-        }
-      })
 
     });
 
@@ -133,9 +95,9 @@ export function FocusMap({ showFocusMap, selectedMountain, focusMapRef }) {
         style={{ width: "100%", height: "100%" }}
         className="focus-map"
       />
-      <RoutePreview
+      {/* <RoutePreview
         focusMapRef={focusMapRef}
-      />
+      /> */}
     </>
   );
 }

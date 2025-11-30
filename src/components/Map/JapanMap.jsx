@@ -18,7 +18,7 @@ export function JapanMap({ japanMapRef, filteredMountains, initialView, selected
     japanMapRef.current = new mapboxgl.Map({
       ...initialView, // japanMapRef.current.flyTo()でカメラ位置管理
       container: japanMapContainerRef.current, // container ID
-      style: 'mapbox://styles/saaka/cmigzixmw00d701r9d48afpqe', // style URL
+      style: 'mapbox://styles/mapbox/outdoors-v12', // style URL
     });
 
     }, [])
