@@ -19,25 +19,27 @@ export const geojson = {
         elevation: 454,
         summit: 1915,
         carPark: "https://maps.app.goo.gl/dVs1xtc3kr4egp6o9",
+        station: ""
       }
     },
-    {
-      type: 'Feature',
-      geometry: {
-        type: 'Point',
-        coordinates: [138.92989016075813, 36.837969505311655],
-      },
-      properties: {
-        title: 'Mt.Tanigawa',
-        description: 'tanigawa',
-        distance: 2.4,
-        courseTime: 4.5,
-        routeName: "Tenjin-ridge return",
-        elevation: 719,
-        summit: 1977,
-        carPark: "https://maps.app.goo.gl/5pwpRYddrjCo44GA9",
-      }
-    },
+    // {
+    //   type: 'Feature',
+    //   geometry: {
+    //     type: 'Point',
+    //     coordinates: [138.92989016075813, 36.837969505311655],
+    //   },
+    //   properties: {
+    //     title: 'Mt.Tanigawa',
+    //     description: 'tanigawa',
+    //     distance: 2.4,
+    //     courseTime: 4.5,
+    //     routeName: "Tenjin-ridge return",
+    //     elevation: 719,
+    //     summit: 1977,
+    //     carPark: "https://maps.app.goo.gl/5pwpRYddrjCo44GA9",
+    //     station: ""
+    //   }
+    // },
     {
       type: 'Feature',
       geometry: {
@@ -53,6 +55,7 @@ export const geojson = {
         elevation: 649,
         summit: 854,
         carPark: "https://maps.app.goo.gl/XSUQ3T1R18RFDWjm9",
+        station: ""
       }
     },
     {
@@ -70,6 +73,7 @@ export const geojson = {
         elevation: 1265,
         summit: 1272,
         carPark: "https://maps.app.goo.gl/bftoUSya6pZRyHeX6",
+        station: ""
       }
     },
     {
@@ -87,6 +91,7 @@ export const geojson = {
         elevation: 539,
         summit: 1213,
         carPark: "https://maps.app.goo.gl/4JaEwRXxGWo3sP4g6",
+        station: ""
       }
     },
     {
@@ -104,6 +109,7 @@ export const geojson = {
         elevation: 538,
         summit: 2599,
         carPark: "https://maps.app.goo.gl/1DS4SRiBYSKB4cPM6",
+        station: ""
       }
     },
     {
@@ -121,6 +127,25 @@ export const geojson = {
         elevation: 1230,
         summit: 2486,
         carPark: "https://maps.app.goo.gl/oXNErHN3ASRJWksDA",
+        station: ""
+      }
+    },
+    {
+      type: 'Feature',
+      geometry: {
+        type: 'Point',
+        coordinates: [139.0483163494036, 35.3874841156144]
+      },
+      properties: {
+        title: 'Mt.Ono',
+        description: 'ono',
+        distance: 2,
+        courseTime: 4,
+        routeName: "Yaga to Yamakita",
+        elevation: 615,
+        summit: 723,
+        carPark: "",
+        station: "https://www.navitime.co.jp/en/transfer/searchlist?orvStationName=%E6%96%B0%E5%AE%BF&orvStationCode=00004254&dnvStationName=%E8%B0%B7%E5%B3%A8&dnvStationCode=00005862&defaultCondition=0"
       }
     },
   ]

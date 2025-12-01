@@ -44,9 +44,9 @@ export function JapanMap({ japanMapRef, filteredMountains, initialView, selected
         <span class="font-bold">${m.properties.title} (${m.properties.summit}m)</span>
         <span class="italic">${m.properties.routeName ? `- ${m.properties.routeName}` : ""}</span>
         <br/>
-        Shinjuku to <a target="_blank" href="${m.properties.carPark}" class="underline">car park</a>: ${m.properties.distance} ${m.properties.distance === 1 ? "hr" : "hrs"}
+        Shinjuku to <a target="_blank" href="${m.properties.carPark ? m.properties.carPark : m.properties.station}" class="underline">${m.properties.carPark ? "car park": "station"}</a>: ${m.properties.distance} ${m.properties.distance === 1 ? "hr" : "hrs"}
         <br/>
-        Return walk time: ${m.properties.courseTime} ${m.properties.courseTime === 1 ? "hr" : "hrs"}
+        Whole walk time: ${m.properties.courseTime} ${m.properties.courseTime === 1 ? "hr" : "hrs"}
         <br/>
         Elevation gain: ${m.properties.elevation}m
       `;
