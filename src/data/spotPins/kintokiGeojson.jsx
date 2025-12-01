@@ -11,6 +11,7 @@ export const kintokiGeojson = {
         icon: "mountain-icon",
         title: "Mt.Kintoki",
         routeApiUrl: "kintokiGeoJson",
+        zoom: 13.5
       }
     },
     {

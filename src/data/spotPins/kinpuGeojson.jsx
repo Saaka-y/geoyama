@@ -11,6 +11,7 @@ export const kinpuGeojson = {
         icon: "mountain-icon",
         title: "Mt.Kinpu",
         routeApiUrl: "kinpuGeoJson",
+        zoom: 12.5
       }
     },
     {

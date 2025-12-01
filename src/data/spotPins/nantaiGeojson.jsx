@@ -11,6 +11,7 @@ export const nantaiGeojson = {
         icon: "mountain-icon",
         title: "Mt.Nantai",
         routeApiUrl: "nantaiGeoJson",
+        zoom: 13
       }
     },
     {
