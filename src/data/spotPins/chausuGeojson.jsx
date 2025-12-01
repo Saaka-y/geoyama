@@ -12,6 +12,7 @@ export const chausuGeojson = {
         icon: "mountain-icon", 
         title: "Mt.Chausu", 
         routeApiUrl: "", 
+        zoom: 13.8,
       }
     },
     {

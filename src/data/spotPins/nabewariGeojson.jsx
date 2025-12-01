@@ -11,6 +11,7 @@ export const nabewariGeojson = {
         icon: "mountain-icon",
         title: "Mt.Nabewari",
         routeApiUrl: "nabewariGeoJson",
+        zoom: 12
       }
     },
     {

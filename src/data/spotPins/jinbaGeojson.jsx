@@ -14,6 +14,7 @@ export const jinbaGeojson = {
         icon: "mountain-icon",
         title: "Mt.Jinba",
         routeApiUrl: "",
+        zoom: 14
       }
     },
     {

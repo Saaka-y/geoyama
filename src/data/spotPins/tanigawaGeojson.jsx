@@ -14,6 +14,7 @@ export const tanigawaGeojson = {
         icon: "mountain-icon",
         title: "Summit",
         routeApiUrl: "",
+        zoom: 12.5
       }
     },
     {

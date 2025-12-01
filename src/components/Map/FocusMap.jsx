@@ -47,7 +47,7 @@ export function FocusMap({ showFocusMap, selectedMountain, focusMapRef }) {
       container: focusMapContainerRef.current,
       style: "mapbox://styles/mapbox/outdoors-v12", //vector地図に変更
       center: center, //@/data/allMountains.jsx
-      zoom: selectedMountain.properties.description === "kintoki" || "chausu" ? 13.5 : 12.5,
+      zoom: spotPinsForEachMountain.features[0].properties.zoom,
       pitch: 40,
       bearing: -17,
     });
