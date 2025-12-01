@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react";
-import mapboxgl from "mapbox-gl";
 
-export function RoutePreview({ apiUrl, focusMapRef, spotPinsForEachMountain }) {
+export function RoutePreview({ apiUrl, focusMapRef }) {
   const [routeGeo, setRouteGeo] = useState(null);
 
   useEffect(() => {
@@ -10,7 +9,6 @@ export function RoutePreview({ apiUrl, focusMapRef, spotPinsForEachMountain }) {
         const res = await fetch(apiUrl);
         const data = await res.json();
         setRouteGeo(data.routeGeojson);
-        console.log("トレイルジオ：", data.routeGeojson);
       } catch (err) {
         console.error(err);
       }
@@ -42,7 +40,7 @@ export function RoutePreview({ apiUrl, focusMapRef, spotPinsForEachMountain }) {
           id: "route-main",
           type: "line",
           source: "route",
-          paint: { "line-color": "black", "line-width": 6, "line-opacity": 0.9 },
+          paint: { "line-color": "white", "line-width": 6, "line-opacity": 1 },
         });
 
         map.addLayer({
@@ -67,12 +65,8 @@ export function RoutePreview({ apiUrl, focusMapRef, spotPinsForEachMountain }) {
         });
       }
 
-      // ルート描画後にカメラをフィットさせ、360度回転
+      // ルート描画後に360度回転
       map.once("idle", () => {
-        // const bounds = new mapboxgl.LngLatBounds();
-        // routeGeo.features[0].geometry.coordinates.forEach(c => bounds.extend([c[0], c[1]]));
-        // map.fitBounds(bounds, { padding: 150, pitch: 40, bearing: 0, duration: 2000 });
-
         let bearing = 0;
         const rotate = () => {
           bearing += 0.2; // 回転スピード

@@ -67,7 +67,7 @@ export function Filter({
 
       {/* Hours from Shinjuku */}
       <div className="w-[90%] flex flex-row md:flex-col items-center md:items-start gap-2">
-        <p className="w-1/2 md:w-full text-left text-xs ">Driving hours from Shinjuku:</p>
+        <p className="w-1/2 md:w-full text-left text-xs ">Duration from Shinjuku:</p>
         <select
           className="w-2/3 md:w-full rounded px-2 py-1"
           value={distance}
@@ -82,7 +82,7 @@ export function Filter({
       </div>
       {/* Course time */}
       <div className=" w-[90%] flex flex-row md:flex-col items-center md:items-start gap-2">
-        <p className="w-1/2 md:w-full text-left text-xs">Approx. Hike duration:</p>
+        <p className="w-1/2 md:w-full text-left text-xs">Approx. Hike time:</p>
         <select
           className="w-2/3 md:w-full rounded px-2 py-1"
 

@@ -15,6 +15,7 @@ const spotPins = {
   "Mt.Kintoki": mountains.kintokiGeojson,
   "Mt.Nabewari": mountains.nabewariGeojson,
   "Mt.Nantai": mountains.nantaiGeojson,
+  "Mt.Ono": mountains.onoGeojson,
   // 他の山も同じように追加
 };
 
@@ -38,6 +39,7 @@ export function FocusMap({ showFocusMap, selectedMountain, focusMapRef }) {
     const coords = spotPinsForEachMountain.features.map(f => f.geometry.coordinates);
     // coords = [[lng1, lat1], [lng2, lat2]] の形
 
+    // summit と start の中心地
     const center = [
       (coords[0][0] + coords[1][0]) / 2, // 経度の平均
       (coords[0][1] + coords[1][1]) / 2  // 緯度の平均
@@ -46,7 +48,7 @@ export function FocusMap({ showFocusMap, selectedMountain, focusMapRef }) {
     focusMapRef.current = new mapboxgl.Map({
       container: focusMapContainerRef.current,
       style: "mapbox://styles/mapbox/outdoors-v12", //vector地図に変更
-      center: center, //@/data/allMountains.jsx
+      center: center,
       zoom: spotPinsForEachMountain.features[0].properties.zoom,
       pitch: 40,
       bearing: -17,
@@ -67,8 +69,8 @@ export function FocusMap({ showFocusMap, selectedMountain, focusMapRef }) {
       // ピン表示
       const features = spotPinsForEachMountain.features;
       features.forEach((feature, i) => {
-        const iconName = i === 0 ? "mountain-icon" : "carpark-icon";
-        const iconPath = i === 0 ? "/icon/mountain-icon.png" : "/icon/carpark-icon.png";
+        const iconName = i === 0 ? "mountain-icon" : "start-icon";
+        const iconPath = i === 0 ? "/icon/mountain-icon.png" : "/icon/start-icon.png";
 
         // icon読み込み
         focusMapRef.current.loadImage(iconPath, (err, image) => {
@@ -106,8 +108,6 @@ export function FocusMap({ showFocusMap, selectedMountain, focusMapRef }) {
       <RoutePreview
         apiUrl={`/api/toGeoJson/${selectedMountain.properties.description}GeoJson`}
         focusMapRef={focusMapRef}
-        spotPinsForEachMountain={spotPinsForEachMountain}
-        selectedMountain={selectedMountain}
       />
     </>
   );
