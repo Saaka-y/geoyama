@@ -6,11 +6,11 @@ import pkg from '@mapbox/togeojson'; // ← 変更
 const { gpx } = pkg; // ← 変更
 
 const mountains = [
-  { name: "Nantai", gpxFile: "Nantai.gpx" },
-  { name: "Kinpu", gpxFile: "Kinpu.gpx" },
-  { name: "Kintoki", gpxFile: "Kintoki.gpx" },
-  { name: "Nabewari", gpxFile: "Nabewari.gpx" },
-  { name: "Ono", gpxFile: "Ono.gpx" },
+  { name: "nantai", gpxFile: "Nantai.gpx" },
+  { name: "kinpu", gpxFile: "Kinpu.gpx" },
+  { name: "kintoki", gpxFile: "Kintoki.gpx" },
+  { name: "nabewari", gpxFile: "Nabewari.gpx" },
+  { name: "ono", gpxFile: "Ono.gpx" },
   // 他の山も追加
 ];
 
@@ -22,7 +22,7 @@ mountains.forEach(({ name, gpxFile }) => {
     const routeGeojson = gpx(dom);
 
     // GeoJSON を保存
-    const outputPath = path.join(process.cwd(), 'src', 'data', 'routeGeojson', `${name}.geojson`);
+    const outputPath = path.join(process.cwd(), 'src', 'data', 'routeGeojson', `${name}.json`);
     fs.writeFileSync(outputPath, JSON.stringify(routeGeojson, null, 2));
 
     console.log(`${name}.geojson saved!`);
