@@ -7,7 +7,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import * as mountains from "@/data/spotPins"; // index.jsx 経由で全山のピン情報を import
 import * as routes from "@/data/routeGeojson"; // index.jsx経由で各山の routeGeojson を import
 import { RoutePreview } from "@/components/Map/RoutePreview";
-import { MountainInfo } from "@/components/Map/mountainInfo";
+import { MountainInfo } from "@/components/Map/MountainInfo";
 
 const accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
