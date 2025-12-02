@@ -84,11 +84,38 @@ export function ShowWeather({ selectedMountain, selectedDate, setSelectedDate })
 
   if (!selectedMountain || forecast.length === 0) return <p>Loading weather...</p>;
 
+  //**************************/
+  // background gradient depenging on the time  /
+  //**************************/
+  const getTimeBackground = (hour) => {
+    // hour: 0,3,6,9,12,15,18,21
+    if (hour === 0) {
+      return { background: "linear-gradient(to right, #2C3E50, #000000)", color: "#fff" }; 
+    } else if (hour === 3) {
+      return { background: "linear-gradient(to right, #000000, #FFF9C4)", color: "#fff" }; 
+    } else if (hour === 6) {
+      return { background: "linear-gradient(to right, #FFF9C4, #f7c8ad)", color: "#000" }; 
+    } else if (hour === 9) {
+      return { background: "linear-gradient(to right, #f7c8ad, #A3E4FF)", color: "#000" }; 
+    } else if (hour === 12) {
+      return { background: "linear-gradient(to right, #A3E4FF, #00BFFF)", color: "#000" }; 
+    } else if (hour === 15) {
+      return { background: "linear-gradient(to right, #00BFFF, #FFDAB9)", color: "#000" }; 
+    } else if (hour === 18) {
+      return { background: "linear-gradient(to right, #FFDAB9, #494ff5)", color: "#000" }; 
+    } else if (hour === 21) {
+      return { background: "linear-gradient(to right, #494ff5, #000000)", color: "#fff" }; 
+    } else {
+      return { background: "#ccc", color: "#000" }; // 安全用
+    }
+  };
+
+
   // ****** parent div ******
   // flex-1 bg-(--color-surface)` +
   //   (showFocusMap? ` pt-5` ...)　
 
-  
+
   return (
     <div
       ref={scrollRef}
@@ -97,8 +124,8 @@ export function ShowWeather({ selectedMountain, selectedDate, setSelectedDate })
         overflow-x-auto md:overflow-x-hidden md:overflow-y-auto 
         px-4 pb-4 md:px-4 md:h-full 
       "
-    > 
-    {/* 天気スクロールカードと画面端の距離を変える場合、親ではなく ↑ のpaddingを変える。親のMainView divを変えるとカードが見切れてしまう */}
+    >
+      {/* 天気スクロールカードと画面端の距離を変える場合、親ではなく ↑ のpaddingを変える。親のMainView divを変えるとカードが見切れてしまう */}
       {Object.keys(grouped).map((date) => (
         <div
           key={date}
@@ -120,13 +147,16 @@ export function ShowWeather({ selectedMountain, selectedDate, setSelectedDate })
             {grouped[date].map((item, i) => {
               const time = item.dt_txt.slice(11, 16);
               const temp = Math.round(item.wind.speed);
+              const timeHour = parseInt(time.slice(0, 2), 10);
+              const { background, color } = getTimeBackground(timeHour);
               return (
                 <div
                   key={i}
-                  className="w-[120px] md:w-full bg-gray-100 p-3 
+                  className="w-[120px] md:w-full p-3 
                     border border-gray-300 rounded-lg 
                     text-center shadow-sm shrink-0 
                     hover:shadow-md transition-shadow"
+                  style={{ background, color }}
                 >
                   <p className="text-xs mb-1">{time}</p>
                   <img
