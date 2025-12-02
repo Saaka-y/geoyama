@@ -138,7 +138,7 @@ export function FocusMap({ showFocusMap, selectedMountain, focusMapRef }) {
             backgroundColor: "rgba(0,0,0,0.3)",
             padding: "8px",
             borderRadius: "6px",
-            maxWidth: "250px",
+            maxWidth: "220px",
             boxShadow: "0 2px 6px rgba(0,0,0,0.2)"
           }}
         >

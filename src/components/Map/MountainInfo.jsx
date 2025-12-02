@@ -6,7 +6,7 @@ export function MountainInfo({ selectedMountain }) {
   const { title, summit, routeName, carPark, station, distance, courseTime, elevation } = selectedMountain.properties;
 
   return (
-    <div>
+    <div className="text-xs text-white">
       <span className="font-bold">{title} ({summit}m)</span>
       <span className="italic">{routeName ? ` - ${routeName}` : ""}</span>
       <br />
@@ -19,11 +19,11 @@ export function MountainInfo({ selectedMountain }) {
       >
         {carPark ? "car park" : "station"}
       </a>
-      : {distance} {distance === 1 ? "hr" : "hrs"}
+      : <span className="text-sm">{distance}</span> {distance === 1 ? "hr" : "hrs"}
       <br />
-      Total hike time: {courseTime} {courseTime === 1 ? "hr" : "hrs"}
+      Total hike time: <span className="text-sm">{courseTime}</span> {courseTime === 1 ? "hr" : "hrs"}
       <br />
-      Elevation gain: {elevation}m
+      Elevation gain: <span className="text-sm">{elevation}</span> m
     </div>
   );
 }
