@@ -1,23 +1,9 @@
 import { useEffect, useState } from "react";
 
-export function RoutePreview({ apiUrl, focusMapRef }) {
-  const [routeGeo, setRouteGeo] = useState(null);
+export function RoutePreview({ focusMapRef, routeGeo }) {
 
   useEffect(() => {
-    const fetchRoute = async () => {
-      try {
-        const res = await fetch(apiUrl);
-        const data = await res.json();
-        setRouteGeo(data.routeGeojson);
-      } catch (err) {
-        console.error(err);
-      }
-    };
-    fetchRoute();
-  }, [apiUrl]);
-
-  useEffect(() => {
-    if (!focusMapRef.current || !routeGeo) return;
+    if (!focusMapRef.current || !routeGeo?.features?.length) return;
     const map = focusMapRef.current;
 
     const elevations = routeGeo.features[0].geometry.coordinates.map(c => c[2]);
