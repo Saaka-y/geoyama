@@ -7,6 +7,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import * as mountains from "@/data/spotPins"; // index.jsx 経由で全山のピン情報を import
 import * as routes from "@/data/routeGeojson"; // index.jsx経由で各山の routeGeojson を import
 import { RoutePreview } from "@/components/Map/RoutePreview";
+import { MountainInfo } from "@/components/Map/mountainInfo";
 
 const accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
@@ -125,6 +126,26 @@ export function FocusMap({ showFocusMap, selectedMountain, focusMapRef }) {
         style={{ width: "100%", height: "100%" }}
         className="focus-map"
       />
+
+      {/* 左上に半透明カード */}
+      {selectedMountain && (
+        <div
+          style={{
+            position: "absolute",
+            top: 30,
+            left: 10,
+            zIndex: 10,
+            backgroundColor: "rgba(0,0,0,0.3)",
+            padding: "8px",
+            borderRadius: "6px",
+            maxWidth: "250px",
+            boxShadow: "0 2px 6px rgba(0,0,0,0.2)"
+          }}
+        >
+          <MountainInfo selectedMountain={selectedMountain} />
+        </div>
+      )}
+
       <RoutePreview
         routeGeo={routeGeo}
         focusMapRef={focusMapRef}
