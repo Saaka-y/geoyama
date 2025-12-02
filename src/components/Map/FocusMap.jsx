@@ -64,6 +64,7 @@ export function FocusMap({ showFocusMap, selectedMountain, focusMapRef }) {
       zoom: spotPinsForEachMountain.features[0].properties.zoom,
       pitch: 40,
       bearing: -17,
+      logoPosition: "top-left",
     });
 
     focusMapRef.current.on("load", () => {
