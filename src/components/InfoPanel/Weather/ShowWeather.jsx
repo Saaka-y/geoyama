@@ -87,6 +87,7 @@ export function ShowWeather({ selectedMountain, selectedDate, setSelectedDate })
   //**************************/
   // background gradient depenging on the time  /
   //**************************/
+
   const getTimeBackground = (hour) => {
     // hour: 0,3,6,9,12,15,18,21
     if (hour === 0) {
