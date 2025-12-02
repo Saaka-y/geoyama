@@ -39,10 +39,10 @@ export function FocusMap({ showFocusMap, selectedMountain, focusMapRef }) {
     const coords = spotPinsForEachMountain.features.map(f => f.geometry.coordinates);
     // coords = [[lng1, lat1], [lng2, lat2]] の形
 
-    // summit と start の中心地
+    // summit, start, goal の中心地
     const center = [
-      (coords[0][0] + coords[1][0]) / 2, // 経度の平均
-      (coords[0][1] + coords[1][1]) / 2  // 緯度の平均
+      (coords[0][0] + coords[1][0] + coords[2][0]) / 3, // 経度の平均
+      (coords[0][1] + coords[1][1] + coords[2][1]) / 3  // 緯度の平均
     ];
 
     focusMapRef.current = new mapboxgl.Map({
@@ -55,7 +55,7 @@ export function FocusMap({ showFocusMap, selectedMountain, focusMapRef }) {
     });
 
     focusMapRef.current.on("load", () => {
-      
+
       // 3Dソース設定
       focusMapRef.current.addSource("terrain-dem", {
         "type": "raster-dem",
@@ -68,9 +68,13 @@ export function FocusMap({ showFocusMap, selectedMountain, focusMapRef }) {
 
       // ピン表示
       const features = spotPinsForEachMountain.features;
-      features.forEach((feature, i) => {
-        const iconName = i === 0 ? "mountain-icon" : "start-icon";
-        const iconPath = i === 0 ? "/icon/mountain-icon.png" : "/icon/start-icon.png";
+      const layerOrder = ["mountain-icon", "goal-icon", "start-icon"];
+      layerOrder.forEach(iconName => {
+        const i = iconName === "mountain-icon" ? 0 : iconName === "start-icon" ? 1 : 2;
+        const feature = features[i];
+
+        const iconPath = `/icon/${iconName}.png`;
+
 
         // icon読み込み
         focusMapRef.current.loadImage(iconPath, (err, image) => {
@@ -88,7 +92,12 @@ export function FocusMap({ showFocusMap, selectedMountain, focusMapRef }) {
             id: `${iconName}-layer`,
             type: "symbol",
             source: `${iconName}-source`,
-            layout: { "icon-image": iconName, "icon-size": 0.7, anchor: "top" },
+            layout: {
+              "icon-image": iconName,
+              "icon-size": 0.3,
+              "icon-anchor": "bottom",
+              "icon-allow-overlap": true,
+            },
           });
         });
       });

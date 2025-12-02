@@ -7,17 +7,29 @@ export const nabewariGeojson = {
     {
       type: "Feature",
       geometry: { type: "Point", coordinates: [139.14178132960086, 35.44431802028864] },
-      properties: {
-        icon: "mountain-icon",
-        title: "Mt.Nabewari",
-        routeApiUrl: "nabewariGeoJson",
-        zoom: 12
-      }
+      properties: { icon: "mountain-icon", title: "Mt.Nabewari", zoom: 12 }
     },
     {
       type: "Feature",
-      geometry: { type: "Point", coordinates: [139.13779380571876, 35.401821833908905] },
-      properties: { icon: "carpark-icon", title: "Car Park" }
-    }
+      geometry: {
+        type: "Point", coordinates: [
+          139.14101957231105,
+          35.402304841845215,
+          347.71192303871504
+        ]
+      },
+      properties: { icon: "start-icon", title: "Start" }
+    },
+    {
+      type: "Feature",
+      geometry: {
+        type: "Point", coordinates: [
+          139.13875663159303,
+          35.40138447297568,
+          292.68307776004076
+        ]
+      },
+      properties: { icon: "goal-icon", title: "Goal" }
+    },
   ]
 };
