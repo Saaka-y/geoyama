@@ -29,7 +29,7 @@ export function MainView({
   // h-2/3 md:h-full w-full md:w-2/3
 
   return (
-    <div className="w-screen h-screen flex flex-col md:flex-row-reverse bg-(--color-background)">
+    <div className="w-screen h-dvh flex flex-col md:flex-row-reverse bg-(--color-background)">
 
       {/* Map */}
       <div className="relative flex-2 z-10">
