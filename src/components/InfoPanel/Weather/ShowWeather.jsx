@@ -4,7 +4,7 @@
 
 import { useEffect, useState, useRef } from "react";
 
-export function ShowWeather({ selectedMountain, selectedDate, setSelectedDate }) {
+export function ShowWeather({ selectedMountain, selectedDate }) {
   const [forecast, setForecast] = useState([]);
   const scrollRef = useRef(null);
   const summit = selectedMountain.properties.summit
@@ -87,35 +87,34 @@ export function ShowWeather({ selectedMountain, selectedDate, setSelectedDate })
   //**************************/
   // background gradient depenging on the time  /
   //**************************/
-
+  const isMd = typeof window !== "undefined" && window.matchMedia("(min-width: 768px)").matches;
   const getTimeBackground = (hour) => {
-    // hour: 0,3,6,9,12,15,18,21
+    const direction = isMd ? "to bottom" : "to right";
     if (hour === 0) {
-      return { background: "linear-gradient(to right, #2C3E50, #000000)", color: "#fff" }; 
-    } else if (hour === 3) {
-      return { background: "linear-gradient(to right, #000000, #FFF9C4)", color: "#fff" }; 
-    } else if (hour === 6) {
-      return { background: "linear-gradient(to right, #FFF9C4, #f7c8ad)", color: "#000" }; 
-    } else if (hour === 9) {
-      return { background: "linear-gradient(to right, #f7c8ad, #A3E4FF)", color: "#000" }; 
-    } else if (hour === 12) {
-      return { background: "linear-gradient(to right, #A3E4FF, #00BFFF)", color: "#000" }; 
-    } else if (hour === 15) {
-      return { background: "linear-gradient(to right, #00BFFF, #FFDAB9)", color: "#000" }; 
-    } else if (hour === 18) {
-      return { background: "linear-gradient(to right, #FFDAB9, #494ff5)", color: "#000" }; 
-    } else if (hour === 21) {
-      return { background: "linear-gradient(to right, #494ff5, #000000)", color: "#fff" }; 
-    } else {
-      return { background: "#ccc", color: "#000" }; // 安全用
-    }
+    return { background: `linear-gradient(${direction}, #2C3E50, #000000)`, color: "#fff" };
+  } else if (hour === 3) {
+    return { background: `linear-gradient(${direction}, #000000, #FFF9C4)`, color: "#fff" };
+  } else if (hour === 6) {
+    return { background: `linear-gradient(${direction}, #FFF9C4, #f7c8ad)`, color: "#000" };
+  } else if (hour === 9) {
+    return { background: `linear-gradient(${direction}, #f7c8ad, #A3E4FF)`, color: "#000" };
+  } else if (hour === 12) {
+    return { background: `linear-gradient(${direction}, #A3E4FF, #00BFFF)`, color: "#000" };
+  } else if (hour === 15) {
+    return { background: `linear-gradient(${direction}, #00BFFF, #FFDAB9)`, color: "#000" };
+  } else if (hour === 18) {
+    return { background: `linear-gradient(${direction}, #FFDAB9, #494ff5)`, color: "#000" };
+  } else if (hour === 21) {
+    return { background: `linear-gradient(${direction}, #494ff5, #000000)`, color: "#fff" };
+  } else {
+    return { background: "#ccc", color: "#000" };
+  }
   };
 
 
   // ****** parent div ******
   // flex-1 bg-(--color-surface)` +
   //   (showFocusMap? ` pt-5` ...)　
-
 
   return (
     <div
@@ -146,9 +145,9 @@ export function ShowWeather({ selectedMountain, selectedDate, setSelectedDate })
           {/* カード群 */}
           <div className="flex flex-row md:flex-col gap-2">
             {grouped[date].map((item, i) => {
-              const time = item.dt_txt.slice(11, 16);
-              const temp = Math.round(item.wind.speed);
-              const timeHour = parseInt(time.slice(0, 2), 10);
+              const time = item.dt_txt.slice(11, 16); //時間
+              const temp = Math.round(item.main.temp); //気温
+              const timeHour = parseInt(time.slice(0, 2), 10); //時間（hourだけ取り出す）
               const { background, color } = getTimeBackground(timeHour);
               return (
                 <div
