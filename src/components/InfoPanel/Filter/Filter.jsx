@@ -6,11 +6,11 @@ import { useFilterStore } from "@/stores/filterStore";
 import { useMountainStore } from "@/stores/mountainStore";
 
 
-export function Filter({japanMapRef, dateOptions}) {
+export function Filter({ japanMapRef }) {
 
   const japanMapInitialView = useUiStore((state) => state.japanMapInitialView);
-  const { distance, courseTime, setDistance, setCourseTime, setSelectedDate } = useFilterStore();
-  const { allMountains,filteredMountains, setFilteredMountains, setSelectedMountain } = useMountainStore();
+  const { distance, courseTime, setDistance, setCourseTime, setSelectedDate, } = useFilterStore();
+  const { allMountains, filteredMountains, setFilteredMountains, setSelectedMountain } = useMountainStore();
 
 
   //**************************/
