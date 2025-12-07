@@ -1,10 +1,10 @@
-/* eslint-disable @next/next/no-img-element */
-
 // components/ShowWeather.jsx
 
 import { useEffect, useState, useRef } from "react";
+import { useMountainStore } from "@/stores/mountainStore";
 
-export function ShowWeather({ selectedMountain, selectedDate }) {
+export function ShowWeather() {
+  const { selectedMountain, selectedDate } = useMountainStore();
   const [forecast, setForecast] = useState([]);
   const scrollRef = useRef(null);
   const summit = selectedMountain.properties.summit
