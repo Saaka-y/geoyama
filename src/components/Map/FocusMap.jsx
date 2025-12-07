@@ -1,15 +1,15 @@
 // components/Map/FocusMap.jsx
 
 "use client"
-import { useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import * as mountains from "@/data/spotPins"; // index.jsx 経由で全山のピン情報を import
 import * as routes from "@/data/routeGeojson"; // index.jsx経由で各山の routeGeojson を import
-import { RoutePreview } from "@/components/Map/RoutePreview";
-import { MountainInfo } from "@/components/Map/MountainInfo";
+import { useEffect, useRef, useState } from "react";
 import { useUiStore } from "@/stores/uiStore";
 import { useMountainStore } from "@/stores/mountainStore";
+import { MountainInfo } from "@/components/Map/MountainInfo";
+import { RoutePreview } from "@/components/Map/RoutePreview";
 
 const accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
@@ -43,6 +43,7 @@ export function FocusMap( { focusMapRef }) {
   useEffect(() => {
     if (!selectedMountain) return;
     const mountainName = selectedMountain.properties.description;
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     setRouteGeo(routes[mountainName] || { type: "FeatureCollection", features: [] });
   }, [selectedMountain]);
 

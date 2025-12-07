@@ -1,13 +1,12 @@
 // components/InfoPanel.jsx
 "use client";
 
+import { useUiStore } from "@/stores/uiStore";
 import { Filter } from "@/components/InfoPanel/Filter/Filter";
 import { ShowWeather } from "@/components/InfoPanel/Weather/ShowWeather";
 import { DateSelect } from "@/components/InfoPanel/Filter/DateSelect";
-import { useUiStore } from "@/stores/uiStore";
 
-export function InfoPanel(japanMapRef) {
-
+export function InfoPanel({ japanMapRef }) {
   const showFocusMap = useUiStore((state) => state.showFocusMap);
 
   return (
