@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useMapStore } from "@/stores/mapStore";
 
-export function RoutePreview({ focusMapRef, routeGeo }) {
+export function RoutePreview(routeGeo) {
+  const focusMap = useMapStore((state) => state.focusMap);
 
   useEffect(() => {
-    if (!focusMapRef.current || !routeGeo?.features?.length) return;
-    const map = focusMapRef.current;
-
+    if (!focusMap || !routeGeo?.features?.length) return;
+    const map = focusMap;
     const elevations = routeGeo.features[0].geometry.coordinates.map(c => c[2]);
     const colorForElevation = (e) => {
       if (e < 500) return "blue";

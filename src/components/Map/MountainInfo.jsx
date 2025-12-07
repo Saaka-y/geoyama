@@ -1,6 +1,9 @@
 //components/Map/MountainInfo.jsx
+import { useMountainStore } from "@/stores/mountainStore";
 
-export function MountainInfo({ selectedMountain }) {
+export function MountainInfo() {
+  const { selectedMountain } = useMountainStore();
+  
   if (!selectedMountain) return null;
 
   const { title, summit, routeName, carPark, station, distance, courseTime, elevation } = selectedMountain.properties;

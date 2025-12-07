@@ -8,6 +8,9 @@ import * as mountains from "@/data/spotPins"; // index.jsx 経由で全山のピ
 import * as routes from "@/data/routeGeojson"; // index.jsx経由で各山の routeGeojson を import
 import { RoutePreview } from "@/components/Map/RoutePreview";
 import { MountainInfo } from "@/components/Map/MountainInfo";
+import { useMapStore } from "@/stores/mapStore";
+import { useUiStore } from "@/stores/uiStore";
+import { useMountainStore } from "@/stores/mountainStore";
 
 const accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
@@ -23,8 +26,11 @@ const spotPins = {
   // 他の山も同じように追加
 };
 
-export function FocusMap({ showFocusMap, selectedMountain, focusMapRef }) {
-  const focusMapContainerRef = useRef();
+export function FocusMap() {
+  const { setFocusMap } = useMapStore();
+  const { showFocusMap } = useUiStore();
+  const { selectedMountain } = useMountainStore();
+  const focusMapContainerRef = useRef(null);
   const [routeGeo, setRouteGeo] = useState(null);
 
   // spot pins
@@ -39,7 +45,6 @@ export function FocusMap({ showFocusMap, selectedMountain, focusMapRef }) {
   useEffect(() => {
     if (!selectedMountain) return;
     const mountainName = selectedMountain.properties.description;
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setRouteGeo(routes[mountainName] || { type: "FeatureCollection", features: [] });
   }, [selectedMountain]);
 
@@ -58,7 +63,7 @@ export function FocusMap({ showFocusMap, selectedMountain, focusMapRef }) {
     ];
 
     // focusMap用インスタンス追加
-    focusMapRef.current = new mapboxgl.Map({
+    const map = new mapboxgl.Map({
       container: focusMapContainerRef.current,
       style: "mapbox://styles/mapbox/outdoors-v12",
       center: center,
@@ -68,17 +73,19 @@ export function FocusMap({ showFocusMap, selectedMountain, focusMapRef }) {
       logoPosition: "top-left",
     });
 
-    focusMapRef.current.on("load", () => {
+    setFocusMap(map);
+
+    map.on("load", () => {
 
       // 3Dソース設定
-      focusMapRef.current.addSource("terrain-dem", {
+      map.addSource("terrain-dem", {
         "type": "raster-dem",
         "url": "mapbox://mapbox.mapbox-terrain-dem-v1",
         "tileSize": 512,
         "maxzoom": 14
       });
       // ３Dソースにterrain 設定
-      focusMapRef.current.setTerrain({ source: "terrain-dem", exaggeration: 1.4 });
+      map.setTerrain({ source: "terrain-dem", exaggeration: 1.4 });
 
       // ピン表示
       const features = spotPinsForEachMountain.features;
@@ -89,18 +96,18 @@ export function FocusMap({ showFocusMap, selectedMountain, focusMapRef }) {
         const iconPath = `/icon/${iconName}.png`;
 
         // icon画像 読み込み
-        focusMapRef.current.loadImage(iconPath, (err, image) => {
+        map.loadImage(iconPath, (err, image) => {
           if (err) throw err;
-          if (!focusMapRef.current.hasImage(iconName)) {
-            focusMapRef.current.addImage(iconName, image);
+          if (!map.hasImage(iconName)) {
+            map.addImage(iconName, image);
           }
           // icon表示用のsource追加
-          focusMapRef.current.addSource(`${iconName}-source`, {
+          map.addSource(`${iconName}-source`, {
             type: "geojson",
             data: feature, //それぞれの山のgeojson（59)
           });
           // icon表示用のlayer（symbol） 設定
-          focusMapRef.current.addLayer({
+          map.addLayer({
             id: `${iconName}-layer`,
             type: "symbol",
             source: `${iconName}-source`,
@@ -116,7 +123,7 @@ export function FocusMap({ showFocusMap, selectedMountain, focusMapRef }) {
 
     });
 
-    return () => focusMapRef.current?.remove();
+    return () => map?.remove();
   }, []);
 
   return (
@@ -142,13 +149,12 @@ export function FocusMap({ showFocusMap, selectedMountain, focusMapRef }) {
             boxShadow: "0 2px 6px rgba(0,0,0,0.2)"
           }}
         >
-          <MountainInfo selectedMountain={selectedMountain} />
+          <MountainInfo />
         </div>
       )}
 
       <RoutePreview
         routeGeo={routeGeo}
-        focusMapRef={focusMapRef}
       />
     </>
   );
