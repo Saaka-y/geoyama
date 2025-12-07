@@ -5,54 +5,22 @@ import { useState } from "react";
 import { Filter } from "@/components/InfoPanel/Filter/Filter";
 import { ShowWeather } from "@/components/InfoPanel/Weather/ShowWeather";
 import { DateSelect } from "@/components/InfoPanel/Filter/DateSelect";
+import { useUiStore } from "@/stores/uiStore";
 
-export function InfoPanel({
-  showFocusMap,
-  filterState,
-  //mountain marker state
-  japanMapRef,
-  allMountains,
-  filteredMountains,
-  setFilteredMountains,
-  initialView,
-  // mountain focus state
-  selectedMountain,
-  setSelectedMountain
-}) {
+export function InfoPanel(japanMapRef) {
 
   const [dateOptions, setDateOptions] = useState([]); // date options
 
-  const {
-    distance,
-    setDistance,
-    courseTime,
-    setCourseTime,
-    selectedDate,
-    setSelectedDate, } = filterState;
+  const showFocusMap = useUiStore((state) => state.showFocusMap);
 
   return (
     <>
       {showFocusMap ? (
-        <ShowWeather
-          selectedDate={selectedDate}
-          setSelectedDate={setSelectedDate}
-          selectedMountain={selectedMountain}
-        />
+        <ShowWeather/>
       ) : (
         <Filter
-          filterState={filterState}
-          //mountain marker state
           japanMapRef={japanMapRef}
-          allMountains={allMountains}
-          filteredMountains={filteredMountains}
-          setFilteredMountains={setFilteredMountains}
-          // date options
           dateOptions={dateOptions}
-          // mapView state
-          initialView={initialView}
-          // mountain focus state
-          selectedMountain={selectedMountain}
-          setSelectedMountain={setSelectedMountain}
         />
       )
       }
@@ -63,8 +31,6 @@ export function InfoPanel({
           <p className="w-1/2 md:w-full text-left text-xs">Select Date:</p>
 
           <DateSelect
-            selectedDate={selectedDate}
-            setSelectedDate={setSelectedDate}
             dateOptions={dateOptions}
             setDateOptions={setDateOptions}
             className=" w-2/3 md:w-full border border-gray-400 rounded px-2 py-1"
