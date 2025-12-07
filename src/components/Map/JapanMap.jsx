@@ -10,7 +10,7 @@ const accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
 export function JapanMap({ japanMapRef }) {
   const { setShowFocusMap, japanMapInitialView } = useUiStore();
-  const { filteredMountains, setSelectedMountain, selectedMountain } = useMountainStore();
+  const { filteredMountains, setSelectedMountain } = useMountainStore();
   const japanMapContainerRef = useRef(null);
   const markerRef = useRef([]);
 
