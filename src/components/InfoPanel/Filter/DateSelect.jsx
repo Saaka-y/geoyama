@@ -26,8 +26,12 @@ export function DateSelect({ className, dateOptions, setDateOptions }) {
       options.push({
         date,
         label,
-        value: dayToStr(date), 
-        string: dayToStr(date),
+        value: dayToStr(date),
+        string: date.toLocaleDateString("en-UK", {
+          weekday: "short",
+          month: "short",
+          day: "numeric"
+        })
       });
     }
     setDateOptions(options);
@@ -36,7 +40,7 @@ export function DateSelect({ className, dateOptions, setDateOptions }) {
       setSelectedDate(options[0]);
     }
 
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleDateSelect = (e) => {

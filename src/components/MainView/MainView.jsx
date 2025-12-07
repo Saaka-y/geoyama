@@ -4,15 +4,13 @@ import { JapanMap } from "@/components/Map/JapanMap";
 import { FocusMap } from "@/components/Map/FocusMap";
 import { InfoPanel } from "@/components/InfoPanel/InfoPanel";
 import { useUiStore } from "@/stores/uiStore";
-import { useMapStore } from "@/stores/mapStore";
 
-export function MainView() {
+export function MainView({ japanMapRef, focusMapRef }) {
   const { showFocusMap, backToMap, japanMapInitialView } = useUiStore();
-  const japanMap = useMapStore(state => state.japanMap);
 
   const handleBackToMap = () => {
     backToMap();
-    japanMap.flyTo({
+    japanMapRef.current.flyTo({
       ...japanMapInitialView,
     });
   };
@@ -25,9 +23,13 @@ export function MainView() {
       {/* Map */}
       <div className="relative flex-2 z-10">
         {!showFocusMap ? (
-          <JapanMap />
+          <JapanMap
+            japanMapRef={japanMapRef}
+          />
         ) : (
-          <FocusMap />
+          <FocusMap 
+            focusMapRef={focusMapRef}
+          />
         )}
       </div>
 

@@ -25,6 +25,7 @@ export function ShowWeather() {
       try {
         const res = await fetch(`/api/weather?lat=${lat}&lon=${lon}`);
         const data = await res.json();
+        console.log("天気データ全体", data);
         const targetDate = new Date(selectedDate.value);
 
         const datesToShow = [];
