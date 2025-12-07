@@ -3,28 +3,19 @@
 import { JapanMap } from "@/components/Map/JapanMap";
 import { FocusMap } from "@/components/Map/FocusMap";
 import { InfoPanel } from "@/components/InfoPanel/InfoPanel";
+import { useUiStore } from "@/stores/uiStore";
+import { useMapStore } from "@/stores/mapStore";
 
-export function MainView({
-  filterState,
-  // Map インスタンス関連
-  japanMapRef,
-  focusMapRef,
-  showFocusMap,
-  setShowFocusMap,
-  //mountain marker state
-  allMountains,
-  filteredMountains,
-  setFilteredMountains,
-  handleBackToMap,
-  // mapView state
-  mapView,
-  setMapView,
-  initialView,
-  // mountain focus state
-  selectedMountain,
-  setSelectedMountain,
-}) {
+export function MainView() {
+  const { showFocusMap, backToMap, japanMapInitialView } = useUiStore();
+  const japanMap = useMapStore(state => state.japanMap);
 
+  const handleBackToMap = () => {
+    backToMap();
+    japanMap.flyTo({
+      ...japanMapInitialView,
+    });
+  };
   // h-1/3 md:h-full w-full md:w-1/3
   // h-2/3 md:h-full w-full md:w-2/3
 
@@ -34,21 +25,9 @@ export function MainView({
       {/* Map */}
       <div className="relative flex-2 z-10">
         {!showFocusMap ? (
-          <JapanMap
-            japanMapRef={japanMapRef}
-            filteredMountains={filteredMountains}
-            initialView={initialView}
-            mapView={mapView}
-            selectedMountain={selectedMountain}
-            setSelectedMountain={setSelectedMountain}
-            setShowFocusMap={setShowFocusMap}
-          />
+          <JapanMap />
         ) : (
-          <FocusMap
-            showFocusMap={showFocusMap}
-            selectedMountain={selectedMountain}
-            focusMapRef={focusMapRef}
-          />
+          <FocusMap />
         )}
       </div>
 
@@ -83,20 +62,7 @@ export function MainView({
           )
         }
       >
-        <InfoPanel
-          showFocusMap={showFocusMap}
-          filterState={filterState}
-          //mountain marker state
-          japanMapRef={japanMapRef}
-          allMountains={allMountains}
-          filteredMountains={filteredMountains}
-          setFilteredMountains={setFilteredMountains}
-          // mapView state
-          initialView={initialView}
-          // mountain focus state
-          selectedMountain={selectedMountain}
-          setSelectedMountain={setSelectedMountain}
-        />
+        <InfoPanel />
       </div>
     </div>
   );

@@ -1,20 +1,16 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 // components/Filter.jsx
 
 import { useEffect } from "react";
+import { useUiStore } from "@/stores/uiStore";
+import { useFilterStore } from "@/stores/filterStore";
+import { useMountainStore } from "@/stores/mountainStore";
 
-export function Filter({
-  filterState,
-  japanMapRef,
-  allMountains,
-  filteredMountains,
-  setFilteredMountains,
-  dateOptions,
-  initialView,
-  setSelectedMountain
-}) {
 
-  const { distance, setDistance, courseTime, setCourseTime, selectedDate, setSelectedDate } = filterState;
+export function Filter({japanMapRef, dateOptions}) {
+
+  const japanMapInitialView = useUiStore((state) => state.japanMapInitialView);
+  const { distance, courseTime, setDistance, setCourseTime, setSelectedDate } = useFilterStore();
+  const { allMountains,filteredMountains, setFilteredMountains, setSelectedMountain } = useMountainStore();
 
 
   //**************************/
@@ -47,7 +43,7 @@ export function Filter({
     setSelectedDate(dateOptions[0]);
 
     japanMapRef.current.flyTo({
-      ...initialView,
+      ...japanMapInitialView,
     })
   }
 

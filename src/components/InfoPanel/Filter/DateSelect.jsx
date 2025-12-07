@@ -1,8 +1,12 @@
-/* eslint-disable react-hooks/set-state-in-effect */
+
 // components/DateSelect.jsx
 import { useEffect } from "react";
+import { dayToStr } from "@/utils/dayToStr";
+import { useFilterStore } from "@/stores/filterStore";
 
-export function DateSelect({ selectedDate, setSelectedDate, className, dateOptions, setDateOptions }) {
+
+export function DateSelect({ className, dateOptions, setDateOptions }) {
+  const { selectedDate, setSelectedDate } = useFilterStore();
 
   // create date options at the first rendering
   useEffect(() => {
@@ -22,12 +26,8 @@ export function DateSelect({ selectedDate, setSelectedDate, className, dateOptio
       options.push({
         date,
         label,
-        value: date.toISOString().split("T")[0], // YYYY-MM-DD
-        string: date.toLocaleDateString("en-UK", {
-          weekday: "short",
-          month: "short",
-          day: "numeric"
-        })
+        value: dayToStr(date), 
+        string: dayToStr(date),
       });
     }
     setDateOptions(options);
