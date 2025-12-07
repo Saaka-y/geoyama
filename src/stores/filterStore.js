@@ -7,10 +7,12 @@ export const useFilterStore = create((set) => ({
   distance: "",
   courseTime: "",
   selectedDate: null,
+  dateOptions: [],
 
   // Setters for filter states
   setDistance: (distance) => set({ distance }),
   setCourseTime: (courseTime) => set({ courseTime }),
   setSelectedDate: (selectedDate) => set({ selectedDate }),
+  setDateOptions: (dateOptions) => set({ dateOptions }),
 
 }));
