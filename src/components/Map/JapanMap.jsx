@@ -3,16 +3,14 @@
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useEffect, useRef } from 'react';
-import { useMapStore } from '@/stores/mapStore';
 import { useUiStore } from '@/stores/uiStore';
 import { useMountainStore } from '@/stores/mountainStore';
 
 const accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
-export function JapanMap() {
-  const {japanMap,setJapanMap} = useMapStore();
+export function JapanMap({ japanMapRef }) {
   const { setShowFocusMap, japanMapInitialView } = useUiStore();
-  const { filteredMountains, setSelectedMountain } = useMountainStore();
+  const { filteredMountains, setSelectedMountain, selectedMountain } = useMountainStore();
   const japanMapContainerRef = useRef(null);
   const markerRef = useRef([]);
 
@@ -20,19 +18,16 @@ export function JapanMap() {
   useEffect(() => {
     mapboxgl.accessToken = accessToken;
 
-    const map = new mapboxgl.Map({
+    japanMapRef.current = new mapboxgl.Map({
       ...japanMapInitialView,
       container: japanMapContainerRef.current, // container ID
       style: 'mapbox://styles/mapbox/outdoors-v12', // style URL
     });
-
-    setJapanMap(map); // mapStoreに保存
-    return () => map.remove();
   }, [])
 
   // Marker 作成、フィルターに沿って変更
   useEffect(() => {
-    if (!japanMap) return;
+    if (!japanMapRef.current) return;
 
     // 既存のマーカーを消す
     markerRef.current.forEach(m => m.remove());
@@ -88,10 +83,10 @@ export function JapanMap() {
       const marker = new mapboxgl.Marker(el)
         .setLngLat(coords)
         .setPopup(popup)
-        .addTo(japanMap);
+        .addTo(japanMapRef.current);
 
       marker.getElement().addEventListener("click", () => {
-        japanMap.flyTo({
+        japanMapRef.current.flyTo({
           ...japanMapInitialView,
           center: coords,
         })
@@ -101,7 +96,6 @@ export function JapanMap() {
       markerRef.current.push(marker);
     })
   }, [filteredMountains]);
-
 
   return (
     <div

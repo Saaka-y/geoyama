@@ -8,7 +8,6 @@ import * as mountains from "@/data/spotPins"; // index.jsx 経由で全山のピ
 import * as routes from "@/data/routeGeojson"; // index.jsx経由で各山の routeGeojson を import
 import { RoutePreview } from "@/components/Map/RoutePreview";
 import { MountainInfo } from "@/components/Map/MountainInfo";
-import { useMapStore } from "@/stores/mapStore";
 import { useUiStore } from "@/stores/uiStore";
 import { useMountainStore } from "@/stores/mountainStore";
 
@@ -26,12 +25,11 @@ const spotPins = {
   // 他の山も同じように追加
 };
 
-export function FocusMap() {
-  const { setFocusMap } = useMapStore();
+export function FocusMap( { focusMapRef }) {
   const { showFocusMap } = useUiStore();
   const { selectedMountain } = useMountainStore();
-  const focusMapContainerRef = useRef(null);
   const [routeGeo, setRouteGeo] = useState(null);
+  const focusMapContainerRef = useRef(null);
 
   // spot pins
   const spotPinsForEachMountain = useMemo(() => {
@@ -63,7 +61,7 @@ export function FocusMap() {
     ];
 
     // focusMap用インスタンス追加
-    const map = new mapboxgl.Map({
+    focusMapRef.current = new mapboxgl.Map({
       container: focusMapContainerRef.current,
       style: "mapbox://styles/mapbox/outdoors-v12",
       center: center,
@@ -73,8 +71,7 @@ export function FocusMap() {
       logoPosition: "top-left",
     });
 
-    setFocusMap(map);
-
+    const map = focusMapRef.current;
     map.on("load", () => {
 
       // 3Dソース設定
@@ -154,6 +151,7 @@ export function FocusMap() {
       )}
 
       <RoutePreview
+        focusMapRef={focusMapRef}
         routeGeo={routeGeo}
       />
     </>
