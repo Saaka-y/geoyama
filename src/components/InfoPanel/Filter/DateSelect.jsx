@@ -5,8 +5,8 @@ import { dayToStr } from "@/utils/dayToStr";
 import { useFilterStore } from "@/stores/filterStore";
 
 
-export function DateSelect({ className, dateOptions, setDateOptions }) {
-  const { selectedDate, setSelectedDate } = useFilterStore();
+export function DateSelect({ className }) {
+  const { selectedDate, setSelectedDate, dateOptions, setDateOptions } = useFilterStore();
 
   // create date options at the first rendering
   useEffect(() => {
@@ -40,7 +40,6 @@ export function DateSelect({ className, dateOptions, setDateOptions }) {
       setSelectedDate(options[0]);
     }
 
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleDateSelect = (e) => {
