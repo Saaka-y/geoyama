@@ -1,7 +1,7 @@
 //@/stores/mountainStore.js
 
 import { create } from "zustand";
-import { geojson } from "@/data/allMountains";
+import geojson from "@/data/allMountains";
 
 export const useMountainStore = create((set) => ({
   // Mountain data
