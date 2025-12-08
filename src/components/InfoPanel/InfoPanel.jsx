@@ -2,9 +2,9 @@
 "use client";
 
 import { useUiStore } from "@/stores/uiStore";
-import { Filter } from "@/components/InfoPanel/Filter/Filter";
-import { ShowWeather } from "@/components/InfoPanel/Weather/ShowWeather";
-import { DateSelect } from "@/components/InfoPanel/Filter/DateSelect";
+import { Filter } from "@/components/InfoPanel/Filter";
+import { ShowWeather } from "@/components/InfoPanel/ShowWeather";
+import { DateSelect } from "@/components/InfoPanel/DateSelect";
 
 export function InfoPanel({ japanMapRef }) {
   const showFocusMap = useUiStore((state) => state.showFocusMap);
