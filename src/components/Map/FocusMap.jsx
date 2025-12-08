@@ -48,7 +48,6 @@ export function FocusMap( { focusMapRef }) {
   }, [selectedMountain]);
 
 
-
   useEffect(() => {
     if (!selectedMountain || !showFocusMap) return;
     mapboxgl.accessToken = accessToken;

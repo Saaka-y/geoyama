@@ -25,7 +25,7 @@ export function MainView({ japanMapRef, focusMapRef }) {
             japanMapRef={japanMapRef}
           />
         ) : (
-          <FocusMap 
+          <FocusMap
             focusMapRef={focusMapRef}
           />
         )}
@@ -35,16 +35,10 @@ export function MainView({ japanMapRef, focusMapRef }) {
       {showFocusMap && (
         <button
           className="
-          bg-white/90 backdrop-blur-sm
-            border border-gray-300 shadow-md
-            px-4 py-2
+          bg-white/90 backdrop-blur-sm border border-gray-300 shadow-md
+            px-4 py-2 w-full md:w-25 flex items-center justify-center gap-1
             text-sm font-semibold
-            flex items-center justify-center
-            gap-1
-            w-full md:w-25
-          hover:bg-white
-            hover:shadow-lg
-            cursor-pointer
+          hover:bg-white hover:shadow-lg cursor-pointer
           "
           onClick={handleBackToMap}
         >
