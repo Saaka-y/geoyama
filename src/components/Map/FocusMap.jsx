@@ -15,7 +15,6 @@ const accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
 const spotPins = {
   "jinba": mountains.jinbaGeojson,
-  "tanigawa": mountains.tanigawaGeojson,
   "chausu": mountains.chausuGeojson,
   "kinpu": mountains.kinpuGeojson,
   "kintoki": mountains.kintokiGeojson,
