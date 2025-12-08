@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 
-export function RoutePreview({routeGeo, focusMapRef}) {
+export function RoutePreview({ routeGeo, focusMapRef }) {
 
   useEffect(() => {
     if (!focusMapRef.current || !routeGeo?.features?.length) return;
