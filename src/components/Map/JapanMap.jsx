@@ -5,12 +5,15 @@ import 'mapbox-gl/dist/mapbox-gl.css';
 import { useEffect, useRef } from 'react';
 import { useUiStore } from '@/stores/uiStore';
 import { useMountainStore } from '@/stores/mountainStore';
+import { useIsLandscape } from '@/hooks/useIsLandscape';
 
 const accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
 export function JapanMap({ japanMapRef }) {
   const { setShowFocusMap, japanMapInitialView } = useUiStore();
   const { filteredMountains, setSelectedMountain } = useMountainStore();
+  const isLandscape = useIsLandscape();
+
   const japanMapContainerRef = useRef(null);
   const markerRef = useRef([]);
 
@@ -24,6 +27,12 @@ export function JapanMap({ japanMapRef }) {
       style: 'mapbox://styles/mapbox/outdoors-v12', // style URL
     });
   }, [])
+
+  useEffect(() => {
+    if (!japanMapRef.current) return;
+    japanMapRef.current.resize();
+  }, [isLandscape])
+  
 
   // Marker 作成、フィルターに沿って変更
   useEffect(() => {
