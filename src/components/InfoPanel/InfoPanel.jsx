@@ -4,7 +4,7 @@
 import { useUiStore } from "@/stores/uiStore";
 import { Filter } from "@/components/InfoPanel/Filter";
 import { ShowWeather } from "@/components/InfoPanel/ShowWeather";
-import { FloatingDateSelect } from "@/components/InfoPanel/floatDateSelect";
+import { FloatDateSelect } from "@/components/InfoPanel/FloatDateSelect";
 
 export function InfoPanel({ japanMapRef }) {
   const showFocusMap = useUiStore((state) => state.showFocusMap);
@@ -13,7 +13,7 @@ export function InfoPanel({ japanMapRef }) {
     <>
       {showFocusMap ? (
         <>
-          <FloatingDateSelect />
+          <FloatDateSelect />
           <ShowWeather />
         </>
       ) : (
