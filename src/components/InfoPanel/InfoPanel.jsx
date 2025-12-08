@@ -1,4 +1,4 @@
-// components/InfoPanel.jsx
+// components/InfoPanel/InfoPanel.jsx
 "use client";
 
 import { useUiStore } from "@/stores/uiStore";
