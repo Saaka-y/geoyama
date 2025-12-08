@@ -4,13 +4,18 @@ import { useEffect } from "react";
 import { useUiStore } from "@/stores/uiStore";
 import { useFilterStore } from "@/stores/filterStore";
 import { useMountainStore } from "@/stores/mountainStore";
+import { useIsLandscape } from "@/hooks/useIsLandscape";
+import { useGetDateOptions } from "@/hooks/useGetDateOptions";
+import { DateSelect } from "@/components/InfoPanel/DateSelect";
 
 
 export function Filter({ japanMapRef }) {
 
   const japanMapInitialView = useUiStore((state) => state.japanMapInitialView);
-  const { distance, courseTime, setDistance, setCourseTime, setSelectedDate, } = useFilterStore();
+  const { distance, courseTime, setDistance, setCourseTime, setSelectedDate } = useFilterStore();
   const { allMountains, filteredMountains, setFilteredMountains, setSelectedMountain } = useMountainStore();
+  const isLandscape = useIsLandscape();
+  const { dateOptions } = useGetDateOptions();
 
 
   //**************************/
@@ -47,25 +52,19 @@ export function Filter({ japanMapRef }) {
     })
   }
 
-  // ****** parent div ******
-  // `flex-1 bg-(--color-surface)` +
-  //   ` flex flex-col pt-6 md:pt-10 items-center gap-5`
-
   return (
     <>
       {/* Clear btn */}
       <button
         className="w-[90%] bg-(--select-bg) border-(--border)"
         onClick={handleClearFilter}
-      >
-        Clear
-      </button>
+      >Clear</button>
 
       {/* Hours from Shinjuku */}
-      <div className="w-[90%] flex flex-row md:flex-col items-center md:items-start gap-2">
-        <p className="w-1/2 md:w-full text-left text-xs ">Duration from Shinjuku:</p>
+      <div className={`w-[90%] flex md:flex-col ${isLandscape && "flex-col items-start"} items-center md:items-start gap-2`}>
+        <p className={`w-1/2 md:w-full ${isLandscape && "w-full"} text-left text-xs`} >Duration from Shinjuku:</p>
         <select
-          className="w-2/3 md:w-full rounded px-2 py-1 "
+          className={`w-2/3 md:w-full ${isLandscape && "w-full"} rounded px-2 py-1`}
           value={distance}
           onChange={(e) => setDistance(e.target.value)}>
           <option value="">Not selected</option>
@@ -76,11 +75,12 @@ export function Filter({ japanMapRef }) {
           <option value="5">Over 5 hours</option>
         </select>
       </div>
+
       {/* Course time */}
-      <div className=" w-[90%] flex flex-row md:flex-col items-center md:items-start gap-2">
-        <p className="w-1/2 md:w-full text-left text-xs">Approx. Hike time:</p>
+      <div className={`w-[90%] flex md:flex-col ${isLandscape && "flex-col items-start"} items-center md:items-start gap-2`}>
+        <p className={`w-1/2 md:w-full ${isLandscape && "w-full"} text-left text-xs`}>Approx. Hike time:</p>
         <select
-          className="w-2/3 md:w-full rounded px-2 py-1"
+          className={`w-2/3 md:w-full ${isLandscape && "w-full"} rounded px-2 py-1`}
 
           value={courseTime}
           onChange={(e) => setCourseTime(e.target.value)}
@@ -93,8 +93,22 @@ export function Filter({ japanMapRef }) {
           <option value="7">Over 7 hours</option>
         </select>
       </div>
+
       {/* show alert when no mountains being matched */}
       {filteredMountains.length === 0 && (<p className="m-1 px-1 text-red-500">No mountains match the filter</p>)}
+
+      {/* Date select */}
+      <div className={`
+        w-[90%] flex md:flex-col justify-center items-center md:items-start gap-2
+        ${isLandscape && "flex-col items-start"}
+      `}>
+
+        <p className={`w-1/2 md:w-full ${isLandscape && "w-full"} text-left text-xs`}>Select Date:</p>
+
+        <DateSelect
+          className={`w-2/3 md:w-full ${isLandscape && "w-full"} border border-gray-400 rounded px-2 py-1`}
+        />
+      </div>
     </>
   );
 }

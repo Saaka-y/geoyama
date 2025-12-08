@@ -11,6 +11,7 @@ import { groupForecastByDate } from "@/utils/groupForecastByDate";
 import { getTimeBackground } from "@/utils/getTimeBackground";
 
 
+
 export function ShowWeather() {
   const { selectedMountain } = useMountainStore();
   const { selectedDate } = useFilterStore();
@@ -37,16 +38,17 @@ export function ShowWeather() {
 
 
   return (
+
     <div
       ref={scrollRef}
       className={`
         flex md:flex-col gap-4 
         overflow-x-auto md:overflow-x-hidden md:overflow-y-auto 
-        px-4 pb-4 md:px-4 md:h-full 
+        px-4 pb-4 mt-4 md:px-4 md:h-full 
         ${isLandscape && "flex-col overflow-x-hidden overflow-y-auto px-4 h-full "}
         `}
-      
     >
+
       {/* 天気スクロールカードと画面端の距離を変える場合、親ではなく ↑ のpaddingを変える。親のMainView divを変えるとカードが見切れてしまう */}
       {Object.keys(grouped).map((date) => (
         <div

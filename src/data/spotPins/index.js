@@ -1,7 +1,6 @@
 // data/spotPins/index.js
 
 export { chausuGeojson } from "./chausuGeojson";
-export { tanigawaGeojson } from "./tanigawaGeojson";
 export { jinbaGeojson } from "./jinbaGeojson";
 export { nabewariGeojson } from "./nabewariGeojson";
 export { kinpuGeojson } from "./kinpuGeojson";
