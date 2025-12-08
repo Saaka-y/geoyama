@@ -14,8 +14,6 @@ export function MainView({ japanMapRef, focusMapRef }) {
       ...japanMapInitialView,
     });
   };
-  // h-1/3 md:h-full w-full md:w-1/3
-  // h-2/3 md:h-full w-full md:w-2/3
 
   return (
     <div className="w-screen h-dvh flex flex-col md:flex-row-reverse bg-(--color-background)">
