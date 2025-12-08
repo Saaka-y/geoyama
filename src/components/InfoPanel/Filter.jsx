@@ -65,7 +65,7 @@ export function Filter({ japanMapRef }) {
       <div className="w-[90%] flex flex-row md:flex-col items-center md:items-start gap-2">
         <p className="w-1/2 md:w-full text-left text-xs ">Duration from Shinjuku:</p>
         <select
-          className="w-2/3 md:w-full rounded px-2 py-1"
+          className="w-2/3 md:w-full rounded px-2 py-1 "
           value={distance}
           onChange={(e) => setDistance(e.target.value)}>
           <option value="">Not selected</option>

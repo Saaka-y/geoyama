@@ -4,9 +4,11 @@ import { JapanMap } from "@/components/Map/JapanMap";
 import { FocusMap } from "@/components/Map/FocusMap";
 import { InfoPanel } from "@/components/InfoPanel/InfoPanel";
 import { useUiStore } from "@/stores/uiStore";
+import { useIsLandscape } from "@/hooks/useIsLandscape";
 
 export function MainView({ japanMapRef, focusMapRef }) {
   const { showFocusMap, backToMap, japanMapInitialView } = useUiStore();
+  const isLandscape = useIsLandscape();
 
   const handleBackToMap = () => {
     backToMap();
@@ -16,7 +18,7 @@ export function MainView({ japanMapRef, focusMapRef }) {
   };
 
   return (
-    <div className="w-screen h-dvh flex flex-col md:flex-row-reverse bg-(--color-background)">
+    <div className={`w-screen h-dvh flex flex-col ${isLandscape &&  "flex-row-reverse"} md:flex-row-reverse bg-(--color-background)`}>
 
       {/* Map */}
       <div className="relative flex-2 z-10">
@@ -34,12 +36,12 @@ export function MainView({ japanMapRef, focusMapRef }) {
       {/* Back button */}
       {showFocusMap && (
         <button
-          className="
-          bg-white/90 backdrop-blur-sm border border-gray-300 shadow-md
-            px-4 py-2 w-full md:w-25 flex items-center justify-center gap-1
+          className={`
+            bg-white/90 backdrop-blur-sm border border-gray-300 shadow-md
+            px-4 py-2 ${isLandscape && "w-25"} md:w-25 flex items-center justify-center gap-1
             text-sm font-semibold
           hover:bg-white hover:shadow-lg cursor-pointer
-          "
+          `}
           onClick={handleBackToMap}
         >
           <span className="text-lg">&lt; &nbsp;</span> Back
@@ -52,7 +54,7 @@ export function MainView({ japanMapRef, focusMapRef }) {
           `flex-1 bg-(--color-surface)` +
           (showFocusMap
             ? ` pt-5`
-            : ` flex flex-col pt-6 md:pt-10 items-center gap-5`
+            : ` flex flex-col pt-6 md:pt-10 ${isLandscape && "pt-10"} items-center gap-5`
           )
         }
       >
