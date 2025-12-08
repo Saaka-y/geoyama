@@ -1,46 +1,11 @@
-
-// components/DateSelect.jsx
-import { useEffect } from "react";
-import { dayToStr } from "@/utils/dayToStr";
+// components/InfoPanel/DateSelect.jsx
 import { useFilterStore } from "@/stores/filterStore";
+import { useGetDateOptions } from "@/hooks/useGetDateOptions";
 
 
 export function DateSelect({ className }) {
-  const { selectedDate, setSelectedDate, dateOptions, setDateOptions } = useFilterStore();
-
-  // create date options at the first rendering
-  useEffect(() => {
-    const today = new Date();
-    const days = 5;
-    const options = [];
-
-    for (let i = 0; i <= days; i++) {
-      const date = new Date(today);
-      date.setDate(today.getDate() + i);
-
-      const label =
-        i === 0 ? "Today" :
-          i === 1 ? "Tomorrow" :
-            `${i} days later`;
-
-      options.push({
-        date,
-        label,
-        value: dayToStr(date),
-        string: date.toLocaleDateString("en-UK", {
-          weekday: "short",
-          month: "short",
-          day: "numeric"
-        })
-      });
-    }
-    setDateOptions(options);
-
-    if (!selectedDate) {
-      setSelectedDate(options[0]);
-    }
-
-  }, []);
+  const { selectedDate, setSelectedDate } = useFilterStore();
+  const { dateOptions } = useGetDateOptions();
 
   const handleDateSelect = (e) => {
     const selected = dateOptions.find(opt => opt.value === e.target.value);
