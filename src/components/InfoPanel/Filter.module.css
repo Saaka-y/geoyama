@@ -1,0 +1,37 @@
+
+.select {
+  width: 66%;
+  padding: 0.5rem 1rem;
+  font-size: 0.8rem;
+
+  background-color: var(--select-bg);
+  color: var(--color);
+
+  border: 1px solid rgba(0, 0, 0, 0.12);
+  border-radius: 8px;
+
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxMiIgZmlsbD0iIzc2NzY3NiI+PHBvbHlnb24gcG9pbnRzPSIwLDAgMTIsMCA2LDYiLz48L3N2Zz4=");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+  background-size: 0.55rem;
+}
+
+.select:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(100, 150, 200, 0.2);
+  border-color: rgba(100, 150, 200, 0.5);
+}
+
+@media (max-width: 768px) {
+  .select {
+    width: 100%;
+  }
+}
+

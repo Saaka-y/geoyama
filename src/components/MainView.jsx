@@ -49,15 +49,7 @@ export function MainView({ japanMapRef, focusMapRef }) {
       )}
 
       {/* Info Panel */}
-      <div
-        className={
-          `flex-1 bg-(--color-surface)` +
-          (showFocusMap
-            ? ` pt-2`
-            : ` flex flex-col pt-6 md:pt-10 ${isLandscape && "pt-10"} items-center gap-5`
-          )
-        }
-      >
+      <div className="flex-1">
         <InfoPanel />
       </div>
     </div>
