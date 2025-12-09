@@ -1,6 +1,6 @@
+/* @/components/InfoPanel/Filter/Filter.module.css */
 
 .select {
-  width: 66%;
   padding: 0.5rem 1rem;
   font-size: 0.8rem;
 
@@ -29,9 +29,4 @@
   border-color: rgba(100, 150, 200, 0.5);
 }
 
-@media (max-width: 768px) {
-  .select {
-    width: 100%;
-  }
-}
 

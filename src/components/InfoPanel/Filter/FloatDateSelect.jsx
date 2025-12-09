@@ -1,3 +1,4 @@
+// @/components/InfoPanel/Filter/FloatDateSelect.jsx
 "use client";
 import { useState, useEffect } from "react";
 import { DateSelect } from "./DateSelect";
@@ -10,6 +11,7 @@ export function FloatDateSelect() {
 
   // selectedDate が変わったらポップアップを閉じる
   useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
     if (open) setOpen(false);
   }, [selectedDate]);
 
