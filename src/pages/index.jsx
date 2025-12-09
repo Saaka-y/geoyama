@@ -1,7 +1,7 @@
 // pages/index.jsx
 "use client";
 import { useRef } from "react";
-import { MainView } from "@/components/MainView";
+import { MainView } from "@/components/MainView/MainView";
 
 export default function Home() {
 

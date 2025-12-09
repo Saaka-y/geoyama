@@ -1,5 +1,4 @@
 // components/InfoPanel/ShowWeather.jsx
-
 import { useEffect, useRef } from "react";
 import { useMountainStore } from "@/stores/mountainStore";
 import { useFilterStore } from "@/stores/filterStore";
@@ -9,7 +8,6 @@ import { getLocalDate } from "@/utils/getLocalDate";
 import { degToCardinal } from "@/utils/degToCardinal";
 import { groupForecastByDate } from "@/utils/groupForecastByDate";
 import { getTimeBackground } from "@/utils/getTimeBackground";
-
 
 
 export function ShowWeather() {
