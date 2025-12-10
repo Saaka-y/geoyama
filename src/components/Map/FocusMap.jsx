@@ -3,49 +3,26 @@
 "use client"
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import * as mountains from "@/data/spotPins"; // index.js 経由で全山のピン情報を import
-import * as routes from "@/data/routeGeojson"; // index.js 経由で各山の routeGeojson を import
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import { useMapUiStore } from "@/stores/mapUiStore";
 import { useMountainStore } from "@/stores/mountainStore";
+import { useCreateSpotPins } from "@/hooks/useCreateSpotPins";
+import { useCreateRoute } from "@/hooks/useCreateRoute";
+// import { useFocusPin } from "@/hooks/useFocusPin";
 import { MountainInfo } from "@/components/Map/MountainInfo";
 import { RoutePreview } from "@/components/Map/RoutePreview";
 
 const accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
-const spotPins = {
-  "jinba": mountains.jinba,
-  "chausu": mountains.chausu,
-  "kinpu": mountains.kinpu,
-  "kintoki": mountains.kintoki,
-  "nabewari": mountains.nabewari,
-  "nantai": mountains.nantai,
-  "ono": mountains.ono,
-  // 他の山も同じように追加
-};
-
 export function FocusMap( { focusMapRef }) {
   const { showFocusMap } = useMapUiStore();
   const { selectedMountain } = useMountainStore();
+  const spotPinsForEachMountain = useCreateSpotPins();
 
-  const [routeGeo, setRouteGeo] = useState(null);
+  const routeGeo = useCreateRoute();
+  const features = spotPinsForEachMountain.features;
+  // useFocusPin({ focusMapRef, features });
   const focusMapContainerRef = useRef(null);
-
-  // spot pins
-  const spotPinsForEachMountain = useMemo(() => {
-    return spotPins[selectedMountain?.properties?.description] || {
-      type: "FeatureCollection",
-      features: []
-    };
-  }, [selectedMountain]);
-
-  // route setup
-  useEffect(() => {
-    if (!selectedMountain) return;
-    const mountainName = selectedMountain.properties.description;
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setRouteGeo(routes[mountainName] || { type: "FeatureCollection", features: [] });
-  }, [selectedMountain]);
 
 
   // FocusMap instance setup
@@ -85,7 +62,7 @@ export function FocusMap( { focusMapRef }) {
       map.setTerrain({ source: "terrain-dem", exaggeration: 1.4 });
 
       // ピン表示
-      const features = spotPinsForEachMountain.features;
+      
       const layerOrder = ["mountain-icon", "goal-icon", "start-icon"];
       layerOrder.forEach(iconName => {
         const i = iconName === "mountain-icon" ? 0 : iconName === "start-icon" ? 1 : 2;
