@@ -2,7 +2,7 @@
 "use client";
 import { useMapUiStore } from "@/stores/mapUiStore";
 import { Filter } from "@/components/InfoPanel/Filter/Filter";
-import { ShowWeather } from "@/components/InfoPanel/ShowWeather";
+import { WeatherPanel } from "@/components/InfoPanel/Weather/WeatherPanel";
 import { FloatDateSelect } from "@/components/InfoPanel/Filter/FloatDateSelect";
 
 export function InfoPanel({ japanMapRef }) {
@@ -13,7 +13,7 @@ export function InfoPanel({ japanMapRef }) {
       {showFocusMap ? (
         <>
           <FloatDateSelect />
-          <ShowWeather />
+          <WeatherPanel />
         </>
       ) : (
         <Filter japanMapRef={japanMapRef} />
