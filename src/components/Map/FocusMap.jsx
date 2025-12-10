@@ -3,10 +3,10 @@
 "use client"
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
-import * as mountains from "@/data/spotPins"; // index.jsx 経由で全山のピン情報を import
-import * as routes from "@/data/routeGeojson"; // index.jsx経由で各山の routeGeojson を import
+import * as mountains from "@/data/spotPins"; // index.js 経由で全山のピン情報を import
+import * as routes from "@/data/routeGeojson"; // index.js 経由で各山の routeGeojson を import
 import { useEffect, useRef, useState } from "react";
-import { useUiStore } from "@/stores/uiStore";
+import { useMapUiStore } from "@/stores/mapUiStore";
 import { useMountainStore } from "@/stores/mountainStore";
 import { MountainInfo } from "@/components/Map/MountainInfo";
 import { RoutePreview } from "@/components/Map/RoutePreview";
@@ -14,19 +14,20 @@ import { RoutePreview } from "@/components/Map/RoutePreview";
 const accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
 const spotPins = {
-  "jinba": mountains.jinbaGeojson,
-  "chausu": mountains.chausuGeojson,
-  "kinpu": mountains.kinpuGeojson,
-  "kintoki": mountains.kintokiGeojson,
-  "nabewari": mountains.nabewariGeojson,
-  "nantai": mountains.nantaiGeojson,
-  "ono": mountains.onoGeojson,
+  "jinba": mountains.jinba,
+  "chausu": mountains.chausu,
+  "kinpu": mountains.kinpu,
+  "kintoki": mountains.kintoki,
+  "nabewari": mountains.nabewari,
+  "nantai": mountains.nantai,
+  "ono": mountains.ono,
   // 他の山も同じように追加
 };
 
 export function FocusMap( { focusMapRef }) {
-  const { showFocusMap } = useUiStore();
+  const { showFocusMap } = useMapUiStore();
   const { selectedMountain } = useMountainStore();
+
   const [routeGeo, setRouteGeo] = useState(null);
   const focusMapContainerRef = useRef(null);
 
@@ -38,7 +39,7 @@ export function FocusMap( { focusMapRef }) {
     };
   }, [selectedMountain]);
 
-  // routes
+  // route setup
   useEffect(() => {
     if (!selectedMountain) return;
     const mountainName = selectedMountain.properties.description;
@@ -47,6 +48,7 @@ export function FocusMap( { focusMapRef }) {
   }, [selectedMountain]);
 
 
+  // FocusMap instance setup
   useEffect(() => {
     if (!selectedMountain || !showFocusMap) return;
     mapboxgl.accessToken = accessToken;
@@ -59,7 +61,6 @@ export function FocusMap( { focusMapRef }) {
       (coords[0][1] + coords[1][1] + coords[2][1]) / 3  // 緯度の平均
     ];
 
-    // focusMap用インスタンス追加
     focusMapRef.current = new mapboxgl.Map({
       container: focusMapContainerRef.current,
       style: "mapbox://styles/mapbox/outdoors-v12",
@@ -122,6 +123,7 @@ export function FocusMap( { focusMapRef }) {
     return () => map?.remove();
   }, []);
 
+  
   return (
     <>
       <div

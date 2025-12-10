@@ -1,4 +1,4 @@
-// src/data/routeGeojson/index.js
+// data/routeGeojson/index.js
 import kinpu from "./kinpu.json";
 import kintoki from "./kintoki.json";
 import nabewari from "./nabewari.json";

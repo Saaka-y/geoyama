@@ -1,11 +1,19 @@
 // data/spotPins/index.js
+import chausu from "./chausu.json";
+import jinba from "./jinba.json";
+import nabewari from "./nabewari.json";
+import kintoki from "./kintoki.json";
+import kinpu from "./kinpu.json";
+import nantai from "./nantai.json";
+import ono from "./ono.json";
 
-export { chausuGeojson } from "./chausuGeojson";
-export { jinbaGeojson } from "./jinbaGeojson";
-export { nabewariGeojson } from "./nabewariGeojson";
-export { kinpuGeojson } from "./kinpuGeojson";
-export { kintokiGeojson } from "./kintokiGeojson";
-export { nantaiGeojson } from "./nantaiGeojson";
-export { onoGeojson } from "./onoGeojson";
-
-
+export {
+  chausu,
+  jinba,
+  nabewari,
+  kintoki,
+  kinpu,
+  nantai,
+  ono,
+  //山増えたら追加
+};
