@@ -9,7 +9,7 @@ export function BackButton({ japanMapRef }) {
 
   const handleBackToMap = () => {
     backToMap();
-    japanMapRef.current.flyTo({
+    japanMapRef?.current.flyTo({
       ...japanMapInitialView,
     });
   };
