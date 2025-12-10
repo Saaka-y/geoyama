@@ -1,17 +1,19 @@
 // components/InfoPanel/Filter/DistanceSelect.jsx
 import styles from '@/components/InfoPanel/Filter/Filter.module.css'
 import { useFilterStore } from "@/stores/filterStore";
+import { useIsMd } from "@/hooks/useIsMd";
 import { useIsLandscape } from "@/hooks/useIsLandscape";
 
 export function DistanceSelect() {
   const { distance, setDistance } = useFilterStore();
+  const isMd = useIsMd();
   const isLandscape = useIsLandscape();
 
   return (
-    <div className={`w-[90%] flex md:flex-col ${isLandscape && "flex-col items-start"} items-center md:items-start gap-2`}>
-      <p className={`w-1/2 md:w-full ${isLandscape && "w-full"} text-left text-xs`} >Duration from Shinjuku:</p>
+    <div className={`w-[90%] flex ${isMd || isLandscape ? "flex-col items-start" : "flex-row"} items-center gap-2`}>
+      <p className={`${isMd || isLandscape ? "w-full" : "w-1/2"} text-left text-xs`} >Duration from Shinjuku:</p>
       <select
-        className={`w-2/3 md:w-full ${styles.select} ${isLandscape && "w-full"} `}
+        className={`${styles.select} ${isMd || isLandscape ? "w-full" : "w-2/3"} `}
         value={distance}
         onChange={(e) => setDistance(e.target.value)}>
         <option value="">Not selected</option>
