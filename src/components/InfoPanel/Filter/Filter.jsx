@@ -1,5 +1,5 @@
 // components/InfoPanel/Filter/Filter.jsx
-import { useUiStore } from "@/stores/uiStore";
+import { useMapUiStore } from "@/stores/mapUiStore";
 import { useMountainStore } from "@/stores/mountainStore";
 import { useFilterStore } from "@/stores/filterStore";
 import { useIsLandscape } from "@/hooks/useIsLandscape";
@@ -12,7 +12,7 @@ import { ClearButton } from '@/components/InfoPanel/Filter/ClearButton';
 
 export function Filter({ japanMapRef }) {
 
-  const { japanMapInitialView } = useUiStore();
+  const { japanMapInitialView } = useMapUiStore();
   const { dateOptions } = useFilterStore();
   const { filteredMountains } = useMountainStore();
   const isLandscape = useIsLandscape();

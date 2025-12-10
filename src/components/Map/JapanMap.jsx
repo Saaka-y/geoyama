@@ -3,15 +3,16 @@
 import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useEffect, useRef } from 'react';
-import { useUiStore } from '@/stores/uiStore';
+import { useMapUiStore } from '@/stores/mapUiStore';
 import { useMountainStore } from '@/stores/mountainStore';
 import { useIsLandscape } from '@/hooks/useIsLandscape';
 
 const accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
 export function JapanMap({ japanMapRef }) {
-  const { setShowFocusMap, japanMapInitialView } = useUiStore();
+  const { setShowFocusMap, japanMapInitialView } = useMapUiStore();
   const { filteredMountains, setSelectedMountain } = useMountainStore();
+
   const isLandscape = useIsLandscape();
 
   const japanMapContainerRef = useRef(null);
@@ -23,11 +24,12 @@ export function JapanMap({ japanMapRef }) {
 
     japanMapRef.current = new mapboxgl.Map({
       ...japanMapInitialView,
-      container: japanMapContainerRef.current, // container ID
-      style: 'mapbox://styles/mapbox/outdoors-v12', // style URL
+      container: japanMapContainerRef.current,
+      style: 'mapbox://styles/mapbox/outdoors-v12',
     });
   }, [])
 
+  // Mapのリサイズ
   useEffect(() => {
     if (!japanMapRef.current) return;
     japanMapRef.current.resize();

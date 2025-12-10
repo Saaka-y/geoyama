@@ -1,10 +1,10 @@
 // components/MainView/BackButton.jsx
 "use client";
-import { useUiStore } from "@/stores/uiStore";
+import { useMapUiStore } from "@/stores/mapUiStore";
 import { useIsLandscape } from "@/hooks/useIsLandscape";
 
 export function BackButton({ japanMapRef }) {
-  const { showFocusMap, backToMap, japanMapInitialView } = useUiStore();
+  const { showFocusMap, backToMap, japanMapInitialView } = useMapUiStore();
   const isLandscape = useIsLandscape();
 
   const handleBackToMap = () => {

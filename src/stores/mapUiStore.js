@@ -1,8 +1,8 @@
-//@/stores/uiStore.js
+//@/stores/mapUiStore.js
 
 import { create } from "zustand";
 
-export const useUiStore = create((set) => ({
+export const useMapUiStore = create((set) => ({
   // Map view state
   showFocusMap: false,
   japanMapInitialView: {
