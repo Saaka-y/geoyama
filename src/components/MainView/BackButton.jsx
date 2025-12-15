@@ -3,13 +3,13 @@
 import { useMapUiStore } from "@/stores/mapUiStore";
 import { useIsLandscape } from "@/hooks/useIsLandscape";
 
-export function BackButton({ japanMapRef }) {
+export function BackButton(japanMapRef) {
   const { showFocusMap, backToMap, japanMapInitialView } = useMapUiStore();
   const isLandscape = useIsLandscape();
 
   const handleBackToMap = () => {
     backToMap();
-    japanMapRef?.current.flyTo({
+    japanMapRef?.current?.flyTo({
       ...japanMapInitialView,
     });
   };

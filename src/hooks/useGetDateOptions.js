@@ -4,7 +4,7 @@ import { useFilterStore } from "@/stores/filterStore";
 
 export function useGetDateOptions() {
 
-  const { dateOptions, initDateOptions } = useFilterStore();
+  const { initDateOptions } = useFilterStore();
 
   useEffect(() => {
     initDateOptions();
