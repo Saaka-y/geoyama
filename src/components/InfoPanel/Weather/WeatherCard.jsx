@@ -1,32 +1,35 @@
 // components/InfoPanel/Weather/WeatherCard.jsx
-import { useIsMd } from "@/hooks/useIsMd";
-import { useIsLandscape } from "@/hooks/useIsLandscape";
 import { getLocalDate } from "@/utils/getLocalDate";
 import { degToCardinal } from "@/utils/degToCardinal";
 import { getTimeBackground } from "@/utils/getTimeBackground";
 
 
 export function WeatherCard({ date, grouped }) {
-  const isMd = useIsMd();
-  const isLandscape = useIsLandscape();
-
 
   return (
-    <div className={`flex gap-2 ${isMd || isLandscape ? "flex-col" : "flex-row"}`}>
+    <div className="
+        flex gap-2
+        flex-row
+        md:flex-col
+        landscape:flex-col
+      ">
       
       {grouped[date].map((item, i) => {
         const { time } = getLocalDate(item.dt); //時間
         const temp = Math.round(item.main.temp); //気温
         const timeHour = parseInt(time.slice(0, 2), 10); //時間（hourだけ取り出す）
-        const { background, color } = getTimeBackground(isLandscape, timeHour);
+        const { background, color } = getTimeBackground(false, timeHour);
         return (
           <div
             key={i}
-            className={`${isMd || isLandscape ? "w-full" : "w-[120px]"}
-              p-3 border border-gray-300 rounded-lg 
-              text-center shadow-sm shrink-0 
+            className="
+              w-[120px]
+              md:w-full
+              landscape:w-full
+              p-3 border border-gray-300 rounded-lg
+              text-center shadow-sm shrink-0
               hover:shadow-md transition-shadow
-            `}
+            "
             style={{ background, color }}
           >
             <p className="text-xs mb-1">{time}</p>

@@ -2,8 +2,6 @@
 import { useMountainStore } from "@/stores/mountainStore";
 import { useFilterStore } from "@/stores/filterStore";
 import { useFetchWeather } from "@/hooks/useFetchWeather";
-import { useIsMd } from "@/hooks/useIsMd";
-import { useIsLandscape } from "@/hooks/useIsLandscape";
 import { useScrollRef } from "@/hooks/useScrollRef";
 import { groupForecastByDate } from "@/utils/groupForecastByDate";
 import { WeatherDate } from "@/components/InfoPanel/Weather/WeatherDate";
@@ -16,8 +14,6 @@ export function WeatherPanel() {
   const { selectedDate } = useFilterStore();
   // hooks
   const forecast = useFetchWeather();
-  const isMd = useIsMd();
-  const isLandscape = useIsLandscape();
   const grouped = groupForecastByDate(forecast);
   const scrollRef = useScrollRef(forecast);
   // mountain info
@@ -30,13 +26,14 @@ export function WeatherPanel() {
 
     <div
       ref={scrollRef}
-      className={`
+      className="
         flex gap-4 px-4 pb-4 mt-4
-        ${isMd || isLandscape
-          ? "flex-col overflow-x-hidden overflow-y-auto h-full "
-          : "flex-row overflow-x-auto"
-        }
-        `}
+        flex-row overflow-x-auto
+        md:flex-col md:overflow-y-auto md:overflow-x-hidden 
+        md:h-[90%]
+        landscape:flex-col landscape:overflow-y-auto landscape:overflow-x-hidden 
+        landscape:h-[90%]
+      "
     >
 
       {/* 天気スクロールカードと画面端の距離を変える場合、親ではなく ↑ のpaddingを変える。親のMainView divを変えるとカードが見切れてしまう */}
