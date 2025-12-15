@@ -1,6 +1,6 @@
 // hooks/useCreateSpotPins.js
 "use client"
-import * as mountains from "@/data/spotPins"; // index.js 経由で全山のピン情報を import
+import * as mountains from "@/data/spotPins"; // Import all spot pin data via index.js 
 import { useMemo } from "react";
 import { useMountainStore } from "@/stores/mountainStore";
 
@@ -12,7 +12,7 @@ const spotPins = {
   "nabewari": mountains.nabewari,
   "nantai": mountains.nantai,
   "ono": mountains.ono,
-  // 他の山も同じように追加
+  // Add other mountains
 };
 
 export function useCreateSpotPins() {
