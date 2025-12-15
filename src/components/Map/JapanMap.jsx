@@ -4,7 +4,6 @@ import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useEffect, useState, useRef } from 'react';
 import { useMapUiStore } from '@/stores/mapUiStore';
-import { useIsLandscape } from '@/hooks/useIsLandscape';
 import { useCreateMarker } from '@/hooks/useCreateMarker';
 
 const accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
@@ -14,7 +13,6 @@ export function JapanMap({ japanMapRef }) {
 
   const { japanMapInitialView } = useMapUiStore();
 
-  const isLandscape = useIsLandscape();
   useCreateMarker({ japanMapRef, ready: isMapReady });
 
   const japanMapContainerRef = useRef(null);
@@ -35,12 +33,6 @@ export function JapanMap({ japanMapRef }) {
 
     return () => japanMapRef.current?.remove();
   }, [japanMapInitialView, japanMapRef]);
-
-  // Mapのリサイズ
-  useEffect(() => {
-    if (!japanMapRef.current) return;
-    japanMapRef.current.resize();
-  }, [isLandscape, japanMapRef])
 
 
   return (
