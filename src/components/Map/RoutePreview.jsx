@@ -1,12 +1,13 @@
+//@/components/Map/RoutePreview.jsx
 import { useEffect } from "react";
 
 export function RoutePreview({ routeGeo, focusMapRef, ready}) {
-
 
   useEffect(() => {
     if (!focusMapRef.current || !routeGeo?.features?.length || !ready) return;
 
     const map = focusMapRef.current;
+
     // Extract elevations from route coordinates and apply color gradient 
     const elevations = routeGeo.features[0].geometry.coordinates.map(c => c[2]);
     const colorForElevation = (e) => {
