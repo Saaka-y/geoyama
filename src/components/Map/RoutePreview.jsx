@@ -1,10 +1,13 @@
 import { useEffect } from "react";
 
-export function RoutePreview({ routeGeo, focusMapRef }) {
+export function RoutePreview({ routeGeo, focusMapRef, ready}) {
+
 
   useEffect(() => {
-    if (!focusMapRef.current || !routeGeo?.features?.length) return;
+    if (!focusMapRef.current || !routeGeo?.features?.length || !ready) return;
+
     const map = focusMapRef.current;
+    // Extract elevations from route coordinates and apply color gradient 
     const elevations = routeGeo.features[0].geometry.coordinates.map(c => c[2]);
     const colorForElevation = (e) => {
       if (e < 500) return "blue";
@@ -15,9 +18,10 @@ export function RoutePreview({ routeGeo, focusMapRef }) {
       return "red";
     };
 
+    // Function to add or update the route layer
     const updateRoute = () => {
       if (map.getSource("route")) {
-        map.getSource("route").setData(routeGeo);
+        map.getSource("route").setData(routeGeo); // *** This line is necessary to avoid errors that happen with multiple layers ***
       } else {
         map.addSource("route", { type: "geojson", data: routeGeo, lineMetrics: true });
 
@@ -49,29 +53,15 @@ export function RoutePreview({ routeGeo, focusMapRef }) {
           },
         });
       }
-
-      // ルート描画後に360度回転
-      map.once("idle", () => {
-        let bearing = 0;
-        const rotate = () => {
-          bearing += 0.2; // 回転スピード
-          map.easeTo({ bearing, duration: 50, easing: t => t });
-          requestAnimationFrame(rotate);
-        };
-        rotate();
-      });
     };
 
-    if (map.isStyleLoaded()) {
-      updateRoute();
-    } else {
-      map.once("load", updateRoute);
-    }
-  }, [routeGeo]);
+    updateRoute();
+
+  }, [routeGeo, ready, focusMapRef]);
 
   return (
     <>
-      {/* 標高バロメーター */}
+      {/* Elevation meter */}
       <div
         style={{
           position: "absolute",
