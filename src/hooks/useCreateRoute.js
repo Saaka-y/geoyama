@@ -1,7 +1,7 @@
 // hooks/useCreateRoute.js
 "use client"
 import "mapbox-gl/dist/mapbox-gl.css";
-import * as routes from "@/data/routeGeojson"; // index.js 経由で各山の routeGeojson を import
+import * as routes from "@/data/routeGeojson"; // Import each routeGeojson via index.js
 import { useEffect, useState } from "react";
 import { useMountainStore } from "@/stores/mountainStore";
 
