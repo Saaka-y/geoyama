@@ -21,19 +21,30 @@ export function WeatherPanel() {
 
   if (!selectedMountain || forecast.length === 0) return <p>Loading weather...</p>;
 
+  const className = [
+    "flex",
+    "gap-4",
+    "px-4",
+    "pb-4",
+    "mt-4",
+    "flex-row",
+    "overflow-x-auto",
+    "md:flex-col",
+    "md:overflow-y-auto",
+    "md:overflow-x-hidden",
+    "md:h-[90%]",
+    "landscape:flex-col",
+    "landscape:overflow-y-auto",
+    "landscape:overflow-x-hidden",
+    "landscape:h-[90%]"
+  ].join(" ")
 
+  
   return (
 
     <div
       ref={scrollRef}
-      className="
-        flex gap-4 px-4 pb-4 mt-4
-        flex-row overflow-x-auto
-        md:flex-col md:overflow-y-auto md:overflow-x-hidden 
-        md:h-[90%]
-        landscape:flex-col landscape:overflow-y-auto landscape:overflow-x-hidden 
-        landscape:h-[90%]
-      "
+      className={className}
     >
 
       {/* 天気スクロールカードと画面端の距離を変える場合、親ではなく ↑ のpaddingを変える。親のMainView divを変えるとカードが見切れてしまう */}

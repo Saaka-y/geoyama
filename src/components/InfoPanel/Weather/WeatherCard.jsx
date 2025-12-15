@@ -7,12 +7,7 @@ import { getTimeBackground } from "@/utils/getTimeBackground";
 export function WeatherCard({ date, grouped }) {
 
   return (
-    <div className="
-        flex gap-2
-        flex-row
-        md:flex-col
-        landscape:flex-col
-      ">
+    <div className="flex gap-2 flex-row md:flex-col landscape:flex-col">
       
       {grouped[date].map((item, i) => {
         const { time } = getLocalDate(item.dt); //時間

@@ -32,12 +32,8 @@ export function Filter({ japanMapRef }) {
   }
 
   return (
-    <div className="
-        flex flex-col items-center gap-5
-        pt-4
-        md:pt-10
-        landscape:pt-10
-      ">
+    <div
+      className="flex flex-col items-center gap-5 pt-4 md:pt-10 landscape:pt-10">
       {filteredMountains.length === 0 && (<p className="m-1 px-1 text-red-500">No mountains match the filter</p>)}
       <DistanceSelect />
       <CourseTimeSelect />
