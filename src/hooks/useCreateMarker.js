@@ -7,19 +7,15 @@ import { useMountainStore } from '@/stores/mountainStore';
 import { markerPopupEl } from '@/utils/markerPopupEl';
 
 
-export function useCreateMarker(japanMapRef) {
+export function useCreateMarker({japanMapRef, ready}) {
   const { setShowFocusMap, japanMapInitialView } = useMapUiStore();
   const { filteredMountains, setSelectedMountain } = useMountainStore();
 
   const markerRef = useRef([]);
 
-  // Marker 作成、フィルターに沿って変更
-  useEffect(() => {
-    if (!japanMapRef.current) return;
 
-    // 既存のマーカーを消す
-    markerRef.current.forEach(m => m.remove());
-    markerRef.current = [];
+  useEffect(() => {
+    if (!japanMapRef.current || !ready) return;
 
     filteredMountains?.forEach((m) => {
       const coords = m.geometry.coordinates;
@@ -44,7 +40,7 @@ export function useCreateMarker(japanMapRef) {
       el.style.cursor = "pointer";
 
 
-      // Marker作成、Popupを紐付ける
+      // Create Marker
       const marker = new mapboxgl.Marker(el)
         .setLngLat(coords)
         .setPopup(popup)
@@ -57,10 +53,17 @@ export function useCreateMarker(japanMapRef) {
         })
       })
 
-      // Marker 管理用配列に追加
+      // Save marker to ref
       markerRef.current.push(marker);
     })
-  }, [filteredMountains]);
+
+    // Cleanup markers on unmount or when dependencies change
+    return () => {
+      markerRef.current.forEach(m => m.remove());
+      markerRef.current = [];
+  };
+
+  }, [filteredMountains, ready]);
 
   return markerRef;
 }
