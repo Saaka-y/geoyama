@@ -14,6 +14,7 @@ const mountains = [
   // 他の山も追加
 ];
 
+// ゆくゆくは 既存データはskipしてもいいかも
 mountains.forEach(({ name, gpxFile }) => {
   try {
     const gpxFilePath = path.join(process.cwd(), 'public', 'GPX', gpxFile);
