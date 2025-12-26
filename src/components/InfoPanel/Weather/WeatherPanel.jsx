@@ -19,8 +19,6 @@ export function WeatherPanel() {
   // mountain info
   const summit = selectedMountain.properties.summit;
 
-  if (!selectedMountain || forecast.length === 0) return <p>Loading weather...</p>;
-
   const className = [
     "flex",
     "gap-4",
@@ -48,7 +46,7 @@ export function WeatherPanel() {
       className={className}
     >
 
-      {/* 天気スクロールカードと画面端の距離を変える場合、親ではなく ↑ のpaddingを変える。親のMainView divを変えるとカードが見切れてしまう */}
+      {/* If we want to change the distance between the weather scroll card and the edge of the screen, adjust the padding above, not the parent. Changing the parent MainView div will cause the card to be cut off.*/}
       {/* Grouped weather lists */}
       {Object.keys(grouped).map((date) => (
         <div

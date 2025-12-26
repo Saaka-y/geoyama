@@ -1,5 +1,5 @@
 // hooks/useMountainMarkers.js
-"use client"
+
 import mapboxgl from 'mapbox-gl';
 import { useEffect, useRef } from 'react';
 import { useMapUiStore } from '@/stores/mapUiStore';
@@ -63,7 +63,7 @@ export function useMountainMarkers({japanMapRef, ready}) {
       markerRef.current = [];
   };
 
-  }, [filteredMountains, ready, japanMapInitialView]);
+  }, [filteredMountains, ready, japanMapInitialView, japanMapRef, setSelectedMountain, setShowFocusMap]);
 
   return markerRef;
 }

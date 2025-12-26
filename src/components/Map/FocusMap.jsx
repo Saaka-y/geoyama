@@ -1,6 +1,5 @@
 // components/Map/FocusMap.jsx
 
-"use client"
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";
 import { useEffect, useState, useRef } from "react";

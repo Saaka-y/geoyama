@@ -1,5 +1,5 @@
 // hooks/useRouteGeo.js
-"use client"
+
 import "mapbox-gl/dist/mapbox-gl.css";
 import * as routes from "@/data/routeGeojson"; // Import each routeGeojson via index.js
 import { useMemo } from "react";
