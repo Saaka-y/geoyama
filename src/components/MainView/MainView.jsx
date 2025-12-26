@@ -25,7 +25,7 @@ export function MainView({ japanMapRef, focusMapRef }) {
 
       {/* Info Panel */}
       <div className="flex-1">
-        <InfoPanel />
+        <InfoPanel japanMapRef={japanMapRef} />
       </div>
     </div>
   );
