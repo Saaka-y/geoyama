@@ -6,7 +6,11 @@
     "dev": "next dev --webpack",
     "build": "next build --webpack",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "lint:fix": "eslint --fix",
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "audit": "npm audit"
   },
   "dependencies": {
     "@mapbox/togeojson": "^0.16.2",
@@ -22,9 +26,12 @@
   },
   "devDependencies": {
     "@tailwindcss/postcss": "^4",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.1",
     "babel-plugin-react-compiler": "1.0.0",
     "eslint": "^9",
     "eslint-config-next": "16.0.2",
+    "jest": "^30.2.0",
     "tailwindcss": "^4"
   }
 }
