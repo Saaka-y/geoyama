@@ -43,6 +43,7 @@ export function FocusMap({ focusMapRef }) {
     focusMapRef.current = new mapboxgl.Map({
       container: focusMapContainerRef.current,
       style: "mapbox://styles/mapbox/outdoors-v12",
+      // @ts-ignore
       center: center,
       zoom: zoom,
       pitch: 40,
