@@ -2,7 +2,7 @@
 import { useMapUiStore } from "@/stores/mapUiStore";
 import { useMountainStore } from "@/stores/mountainStore";
 import { useFilterStore } from "@/stores/filterStore";
-import { useClearFilter } from "@/hooks/useClearFilter";
+import { useClearFilters } from "@/hooks/useClearFilters";
 import { useApplyFilter } from '@/hooks/useApplyFilter';
 import { DistanceSelect } from '@/components/InfoPanel/Filter/DistanceSelect';
 import { CourseTimeSelect } from '@/components/InfoPanel/Filter/CourseTimeSelect';
@@ -14,7 +14,7 @@ export function Filter({ japanMapRef }) {
   const { japanMapInitialView } = useMapUiStore();
   const { dateOptions } = useFilterStore();
   const { filteredMountains } = useMountainStore();
-  const { clearFilter } = useClearFilter();
+  const { clearFilter } = useClearFilters();
   useApplyFilter();
 
 

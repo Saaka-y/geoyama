@@ -1,8 +1,8 @@
-//@/hooks/useClearFilter.js
+//@/hooks/useClearFilters.js
 import { useFilterStore } from "@/stores/filterStore";
 import { useMountainStore } from "@/stores/mountainStore";
 
-export function useClearFilter() {
+export function useClearFilters() {
   const { setDistance, setCourseTime, setSelectedDate } = useFilterStore();
   const { allMountains, setFilteredMountains, setSelectedMountain } = useMountainStore();
 

@@ -7,7 +7,7 @@ import { useEffect, useState, useRef } from "react";
 import { useMapUiStore } from "@/stores/mapUiStore";
 import { useMountainStore } from "@/stores/mountainStore";
 import { useInitFocusView } from "@/hooks/useInitFocusView";
-import { useCreateSpotPins } from "@/hooks/useCreateSpotPins";
+import { useSpotPins } from "@/hooks/useSpotPins";
 import { useCreateRoute } from "@/hooks/useCreateRoute";
 import { useApplySpotPins } from "@/hooks/useApplySpotPins";
 import { useRotateMap } from "@/hooks/useRotateMap";
@@ -23,7 +23,7 @@ export function FocusMap({ focusMapRef }) {
   const { selectedMountain } = useMountainStore();
   // hooks
   const { center, zoom } = useInitFocusView();
-  const spotPinsForEachMountain = useCreateSpotPins();
+  const spotPinsForEachMountain = useSpotPins();
   const routeGeo = useCreateRoute();
   useRotateMap({ focusMapRef, ready: isMapReady });
   // Extract features from spot pins
@@ -40,8 +40,8 @@ export function FocusMap({ focusMapRef }) {
 
   // FocusMap instance setup
   useEffect(() => {
-
     mapboxgl.accessToken = accessToken;
+    // Recreate the map instance every time the selectedMountain changes
     focusMapRef.current = new mapboxgl.Map({
       container: focusMapContainerRef.current,
       style: "mapbox://styles/mapbox/outdoors-v12",

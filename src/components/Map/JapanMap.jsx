@@ -4,23 +4,23 @@ import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useEffect, useState, useRef } from 'react';
 import { useMapUiStore } from '@/stores/mapUiStore';
-import { useCreateMarker } from '@/hooks/useCreateMarker';
+import { useMountainMarkers } from '@/hooks/useMountainMarkers';
 
 const accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
 export function JapanMap({ japanMapRef }) {
-  const [isMapReady, setIsMapReady] = useState(false); // a flag that shows if map is ready
+  const [isMapReady, setIsMapReady] = useState(false); // A flag that shows if map is ready
 
   const { japanMapInitialView } = useMapUiStore();
 
-  useCreateMarker({ japanMapRef, ready: isMapReady });
+  useMountainMarkers({ japanMapRef, ready: isMapReady });
 
   const japanMapContainerRef = useRef(null);
 
   //Map instance setup
   useEffect(() => {
+    if (!japanMapContainerRef.current) return;
     mapboxgl.accessToken = accessToken;
-
     japanMapRef.current = new mapboxgl.Map({
       ...japanMapInitialView,
       container: japanMapContainerRef.current,
@@ -28,7 +28,7 @@ export function JapanMap({ japanMapRef }) {
     });
 
     japanMapRef.current.on('load', () => {
-      setIsMapReady(true); // a flag that shows if map is ready
+      setIsMapReady(true); // A flag that shows if map is ready
     });
 
     return () => japanMapRef.current?.remove();
