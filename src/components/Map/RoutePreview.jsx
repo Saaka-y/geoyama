@@ -1,7 +1,9 @@
 //@/components/Map/RoutePreview.jsx
 import { useEffect } from "react";
+import { useRouteGeo } from "@/hooks/useRouteGeo";
 
-export function RoutePreview({ routeGeo, focusMapRef, ready}) {
+export function RoutePreview({ focusMapRef, ready }) {
+  const routeGeo = useRouteGeo();
 
   useEffect(() => {
     if (!focusMapRef.current || !routeGeo?.features?.length || !ready) return;
