@@ -1,7 +1,7 @@
 // components/MainView/MainView.jsx
-"use client";
+
 import { useMapUiStore } from "@/stores/mapUiStore";
-import { JapanMap } from "@/components/Map/JapanMap";
+import { JapanMapView } from "@/components/Map/JapanMap";
 import { FocusMap } from "@/components/Map/FocusMap";
 import { InfoPanel } from "@/components/InfoPanel/InfoPanel";
 import { BackButton } from "@/components/MainView/BackButton";
@@ -15,7 +15,7 @@ export function MainView({ japanMapRef, focusMapRef }) {
       {/* Map */}
       <div className="relative flex-2 z-10">
         {!showFocusMap ? (
-          <JapanMap japanMapRef={japanMapRef} />
+          <JapanMapView japanMapRef={japanMapRef} />
         ) : (
           <FocusMap focusMapRef={focusMapRef} />
         )}

@@ -1,5 +1,5 @@
 // components/InfoPanel/InfoPanel.jsx
-"use client";
+
 import { useMapUiStore } from "@/stores/mapUiStore";
 import { Filter } from "@/components/InfoPanel/Filter/Filter";
 import { WeatherPanel } from "@/components/InfoPanel/Weather/WeatherPanel";

@@ -8,7 +8,7 @@ import { useMountainMarkers } from '@/hooks/useMountainMarkers';
 
 const accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
-export function JapanMap({ japanMapRef }) {
+export function JapanMapView({ japanMapRef }) {
   const [isMapReady, setIsMapReady] = useState(false); // A flag that shows if map is ready
 
   const { japanMapInitialView } = useMapUiStore();

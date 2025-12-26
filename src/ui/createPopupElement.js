@@ -1,6 +1,5 @@
 // ui/createPopupElement.js
 
-
 export function createPopupElement(m, onClick) {
 
       // Popup用のDOM作成
