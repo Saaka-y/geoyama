@@ -2,7 +2,7 @@
 
 import dayjs from "dayjs";
 
-export function dayToStr(date) {
+export function dateToStr(date) {
   return dayjs(date).format("YYYY-MM-DD");
 }
 

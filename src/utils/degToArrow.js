@@ -1,6 +1,6 @@
-//@/utils/degToCardinal.js
+//@/utils/degToArrow.js
 
-export function degToCardinal(deg) {
+export function degToArrow(deg) {
     const directions = ['↓', '↙︎', '←', '↖︎', '↑', '↗︎', '→', '↘︎'];
     return directions[Math.round(deg / 45) % 8];
   }

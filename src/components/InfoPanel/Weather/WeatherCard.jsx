@@ -1,7 +1,7 @@
 // components/InfoPanel/Weather/WeatherCard.jsx
-import { getLocalDate } from "@/utils/getLocalDate";
-import { degToCardinal } from "@/utils/degToCardinal";
-import { getTimeBackground } from "@/utils/getTimeBackground";
+import { unixToLocalDateTime } from "@/utils/unixToLocalDateTime";
+import { degToArrow } from "@/utils/degToArrow";
+import { resolveTimeBackground } from "@/ui/resolveTimeBackground";
 
 
 export function WeatherCard({ date, grouped }) {
@@ -10,10 +10,10 @@ export function WeatherCard({ date, grouped }) {
     <div className="flex gap-2 flex-row md:flex-col landscape:flex-col">
       
       {grouped[date].map((item, i) => {
-        const { time } = getLocalDate(item.dt); //時間
+        const { time } = unixToLocalDateTime(item.dt); //時間
         const temp = Math.round(item.main.temp); //気温
         const timeHour = parseInt(time.slice(0, 2), 10); //時間（hourだけ取り出す）
-        const { background, color } = getTimeBackground(false, timeHour);
+        const { background, color } = resolveTimeBackground(false, timeHour);
         return (
           <div
             key={i}
@@ -36,7 +36,7 @@ export function WeatherCard({ date, grouped }) {
             />
             <p className={`text-sm font-bold ${temp <= 0 ? "text-blue-500" : ""}`}>{temp}°C</p>
             <p className="text-sm font-bold">
-              {degToCardinal(item.wind.deg)} {Math.round(item.wind.speed)} m/s
+              {degToArrow(item.wind.deg)} {Math.round(item.wind.speed)} m/s
             </p>
             <p className="text-xs">{item.weather[0].description}</p>
           </div>
