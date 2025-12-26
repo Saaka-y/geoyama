@@ -12,8 +12,7 @@ export function useRotateMap({ focusMapRef, ready }) {
     const rotate = () => {
       bearing += 0.2; // Rotate speed
       focusMapRef.current.easeTo({ bearing, duration: 50, easing: t => t });
-      rafIdRef.current = requestAnimationFrame(rotate);
-
+      rafIdRef.current = requestAnimationFrame(rotate); // Loop for animation
     };
     rotate();
 
@@ -22,5 +21,5 @@ export function useRotateMap({ focusMapRef, ready }) {
       cancelAnimationFrame(rafIdRef.current);
       rafIdRef.current = null;
     }
-  }, [ready]);
+  }, [focusMapRef, ready]);
 }
