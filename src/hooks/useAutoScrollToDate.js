@@ -1,10 +1,8 @@
-// @/hooks/useScrollRef.js
+// @/hooks/useAutoScrollToDate.js
 import { useEffect, useRef } from "react";
-import { useMountainStore } from "@/stores/mountainStore";
 import { useFilterStore } from "@/stores/filterStore";
 
-export function useScrollRef(forecast) {
-  const { selectedMountain } = useMountainStore();
+export function useAutoScrollToDate(forecast) {
   const { selectedDate } = useFilterStore();
   const scrollRef = useRef(null);
 
@@ -14,9 +12,7 @@ export function useScrollRef(forecast) {
     if (el) {
       el.scrollIntoView({ behavior: "smooth", inline: "center" });
     }
-  }, [forecast, selectedDate]);
-
-  if (!selectedMountain || forecast.length === 0) return <p>Loading weather...</p>;
+  }, [selectedDate,forecast]);
 
   return scrollRef;
 }
