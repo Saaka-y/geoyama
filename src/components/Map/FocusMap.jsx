@@ -8,7 +8,6 @@ import { useMapUiStore } from "@/stores/mapUiStore";
 import { useMountainStore } from "@/stores/mountainStore";
 import { useInitFocusView } from "@/hooks/useInitFocusView";
 import { useSpotPins } from "@/hooks/useSpotPins";
-import { useCreateRoute } from "@/hooks/useCreateRoute";
 import { useApplySpotPins } from "@/hooks/useApplySpotPins";
 import { useRotateMap } from "@/hooks/useRotateMap";
 import { MountainInfo } from "@/components/Map/MountainInfo";
@@ -24,7 +23,6 @@ export function FocusMap({ focusMapRef }) {
   // hooks
   const { center, zoom } = useInitFocusView();
   const spotPinsForEachMountain = useSpotPins();
-  const routeGeo = useCreateRoute();
   useRotateMap({ focusMapRef, ready: isMapReady });
   // Extract features from spot pins
   const features = spotPinsForEachMountain.features;
@@ -103,7 +101,6 @@ export function FocusMap({ focusMapRef }) {
 
       <RoutePreview
         focusMapRef={focusMapRef}
-        routeGeo={routeGeo}
         ready={isMapReady}
       />
     </>
