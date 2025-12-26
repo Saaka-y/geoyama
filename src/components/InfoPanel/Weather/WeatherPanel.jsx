@@ -6,6 +6,7 @@ import { useAutoScrollToDate } from "@/hooks/useAutoScrollToDate";
 import { groupForecastByDate } from "@/utils/groupForecastByDate";
 import { WeatherDate } from "@/components/InfoPanel/Weather/WeatherDate";
 import { WeatherCard } from "@/components/InfoPanel/Weather/WeatherCard";
+import WeatherErrorBoundary from "@/components/ErrorBoundary/WeatherErrorBoundary";
 
 
 export function WeatherPanel() {
@@ -40,29 +41,30 @@ export function WeatherPanel() {
   if (!selectedMountain || forecast.length === 0) return <p>Loading weather...</p>;
 
   return (
+    <WeatherErrorBoundary>
+      <div
+        ref={scrollRef}
+        className={className}
+      >
 
-    <div
-      ref={scrollRef}
-      className={className}
-    >
-
-      {/* If we want to change the distance between the weather scroll card and the edge of the screen, adjust the padding above, not the parent. Changing the parent MainView div will cause the card to be cut off.*/}
-      {/* Grouped weather lists */}
-      {Object.keys(grouped).map((date) => (
-        <div
-          key={date}
-          id={`date-${date}`}
-          className="snap-start bg-white p-2 flex flex-col gap-1 shadow-sm"
-          style={{
-            border: date === selectedDate.value
-              ? "2px solid #6495ED"
-              : "1px solid #e5e7eb"
-          }}
-        >
-          <WeatherDate date={date} grouped={grouped} summit={summit} />
-          <WeatherCard date={date} grouped={grouped} />
-        </div>
-      ))}
-    </div>
+        {/* If we want to change the distance between the weather scroll card and the edge of the screen, adjust the padding above, not the parent. Changing the parent MainView div will cause the card to be cut off.*/}
+        {/* Grouped weather lists */}
+        {Object.keys(grouped).map((date) => (
+          <div
+            key={date}
+            id={`date-${date}`}
+            className="snap-start bg-white p-2 flex flex-col gap-1 shadow-sm"
+            style={{
+              border: date === selectedDate.value
+                ? "2px solid #6495ED"
+                : "1px solid #e5e7eb"
+            }}
+          >
+            <WeatherDate date={date} grouped={grouped} summit={summit} />
+            <WeatherCard date={date} grouped={grouped} />
+          </div>
+        ))}
+      </div>
+    </WeatherErrorBoundary>
   );
 }

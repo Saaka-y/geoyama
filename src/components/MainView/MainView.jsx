@@ -5,6 +5,7 @@ import { JapanMapView } from "@/components/Map/JapanMap";
 import { FocusMap } from "@/components/Map/FocusMap";
 import { InfoPanel } from "@/components/InfoPanel/InfoPanel";
 import { BackButton } from "@/components/MainView/BackButton";
+import MapErrorBoundary from "@/components/ErrorBoundary/MapErrorBoundary";
 
 export function MainView({ japanMapRef, focusMapRef }) {
   const { showFocusMap } = useMapUiStore();
@@ -17,7 +18,9 @@ export function MainView({ japanMapRef, focusMapRef }) {
         {!showFocusMap ? (
           <JapanMapView japanMapRef={japanMapRef} />
         ) : (
-          <FocusMap focusMapRef={focusMapRef} />
+          <MapErrorBoundary>
+            <FocusMap focusMapRef={focusMapRef} />
+          </MapErrorBoundary>
         )}
       </div>
 

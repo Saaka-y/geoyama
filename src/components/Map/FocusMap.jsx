@@ -15,6 +15,7 @@ import { RoutePreview } from "@/components/Map/RoutePreview";
 const accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
 export function FocusMap({ focusMapRef }) {
+  
   const [isMapReady, setIsMapReady] = useState(false); // a flag that shows if map is ready
   // Zustand store
   const { showFocusMap } = useMapUiStore();
