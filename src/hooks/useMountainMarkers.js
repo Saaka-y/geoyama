@@ -1,4 +1,4 @@
-// hooks/useCreateMarker.js
+// hooks/useMountainMarkers.js
 "use client"
 import mapboxgl from 'mapbox-gl';
 import { useEffect, useRef } from 'react';
@@ -7,7 +7,7 @@ import { useMountainStore } from '@/stores/mountainStore';
 import { createPopupElement } from '@/ui/createPopupElement';
 
 
-export function useCreateMarker({japanMapRef, ready}) {
+export function useMountainMarkers({japanMapRef, ready}) {
   const { setShowFocusMap, japanMapInitialView } = useMapUiStore();
   const { filteredMountains, setSelectedMountain } = useMountainStore();
 
@@ -63,7 +63,7 @@ export function useCreateMarker({japanMapRef, ready}) {
       markerRef.current = [];
   };
 
-  }, [filteredMountains, ready]);
+  }, [filteredMountains, ready, japanMapInitialView]);
 
   return markerRef;
 }
