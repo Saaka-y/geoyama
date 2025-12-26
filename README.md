@@ -105,7 +105,7 @@ The app includes ErrorBoundary components to gracefully handle runtime errors:
 This prevents the entire app from crashing when components fail.
 
 <details>
-<summary><strong>Development Highlights</strong> (click to expand)</summary>
+<summary>📚 <strong>Development Highlights</strong> (click to expand)</summary>
 
 ### Design Decisions
 
@@ -261,7 +261,7 @@ src/
 これにより、コンポーネントが失敗してもアプリ全体がクラッシュすることを防ぎます。
 
 <details>
-<summary><strong>開発のポイント</strong>（クリックで展開）</summary>
+<summary>📚 <strong>開発のポイント</strong>（クリックで展開）</summary>
 
 ### 設計上の工夫
 
