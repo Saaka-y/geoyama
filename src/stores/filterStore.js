@@ -22,7 +22,7 @@ export const useFilterStore = create((set, get) => ({
     const { dateOptions, selectedDate } = get();
     if (dateOptions.length > 0) return;
 
-    const options = createDateOptions(5);
+    const options = createDateOptions();
 
     set({
       dateOptions: options,
