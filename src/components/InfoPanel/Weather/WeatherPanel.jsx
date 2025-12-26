@@ -1,7 +1,7 @@
 // components/InfoPanel/Weather/WeatherPanel.jsx
 import { useMountainStore } from "@/stores/mountainStore";
 import { useFilterStore } from "@/stores/filterStore";
-import { useFetchWeather } from "@/hooks/useFetchWeather";
+import { useWeatherForecast } from "@/hooks/useWeatherForecast";
 import { useAutoScrollToDate } from "@/hooks/useAutoScrollToDate";
 import { groupForecastByDate } from "@/utils/groupForecastByDate";
 import { WeatherDate } from "@/components/InfoPanel/Weather/WeatherDate";
@@ -13,7 +13,7 @@ export function WeatherPanel() {
   const { selectedMountain } = useMountainStore();
   const { selectedDate } = useFilterStore();
   // hooks
-  const forecast = useFetchWeather();
+  const forecast = useWeatherForecast();
   const grouped = groupForecastByDate(forecast);
   const scrollRef = useAutoScrollToDate(forecast);
   // mountain info

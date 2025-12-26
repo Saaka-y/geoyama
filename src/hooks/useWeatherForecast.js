@@ -1,11 +1,11 @@
-//@/hooks/useFetchWeather.js
+//@/hooks/useWeatherForecast.js
 
 import { useEffect, useState } from "react";
 import { useMountainStore } from "@/stores/mountainStore";
 import { useFilterStore } from "@/stores/filterStore";
 import { dateToStr } from "@/utils/dateToStr";
 
-export function useFetchWeather() {
+export function useWeatherForecast() {
 
   const { selectedMountain } = useMountainStore();
   const { selectedDate } = useFilterStore();
