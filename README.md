@@ -17,6 +17,46 @@ A Next.js application for exploring Japanese mountain trails. It provides intera
 - 🔍 **Smart Filtering** - Filter by date, distance, and course time
 - 📱 **Responsive Design** - Works on desktop, tablet, mobile portrait and landscape
 
+## Development Highlights
+
+<details>
+<summary>Click to expand</summary>
+
+### Design Decisions
+
+- **Target Audience**: Focused on international hikers, hiking enthusiasts, and mountains accessible from Tokyo
+- **Hiker-Centric Features**: 
+  - Weather forecasts for 2 days before and after the selected hiking date
+  - "Drive time from Shinjuku" filter for international visitors
+  - Course time and elevation filtering
+  - Visual route confirmation with interactive maps
+- **API Security**: 
+  - Mapbox API is domain-restricted for safe frontend use
+  - OpenWeatherMap API is accessed only from backend routes
+- **Data Workflow**: 
+  - Used YAMAP GPS traces to convert GPX to GeoJSON (@mapbox/togeojson)
+  - Simplified the process of obtaining accurate hiking routes
+- **Framework Choice**: 
+  - Initially used react-map-gl, but migrated to pure mapbox-gl for better control
+  - Needed advanced features: camera following, smooth coordinate transitions, dynamic route rendering
+  - Lack of detailed documentation for react-map-gl influenced the decision
+- **UX Considerations**: 
+  - Logo positioned in top-left to prevent accidental taps
+  - Responsive design with Tailwind's landscape utilities for smooth mobile orientation changes
+
+### Technical Challenges & Solutions
+
+- **GPX File Location**: Initially placed in `components/data/`, but fs module doesn't work client-side → Moved to `public/` directory
+- **Line Gradient**: react-map-gl v7.1 didn't support mapbox's line-gradient → Migrated to pure mapbox-gl
+- **Smooth Animations**: FlyToInterpolator removed in react-map-gl v7+ → Used mapRef with official mapbox methods
+- **Route Pin Animation**: Coordinates were misaligned when animating pins along route → Used line-gradient/line-progress for coloring and updated marker position each frame
+- **Camera Conflicts**: `easeTo` and animation loops conflicted → Separated line animation and camera operations
+- **Map Loading Race Condition**: Route GeoJSON tried to render before map style loaded → Added `isMapReady` flag and state management for routeGeo
+- **Lifecycle Mismatch**: Mapbox's onLoad and React's render cycle were out of sync → Implemented `isMapReady` flag to coordinate component initialization
+- **Hydration Error**: Class names with line breaks caused hydration errors → Used `join()` with arrays for long class names, single line for short ones
+
+</details>
+
 ## Tech Stack
 
 - **Framework**: Next.js 15
@@ -104,44 +144,6 @@ The app includes ErrorBoundary components to gracefully handle runtime errors:
 
 This prevents the entire app from crashing when components fail.
 
-<details>
-<summary>📚 <strong>Development Highlights</strong> (click to expand)</summary>
-
-### Design Decisions
-
-- **Target Audience**: Focused on international hikers, hiking enthusiasts, and mountains accessible from Tokyo
-- **Hiker-Centric Features**: 
-  - Weather forecasts for 2 days before and after the selected hiking date
-  - "Drive time from Shinjuku" filter for international visitors
-  - Course time and elevation filtering
-  - Visual route confirmation with interactive maps
-- **API Security**: 
-  - Mapbox API is domain-restricted for safe frontend use
-  - OpenWeatherMap API is accessed only from backend routes
-- **Data Workflow**: 
-  - Used YAMAP GPS traces to convert GPX to GeoJSON (@mapbox/togeojson)
-  - Simplified the process of obtaining accurate hiking routes
-- **Framework Choice**: 
-  - Initially used react-map-gl, but migrated to pure mapbox-gl for better control
-  - Needed advanced features: camera following, smooth coordinate transitions, dynamic route rendering
-  - Lack of detailed documentation for react-map-gl influenced the decision
-- **UX Considerations**: 
-  - Logo positioned in top-left to prevent accidental taps
-  - Responsive design with Tailwind's landscape utilities for smooth mobile orientation changes
-
-### Technical Challenges & Solutions
-
-- **GPX File Location**: Initially placed in `components/data/`, but fs module doesn't work client-side → Moved to `public/` directory
-- **Line Gradient**: react-map-gl v7.1 didn't support mapbox's line-gradient → Migrated to pure mapbox-gl
-- **Smooth Animations**: FlyToInterpolator removed in react-map-gl v7+ → Used mapRef with official mapbox methods
-- **Route Pin Animation**: Coordinates were misaligned when animating pins along route → Used line-gradient/line-progress for coloring and updated marker position each frame
-- **Camera Conflicts**: `easeTo` and animation loops conflicted → Separated line animation and camera operations
-- **Map Loading Race Condition**: Route GeoJSON tried to render before map style loaded → Added `isMapReady` flag and state management for routeGeo
-- **Lifecycle Mismatch**: Mapbox's onLoad and React's render cycle were out of sync → Implemented `isMapReady` flag to coordinate component initialization
-- **Hydration Error**: Class names with line breaks caused hydration errors → Used `join()` with arrays for long class names, single line for short ones
-
-</details>
-
 ## Testing
 
 Run tests with:
@@ -172,6 +174,46 @@ This project is open source and available under the [MIT License](LICENSE).
 - 📍 **トレイルルート** - スタート、ゴール、山頂のピンを含むルートプレビューを表示
 - 🔍 **スマートフィルタリング** - 日付、距離、コースタイムでフィルタリング
 - 📱 **レスポンシブデザイン** - デスクトップ、タブレット、モバイル、モバイル横向きに対応
+
+## 開発のポイント
+
+<details>
+<summary>クリックで展開</summary>
+
+### 設計上の工夫
+
+- **ターゲット設定**: 海外旅行客、登山好き、東京から行ける山に明確に焦点を当てた
+- **ハイカー目線の機能**: 
+  - 登山予定日の前後2日間の詳細な天気予報
+  - 海外ハイカー向けに「新宿からの運転時間」フィルター
+  - 公式コースタイムと標高差でのフィルタリング
+  - インタラクティブな地図でハイキングルートを視覚的に確認
+- **APIセキュリティ**: 
+  - Mapbox APIは特定ドメインからのアクセスに制限してフロントで使用
+  - OpenWeatherMap APIはバックエンドから呼び出すように設定
+- **データワークフロー**: 
+  - YAMAPの軌跡を使ってGPXからGeoJSONデータに変換（@mapbox/togeojson）
+  - 正確なハイキングルートの取得を効率化
+- **フレームワーク選択**: 
+  - 当初react-map-glを使用していたが、より細かい制御のためmapbox-glに移行
+  - カメラ追従、スムーズな座標移動、ハイキングルートの動的描写など複雑な処理が必要に
+  - react-map-glの詳しいドキュメントが見当たらなかったことも判断材料に
+- **UXの配慮**: 
+  - ロゴを誤ってタップしないよう左上に設置
+  - Tailwindのlandscapeユーティリティでレスポンシブ対応、スマホ横向きへスムーズに対応
+
+### 技術的な課題と解決策
+
+- **GPXファイルの配置**: 当初`components/data/`に配置していたが、fsモジュールはクライアントサイドでは動作しない → `public/`配下に移動
+- **ライングラデーション**: react-map-gl v7.1ではmapboxのline-gradientが使えない → mapbox-glに移行
+- **スムーズなアニメーション**: react-map-gl v7以降でFlyToInterpolatorが削除 → mapRefを使用して公式のmapboxメソッドで対応
+- **ルートピンのアニメーション**: ルートに沿ってピンが動くUIで座標がずれていた → line-gradient/line-progressで色をつけ、毎フレームマーカー座標を更新する方法に
+- **カメラ操作の競合**: `easeTo`とループの操作がぶつかると挙動がおかしくなる → ラインアニメーションとカメラ操作を別で管理
+- **マップ読み込みの競合**: Mapがstyleを読み込む前にroute geojsonを描画しようとして不安定に → routeGeoをstate管理に変更、mapのload後に描画するように
+- **ライフサイクルのズレ**: Mapboxのon loadとReactのレンダーサイクルがズレる → `isMapReady`フラグを設けてコンポーネント初期化を調整
+- **Hydrationエラー**: クラス名を改行して書いていたためエラーが発生 → 長いものは`join()`と配列で整理、短いものは1行にまとめた
+
+</details>
 
 ## 技術スタック
 
@@ -259,44 +301,6 @@ src/
 - **WeatherErrorBoundary** - 天気API エラーを管理
 
 これにより、コンポーネントが失敗してもアプリ全体がクラッシュすることを防ぎます。
-
-<details>
-<summary>📚 <strong>開発のポイント</strong>（クリックで展開）</summary>
-
-### 設計上の工夫
-
-- **ターゲット設定**: 海外旅行客、登山好き、東京から行ける山に明確に焦点を当てた
-- **ハイカー目線の機能**: 
-  - 登山予定日の前後2日間の詳細な天気予報
-  - 海外ハイカー向けに「新宿からの運転時間」フィルター
-  - 公式コースタイムと標高差でのフィルタリング
-  - インタラクティブな地図でハイキングルートを視覚的に確認
-- **APIセキュリティ**: 
-  - Mapbox APIは特定ドメインからのアクセスに制限してフロントで使用
-  - OpenWeatherMap APIはバックエンドから呼び出すように設定
-- **データワークフロー**: 
-  - YAMAPの軌跡を使ってGPXからGeoJSONデータに変換（@mapbox/togeojson）
-  - 正確なハイキングルートの取得を効率化
-- **フレームワーク選択**: 
-  - 当初react-map-glを使用していたが、より細かい制御のためmapbox-glに移行
-  - カメラ追従、スムーズな座標移動、ハイキングルートの動的描写など複雑な処理が必要に
-  - react-map-glの詳しいドキュメントが見当たらなかったことも判断材料に
-- **UXの配慮**: 
-  - ロゴを誤ってタップしないよう左上に設置
-  - Tailwindのlandscapeユーティリティでレスポンシブ対応、スマホ横向きへスムーズに対応
-
-### 技術的な課題と解決策
-
-- **GPXファイルの配置**: 当初`components/data/`に配置していたが、fsモジュールはクライアントサイドでは動作しない → `public/`配下に移動
-- **ライングラデーション**: react-map-gl v7.1ではmapboxのline-gradientが使えない → mapbox-glに移行
-- **スムーズなアニメーション**: react-map-gl v7以降でFlyToInterpolatorが削除 → mapRefを使用して公式のmapboxメソッドで対応
-- **ルートピンのアニメーション**: ルートに沿ってピンが動くUIで座標がずれていた → line-gradient/line-progressで色をつけ、毎フレームマーカー座標を更新する方法に
-- **カメラ操作の競合**: `easeTo`とループの操作がぶつかると挙動がおかしくなる → ラインアニメーションとカメラ操作を別で管理
-- **マップ読み込みの競合**: Mapがstyleを読み込む前にroute geojsonを描画しようとして不安定に → routeGeoをstate管理に変更、mapのload後に描画するように
-- **ライフサイクルのズレ**: Mapboxのon loadとReactのレンダーサイクルがズレる → `isMapReady`フラグを設けてコンポーネント初期化を調整
-- **Hydrationエラー**: クラス名を改行して書いていたためエラーが発生 → 長いものは`join()`と配列で整理、短いものは1行にまとめた
-
-</details>
 
 ## テスト
 
