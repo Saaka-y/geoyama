@@ -2,7 +2,7 @@
 import { useMountainStore } from "@/stores/mountainStore";
 import { useFilterStore } from "@/stores/filterStore";
 import { useFetchWeather } from "@/hooks/useFetchWeather";
-import { useScrollRef } from "@/hooks/useScrollRef";
+import { useAutoScrollToDate } from "@/hooks/useAutoScrollToDate";
 import { groupForecastByDate } from "@/utils/groupForecastByDate";
 import { WeatherDate } from "@/components/InfoPanel/Weather/WeatherDate";
 import { WeatherCard } from "@/components/InfoPanel/Weather/WeatherCard";
@@ -15,7 +15,7 @@ export function WeatherPanel() {
   // hooks
   const forecast = useFetchWeather();
   const grouped = groupForecastByDate(forecast);
-  const scrollRef = useScrollRef(forecast);
+  const scrollRef = useAutoScrollToDate(forecast);
   // mountain info
   const summit = selectedMountain.properties.summit;
 
@@ -39,7 +39,8 @@ export function WeatherPanel() {
     "landscape:h-[90%]"
   ].join(" ")
 
-  
+  if (!selectedMountain || forecast.length === 0) return <p>Loading weather...</p>;
+
   return (
 
     <div
