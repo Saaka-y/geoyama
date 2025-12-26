@@ -1,7 +1,7 @@
-// utils/markerPopupEl.js
+// ui/createPopupElement.js
 "use client"
 
-export function markerPopupEl(m, onClick) {
+export function createPopupElement(m, onClick) {
 
       // Popup用のDOM作成
       const popupEl = document.createElement("div");
