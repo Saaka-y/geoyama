@@ -8,8 +8,8 @@ export default function Home() {
    //**************************/
   // Mapbox instance /
   //**************************/
-  const japanMapRef = useRef();
-  const focusMapRef = useRef();
+  const japanMapRef = useRef(null);
+  const focusMapRef = useRef(null);
 
   return (
     <MainView 
