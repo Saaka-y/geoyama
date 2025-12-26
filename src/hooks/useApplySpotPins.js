@@ -1,4 +1,4 @@
-// hooks/useApplySpotPis.js
+// hooks/useApplySpotPins.js
 
 import { useEffect } from "react";
 
