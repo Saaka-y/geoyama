@@ -1,6 +1,6 @@
-//@/utils/getTimeBackground.js
+//@/utils/resolveTimeBackground.js
 
-export const getTimeBackground = (isLandscape, hour) => {
+export const resolveTimeBackground = (isLandscape, hour) => {
   const isMd = typeof window !== "undefined" && window.matchMedia("(min-width: 640px)").matches;
 
   const direction = isMd || isLandscape ? "to bottom" : "to right";

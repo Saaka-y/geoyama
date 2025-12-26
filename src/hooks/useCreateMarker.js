@@ -4,7 +4,7 @@ import mapboxgl from 'mapbox-gl';
 import { useEffect, useRef } from 'react';
 import { useMapUiStore } from '@/stores/mapUiStore';
 import { useMountainStore } from '@/stores/mountainStore';
-import { markerPopupEl } from '@/utils/markerPopupEl';
+import { createPopupElement } from '@/ui/createPopupElement';
 
 
 export function useCreateMarker({japanMapRef, ready}) {
@@ -20,8 +20,8 @@ export function useCreateMarker({japanMapRef, ready}) {
     filteredMountains?.forEach((m) => {
       const coords = m.geometry.coordinates;
 
-      // Popup(markerPopupEl.js)
-      const popupEl = markerPopupEl(m, () => {
+      // Popup(createPopupElement.js)
+      const popupEl = createPopupElement(m, () => {
         setSelectedMountain(m);
         setShowFocusMap(true);
       });

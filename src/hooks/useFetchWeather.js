@@ -3,7 +3,7 @@
 import { useEffect, useState } from "react";
 import { useMountainStore } from "@/stores/mountainStore";
 import { useFilterStore } from "@/stores/filterStore";
-import { dayToStr } from "@/utils/dayToStr";
+import { dateToStr } from "@/utils/dateToStr";
 
 export function useFetchWeather() {
 
@@ -32,7 +32,7 @@ export function useFetchWeather() {
         for (let i = -1; i <= 1; i++) {
           const d = new Date(targetDate);
           d.setDate(d.getDate() + i);
-          datesToShow.push(dayToStr(d));
+          datesToShow.push(dateToStr(d));
         }
 
         const filtered = data.list.filter(item =>
