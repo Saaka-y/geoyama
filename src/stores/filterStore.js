@@ -1,9 +1,11 @@
 //@/stores/filterStore.js
 "use client"
 import { create } from "zustand";
-import { dayToStr } from "@/utils/dayToStr";
+import { createDateOptions } from "@/utils/createDateOptions";
 
-export const useFilterStore = create((set) => ({
+
+export const useFilterStore = create((set, get) => ({
+
   // Filter states
   distance: "",
   courseTime: "",
@@ -16,38 +18,16 @@ export const useFilterStore = create((set) => ({
   setSelectedDate: (selectedDate) => set({ selectedDate }),
   setDateOptions: (options) => set({ dateOptions: options }),
 
-  initDateOptions: () => set((state) => {
-    if (state.dateOptions.length > 0) return state; // 既にあるなら何もしない
+  initDateOptions: () => {
+    const { dateOptions, selectedDate } = get();
+    if (dateOptions.length > 0) return;
 
-    const today = new Date();
-    const days = 5;
-    const options = [];
+    const options = createDateOptions(5);
 
-    for (let i = 0; i <= days; i++) {
-      const date = new Date(today);
-      date.setDate(today.getDate() + i);
-
-      const label =
-        i === 0 ? "Today" :
-        i === 1 ? "Tomorrow" :
-        `${i} days later`;
-
-      options.push({
-        date,
-        label,
-        value: dayToStr(date),
-        string: date.toLocaleDateString("en-UK", {
-          weekday: "short",
-          month: "short",
-          day: "numeric"
-        })
-      });
-    }
-
-    return {
+    set({
       dateOptions: options,
-      selectedDate: state.selectedDate || options[0] // 初回だけ自動セット
-    };
-  }),
+      selectedDate: selectedDate ?? options[0] // 初回だけ自動セット
+    });
+  },
 
 }));
