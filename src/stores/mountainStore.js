@@ -1,7 +1,7 @@
 //@/stores/mountainStore.js
 
-import { create } from "zustand";
-import geojson from "@/data/allMountains";
+import { create } from 'zustand';
+import geojson from "@/data/allMountains.json";
 
 export const useMountainStore = create((set) => ({
   // Mountain data
@@ -12,6 +12,7 @@ export const useMountainStore = create((set) => ({
   setFilteredMountains: (mountains) => set({ filteredMountains: mountains }),
   setSelectedMountain: (mountain) => {
     console.log("setSelectedMountain called with:", mountain);
-    set({ selectedMountain: mountain })},
+    set({ selectedMountain: mountain });
+  },
 
 }));

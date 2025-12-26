@@ -1,5 +1,5 @@
 // components/MainView/BackButton.jsx
-"use client";
+
 import { useMapUiStore } from "@/stores/mapUiStore";
 import { useEffect } from "react";
 

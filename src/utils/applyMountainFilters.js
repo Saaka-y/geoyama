@@ -1,6 +1,6 @@
-//@/utils/applyMoutnainFilters.js
+//@/utils/applyMountainFilters.js
 
-export function applyMoutnainFilters(distance, courseTime, mountains) {
+export function applyMountainFilters({distance, courseTime, mountains}) {
 
     return mountains.filter(mountain => {
       if (distance && mountain.properties.distance > distance) return false;

@@ -1,5 +1,5 @@
 // components/InfoPanel/Filter/CourseTimeSelect.jsx
-"use client"
+
 import styles from '@/components/InfoPanel/Filter/Filter.module.css'
 import { useFilterStore } from "@/stores/filterStore";
 

@@ -1,5 +1,5 @@
 // ui/createPopupElement.js
-"use client"
+
 
 export function createPopupElement(m, onClick) {
 

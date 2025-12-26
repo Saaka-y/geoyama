@@ -1,5 +1,5 @@
 //@/stores/filterStore.js
-"use client"
+
 import { create } from "zustand";
 import { createDateOptions } from "@/utils/createDateOptions";
 

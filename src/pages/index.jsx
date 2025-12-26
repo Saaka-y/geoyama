@@ -1,5 +1,5 @@
 // pages/index.jsx
-"use client";
+
 import { useRef } from "react";
 import { MainView } from "@/components/MainView/MainView";
 

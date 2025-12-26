@@ -40,5 +40,21 @@ export function useApplySpotPins({ focusMapRef, features, ready }) {
         });
       });
     });
+
+    return () => {
+      // Clean up layers and sources
+      layerOrder.forEach(iconName => {
+        if (map.getLayer(`${iconName}-layer`)) {
+          map.removeLayer(`${iconName}-layer`);
+        }
+        if (map.getSource(`${iconName}-source`)) {
+          map.removeSource(`${iconName}-source`);
+        }
+        if (map.hasImage(iconName)) {
+          map.removeImage(iconName);
+        }
+      }
+      );
+    }
   }, [focusMapRef, features, ready]);
 }

@@ -1,5 +1,5 @@
 // @/components/InfoPanel/Filter/FloatDateSelect.jsx
-"use client";
+
 import { useState, useEffect } from "react";
 import { DateSelect } from "./DateSelect";
 import { CiCalendarDate } from "react-icons/ci";

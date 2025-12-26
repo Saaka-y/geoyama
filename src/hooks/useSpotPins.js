@@ -1,5 +1,5 @@
 // hooks/useSpotPins.js
-"use client"
+
 import * as mountains from "@/data/spotPins"; // Import all spot pin data via index.js 
 import { useMemo } from "react";
 import { useMountainStore } from "@/stores/mountainStore";
