@@ -1,307 +1,179 @@
-# Geoyama
+*英語版は下にあります / English version below*
 
-A Next.js application for exploring Japanese mountain trails. It provides interactive 3D maps, weather forecasts, and route information.
+# 🏔️ Geoyama
 
-> 📝 **Portfolio Project** - This is a personal portfolio project showcasing front-focused web development skills with modern technologies.
+日本を訪れる登山好き外国人観光客向けの、ハイキングプランアプリです。
 
-## 🌐 Live Demo
+🌐 **デモサイト**: [https://geoyama.vercel.app/](https://geoyama.vercel.app/)
 
-**[https://geoyama.vercel.app/](https://geoyama.vercel.app/)**
+## 開発背景
 
-## Features
+**フロントエンド開発スキルの実践** を目的として作成しました。自分の好きな登山を題材にして、実際に使ってみたい機能を搭載して開発しました。
 
-- 🗺️ **Interactive Map** - Explore mountains across Japan with Mapbox GL (currently limited selection as routes are created from my personal topo data)
-- 🏔️ **3D Terrain** - View mountains with realistic 3D elevation
-- 🌤️ **Weather Forecasts** - Check weather conditions for 2 days before and after the selected date
-- 📍 **Trail Routes** - View route preview with start, goal, and summit pins
-- 🔍 **Smart Filtering** - Filter by date, distance, and course time
-- 📱 **Responsive Design** - Works on desktop, tablet, mobile portrait and landscape
+ターゲットは、登山好きな外国人旅行者です。
 
-## Development Highlights
+旅行者にとって、どの山であれば日帰りで登れるかを調べるのは意外と大変です。このアプリは東京周辺の山を、実際のトレイル情報、天気予報、新宿からの所要時間、駐車場の場所と共に紹介します。
 
-<details>
-<summary>Click to expand</summary>
+必ず寄るであろう新宿から日帰りで行ける、自分に合った山を見つけてもらえるような作りになっています。細かいルート設定などは別アプリ（AllTrais, Yamap）などで可能なため、geoyamaは日本の山に馴染みのない方々が、まずは行きたい山を絞れるように直感的な操作と重要な情報を表示することに重きを置きました。
 
-### Design Decisions
 
-- **Target Audience**: Focused on international hikers, hiking enthusiasts, and mountains accessible from Tokyo
-- **Hiker-Centric Features**: 
-  - Weather forecasts for 2 days before and after the selected hiking date
-  - "Drive time from Shinjuku" filter for international visitors
-  - Course time and elevation filtering
-  - Visual route confirmation with interactive maps
-- **API Security**: 
-  - Mapbox API is domain-restricted for safe frontend use
-  - OpenWeatherMap API is accessed only from backend routes
-- **Data Workflow**: 
-  - Used YAMAP GPS traces to convert GPX to GeoJSON (@mapbox/togeojson)
-  - Simplified the process of obtaining accurate hiking routes
-- **Framework Choice**: 
-  - Initially used react-map-gl, but migrated to pure mapbox-gl for better control
-  - Needed advanced features: camera following, smooth coordinate transitions, dynamic route rendering
-  - Lack of detailed documentation for react-map-gl influenced the decision
-- **UX Considerations**: 
-  - Logo positioned in top-left to prevent accidental taps
-  - Responsive design with Tailwind's landscape utilities for smooth mobile orientation changes
 
-### Technical Challenges & Solutions
+### プロジェクトの特徴
 
-- **GPX File Location**: Initially placed in `components/data/`, but fs module doesn't work client-side → Moved to `public/` directory
-- **Line Gradient**: react-map-gl v7.1 didn't support mapbox's line-gradient → Migrated to pure mapbox-gl
-- **Smooth Animations**: FlyToInterpolator removed in react-map-gl v7+ → Used mapRef with official mapbox methods
-- **Route Pin Animation**: Coordinates were misaligned when animating pins along route → Used line-gradient/line-progress for coloring and updated marker position each frame
-- **Camera Conflicts**: `easeTo` and animation loops conflicted → Separated line animation and camera operations
-- **Map Loading Race Condition**: Route GeoJSON tried to render before map style loaded → Added `isMapReady` flag and state management for routeGeo
-- **Lifecycle Mismatch**: Mapbox's onLoad and React's render cycle were out of sync → Implemented `isMapReady` flag to coordinate component initialization
-- **Hydration Error**: Class names with line breaks caused hydration errors → Used `join()` with arrays for long class names, single line for short ones
+特に以下の技術習得に重点を置きました（実際に知り合いに使ってもらうことで、少しずつ改善していきました）：
 
-</details>
+- **MapboxとReactの統合** - マップアニメーションとカメラ制御で視覚的にわかりやすい山情報
+- **グローバル状態管理** - Zustandを使った効率的な状態管理
+- **データ処理** - GPXからGeoJSONへの変換、MapインスタンスとReactの連携
+- **レスポンシブデザイン** - モバイル横向きにも対応した細かいUX調整
 
-## Tech Stack
+当初react-map-glを使用していましたが、カメラ追従やスムーズな座標移動などの複雑さや、公式ドキュメントの乏しさから、途中で純粋なmapbox-glに移行しました。MapboxのライフサイクルとReactのレンダーサイクルの同期など、フレームワーク統合の複雑さを実感できる良い学習機会となりました。
 
-- **Framework**: Next.js 15
-- **Maps**: Mapbox GL JS
-- **State Management**: Zustand
-- **Styling**: Tailwind CSS
-- **Testing**: Jest & React Testing Library (still learning Jest)
-- **APIs**: 
-  - Mapbox GL API (with domain restriction for frontend use)
-  - OpenWeatherMap API (accessed from backend)
-- **Data Tools**: 
-  - @mapbox/togeojson (GPX to GeoJSON conversion)
-  - tippecanoe (vector tile generation)
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js 20+ 
-- Mapbox API token
-- OpenWeather API token
-
-### Installation
-
-1. Clone the repository
-```bash
-git clone https://github.com/Saaka-y/geoyama.git
-cd geoyama
-```
-
-2. Install dependencies
-```bash
-npm install
-```
-
-3. Create `.env.local` file
-```env
-NEXT_PUBLIC_MAPBOX_TOKEN=
-OPENWEATHER_API_KEY=
-```
-
-4. Run the development server
-```bash
-npm run dev
-```
-
-5. Open [http://localhost:3000](http://localhost:3000)
-
-## Project Structure
-
-```
-scripts/             # Node.js scripts for data processing
-├── saveTrailGeojson.js   # GPX to GeoJSON conversion script
-src/
-├── components/       # React components
-│   ├── ErrorBoundary/   # Error handling boundaries
-│   ├── InfoPanel/       # Filters and weather display
-│   ├── MainView/        # Main layout
-│   └── Map/            # Map components
-├── data/            # Mountain data and GeoJSON routes
-├── hooks/           # Custom React hooks
-├── pages/           # Next.js pages and API routes
-├── stores/          # Zustand state management
-├── styles/          # Global styles
-├── ui/              # UI utilities
-└── utils/           # Helper functions
-```
-
-### Adding New Trail Routes
-
-When adding new mountain routes:
-
-1. Place GPX data in `public/GPX/`
-2. Add route entry to `scripts/saveTrailGeojson.js`
-3. Run `node scripts/saveTrailGeojson.js` to generate GeoJSON files in `src/data/routeGeojson/`
-4. GeoJSON files are directly loaded on the map (vector tiles were considered but made gradient coloring by elevation difficult)
-
-## Error Handling
-
-The app includes ErrorBoundary components to gracefully handle runtime errors:
-
-- **Global ErrorBoundary** - Catches app-level errors with full-page fallback
-- **MapErrorBoundary** - Handles map loading failures
-- **WeatherErrorBoundary** - Manages weather API errors
-
-This prevents the entire app from crashing when components fail.
-
-## Testing
-
-Run tests with:
-```bash
-npm test
-```
-
-## License
-
-This project is open source and available under the [MIT License](LICENSE).
-
----------------------
-
-# Geoyama（日本語）
-
-日本の登山道を探索するためのNext.jsアプリケーションです。インタラクティブな3D地図、天気予報、ルート情報を提供します。
-> 📝 **ポートフォリオプロジェクト** - これはモダンな技術を使用したフロントWeb開発スキルを示すための個人ポートフォリオプロジェクトです。
-
-## 🌐 デモ
-
-**[https://geoyama.vercel.app/](https://geoyama.vercel.app/)**
 
 ## 機能
 
-- 🗺️ **インタラクティブマップ** - Mapbox GLで日本全国の山を探索（現状は私のトポから作っているため数個しか選択肢がありません）
-- 🏔️ **3D地形** - リアルな3D標高で山を表示
-- 🌤️ **天気予報** - 選んだ日付を中心に前後2日間の天気状況を確認
-- 📍 **トレイルルート** - スタート、ゴール、山頂のピンを含むルートプレビューを表示
-- 🔍 **スマートフィルタリング** - 日付、距離、コースタイムでフィルタリング
-- 📱 **レスポンシブデザイン** - デスクトップ、タブレット、モバイル、モバイル横向きに対応
+- 🗺️ **インタラクティブマップ** - Mapbox GLで日本の山を探索（今のところ自分のGPSデータから作ってるので数は少なめです）
+- 🏔️ **3D地形** - リアルな3D標高で山の様子をチェック
+- 🌤️ **天気予報** - 登山予定日の前後2日間の天気を確認できます
+- 📍 **トレイルルート** - スタート、ゴール、山頂マーカー付きで実際のルートをプレビュー
+- 🔍 **スマートフィルタリング** - 日付、距離、予想ハイキング時間で山を絞り込み
+- 📱 **レスポンシブデザイン** - デスクトップ、タブレット、スマホ（縦向きも横向きも）でスムーズに動作
 
-## 開発のポイント
+## 使った技術
 
-<details>
-<summary>クリックで展開</summary>
-
-### 設計上の工夫
-
-- **ターゲット設定**: 海外旅行客、登山好き、東京から行ける山に明確に焦点を当てた
-- **ハイカー目線の機能**: 
-  - 登山予定日の前後2日間の詳細な天気予報
-  - 海外ハイカー向けに「新宿からの運転時間」フィルター
-  - 公式コースタイムと標高差でのフィルタリング
-  - インタラクティブな地図でハイキングルートを視覚的に確認
-- **APIセキュリティ**: 
-  - Mapbox APIは特定ドメインからのアクセスに制限してフロントで使用
-  - OpenWeatherMap APIはバックエンドから呼び出すように設定
-- **データワークフロー**: 
-  - YAMAPの軌跡を使ってGPXからGeoJSONデータに変換（@mapbox/togeojson）
-  - 正確なハイキングルートの取得を効率化
-- **フレームワーク選択**: 
-  - 当初react-map-glを使用していたが、より細かい制御のためmapbox-glに移行
-  - カメラ追従、スムーズな座標移動、ハイキングルートの動的描写など複雑な処理が必要に
-  - react-map-glの詳しいドキュメントが見当たらなかったことも判断材料に
-- **UXの配慮**: 
-  - ロゴを誤ってタップしないよう左上に設置
-  - Tailwindのlandscapeユーティリティでレスポンシブ対応、スマホ横向きへスムーズに対応
-
-### 技術的な課題と解決策
-
-- **GPXファイルの配置**: 当初`components/data/`に配置していたが、fsモジュールはクライアントサイドでは動作しない → `public/`配下に移動
-- **ライングラデーション**: react-map-gl v7.1ではmapboxのline-gradientが使えない → mapbox-glに移行
-- **スムーズなアニメーション**: react-map-gl v7以降でFlyToInterpolatorが削除 → mapRefを使用して公式のmapboxメソッドで対応
-- **ルートピンのアニメーション**: ルートに沿ってピンが動くUIで座標がずれていた → line-gradient/line-progressで色をつけ、毎フレームマーカー座標を更新する方法に
-- **カメラ操作の競合**: `easeTo`とループの操作がぶつかると挙動がおかしくなる → ラインアニメーションとカメラ操作を別で管理
-- **マップ読み込みの競合**: Mapがstyleを読み込む前にroute geojsonを描画しようとして不安定に → routeGeoをstate管理に変更、mapのload後に描画するように
-- **ライフサイクルのズレ**: Mapboxのon loadとReactのレンダーサイクルがズレる → `isMapReady`フラグを設けてコンポーネント初期化を調整
-- **Hydrationエラー**: クラス名を改行して書いていたためエラーが発生 → 長いものは`join()`と配列で整理、短いものは1行にまとめた
-
-</details>
-
-## 技術スタック
-
-- **フレームワーク**: Next.js 15
-- **地図**: Mapbox GL JS
-- **状態管理**: Zustand
-- **スタイリング**: Tailwind CSS
-- **テスト**: Jest & React Testing Library（Jestはまだ勉強中です）
+- **Next.js 15** - Reactフレームワーク
+- **Mapbox GL JS** - インタラクティブマップ
+- **Zustand** - 状態管理
+- **Tailwind CSS** - スタイリング
+- **Jest & React Testing Library** - テスト（Jestはまだ勉強中！）
 - **API**: 
-  - Mapbox GL API（特定ドメインからのアクセスに制限してフロントで使用）
+  - Mapbox GL API（ドメイン制限でフロントエンド安全使用）
   - OpenWeatherMap API（バックエンドから呼び出し）
 - **データツール**: 
-  - @mapbox/togeojson（GPXからGeoJSONへの変換）
-  - tippecanoe（ベクタータイル生成）
+  - @mapbox/togeojson（GPXをGeoJSONに変換）
+  - tippecanoe（ベクタータイル生成。最終的には個々のベクタータイルを生成せず、Map自体をベクターに変更して落ち着きました）
 
-## 始め方
+## セットアップ
 
 ### 前提条件
 
-- Node.js 20+ 
+- Node.js 20以上
 - Mapbox APIトークン
 - OpenWeather APIトークン
 
 ### インストール
 
-1. リポジトリをクローン
 ```bash
+# リポジトリをクローン
 git clone https://github.com/Saaka-y/geoyama.git
-cd geoyama
-```
 
-2. 依存関係をインストール
-```bash
+# プロジェクトディレクトリに移動
+cd geoyama
+
+# 依存関係をインストール
 npm install
 ```
 
-3. `.env.local`ファイルを作成
-```env
-NEXT_PUBLIC_MAPBOX_TOKEN=XXX
-OPENWEATHER_API_KEY=XXX
-```
+### 開発サーバーの起動
 
-4. 開発サーバーを起動
 ```bash
+# 環境変数ファイルを作成
+# .env.local
+NEXT_PUBLIC_MAPBOX_TOKEN=your_mapbox_token
+OPENWEATHER_API_KEY=your_openweather_key
+
+# サーバー起動
 npm run dev
 ```
 
-5. [http://localhost:3000](http://localhost:3000) を開く
+ブラウザで [http://localhost:3000](http://localhost:3000) を開いてアプリケーションを表示します。
+
+または、デモサイト [https://geoyama.vercel.app/](https://geoyama.vercel.app/) にアクセスしてください。
 
 ## プロジェクト構造
 
 ```
-scripts/             # データ処理用Node.jsスクリプト
-├── saveTrailGeojson.js   # GPXからGeoJSONへの変換スクリプト
-src/
-├── components/       # Reactコンポーネント
-│   ├── ErrorBoundary/   # エラーハンドリング用境界
-│   ├── InfoPanel/       # フィルターと天気表示
-│   ├── MainView/        # メインレイアウト
-│   └── Map/            # マップコンポーネント
-├── data/            # 山のデータとGeoJSONルート
-├── hooks/           # カスタムReactフック
-├── pages/           # Next.jsページとAPIルート
-├── stores/          # Zustand状態管理
-├── styles/          # グローバルスタイル
-├── ui/              # UIユーティリティ
-└── utils/           # ヘルパー関数
+geoyama/
+├── scripts/             # データ処理用Node.jsスクリプト
+│   └── saveTrailGeojson.js   # GPX→GeoJSON変換
+├── src/
+│   ├── components/      # Reactコンポーネント
+│   │   ├── ErrorBoundary/   # エラーハンドリング
+│   │   ├── InfoPanel/       # フィルターと天気表示
+│   │   ├── MainView/        # メインレイアウト
+│   │   └── Map/             # マップコンポーネント
+│   ├── data/            # 山データとGeoJSONルート
+│   ├── hooks/           # カスタムReactフック
+│   ├── pages/           # Next.jsページとAPIルート
+│   ├── stores/          # Zustand状態管理
+│   ├── styles/          # グローバルスタイル
+│   ├── ui/              # UIユーティリティ
+│   └── utils/           # ヘルパー関数
+└── public/              # 静的アセット
+    └── GPX/             # GPXファイル
 ```
 
-### 新しいトレイルルートの追加
-
-山ルートを追加する手順:
+## トレイルの追加方法
 
 1. GPXデータを`public/GPX/`に配置
-2. `scripts/saveTrailGeojson.js`にルートエントリを追加
-3. `node scripts/saveTrailGeojson.js`を実行して`src/data/routeGeojson/`にGeoJSONファイルを生成
-4. GeoJSONファイルは地図上で直接読み込まれます（ベクタータイルも検討しましたが、標高ごとに色を変えるのが困難だったため）
+2. `scripts/saveTrailGeojson.js`にルート情報を追加
+3. 変換スクリプトを実行:
+```bash
+node scripts/saveTrailGeojson.js
+```
+4. `src/data/routeGeojson/`にGeoJSONファイルが生成されます
+
+GeoJSONファイルは地図上で直接読み込まれます（ベクタータイルも検討しましたが、標高ベースの色グラデーションが困難だったため現在の方式を採用）。
 
 ## エラーハンドリング
 
-ランタイムエラーを適切に処理するためのErrorBoundaryコンポーネントを実装：
+何か問題が起きても完全に壊れないようErrorBoundaryコンポーネントを追加しました：
 
-- **Global ErrorBoundary** - アプリレベルのエラーをフルページフォールバックでキャッチ
-- **MapErrorBoundary** - マップの読み込み失敗を処理
-- **WeatherErrorBoundary** - 天気API エラーを管理
+- **Global ErrorBoundary** - アプリレベルのエラーをフォールバックページでキャッチ
+- **MapErrorBoundary** - マップの読み込み問題を処理
+- **WeatherErrorBoundary** - 天気API の問題を管理
 
-これにより、コンポーネントが失敗してもアプリ全体がクラッシュすることを防ぎます。
+基本的に、一部が失敗してもアプリの残りは動き続けます！
 
+## 開発の裏側
+
+<details>
+<summary>クリックで詳細を見る</summary>
+
+### 設計の工夫
+
+- **誰のため？**: 日頃ハイキングをしていて、東京からアクセスできる山を探したい外国人旅行者向け
+- **ハイカーのための機能**: 
+  - 登山予定日の前後2日間の天気予報（登山者はその日だけでなく、前後の天気や気温、風向きも気にするため）
+  - 「新宿からの運転時間」フィルター—東京中心部から出発する旅行者に向けて
+  - 体力レベルに合わせたコースタイム
+  - 視覚的なルート確認で、どんなコースなのか一目瞭然（標高差もわかりやすく色で管理）
+- **APIのセキュリティ**: 
+  - Mapbox APIはドメイン制限をかけてフロントエンドで安全に使用
+  - OpenWeatherMap APIはバックエンドから呼び出してキーを隠している
+- **トレイルデータの取得**: 
+  - 自分の「YAMAP」アカウントからGPSトラック（GPX）をダウンロード、GeoJSONに変換（@mapbox/togeojson使用）
+  - 手作業でルートを描くより断然楽だった
+- **なぜフレームワークを変更？**: 
+  - 最初はreact-map-glを使っていたが、公式ドキュメントが高度な機能についてあまり詳しく書かれておらず、移行した方が長い目で見れば楽だと思ったため
+  - カメラ追従、スムーズな移動、動的ルート描画のために純粋なmapbox-glに移行
+- **小さなUXの工夫**: 
+  - 誤ってタップしないようMapboxロゴは左上に配置（実際に使用した知り合いからのアドバイス）
+  - Tailwindのlandscapeユーティリティでスマホを回転させても見やすく
+  - 天気カードの背景を、時間帯に合わせてグラデーションにして見た瞬間にわかるようにした
+
+### 直面した問題（と解決法）
+
+- **GPXファイルの場所**: 最初`components/data/`に置いてたが、Nodeのfsモジュールはクライアントサイドで動かないらしい → 全て`public/`に移動
+- **ラインのグラデーション**: react-map-gl v7.1がmapboxのline-gradient機能に非対応 → これも純粋なmapbox-glに切り替えた理由の一つ
+- **滑らかなアニメーション**: react-map-gl v7+でFlyToInterpolatorが削除された → 公式のmapboxメソッドとmapRefを使用
+- **ルートピンのアニメーション**: ピンがルートに沿わずずれてしまう → line-gradient/line-progressで色付けして、毎フレームマーカー位置を更新
+- **マップ読み込みのタイミング問題**: マップスタイルの読み込み前にルートを描画しようとした → どうやらMapboxとReactのレンダータイミングがずれてエラーが重なる →  `isMapReady`フラグを追加してシンプルに制御
+- **ReactとMapboxのライフサイクル**: MapboxのonLoadとReactのレンダーサイクルが同期してなかった → こちらも`isMapReady`フラグで解決
+- **Hydrationエラー**: 改行入りのクラス名がReactのHydrationエラーを引き起こした → 長いクラス名は`join()`使用、短いものは1行に
+
+</details>
+[def]
 ## テスト
 
 テストを実行:
@@ -311,4 +183,196 @@ npm test
 
 ## ライセンス
 
-このプロジェクトはオープンソースで、[MIT License](LICENSE)の下で利用可能です。
+MIT
+
+## 作成者
+
+Saaka-y
+
+---
+
+# 🏔️ Geoyama (EN)
+
+A hiking planner app for foreign tourists who love hiking and are visiting Japan.
+
+🌐 **Live Demo**: [https://geoyama.vercel.app/](https://geoyama.vercel.app/)
+
+## Background
+
+This project was created with the goal of **practicing front-focused development skills**. I built it around my favorite hobby—hiking—and implemented features I'd actually want to use.
+
+The target audience is foreign tourists who hike regularly and know their fitness level. 
+
+For foreign travelers, figuring out which mountains can be hiked as day trips is surprisingly challenging. This app introduces mountains around Tokyo with actual trail information, weather forecasts, travel times from Shinjuku, and parking locations.
+
+The app helps them find suitable mountains for day trips from Shinjuku, a place most tourists would visit. Since detailed route planning can be done with other apps (AllTrails, YAMAP, etc.), geoyama focuses on helping people unfamiliar with Japanese mountains to first narrow down which mountain to visit through intuitive operations and displaying key information.
+
+
+### Project Highlights
+
+Special emphasis was placed on learning the following technologies (gradually improved by having friends actually use it):
+
+- **Mapbox-React Integration** - Visually clear mountain information through map animations and camera controls
+- **Global State Management** - Efficient state management with Zustand
+- **Data Processing** - GPX to GeoJSON conversion, Map instance and React integration
+- **Responsive Design** - Fine-tuned UX including mobile landscape support
+
+I initially used react-map-gl but switched to pure mapbox-gl due to the complexity of camera following and smooth coordinate transitions, as well as the lack of comprehensive official documentation. This was a valuable learning experience in understanding the complexity of framework integration, especially synchronizing Mapbox's lifecycle with React's render cycle.
+
+## Features
+
+- 🗺️ **Interactive Map** - Browse mountains around Japan with Mapbox GL (currently a small selection since I'm building routes from my personal GPS data)
+- 🏔️ **3D Terrain** - Check out mountains with realistic 3D elevation views
+- 🌤️ **Weather Forecasts** - See weather conditions for 2 days before and after your planned hiking date
+- 📍 **Trail Routes** - Preview the actual route with start, goal, and summit markers
+- 🔍 **Smart Filtering** - Filter mountains by date, distance, and estimated hiking time
+- 📱 **Responsive Design** - Works smoothly on desktop, tablet, and mobile (both portrait and landscape)
+
+## Tech Stack
+
+- **Next.js 15** - React framework
+- **Mapbox GL JS** - Interactive maps
+- **Zustand** - State management
+- **Tailwind CSS** - Styling
+- **Jest & React Testing Library** - Testing (still getting the hang of Jest!)
+- **APIs**: 
+  - Mapbox GL API (domain-restricted for frontend safety)
+  - OpenWeatherMap API (called from backend)
+- **Data Tools**: 
+  - @mapbox/togeojson (converts GPX to GeoJSON)
+  - tippecanoe (vector tile generation. Eventually settled on changing the Map itself to vector format rather than generating individual vector tiles)
+
+## Getting Started
+
+### Requirements
+
+- Node.js 20+
+- Mapbox API token
+- OpenWeather API token
+
+### Installation
+
+```bash
+# Clone
+git clone https://github.com/Saaka-y/geoyama.git
+
+# Navigate
+cd geoyama
+
+# Install
+npm install
+```
+
+### Development
+
+```bash
+# Create environment variables file
+# .env.local
+NEXT_PUBLIC_MAPBOX_TOKEN=your_mapbox_token
+OPENWEATHER_API_KEY=your_openweather_key
+
+# Start server
+npm run dev
+```
+
+Open [http://localhost:3000](http://localhost:3000) in your browser.
+
+Or check out the demo at [https://geoyama.vercel.app/](https://geoyama.vercel.app/)
+
+## Project Structure
+
+```
+geoyama/
+├── scripts/             # Node.js scripts for data processing
+│   └── saveTrailGeojson.js   # GPX to GeoJSON conversion
+├── src/
+│   ├── components/      # React components
+│   │   ├── ErrorBoundary/   # Error handling
+│   │   ├── InfoPanel/       # Filters and weather display
+│   │   ├── MainView/        # Main layout
+│   │   └── Map/             # Map components
+│   ├── data/            # Mountain data and GeoJSON routes
+│   ├── hooks/           # Custom React hooks
+│   ├── pages/           # Next.js pages and API routes
+│   ├── stores/          # Zustand state management
+│   ├── styles/          # Global styles
+│   ├── ui/              # UI utilities
+│   └── utils/           # Helper functions
+└── public/              # Static assets
+    └── GPX/             # GPX files
+```
+
+## Adding New Trails
+
+1. Place GPX data in `public/GPX/`
+2. Add route info to `scripts/saveTrailGeojson.js`
+3. Run the conversion script:
+```bash
+node scripts/saveTrailGeojson.js
+```
+4. GeoJSON files will be generated in `src/data/routeGeojson/`
+
+The GeoJSON files load directly on the map (I thought about using vector tiles, but they made the elevation-based color gradients way harder, so I went with the current approach).
+
+## Error Handling
+
+Added ErrorBoundary components so things don't completely break if something goes wrong:
+
+- **Global ErrorBoundary** - Catches app-level errors with a nice fallback page
+- **MapErrorBoundary** - Handles map loading issues
+- **WeatherErrorBoundary** - Manages weather API problems
+
+Basically, if one part fails, the rest of the app keeps working!
+
+## Behind the Scenes
+
+<details>
+<summary>Click to see the details</summary>
+
+### Design Choices
+
+- **Who It's For**: Foreign tourists who hike regularly and want to explore mountains accessible from Tokyo
+- **Features That Matter to Hikers**: 
+  - Weather forecasts for 2 days before and after your hiking date (hikers care about weather, temperature, and wind direction not just on the day, but before and after as well)
+  - "Drive time from Shinjuku" filter—for tourists starting from central Tokyo
+  - General course time
+  - Visual route confirmation so you know exactly what you're getting into (elevation changes clearly managed by color)
+- **Keeping APIs Secure**: 
+  - Mapbox API is domain-restricted for safe frontend use
+  - OpenWeatherMap API is called from backend to keep the key hidden
+- **Getting Trail Data**: 
+  - Downloaded GPS tracks (GPX) from my YAMAP account and converted to GeoJSON (using @mapbox/togeojson) Way easier than drawing routes manually
+- **Why I Switched Frameworks**: 
+  - Initially used react-map-gl, but official documentation wasn't detailed enough for advanced features, so I thought it would be easier in the long run to migrate
+  - Switched to pure mapbox-gl for camera following, smooth transitions, and dynamic route rendering
+- **Little UX Details**: 
+  - Placed Mapbox logo in top-left to avoid accidental taps (advice from friends who actually used it)
+  - Used Tailwind's landscape utilities for better mobile rotation experience
+  - Made weather card backgrounds gradient based on time of day so you can tell at a glance
+
+### Problems I Ran Into (and Solutions)
+
+- **GPX File Location**: Initially placed in `components/data/`, but Node's fs module apparently doesn't work client-side → Moved everything to `public/`
+- **Line Gradients**: react-map-gl v7.1 didn't support mapbox's line-gradient feature → This was also one reason to switch to pure mapbox-gl
+- **Smooth Animations**: FlyToInterpolator was removed in react-map-gl v7+ → Used mapRef with official mapbox methods
+- **Route Pin Animation**: Pins wouldn't follow the route properly → Used line-gradient/line-progress for coloring and updated marker position every frame
+- **Map Loading Timing**: Tried to render route before map style loaded → Apparently Mapbox and React render timing was off, causing errors to pile up → Added `isMapReady` flag for simple control
+- **React vs Mapbox Lifecycle**: Mapbox's onLoad and React's render cycle weren't in sync → Also solved this with `isMapReady` flag
+- **Hydration Errors**: Class names with line breaks caused React hydration errors → Used `join()` for long class names, kept short ones on single line
+
+</details>
+
+## Testing
+
+Run tests:
+```bash
+npm test
+```
+
+## License
+
+MIT
+
+## Author
+
+Saaka-y
