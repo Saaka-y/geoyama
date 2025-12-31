@@ -6,48 +6,6 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
-          139.96470378835457,
-          37.125682960009954
-        ]
-      },
-      "properties": {
-        "title": "Mt.Chausu",
-        "description": "chausu",
-        "distance": 3.5,
-        "courseTime": 2.5,
-        "routeName": "",
-        "elevation": 454,
-        "summit": 1915,
-        "carPark": "https://maps.app.goo.gl/dVs1xtc3kr4egp6o9",
-        "station": ""
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
-          139.1664777423291,
-          35.65269336784197
-        ]
-      },
-      "properties": {
-        "title": "Mt.Jinba",
-        "description": "jinba",
-        "distance": 1.25,
-        "courseTime": 3.5,
-        "routeName": "Tochiya-ridge return",
-        "elevation": 649,
-        "summit": 854,
-        "carPark": "https://maps.app.goo.gl/XSUQ3T1R18RFDWjm9",
-        "station": ""
-      }
-    },
-    {
-      "type": "Feature",
-      "geometry": {
-        "type": "Point",
-        "coordinates": [
           139.14178132960086,
           35.44431802028864
         ]
