@@ -49,7 +49,7 @@ export function WeatherPanel() {
 
         {/* If we want to change the distance between the weather scroll card and the edge of the screen, adjust the padding above, not the parent. Changing the parent MainView div will cause the card to be cut off.*/}
         {/* Grouped weather lists */}
-        {Object.keys(grouped).map((date) => (
+        {Object.keys(grouped).map((date) => ( // each date is the key
           <div
             key={date}
             id={`date-${date}`}
