@@ -49,5 +49,6 @@ export function useWeatherForecast() {
     fetchWeather();
   }, [selectedDate, selectedMountain]);
 
+  console.log("Fetched forecast:", forecast);
   return forecast;
 }
