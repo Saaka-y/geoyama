@@ -14,12 +14,14 @@ jest.mock('../unixToLocalDateTime', () => ({
 
 describe('groupForecastByDate', () => {
   // Suppress console.log in tests
+  let consoleLogSpy;
+  
   beforeEach(() => {
-    jest.spyOn(console, 'log').mockImplementation(() => {});
+    consoleLogSpy = jest.spyOn(console, 'log').mockImplementation(() => {});
   });
 
   afterEach(() => {
-    console.log.mockRestore();
+    consoleLogSpy.mockRestore();
   });
 
   it('should group forecast items by date', () => {
