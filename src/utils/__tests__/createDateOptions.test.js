@@ -1,7 +1,6 @@
 import { createDateOptions } from '../createDateOptions';
 
 describe('createDateOptions', () => {
-  // Mock current date for consistent testing
   beforeAll(() => {
     jest.useFakeTimers();
     jest.setSystemTime(new Date('2026-01-08T12:00:00Z'));
