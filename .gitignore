@@ -40,5 +40,6 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# evaluation
+# evaluation and guidelines
 PROJECT_EVALUATION.md
+JEST_GUIDE.md
