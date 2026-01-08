@@ -40,7 +40,7 @@ describe('createDateOptions', () => {
     for (let i = 1; i < options.length; i++) {
       const prevDate = options[i - 1].date;
       const currDate = options[i].date;
-      const dayDiff = (currDate - prevDate) / (1000 * 60 * 60 * 24);
+      const dayDiff = (Number(currDate) - Number(prevDate)) / (1000 * 60 * 60 * 24);
       expect(dayDiff).toBe(1);
     }
   });
