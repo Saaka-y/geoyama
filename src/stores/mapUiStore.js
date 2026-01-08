@@ -18,6 +18,5 @@ export const useMapUiStore = create((set) => ({
   // Back to map handler
   backToMap: () => set({
     showFocusMap: false,
-    selectedMountain: null,
   })
 }));

@@ -10,9 +10,6 @@ export const useMountainStore = create((set) => ({
   selectedMountain: null,
 
   setFilteredMountains: (mountains) => set({ filteredMountains: mountains }),
-  setSelectedMountain: (mountain) => {
-    console.log("setSelectedMountain called with:", mountain);
-    set({ selectedMountain: mountain });
-  },
+  setSelectedMountain: (mountain) => set({ selectedMountain: mountain }),
 
 }));

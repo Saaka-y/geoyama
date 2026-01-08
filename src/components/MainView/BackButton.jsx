@@ -1,10 +1,12 @@
 // components/MainView/BackButton.jsx
 
 import { useMapUiStore } from "@/stores/mapUiStore";
+import { useMountainStore } from "@/stores/mountainStore";
 import { useEffect } from "react";
 
 export function BackButton({ japanMapRef }) {
   const { showFocusMap, backToMap, japanMapInitialView } = useMapUiStore();
+  const { setSelectedMountain } = useMountainStore();
 
   useEffect(() => {
     if (!showFocusMap && japanMapRef.current) {
@@ -16,6 +18,7 @@ export function BackButton({ japanMapRef }) {
 
   const handleBackToMap = () => {
     backToMap();
+    setSelectedMountain(null);
   };
 
   const className = [
