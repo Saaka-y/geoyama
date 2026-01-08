@@ -43,3 +43,4 @@ next-env.d.ts
 # evaluation and guidelines
 PROJECT_EVALUATION.md
 JEST_GUIDE.md
+JEST_TEST_GUIDE.md
