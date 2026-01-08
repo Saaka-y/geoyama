@@ -12,10 +12,10 @@ export function JapanMapView({ japanMapRef }) {
   const [isMapReady, setIsMapReady] = useState(false); // A flag that shows if map is ready
 
   const { japanMapInitialView } = useMapUiStore();
+  const japanMapContainerRef = useRef(null);
 
   useMountainMarkers({ japanMapRef, ready: isMapReady });
 
-  const japanMapContainerRef = useRef(null);
 
   //Map instance setup
   useEffect(() => {
