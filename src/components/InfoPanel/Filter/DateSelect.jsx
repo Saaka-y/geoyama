@@ -1,17 +1,13 @@
 // components/InfoPanel/Filter/DateSelect.jsx
-import { useEffect } from "react";
 import { useFilterStore } from "@/stores/filterStore";
 
-export function DateSelect({ className }) {
-  const { selectedDate, setSelectedDate, dateOptions, initDateOptions } = useFilterStore();
-
-  useEffect(() => {
-    initDateOptions();
-  }, [initDateOptions]);
+export function DateSelect({ className, onSelect }) {
+  const { selectedDate, setSelectedDate, dateOptions } = useFilterStore();
 
   const handleDateSelect = (e) => {
     const selected = dateOptions.find(opt => opt.value === e.target.value);
     setSelectedDate(selected);
+    if (onSelect) onSelect();
   };
 
 

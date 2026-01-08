@@ -2,23 +2,19 @@
 
 import { useMapUiStore } from "@/stores/mapUiStore";
 import { useMountainStore } from "@/stores/mountainStore";
-import { useEffect } from "react";
 
 export function BackButton({ japanMapRef }) {
   const { showFocusMap, backToMap, japanMapInitialView } = useMapUiStore();
   const { setSelectedMountain } = useMountainStore();
 
-  useEffect(() => {
-    if (!showFocusMap && japanMapRef.current) {
-      japanMapRef?.current?.flyTo({
-        ...japanMapInitialView,
-      });
-    }
-  }, [showFocusMap, japanMapInitialView, japanMapRef])
-
   const handleBackToMap = () => {
     backToMap();
     setSelectedMountain(null);
+    if (japanMapRef.current) {
+      japanMapRef.current.flyTo({
+        ...japanMapInitialView,
+      });
+    }
   };
 
   const className = [

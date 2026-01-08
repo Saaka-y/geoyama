@@ -1,19 +1,15 @@
 // @/components/InfoPanel/Filter/FloatDateSelect.jsx
 
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { DateSelect } from "./DateSelect";
 import { CiCalendarDate } from "react-icons/ci";
-import { useFilterStore } from "@/stores/filterStore";
 
 export function FloatDateSelect() {
   const [open, setOpen] = useState(false);
-  const { selectedDate } = useFilterStore();
 
-  // selectedDate が変わったらポップアップを閉じる
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    if (open) setOpen(false);
-  }, [selectedDate]);
+  const handleDateSelect = () => {
+    setOpen(false);
+  }
 
   return (
     <div className="absolute bottom-4 right-4 z-20">
@@ -28,7 +24,7 @@ export function FloatDateSelect() {
       {/* ポップアップ */}
       {open && (
         <div className="absolute bottom-full right-0 mb-2 w-48 bg-white border border-gray-200 shadow-lg rounded-lg p-3 z-30">
-          <DateSelect className="w-full" />
+          <DateSelect className="w-full" onSelect={handleDateSelect} />
         </div>
       )}
     </div>
