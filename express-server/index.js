@@ -7,8 +7,11 @@ require('dotenv').config();
 const express = require('express')
 
 // Cross-Origin Resource Sharing
-// ブラウザには Same-Origin Policy（同一オリジン制約） がある
+// ブラウザには Same-Origin Policy（同一オリジン制約） があるので開発用に記載（本場用はフロントのoriginの指定必須）
 const cors = require('cors');
+// app.use(cors({
+//   origin: 'https://your-domain.com'
+// }));
 
 const app = express();
 
