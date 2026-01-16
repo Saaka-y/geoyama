@@ -24,7 +24,7 @@ export function useWeatherForecast() {
       const lon = geometry.coordinates[0];
 
       try {
-        const res = await fetch(`/api/weather?lat=${lat}&lon=${lon}`);
+        const res = await fetch(`http://localhost:4000/api/weather?lat=${lat}&lon=${lon}`);
         const data = await res.json();
         const targetDate = new Date(selectedDate.value);
 
