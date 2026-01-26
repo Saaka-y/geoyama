@@ -22,7 +22,7 @@ export function createPopupElement(m, onClick) {
 
       // ボタン
       const button = document.createElement("button");
-      button.className = "underline cursor-pointer mt-1";
+      button.className = "bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded mt-2 w-full transition-colors";
       button.textContent = "Weather and trail map";
       button.addEventListener("click", onClick);
       popupEl.appendChild(button);
