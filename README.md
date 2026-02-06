@@ -1,43 +1,38 @@
-*日本語版は下にあります / Japanese version below*
 
-# 🏔️ Geoyama (EN)
+# 🏔️ Geoyama
 
-A hiking planner app for foreign tourists who love hiking and are visiting Japan.
+日本の山を探せる登山プランアプリ。
 
-🌐 **Live Demo**: [https://geoyama.vercel.app/](https://geoyama.vercel.app/)
+🌐 デモ: [https://geoyama.vercel.app/](https://geoyama.vercel.app/)
 
-## Background
+## 機能
+- マップで山・ルート表示
+- 天気予報
+- フィルター（距離・日付・コースタイム）
 
-This project was created with the goal of **practicing front-focused development skills**. I built it around my favorite hobby—hiking—and implemented features I'd actually want to use.
+## 技術
+- Next.js / Mapbox GL / Zustand / Tailwind CSS
 
-The target audience is foreign tourists who hike regularly and know their fitness level. 
+## セットアップ
+Node.js 20以上、APIトークンを.env.localに記入。
 
-For foreign travelers, figuring out which mountains can be hiked as day trips is surprisingly challenging. This app introduces mountains around Tokyo with actual trail information, weather forecasts, travel times from Shinjuku, and parking locations.
+```bash
+git clone https://github.com/Saaka-y/geoyama.git
+cd geoyama
+npm install
+npm run dev
+```
 
-The app helps them find suitable mountains for day trips from Shinjuku, a place most tourists would visit. Since detailed route planning can be done with other apps (AllTrails, YAMAP, etc.), geoyama focuses on helping people unfamiliar with Japanese mountains to first narrow down which mountain to visit through intuitive operations and displaying key information.
+## トレイル追加
+GPXをpublic/GPX/へ→scripts/saveTrailGeojson.js実行→src/data/routeGeojson/に生成
 
+## テスト
+```bash
+npm test
+```
 
-### Project Highlights
-
-Special emphasis was placed on learning the following technologies (gradually improved by having friends actually use it):
-
-- **Mapbox-React Integration** - Visually clear mountain information through map animations and camera controls
-- **Global State Management** - Efficient state management with Zustand
-- **Data Processing** - GPX to GeoJSON conversion, Map instance and React integration
-- **Responsive Design** - Fine-tuned UX including mobile landscape support
-
-I initially used react-map-gl but switched to pure mapbox-gl due to the complexity of camera following and smooth coordinate transitions, as well as the lack of comprehensive official documentation. This was a valuable learning experience in understanding the complexity of framework integration, especially synchronizing Mapbox's lifecycle with React's render cycle.
-
-## Features
-
-- 🗺️ **Interactive Map** - Browse mountains around Japan with Mapbox GL (currently a small selection since I'm building routes from my personal GPS data)
-- 🏔️ **3D Terrain** - Check out mountains with realistic 3D elevation views
-- 🌤️ **Weather Forecasts** - See weather conditions for 2 days before and after your planned hiking date
-- 📍 **Trail Routes** - Preview the actual route with start, goal, and summit markers
-- 🔍 **Smart Filtering** - Filter mountains by date, distance, and estimated hiking time
-- 📱 **Responsive Design** - Works smoothly on desktop, tablet, and mobile (both portrait and landscape)
-
-## Tech Stack
+## 作者
+Saaka-y
 
 - **Next.js 15** - React framework
 - **Mapbox GL JS** - Interactive maps
@@ -49,44 +44,7 @@ I initially used react-map-gl but switched to pure mapbox-gl due to the complexi
   - OpenWeatherMap API (called from backend)
 - **Data Tools**: 
   - @mapbox/togeojson (converts GPX to GeoJSON)
-  - tippecanoe (vector tile generation. Eventually settled on changing the Map itself to vector format rather than generating individual vector tiles)
 
-## Getting Started
-
-### Requirements
-
-- Node.js 20+
-- Mapbox API token
-- OpenWeather API token
-
-### Installation
-
-```bash
-# Clone
-git clone https://github.com/Saaka-y/geoyama.git
-
-# Navigate
-cd geoyama
-
-# Install
-npm install
-```
-
-### Development
-
-```bash
-# Create environment variables file
-# .env.local
-NEXT_PUBLIC_MAPBOX_TOKEN=your_mapbox_token
-OPENWEATHER_API_KEY=your_openweather_key
-
-# Start server
-npm run dev
-```
-
-Open [http://localhost:3000](http://localhost:3000) in your browser.
-
-Or check out the demo at [https://geoyama.vercel.app/](https://geoyama.vercel.app/)
 
 ## Project Structure
 
@@ -111,17 +69,6 @@ geoyama/
     └── GPX/             # GPX files
 ```
 
-## Adding New Trails
-
-1. Place GPX data in `public/GPX/`
-2. Add route info to `scripts/saveTrailGeojson.js`
-3. Run the conversion script:
-```bash
-node scripts/saveTrailGeojson.js
-```
-4. GeoJSON files will be generated in `src/data/routeGeojson/`
-
-The GeoJSON files load directly on the map (I thought about using vector tiles, but they made the elevation-based color gradients way harder, so I went with the current approach).
 
 ## Error Handling
 
@@ -178,14 +125,6 @@ Run tests:
 npm test
 ```
 
-## License
-
-MIT
-
-## Author
-
-Saaka-y
-
 -----------------
 
 # 🏔️ Geoyama
@@ -241,42 +180,6 @@ Saaka-y
   - @mapbox/togeojson（GPXをGeoJSONに変換）
   - tippecanoe（ベクタータイル生成。最終的には個々のベクタータイルを生成せず、Map自体をベクターに変更して落ち着きました）
 
-## セットアップ
-
-### 前提条件
-
-- Node.js 20以上
-- Mapbox APIトークン
-- OpenWeather APIトークン
-
-### インストール
-
-```bash
-# リポジトリをクローン
-git clone https://github.com/Saaka-y/geoyama.git
-
-# プロジェクトディレクトリに移動
-cd geoyama
-
-# 依存関係をインストール
-npm install
-```
-
-### 開発サーバーの起動
-
-```bash
-# 環境変数ファイルを作成
-# .env.local
-NEXT_PUBLIC_MAPBOX_TOKEN=your_mapbox_token
-OPENWEATHER_API_KEY=your_openweather_key
-
-# サーバー起動
-npm run dev
-```
-
-ブラウザで [http://localhost:3000](http://localhost:3000) を開いてアプリケーションを表示します。
-
-または、デモサイト [https://geoyama.vercel.app/](https://geoyama.vercel.app/) にアクセスしてください。
 
 ## プロジェクト構造
 
@@ -368,13 +271,3 @@ GeoJSONファイルは地図上で直接読み込まれます（ベクタータ�
 ```bash
 npm test
 ```
-
-## ライセンス
-
-MIT
-
-## 作成者
-
-Saaka-y
-
----
