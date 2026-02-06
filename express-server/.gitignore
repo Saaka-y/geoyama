@@ -1,0 +1,17 @@
+# Express server ignore
+node_modules/
+.env
+*.log
+dist/
+build/
+coverage/
+
+# OS/Editor
+.DS_Store
+.idea/
+.vscode/
+
+# その他
+npm-debug.log*
+yarn-error.log*
+
