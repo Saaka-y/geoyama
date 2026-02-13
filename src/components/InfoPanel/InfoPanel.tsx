@@ -36,12 +36,14 @@ export function InfoPanel({ japanMapRef }) {
   };
 
   const handleTouchStart = (e: React.TouchEvent) => {
+    e.stopPropagation(); // Prevent touch from reaching the map
     setStartY(e.touches[0].clientY);
     setIsDragging(true);
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
     if (!isDragging) return;
+    e.stopPropagation(); // Prevent touch from reaching the map
     setCurrentY(e.touches[0].clientY);
   };
 
