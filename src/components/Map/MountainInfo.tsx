@@ -9,7 +9,7 @@ export function MountainInfo() {
   const { title, summit, routeName, carPark, station, distance, courseTime, elevation } = selectedMountain.properties;
 
   return (
-    <div className="text-xs text-white">
+    <div className="text-xs text-white" style={{ fontFamily: 'Roboto' }}>
       <span className="font-bold">{title} ({summit}m)</span>
       <span className="italic">{routeName ? ` - ${routeName}` : ""}</span>
       <br />

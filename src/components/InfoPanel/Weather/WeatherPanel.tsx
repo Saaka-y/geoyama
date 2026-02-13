@@ -36,7 +36,7 @@ export function WeatherPanel() {
     "landscape:flex-col",
     "landscape:overflow-y-auto",
     "landscape:overflow-x-hidden",
-    "landscape:h-[90%]"
+    "landscape:h-[90%]",
   ].join(" ")
 
   if (!selectedMountain || forecast.length === 0) {
@@ -52,6 +52,7 @@ export function WeatherPanel() {
       <div
         ref={scrollRef}
         className={className}
+        style={{ background: 'var(--card-bg)' }}
       >
 
         {/* Grouped weather lists */}
@@ -59,8 +60,9 @@ export function WeatherPanel() {
           <div
             key={date}
             id={`date-${date}`}
-            className="snap-start bg-(--card-bg) p-3 flex flex-col gap-2 rounded-xl shadow-(--card-shadow) hover:shadow-(--card-shadow-hover) transition-all duration-300"
+            className="snap-start p-3 flex flex-col gap-2 rounded-xl shadow-(--card-shadow) hover:shadow-(--card-shadow-hover) transition-all duration-300"
             style={{
+              background: 'var(--background)',
               border: date === selectedDate.value
                 ? "2px solid var(--primary)"
                 : "2px solid transparent"

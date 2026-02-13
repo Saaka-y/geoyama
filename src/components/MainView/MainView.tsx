@@ -12,7 +12,7 @@ export function MainView({ japanMapRef, focusMapRef }) {
   return (
     <div className="w-screen h-dvh flex flex-col md:flex-row-reverse landscape:flex-row-reverse bg-(--background)">
       {/* Map - Full screen on mobile, right side on desktop */}
-      <div className="absolute inset-0 md:relative md:flex-2 z-0 overflow-hidden">
+      <div className="absolute inset-0 md:relative md:flex-2 z-0 overflow-hidden touch-none pointer-events-none md:touch-auto md:pointer-events-auto landscape:touch-auto landscape:pointer-events-auto">
         {!showFocusMap ? (
           <JapanMapView japanMapRef={japanMapRef} />
         ) : (
