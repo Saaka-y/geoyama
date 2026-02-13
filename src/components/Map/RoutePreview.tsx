@@ -11,7 +11,7 @@ export function RoutePreview({ focusMapRef, ready }) {
     const map = focusMapRef.current;
 
     // Extract elevations from route coordinates and apply color gradient 
-    const elevations = routeGeo.features[0].geometry.coordinates.map(c => c[2]);
+    const elevations = routeGeo.features[0].geometry.coordinates.map((c: [number, number, number]) => c[2]);
     const colorForElevation = (e) => {
       if (e < 500) return "blue";
       if (e < 1000) return "cyan";
@@ -71,22 +71,25 @@ export function RoutePreview({ focusMapRef, ready }) {
           top: 30,
           right: 10,
           height: 200,
-          width: 60,
+          width: 90,
           backgroundColor: "rgba(0,0,0,0.3)",
           borderRadius: 6,
-          padding: "5px",
+          padding: "8px",
           display: "flex",
-          flexDirection: "row-reverse",
-          alignItems: "flex-end",
+          flexDirection: "row",
+          alignItems: "stretch",
+          gap: "8px",
         }}
       >
         <div
           style={{
-            width: 20,
+            width: 30,
+            minWidth: 30,
             height: "100%",
-            background: "linear-gradient(to top, blue, cyan, lime, yellow, orange, red)",
-            border: "1px solid #000",
+            background: "linear-gradient(to top, #0000FF 0%, #00FFFF 20%, #00FF00 40%, #FFFF00 60%, #FFA500 80%, #FF0000 100%)",
+            border: "2px solid #fff",
             borderRadius: 4,
+            flexShrink: 0,
           }}
         />
         <div
@@ -95,11 +98,11 @@ export function RoutePreview({ focusMapRef, ready }) {
             flexDirection: "column-reverse",
             justifyContent: "space-between",
             height: "100%",
-            marginRight: 5,
+            flex: 1,
           }}
         >
           {[0, 500, 1000, 1500, 2000, 2500, 3000].map((el) => (
-            <div key={el} style={{ fontSize: 12, color: "#fff" }}>{el}m</div>
+            <div key={el} style={{ fontSize: 9, color: "#fff",  whiteSpace: "nowrap" }}>{el}m</div>
           ))}
         </div>
       </div>

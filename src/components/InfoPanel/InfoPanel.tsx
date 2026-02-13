@@ -7,7 +7,7 @@ import { Filter } from "@/components/InfoPanel/Filter/Filter";
 import { WeatherPanel } from "@/components/InfoPanel/Weather/WeatherPanel";
 import { FloatDateSelect } from "@/components/InfoPanel/Filter/FloatDateSelect";
 
-type SheetState = 'closed' | 'half' | 'full';
+type SheetState = 'closed' | 'half';
 
 export function InfoPanel({ japanMapRef }) {
   const showFocusMap = useMapUiStore((state) => state.showFocusMap);
@@ -112,19 +112,33 @@ export function InfoPanel({ japanMapRef }) {
 
         {/* Back & Forecast label - Mobile */}
         {showFocusMap && (
-          <div className="px-4 py-2 flex items-center justify-center gap-3 text-sm">
+          <div
+            className="px-4 py-2 flex items-center justify-center gap-3 text-sm"
+            onTouchStart={(e) => e.stopPropagation()}
+            onTouchMove={(e) => e.stopPropagation()}
+            onTouchEnd={(e) => e.stopPropagation()}
+          >
             <button
               className="flex items-center gap-1.5 text-(--text-primary) font-semibold hover:text-(--primary) transition-colors"
-              onClick={handleBackToMap}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleBackToMap();
+              }}
             >
               <span>&larr;</span>
               <span>Back</span>
             </button>
             <span className="text-(--text-muted)">|</span>
-            <div className="flex items-center gap-1.5 text-(--text-muted) font-semibold">
+            <button
+              className="flex items-center gap-1.5 text-(--text-muted) font-semibold hover:text-(--primary) transition-colors cursor-pointer"
+              onClick={(e) => {
+                e.stopPropagation();
+                setSheetState(sheetState === 'half' ? 'closed' : 'half');
+              }}
+            >
               <span>Forecast</span>
               <span>&darr;</span>
-            </div>
+            </button>
           </div>
         )}
 

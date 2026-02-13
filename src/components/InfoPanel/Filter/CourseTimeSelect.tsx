@@ -8,8 +8,8 @@ export function CourseTimeSelect() {
   const { courseTime, setCourseTime } = useFilterStore();
 
   return (
-    <div className="bg-(--card-bg) rounded-(--card-radius) p-5 shadow-(--card-shadow) hover:shadow-(--card-shadow-hover) transition-all duration-300 backdrop-blur-sm">
-      <label className="block text-sm font-semibold text-(--text-primary) mb-3 tracking-tight">
+    <div className="bg-(--select-el-bg) rounded-(--card-radius) p-5 shadow-(--card-shadow) hover:shadow-(--card-shadow-hover) transition-all duration-300 backdrop-blur-sm">
+      <label className="block text-sm font-semibold text-(--select-bg) mb-3 tracking-tight">
         Hiking Duration
       </label>
       <select

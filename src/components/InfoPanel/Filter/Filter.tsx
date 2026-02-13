@@ -39,7 +39,7 @@ export function Filter({ japanMapRef }) {
           Find Your Mountain
         </h1>
         <p className="text-base text-(--text-secondary) leading-relaxed">
-          Discover hiking trails by distance, duration, and weather conditions
+          Discover your best trails by distance, duration, and weather conditions!
         </p>
       </div>
 
