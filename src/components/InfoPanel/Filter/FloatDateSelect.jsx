@@ -12,18 +12,19 @@ export function FloatDateSelect() {
   }
 
   return (
-    <div className="absolute bottom-4 right-4 z-20">
-      {/* 丸いアイコン */}
+    <div className="absolute bottom-6 right-6 z-20">
+      {/* Floating Button */}
       <button
         onClick={() => setOpen((prev) => !prev)}
-        className="w-12 h-12 rounded-full bg-sky-600 text-white flex items-center justify-center shadow-lg hover:bg-sky-500 transition-colors"
+        className="w-14 h-14 rounded-full bg-[var(--primary)] text-white flex items-center justify-center shadow-[var(--card-shadow-hover)] hover:bg-[var(--primary-hover)] hover:shadow-lg transition-all duration-300 hover:scale-105"
       >
-        <CiCalendarDate color="white" size={24} />
+        <CiCalendarDate color="white" size={28} strokeWidth={0.5} />
       </button>
 
-      {/* ポップアップ */}
+      {/* Popup */}
       {open && (
-        <div className="absolute bottom-full right-0 mb-2 w-48 bg-white border border-gray-200 shadow-lg rounded-lg p-3 z-30">
+        <div className="absolute bottom-full right-0 mb-3 w-56 bg-[var(--card-bg)] border border-[var(--card-border)] shadow-[var(--card-shadow-hover)] rounded-xl p-4 z-30 animate-fadeIn">
+          <p className="text-sm font-medium text-[var(--text-primary)] mb-3">Select Date</p>
           <DateSelect className="w-full" onSelect={handleDateSelect} />
         </div>
       )}

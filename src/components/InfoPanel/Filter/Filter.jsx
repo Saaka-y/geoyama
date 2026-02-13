@@ -32,12 +32,30 @@ export function Filter({ japanMapRef }) {
   }
 
   return (
-    <div
-      className="flex flex-col items-center gap-5 pt-4 md:pt-10 landscape:pt-10">
-      {filteredMountains.length === 0 && (<p className="m-1 px-1 text-red-500">No mountains match the filter</p>)}
-      <DistanceSelect />
-      <CourseTimeSelect />
-      <DateSelectWrapper />
+    <div className="flex flex-col items-center gap-4 px-4 py-2 pt-6 md:pt-10 landscape:pt-10">
+      {/* Header */}
+      <div className="w-full max-w-md">
+        <h2 className="text-xl font-semibold text-[var(--text-primary)] mb-2">
+          Find Your Mountain
+        </h2>
+        <p className="text-sm text-[var(--text-secondary)]">
+          Filter mountains by distance, hike time, and weather
+        </p>
+      </div>
+
+      {filteredMountains.length === 0 && (
+        <div className="w-full max-w-md bg-red-50 border border-red-200 rounded-lg p-3">
+          <p className="text-sm text-red-600">No mountains match the filter</p>
+        </div>
+      )}
+
+      {/* Filter Cards */}
+      <div className="w-full max-w-md flex flex-col gap-3">
+        <DistanceSelect />
+        <CourseTimeSelect />
+        <DateSelectWrapper />
+      </div>
+
       <ClearButton onClear={handleClearFilter} />
     </div>
   );

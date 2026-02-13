@@ -1,13 +1,14 @@
 /* @/components/InfoPanel/Filter/Filter.module.css */
 
 .select {
-  padding: 0.2rem 1rem;
-  font-size: 0.8rem;
+  padding: 0.625rem 2.5rem 0.625rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
 
   background-color: var(--select-bg);
-  color: var(--color);
+  color: var(--text-primary);
 
-  border: 1px solid rgba(0, 0, 0, 0.12);
+  border: 1.5px solid var(--border);
   border-radius: 8px;
 
   cursor: pointer;
@@ -17,16 +18,20 @@
   -webkit-appearance: none;
   -moz-appearance: none;
 
-  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxMiIgZmlsbD0iIzc2NzY3NiI+PHBvbHlnb24gcG9pbnRzPSIwLDAgMTIsMCA2LDYiLz48L3N2Zz4=");
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxMiIgZmlsbD0iIzViOWRlMCI+PHBvbHlnb24gcG9pbnRzPSIwLDAgMTIsMCA2LDYiLz48L3N2Zz4=");
   background-repeat: no-repeat;
   background-position: right 0.75rem center;
-  background-size: 0.55rem;
+  background-size: 0.7rem;
+}
+
+.select:hover {
+  border-color: var(--primary);
 }
 
 .select:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(100, 150, 200, 0.2);
-  border-color: rgba(100, 150, 200, 0.5);
+  box-shadow: 0 0 0 3px rgba(91, 157, 224, 0.15);
+  border-color: var(--primary);
 }
 
 

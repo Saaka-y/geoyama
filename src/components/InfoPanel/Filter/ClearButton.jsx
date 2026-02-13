@@ -2,28 +2,12 @@
 
 export function ClearButton({ onClear }) {
 
-  const className = [
-    "w-[90%]",
-    "py-1",
-    "text-xs",
-    "border",
-    "border-gray-300",
-    "rounded-md",
-    "text-gray-600",
-    "bg-white",
-    "hover:bg-gray-100",
-    "transition",
-    "mt-0.5",
-    "md:mt-2",
-    "landscape:mt-2"
-  ].join(" ");
-
   return (
     <button
-      className={className}
+      className="w-full max-w-md px-6 py-3 text-sm font-medium text-[var(--primary)] bg-white border-2 border-[var(--primary)] rounded-lg hover:bg-[var(--primary)] hover:text-white transition-all duration-300 shadow-sm hover:shadow-md"
       onClick={onClear}
     >
-      Clear
+      Clear Filters
     </button>
   );
 }
