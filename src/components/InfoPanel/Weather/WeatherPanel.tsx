@@ -25,6 +25,7 @@ export function WeatherPanel() {
     "gap-4",
     "px-4",
     "pb-6",
+    "mx-auto",
     "mt-4",
     "flex-row",
     "overflow-x-auto",
