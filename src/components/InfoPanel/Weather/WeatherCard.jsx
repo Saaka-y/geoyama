@@ -26,14 +26,14 @@ export function WeatherCard({ date, grouped }) {
               p-2.5
               rounded-xl
               text-center
-              shadow-[var(--card-shadow)]
-              hover:shadow-[var(--card-shadow-hover)]
+              shadow-(--card-shadow)
+              hover:shadow-(--card-shadow-hover)
               transition-all
               duration-300
               shrink-0
               border
               border-transparent
-              hover:border-[var(--primary)]
+              hover:border-(--primary)
             "
             style={{ background, color }}
           >

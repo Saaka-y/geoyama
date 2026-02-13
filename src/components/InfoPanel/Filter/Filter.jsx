@@ -35,10 +35,10 @@ export function Filter({ japanMapRef }) {
     <div className="flex flex-col items-center gap-4 px-4 py-2 pt-6 md:pt-10 landscape:pt-10">
       {/* Header */}
       <div className="w-full max-w-md">
-        <h2 className="text-xl font-semibold text-[var(--text-primary)] mb-2">
+        <h2 className="text-xl font-semibold text-(--text-primary) mb-2">
           Find Your Mountain
         </h2>
-        <p className="text-sm text-[var(--text-secondary)]">
+        <p className="text-sm text-(--text-secondary)">
           Filter mountains by distance, hike time, and weather
         </p>
       </div>
