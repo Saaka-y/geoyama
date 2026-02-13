@@ -2,14 +2,14 @@
 # Demo Images
 
 <p align="center">
-  <img src="demo/IMG_2359.jpg" alt="Demo 1" width="300" />
-  <img src="demo/IMG_2360.jpg" alt="Demo 2" width="300" />
-  <img src="demo/IMG_2361.jpg" alt="Demo 3" width="300" />
-  <img src="demo/IMG_2362.jpg" alt="Demo 4" width="300" />
+  <img src="public/demo/IMG_2359.jpg" alt="Demo 1" width="300" />
+  <img src="public/demo/IMG_2360.jpg" alt="Demo 2" width="300" />
+  <img src="public/demo/IMG_2361.jpg" alt="Demo 3" width="300" />
+  <img src="public/demo/IMG_2362.jpg" alt="Demo 4" width="300" />
 </p>
 
 外国人旅行者向けの日本登山ガイドアプリ
-デモ：https://geoyama.vercel.app/
+#### デモ：https://geoyama.vercel.app/
 
  新宿から日帰りで行ける山を探せる、直感的なマップベースの登山情報サービス
 
