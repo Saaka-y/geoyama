@@ -41,7 +41,7 @@ export function WeatherPanel() {
   if (!selectedMountain || forecast.length === 0) {
     return (
       <div className="flex items-center justify-center p-8">
-        <p className="text-[var(--text-secondary)] text-sm">Loading weather...</p>
+        <p className="text-(--text-secondary) text-sm">Loading weather...</p>
       </div>
     );
   }
@@ -58,7 +58,7 @@ export function WeatherPanel() {
           <div
             key={date}
             id={`date-${date}`}
-            className="snap-start bg-[var(--card-bg)] p-3 flex flex-col gap-2 rounded-xl shadow-[var(--card-shadow)] hover:shadow-[var(--card-shadow-hover)] transition-all duration-300"
+            className="snap-start bg-(--card-bg) p-3 flex flex-col gap-2 rounded-xl shadow-(--card-shadow) hover:shadow-(--card-shadow-hover) transition-all duration-300"
             style={{
               border: date === selectedDate.value
                 ? "2px solid var(--primary)"

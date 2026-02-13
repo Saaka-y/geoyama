@@ -11,7 +11,7 @@ export function MainView({ japanMapRef, focusMapRef }) {
   const { showFocusMap } = useMapUiStore();
 
   return (
-    <div className="w-screen h-dvh flex flex-col md:flex-row-reverse landscape:flex-row-reverse bg-[var(--background)]">
+    <div className="w-screen h-dvh flex flex-col md:flex-row-reverse landscape:flex-row-reverse bg-(--background)">
 
       {/* Map */}
       <div className="relative flex-2 z-10 overflow-hidden">

@@ -18,13 +18,13 @@ export function BackButton({ japanMapRef }) {
   };
 
   const className = [
-    "bg-[var(--card-bg)] backdrop-blur-sm",
-    "border-2 border-[var(--border)] shadow-[var(--card-shadow)]",
+    "bg-(--card-bg) backdrop-blur-sm",
+    "border-2 border-(--border) shadow-(--card-shadow)",
     "flex items-center justify-center gap-2",
     "px-5 py-2",
     "w-full md:w-28 landscape:w-28",
-    "text-sm font-semibold text-[var(--text-primary)]",
-    "hover:bg-[var(--primary)] hover:text-white hover:border-[var(--primary)] hover:shadow-[var(--card-shadow-hover)]",
+    "text-sm font-semibold text-(--text-primary)",
+    "hover:bg-(--primary) hover:text-white hover:border-(--primary) hover:shadow-(--card-shadow-hover)",
     "transition-all duration-300",
     "cursor-pointer",
     "rounded-lg md:rounded-full landscape:rounded-full"
