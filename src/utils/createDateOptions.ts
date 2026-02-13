@@ -1,8 +1,15 @@
-//@/utils/createDateOptions.js
+//@/utils/createDateOptions.ts
 
 import { dateToStr } from "@/utils/dateToStr";
 
-export const createDateOptions = () => {
+export interface DateOption {
+  date: Date;
+  label: string;
+  value: string;
+  string: string;
+}
+
+export const createDateOptions = (): DateOption[] => {
   const today = new Date();
   const days = 5;
   const options = [];

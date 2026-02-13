@@ -1,12 +1,10 @@
-// hooks/useSpotPins.js
+// hooks/useSpotPins.ts
 
-import * as mountains from "@/data/spotPins"; // Import all spot pin data via index.js 
+import * as mountains from "@/data/spotPins"; // Import all spot pin data via index.ts
 import { useMemo } from "react";
 import { useMountainStore } from "@/stores/mountainStore";
 
-const spotPins = {
-  "jinba": mountains.jinba,
-  "chausu": mountains.chausu,
+const spotPins: Record<string, any> = {
   "kinpu": mountains.kinpu,
   "kintoki": mountains.kintoki,
   "nabewari": mountains.nabewari,
