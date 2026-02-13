@@ -150,7 +150,7 @@ export default function LoginPage() {
           {/* Footer Links */}
           <div className="mt-6 text-center text-sm" style={{ color: 'var(--text-muted)' }}>
             <p>
-              Don't have an account?{' '}
+              Don&apos;t have an account?{' '}
               <a
                 href="/signup"
                 className="font-semibold transition-colors"
