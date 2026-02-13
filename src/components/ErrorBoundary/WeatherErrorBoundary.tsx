@@ -1,18 +1,27 @@
-// components/ErrorBoundary/WeatherErrorBoundary.jsx
+// components/ErrorBoundary/WeatherErrorBoundary.tsx
 
-import { Component } from "react";
+import { Component, ReactNode, ErrorInfo } from "react";
 
-class WeatherErrorBoundary extends Component {
-  constructor(props) {
+interface WeatherErrorBoundaryProps {
+  children: ReactNode;
+}
+
+interface WeatherErrorBoundaryState {
+  hasError: boolean;
+  error: Error | null;
+}
+
+class WeatherErrorBoundary extends Component<WeatherErrorBoundaryProps, WeatherErrorBoundaryState> {
+  constructor(props: WeatherErrorBoundaryProps) {
     super(props);
     this.state = { hasError: false, error: null };
   }
 
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError(error: Error) {
     return { hasError: true, error };
   }
 
-  componentDidCatch(error, errorInfo) {
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     console.error("WeatherErrorBoundary caught an error:", error, errorInfo);
   }
 

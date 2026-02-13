@@ -1,7 +1,12 @@
-// components/InfoPanel/Filter/DateSelect.jsx
+// components/InfoPanel/Filter/DateSelect.tsx
 import { useFilterStore } from "@/stores/filterStore";
 
-export function DateSelect({ className, onSelect }) {
+interface DateSelectProps {
+  className?: string;
+  onSelect?: () => void;
+}
+
+export function DateSelect({ className, onSelect }: DateSelectProps) {
   const { selectedDate, setSelectedDate, dateOptions } = useFilterStore();
 
   const handleDateSelect = (e) => {

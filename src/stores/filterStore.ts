@@ -1,10 +1,24 @@
-//@/stores/filterStore.js
+//@/stores/filterStore.ts
 
 import { create } from "zustand";
-import { createDateOptions } from "@/utils/createDateOptions";
+import { createDateOptions, DateOption } from "@/utils/createDateOptions";
 
+interface FilterStore {
+  // Filter states
+  distance: string;
+  courseTime: string;
+  selectedDate: DateOption | null;
+  dateOptions: DateOption[];
 
-export const useFilterStore = create((set, get) => ({
+  // Setters for filter states
+  setDistance: (distance: string) => void;
+  setCourseTime: (courseTime: string) => void;
+  setSelectedDate: (selectedDate: DateOption | null) => void;
+  setDateOptions: (options: DateOption[]) => void;
+  initDateOptions: () => void;
+}
+
+export const useFilterStore = create<FilterStore>((set, get) => ({
 
   // Filter states
   distance: "",

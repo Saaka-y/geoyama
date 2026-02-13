@@ -1,18 +1,27 @@
-// components/ErrorBoundary/MapErrorBoundary.jsx
+// components/ErrorBoundary/MapErrorBoundary.tsx
 
-import { Component } from "react";
+import { Component, ReactNode, ErrorInfo } from "react";
 
-class MapErrorBoundary extends Component {
-  constructor(props) {
+interface MapErrorBoundaryProps {
+  children: ReactNode;
+}
+
+interface MapErrorBoundaryState {
+  hasError: boolean;
+  error: Error | null;
+}
+
+class MapErrorBoundary extends Component<MapErrorBoundaryProps, MapErrorBoundaryState> {
+  constructor(props: MapErrorBoundaryProps) {
     super(props);
     this.state = { hasError: false, error: null };
   }
 
-  static getDerivedStateFromError(error) {
+  static getDerivedStateFromError(error: Error) {
     return { hasError: true, error };
   }
 
-  componentDidCatch(error, errorInfo) {
+  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     console.error("MapErrorBoundary caught an error:", error, errorInfo);
   }
 
