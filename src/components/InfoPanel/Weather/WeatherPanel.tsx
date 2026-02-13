@@ -31,6 +31,7 @@ export function WeatherPanel() {
     "md:flex-col",
     "md:overflow-y-auto",
     "md:overflow-x-hidden",
+    "md:w-[90%]",
     "md:h-[90%]",
     "landscape:flex-col",
     "landscape:overflow-y-auto",

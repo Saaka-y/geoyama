@@ -38,7 +38,7 @@ export function WeatherCard({ date, grouped }) {
             style={{ background, color }}
           >
             {/* Time */}
-            <p className="text-xs font-semibold mb-1 opacity-80">{time}</p>
+            <p className="text-xs font-bold mb-1.5 opacity-90 tracking-tight">{time}</p>
 
             {/* Weather Icon */}
             {/* eslint-disable-next-line @next/next/no-img-element */}
@@ -49,19 +49,19 @@ export function WeatherCard({ date, grouped }) {
             />
 
             {/* Temperature */}
-            <p className={`text-lg font-bold mb-1 ${temp <= 0 ? "text-blue-400" : ""}`}>
+            <p className={`text-xl font-bold mb-1.5 tracking-tight ${temp <= 0 ? "text-blue-400" : ""}`}>
               {temp}°
             </p>
 
             {/* Wind */}
-            <div className="flex items-center justify-center gap-0.5 mb-1">
+            <div className="flex items-center justify-center gap-1 mb-1.5">
               <span className="text-sm">{degToArrow(item.wind.deg)}</span>
-              <span className="text-xs font-semibold">{windSpeed}</span>
-              <span className="text-[10px] opacity-70">m/s</span>
+              <span className="text-xs font-bold tracking-tight">{windSpeed}</span>
+              <span className="text-[10px] opacity-75 font-medium">m/s</span>
             </div>
 
             {/* Description */}
-            <p className="text-[10px] opacity-80 capitalize leading-tight">
+            <p className="text-[10px] opacity-85 capitalize leading-tight font-medium">
               {item.weather[0].description}
             </p>
           </div>
