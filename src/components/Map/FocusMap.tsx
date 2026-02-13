@@ -39,6 +39,7 @@ export function FocusMap({ focusMapRef }) {
   // FocusMap instance setup
   useEffect(() => {
     mapboxgl.accessToken = accessToken;
+
     // Recreate the map instance every time the selectedMountain changes
     focusMapRef.current = new mapboxgl.Map({
       container: focusMapContainerRef.current,

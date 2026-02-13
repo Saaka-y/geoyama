@@ -21,6 +21,7 @@ export function JapanMapView({ japanMapRef }) {
   useEffect(() => {
     if (!japanMapContainerRef.current) return;
     mapboxgl.accessToken = accessToken;
+
     japanMapRef.current = new mapboxgl.Map({
       ...japanMapInitialView,
       container: japanMapContainerRef.current,
