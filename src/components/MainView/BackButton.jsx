@@ -18,13 +18,16 @@ export function BackButton({ japanMapRef }) {
   };
 
   const className = [
-    "bg-white/90 backdrop-blur-sm",
-    "border border-gray-300 shadow-md",
-    "flex items-center justify-center gap-1",
-    "px-4 py-1",
-    "w-full md:w-24 landscape:w-24",
-    "text-sm font-semibold",
-    "hover:bg-white hover:shadow-lg cursor-pointer",
+    "bg-[var(--card-bg)] backdrop-blur-sm",
+    "border-2 border-[var(--border)] shadow-[var(--card-shadow)]",
+    "flex items-center justify-center gap-2",
+    "px-5 py-2",
+    "w-full md:w-28 landscape:w-28",
+    "text-sm font-semibold text-[var(--text-primary)]",
+    "hover:bg-[var(--primary)] hover:text-white hover:border-[var(--primary)] hover:shadow-[var(--card-shadow-hover)]",
+    "transition-all duration-300",
+    "cursor-pointer",
+    "rounded-lg md:rounded-full landscape:rounded-full"
   ].join(" ");
 
   return (
@@ -34,7 +37,8 @@ export function BackButton({ japanMapRef }) {
           className={className}
           onClick={handleBackToMap}
         >
-          <span className="text-xs">&lt; &nbsp;</span> Back
+          <span className="text-base">&larr;</span>
+          <span>Back</span>
         </button>
       )}
     </>

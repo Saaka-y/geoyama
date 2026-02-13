@@ -6,10 +6,12 @@ export function DistanceSelect() {
   const { distance, setDistance } = useFilterStore();
 
   return (
-    <div className="w-[90%] flex md:flex-col md:items-start landscape:flex-col landscape:items-start flex-row items-center gap-2">
-      <p className="w-1/2 md:w-full landscape:w-full text-left text-xs" >Duration from Shinjuku:</p>
+    <div className="bg-[var(--card-bg)] rounded-[var(--card-radius)] p-4 shadow-[var(--card-shadow)] hover:shadow-[var(--card-shadow-hover)] transition-shadow duration-300">
+      <label className="block text-sm font-medium text-[var(--text-primary)] mb-3">
+        Duration from Shinjuku
+      </label>
       <select
-        className={`${styles.select} w-2/3 md:w-full landscape:w-full`}
+        className={`${styles.select} w-full`}
         value={distance}
         onChange={(e) => setDistance(e.target.value)}>
         <option value="">Not selected</option>

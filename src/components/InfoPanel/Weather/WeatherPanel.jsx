@@ -24,7 +24,7 @@ export function WeatherPanel() {
     "flex",
     "gap-4",
     "px-4",
-    "pb-4",
+    "pb-6",
     "mt-4",
     "flex-row",
     "overflow-x-auto",
@@ -38,7 +38,13 @@ export function WeatherPanel() {
     "landscape:h-[90%]"
   ].join(" ")
 
-  if (!selectedMountain || forecast.length === 0) return <p>Loading weather...</p>;
+  if (!selectedMountain || forecast.length === 0) {
+    return (
+      <div className="flex items-center justify-center p-8">
+        <p className="text-[var(--text-secondary)] text-sm">Loading weather...</p>
+      </div>
+    );
+  }
 
   return (
     <WeatherErrorBoundary>
@@ -47,17 +53,16 @@ export function WeatherPanel() {
         className={className}
       >
 
-        {/* If we want to change the distance between the weather scroll card and the edge of the screen, adjust the padding above, not the parent. Changing the parent MainView div will cause the card to be cut off.*/}
         {/* Grouped weather lists */}
         {Object.keys(grouped).map((date) => ( // each date is the key
           <div
             key={date}
             id={`date-${date}`}
-            className="snap-start bg-white p-2 flex flex-col gap-1 shadow-sm"
+            className="snap-start bg-[var(--card-bg)] p-3 flex flex-col gap-2 rounded-xl shadow-[var(--card-shadow)] hover:shadow-[var(--card-shadow-hover)] transition-all duration-300"
             style={{
               border: date === selectedDate.value
-                ? "2px solid #6495ED"
-                : "1px solid #e5e7eb"
+                ? "2px solid var(--primary)"
+                : "2px solid transparent"
             }}
           >
             <WeatherDate date={date} grouped={grouped} summit={summit} />

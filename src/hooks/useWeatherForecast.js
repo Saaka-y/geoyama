@@ -26,6 +26,14 @@ export function useWeatherForecast() {
       try {
         const res = await fetch(`/api/weather?lat=${lat}&lon=${lon}`);
         const data = await res.json();
+
+        // Check if API returned an error
+        if (!res.ok || !data.list) {
+          console.error("Weather API error:", data.error || "No data available");
+          setForecast([]);
+          return;
+        }
+
         const targetDate = new Date(selectedDate.value);
 
         const datesToShow = [];
@@ -43,6 +51,7 @@ export function useWeatherForecast() {
 
       } catch (err) {
         console.error("天気APIのエラー：", err);
+        setForecast([]);
       }
     }
 
