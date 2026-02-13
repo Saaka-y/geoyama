@@ -22,12 +22,15 @@ export function BackButton({ japanMapRef }) {
     "border-2 border-(--border) shadow-(--card-shadow)",
     "flex items-center justify-center gap-2",
     "px-5 py-2",
-    "w-full md:w-28 landscape:w-28",
     "text-sm font-semibold text-(--text-primary)",
     "hover:bg-(--primary) hover:text-white hover:border-(--primary) hover:shadow-(--card-shadow-hover)",
     "transition-all duration-300",
     "cursor-pointer",
-    "rounded-lg md:rounded-full landscape:rounded-full"
+    "rounded-full",
+    // Mobile: top right of screen (above everything)
+    "fixed top-4 right-4 z-[60]",
+    // Desktop: hide (will be shown in InfoPanel instead)
+    "md:hidden landscape:hidden"
   ].join(" ");
 
   return (

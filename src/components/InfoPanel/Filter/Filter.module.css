@@ -1,9 +1,12 @@
 /* @/components/InfoPanel/Filter/Filter.module.css */
 
 .select {
-  padding: 0.625rem 2.5rem 0.625rem 1rem;
-  font-size: 0.875rem;
+  padding: 0.75rem 2.75rem 0.75rem 1rem;
+  font-size: 0.9375rem;
   font-weight: 500;
+  font-family: var(--font-sans);
+  letter-spacing: -0.01em;
+  line-height: 1.5;
 
   background-color: var(--select-bg);
   color: var(--text-primary);
@@ -12,26 +15,28 @@
   border-radius: 8px;
 
   cursor: pointer;
-  transition: all 0.2s ease-in-out;
+  transition: all 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 
   appearance: none;
   -webkit-appearance: none;
   -moz-appearance: none;
 
-  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxMiIgZmlsbD0iIzViOWRlMCI+PHBvbHlnb24gcG9pbnRzPSIwLDAgMTIsMCA2LDYiLz48L3N2Zz4=");
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxMiIgaGVpZ2h0PSIxMiIgZmlsbD0iIzRhOTBlMiI+PHBvbHlnb24gcG9pbnRzPSIwLDAgMTIsMCA2LDYiLz48L3N2Zz4=");
   background-repeat: no-repeat;
-  background-position: right 0.75rem center;
-  background-size: 0.7rem;
+  background-position: right 0.875rem center;
+  background-size: 0.75rem;
 }
 
 .select:hover {
   border-color: var(--primary);
+  background-color: #fafbfc;
 }
 
 .select:focus {
   outline: none;
-  box-shadow: 0 0 0 3px rgba(91, 157, 224, 0.15);
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.12);
   border-color: var(--primary);
+  background-color: #ffffff;
 }
 
 

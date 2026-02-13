@@ -32,20 +32,20 @@ export function Filter({ japanMapRef }) {
   }
 
   return (
-    <div className="flex flex-col items-center gap-4 px-4 py-2 pt-6 md:pt-10 landscape:pt-10">
+    <div className="flex flex-col items-center gap-6 px-4 py-2 pt-8 md:pt-12 landscape:pt-12">
       {/* Header */}
       <div className="w-full max-w-md">
-        <h2 className="text-xl font-semibold text-(--text-primary) mb-2">
+        <h1 className="text-2xl md:text-3xl font-bold text-(--text-primary) mb-2 tracking-tight">
           Find Your Mountain
-        </h2>
-        <p className="text-sm text-(--text-secondary)">
-          Filter mountains by distance, hike time, and weather
+        </h1>
+        <p className="text-base text-(--text-secondary) leading-relaxed">
+          Discover hiking trails by distance, duration, and weather conditions
         </p>
       </div>
 
       {filteredMountains.length === 0 && (
-        <div className="w-full max-w-md bg-red-50 border border-red-200 rounded-lg p-3">
-          <p className="text-sm text-red-600">No mountains match the filter</p>
+        <div className="w-full max-w-md bg-red-50 border border-red-200 rounded-lg p-4">
+          <p className="text-sm font-medium text-red-700">No mountains match your filters. Try adjusting your criteria.</p>
         </div>
       )}
 
