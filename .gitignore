@@ -47,3 +47,5 @@ JEST_TEST_GUIDE.md
 BACKEND_LEARNING_PLAN.md
 DEV_NOTES.md
 DESIGN.md
+/src/generated/prisma
+
