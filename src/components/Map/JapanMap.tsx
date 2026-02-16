@@ -4,11 +4,12 @@ import mapboxgl from 'mapbox-gl';
 import 'mapbox-gl/dist/mapbox-gl.css';
 import { useEffect, useState, useRef } from 'react';
 import { useMapUiStore } from '@/stores/mapUiStore';
+import { MapRef } from '@/types/mapbox';
 import { useMountainMarkers } from '@/hooks/useMountainMarkers';
 
 const accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
-export function JapanMapView({ japanMapRef }) {
+export function JapanMapView({ japanMapRef }: { japanMapRef: MapRef }) {
   const [isMapReady, setIsMapReady] = useState(false); // A flag that shows if map is ready
 
   const { japanMapInitialView } = useMapUiStore();

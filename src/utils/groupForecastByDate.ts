@@ -1,18 +1,18 @@
 // /utils/groupForecastByDate.js
+import { GroupedForecastByDate, WeatherForecast} from "@/types/weather";
 import { unixToLocalDateTime } from "./unixToLocalDateTime";
 
 
-export function groupForecastByDate(list) {
-  const grouped = {};
+export function groupForecastByDate(list: WeatherForecast[]) {
+  const grouped: GroupedForecastByDate = {};
   for(const item of list) {
-    const { date } = unixToLocalDateTime(item.dt);
+    const { date } = unixToLocalDateTime({ dt: item.dt });
     if(!grouped[date]) {
-      grouped[date] = [];  // Initialize an empty array if the date key does not exist
+      grouped[date] = [];  
     }
     grouped[date].push(item);
   }
-
-  console.log("Grouped forecast by date:", grouped);
+  console.log("Grouped Forecast:", grouped);
   return grouped;
 }
 

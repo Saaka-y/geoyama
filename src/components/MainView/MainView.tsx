@@ -1,12 +1,15 @@
 // components/MainView/MainView.tsx
 
 import { useMapUiStore } from "@/stores/mapUiStore";
+import { MapRef } from "@/types/mapbox";
 import { JapanMapView } from "@/components/Map/JapanMap";
 import { FocusMap } from "@/components/Map/FocusMap";
 import { InfoPanel } from "@/components/InfoPanel/InfoPanel";
 import MapErrorBoundary from "@/components/ErrorBoundary/MapErrorBoundary";
 
-export function MainView({ japanMapRef, focusMapRef }) {
+
+
+export function MainView({ japanMapRef, focusMapRef }: { japanMapRef: MapRef; focusMapRef: MapRef }) {
   const { showFocusMap } = useMapUiStore();
 
   return (

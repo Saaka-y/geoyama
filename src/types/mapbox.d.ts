@@ -1,5 +1,7 @@
 // Mapbox GL JS 型定義
 
+export type MapRef = React.RefObject<MapboxGL.Map | null>;
+
 export interface MapboxGeoJSONFeature {
   type: "Feature";
   geometry: {
@@ -21,5 +23,3 @@ export interface MapboxCamera {
   pitch?: number;
   bearing?: number;
 }
-
-// 必要に応じて追加

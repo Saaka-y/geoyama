@@ -11,9 +11,11 @@ export function useRouteGeo() {
 
   const routeGeo = useMemo(() => {
     if (!selectedMountain) return null;
-    return routes[selectedMountain.properties.description] || { type: "FeatureCollection", features: [] }
+    const routeKey = selectedMountain.properties.routeKey as keyof typeof routes;
+    return routes[routeKey] || { type: "FeatureCollection", features: [] }
   }, [selectedMountain])
 
+  console.log("routeGeo:", routeGeo)
   return routeGeo;
 }
 

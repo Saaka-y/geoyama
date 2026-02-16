@@ -4,14 +4,14 @@ import mapboxgl from 'mapbox-gl';
 import { useEffect, useRef } from 'react';
 import { useMapUiStore } from '@/stores/mapUiStore';
 import { useMountainStore } from '@/stores/mountainStore';
+import { MapRef } from '@/types/mapbox';
 import { createPopupElement } from '@/ui/createPopupElement';
 
-
-export function useMountainMarkers({japanMapRef, ready}) {
+export function useMountainMarkers({japanMapRef, ready}: {japanMapRef: MapRef, ready: boolean}) {
   const { setShowFocusMap, japanMapInitialView } = useMapUiStore();
   const { filteredMountains, setSelectedMountain } = useMountainStore();
 
-  const markerRef = useRef([]);
+  const markerRef = useRef<mapboxgl.Marker[]>([]);
 
 
   useEffect(() => {

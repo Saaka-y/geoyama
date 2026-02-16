@@ -2,8 +2,9 @@
 
 import { useMapUiStore } from "@/stores/mapUiStore";
 import { useMountainStore } from "@/stores/mountainStore";
+import { MapRef } from "@/types/mapbox";
 
-export function BackButton({ japanMapRef }) {
+export function BackButton({ japanMapRef }: { japanMapRef: MapRef }) {
   const { showFocusMap, backToMap, japanMapInitialView } = useMapUiStore();
   const { setSelectedMountain } = useMountainStore();
 

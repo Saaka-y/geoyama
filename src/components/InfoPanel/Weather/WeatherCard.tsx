@@ -1,16 +1,21 @@
 // components/InfoPanel/Weather/WeatherCard.jsx
+import { GroupedForecastByDate } from "@/types/weather";
 import { unixToLocalDateTime } from "@/utils/unixToLocalDateTime";
 import { degToArrow } from "@/utils/degToArrow";
 import { resolveTimeBackground } from "@/ui/resolveTimeBackground";
 
+interface WeatherCardProps {
+  date: string;
+  grouped: GroupedForecastByDate;
+}
 
-export function WeatherCard({ date, grouped }) {
+export function WeatherCard({ date, grouped }: WeatherCardProps) {
 
   return (
     <div className="flex gap-3 flex-row md:flex-col landscape:flex-col">
 
       {grouped[date].map((item, i) => {
-        const { time } = unixToLocalDateTime(item.dt);
+        const { time } = unixToLocalDateTime({ dt: item.dt });
         const temp = Math.round(item.main.temp);
         const timeHour = parseInt(time.slice(0, 2), 10);
         const { background, color } = resolveTimeBackground(false, timeHour);

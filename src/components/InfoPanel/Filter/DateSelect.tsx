@@ -9,8 +9,9 @@ interface DateSelectProps {
 export function DateSelect({ className, onSelect }: DateSelectProps) {
   const { selectedDate, setSelectedDate, dateOptions } = useFilterStore();
 
-  const handleDateSelect = (e) => {
+  const handleDateSelect = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const selected = dateOptions.find(opt => opt.value === e.target.value);
+    if (!selected) return;
     setSelectedDate(selected);
     if (onSelect) onSelect();
   };

@@ -5,6 +5,7 @@ import "mapbox-gl/dist/mapbox-gl.css";
 import { useEffect, useState, useRef } from "react";
 import { useMapUiStore } from "@/stores/mapUiStore";
 import { useMountainStore } from "@/stores/mountainStore";
+import { MapRef } from "@/types/mapbox";
 import { useInitFocusView } from "@/hooks/useInitFocusView";
 import { useSpotPins } from "@/hooks/useSpotPins";
 import { useApplySpotPins } from "@/hooks/useApplySpotPins";
@@ -14,7 +15,7 @@ import { RoutePreview } from "@/components/Map/RoutePreview";
 
 const accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
-export function FocusMap({ focusMapRef }) {
+export function FocusMap({ focusMapRef }: { focusMapRef: MapRef }) {
   
   const [isMapReady, setIsMapReady] = useState(false); // a flag that shows if map is ready
   // Zustand store
@@ -41,36 +42,38 @@ export function FocusMap({ focusMapRef }) {
     mapboxgl.accessToken = accessToken;
 
     // Recreate the map instance every time the selectedMountain changes
-    focusMapRef.current = new mapboxgl.Map({
-      container: focusMapContainerRef.current,
-      style: "mapbox://styles/mapbox/outdoors-v12",
-      // @ts-ignore
-      center: center,
-      zoom: zoom,
-      pitch: 40,
-      bearing: -17,
-      logoPosition: "top-left",
-    });
-
-    const map = focusMapRef.current;
-    map.on("load", () => {
-      setIsMapReady(true); // a flag that shows if map is ready
-
-      // Add 3D source
-      map.addSource("terrain-dem", {
-        "type": "raster-dem",
-        "url": "mapbox://mapbox.mapbox-terrain-dem-v1",
-        "tileSize": 512,
-        "maxzoom": 14
+    if (focusMapContainerRef.current) {
+      focusMapRef.current = new mapboxgl.Map({
+        container: focusMapContainerRef.current as HTMLElement,
+        style: "mapbox://styles/mapbox/outdoors-v12",
+        // @ts-ignore
+        center: center,
+        zoom: zoom,
+        pitch: 40,
+        bearing: -17,
+        logoPosition: "top-left",
       });
-      // Set terrain with exaggeration
-      map.setTerrain({ source: "terrain-dem", exaggeration: 1.4 });
 
-      // Show spot pins
-      // 👉 Refer to "useApplySpotPins.js"
-    });
+      const map = focusMapRef.current;
+      map.on("load", () => {
+        setIsMapReady(true); // a flag that shows if map is ready
 
-    return () => map?.remove();
+        // Add 3D source
+        map.addSource("terrain-dem", {
+          "type": "raster-dem",
+          "url": "mapbox://mapbox.mapbox-terrain-dem-v1",
+          "tileSize": 512,
+          "maxzoom": 14
+        });
+        // Set terrain with exaggeration
+        map.setTerrain({ source: "terrain-dem", exaggeration: 1.4 });
+
+        // Show spot pins
+        // 👉 Refer to "useApplySpotPins.js"
+      });
+
+      return () => map?.remove();
+    }
   }, [center, focusMapRef, selectedMountain, showFocusMap, zoom]);
 
 

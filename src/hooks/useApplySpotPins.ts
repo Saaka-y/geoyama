@@ -1,8 +1,15 @@
 // hooks/useApplySpotPins.js
 
 import { useEffect } from "react";
+import { MapRef } from "@/types/mapbox";
 
-export function useApplySpotPins({ focusMapRef, features, ready }) {
+interface Props {
+  focusMapRef: MapRef;
+  features: any[];
+  ready: boolean;
+}
+
+export function useApplySpotPins({ focusMapRef, features, ready }: Props) {
 
   useEffect(() => {
     if (!focusMapRef.current || !features || !ready) return;
@@ -15,7 +22,7 @@ export function useApplySpotPins({ focusMapRef, features, ready }) {
       const iconPath = `/icon/${iconName}.png`;
 
       // Load icon images
-      map.loadImage(iconPath, (err, image) => {
+      map.loadImage(iconPath, (err: Error | null, image:  HTMLImageElement | ImageBitmap | null) => {
         if (err) throw err;
         if (!map.hasImage(iconName)) {
           map.addImage(iconName, image);

@@ -1,8 +1,14 @@
 //@/components/Map/RoutePreview.jsx
 import { useEffect } from "react";
+import { MapRef } from "@/types/mapbox";
 import { useRouteGeo } from "@/hooks/useRouteGeo";
 
-export function RoutePreview({ focusMapRef, ready }) {
+type RoutePreviewProps = {
+  focusMapRef: MapRef;
+  ready: boolean;
+};
+
+export function RoutePreview({ focusMapRef, ready }: RoutePreviewProps) {
   const routeGeo = useRouteGeo();
 
   useEffect(() => {
@@ -11,8 +17,8 @@ export function RoutePreview({ focusMapRef, ready }) {
     const map = focusMapRef.current;
 
     // Extract elevations from route coordinates and apply color gradient 
-    const elevations = routeGeo.features[0].geometry.coordinates.map((c: [number, number, number]) => c[2]);
-    const colorForElevation = (e) => {
+    const elevations = routeGeo.features[0].geometry.coordinates.map((c) => c[2]);
+    const colorForElevation = (e: number) => {
       if (e < 500) return "blue";
       if (e < 1000) return "cyan";
       if (e < 1500) return "lime";

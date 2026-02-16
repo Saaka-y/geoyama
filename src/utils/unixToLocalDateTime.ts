@@ -1,7 +1,11 @@
 //@/utils/unixToLocalDateTime.js
 import { dateToStr } from "@/utils/dateToStr";
 
-export function unixToLocalDateTime(dt) {
+interface Props {
+  dt: number; 
+}
+
+export function unixToLocalDateTime({ dt }: Props) {
   const local = new Date(dt * 1000); // JS内で自動的にローカル時間になる
   const date = dateToStr(local);
   // time: HH:MM

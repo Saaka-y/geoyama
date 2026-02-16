@@ -1,15 +1,18 @@
 // @/hooks/useAutoScrollToDate.js
 import { useEffect, useRef } from "react";
+import { WeatherForecast} from "@/types/weather";
 import { useFilterStore } from "@/stores/filterStore";
 
-export function useAutoScrollToDate(forecast) {
+type ScrollRef = React.RefObject<HTMLDivElement | null>;
+
+export function useAutoScrollToDate(forecast: WeatherForecast[]) {
   const { selectedDate } = useFilterStore();
-  const scrollRef = useRef(null);
+  const scrollRef: ScrollRef = useRef(null);
 
   useEffect(() => {
     if (!scrollRef.current) return;
     const container = scrollRef.current;
-    const el = document.getElementById(`date-${selectedDate.value}`);
+    const el = document.getElementById(`date-${selectedDate && selectedDate.value}`);
 
     if (el) {
       // Check if horizontal scroll (mobile) or vertical scroll (desktop)

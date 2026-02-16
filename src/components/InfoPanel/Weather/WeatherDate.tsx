@@ -1,6 +1,14 @@
 // components/InfoPanel/Weather/WeatherDate.jsx
 
-export function WeatherDate({ date, grouped, summit }) {
+import { GroupedForecastByDate } from "@/types/weather";
+
+interface WeatherDateProps {
+  date: string;
+  grouped: GroupedForecastByDate;
+  summit: number;
+}
+
+export function WeatherDate({ date, grouped, summit }: WeatherDateProps) {
 
   return (
     <div className="border-b border-(--border) pb-2.5 mb-2">

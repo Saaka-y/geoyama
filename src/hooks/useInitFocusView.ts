@@ -1,5 +1,6 @@
 // hooks/useInitFocusView.jsx
 import { useSpotPins } from "@/hooks/useSpotPins";
+import { Coordinates } from "@/types/mapbox"; 
 
 export function useInitFocusView() {
   const spotPinsForEachMountain = useSpotPins();
@@ -9,7 +10,7 @@ export function useInitFocusView() {
     return { center: null, zoom: null };
   }
 
-  const coords = features.map(f => f.geometry.coordinates);
+  const coords = features.map((f: { geometry: { coordinates: Coordinates } }) => f.geometry.coordinates);
 
   const center = [
     (coords[0][0] + coords[1][0] + coords[2][0]) / 3,

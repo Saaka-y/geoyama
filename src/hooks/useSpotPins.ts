@@ -17,7 +17,7 @@ export function useSpotPins() {
   const { selectedMountain } = useMountainStore();
 
   const spotPinsForEachMountain = useMemo(() => {
-    return spotPins[selectedMountain?.properties?.description] || {
+    return spotPins[selectedMountain?.properties?.routeKey] || {
       type: "FeatureCollection",
       features: []
     };

@@ -3,13 +3,14 @@
 import { useState, useRef } from "react";
 import { useMapUiStore } from "@/stores/mapUiStore";
 import { useMountainStore } from "@/stores/mountainStore";
+import { MapRef } from "@/types/mapbox";
 import { Filter } from "@/components/InfoPanel/Filter/Filter";
 import { WeatherPanel } from "@/components/InfoPanel/Weather/WeatherPanel";
 import { FloatDateSelect } from "@/components/InfoPanel/Filter/FloatDateSelect";
 
 type SheetState = 'closed' | 'half';
 
-export function InfoPanel({ japanMapRef }) {
+export function InfoPanel({ japanMapRef }: { japanMapRef: MapRef }) {
   const showFocusMap = useMapUiStore((state) => state.showFocusMap);
   const { backToMap, japanMapInitialView } = useMapUiStore();
   const { setSelectedMountain } = useMountainStore();

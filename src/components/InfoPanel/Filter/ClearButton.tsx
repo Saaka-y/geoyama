@@ -1,6 +1,10 @@
 // components/InfoPanel/Filter/ClearButton.jsx
 
-export function ClearButton({ onClear }) {
+type ClearButtonProps = {
+  onClear: () => void;
+};
+
+export function ClearButton({ onClear }: ClearButtonProps) {
 
   return (
     <button

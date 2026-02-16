@@ -12,7 +12,7 @@
       },
       "properties": {
         "title": "Mt.Nabewari",
-        "description": "nabewari",
+        "routeKey": "nabewari",
         "distance": 1.5,
         "courseTime": 6.5,
         "routeName": "Yadorigi start",
@@ -33,7 +33,7 @@
       },
       "properties": {
         "title": "Mt.Kintoki",
-        "description": "kintoki",
+        "routeKey": "kintoki",
         "distance": 2.5,
         "courseTime": 4.5,
         "routeName": "Kintoki shrine loop",
@@ -54,7 +54,7 @@
       },
       "properties": {
         "title": "Mt.Kinpu",
-        "description": "kinpu",
+        "routeKey": "kinpu",
         "distance": 3,
         "courseTime": 4.5,
         "routeName": "Odarumi pass start",
@@ -75,7 +75,7 @@
       },
       "properties": {
         "title": "Mt.Nantai",
-        "description": "nantai",
+        "routeKey": "nantai",
         "distance": 2.5,
         "courseTime": 7,
         "routeName": "",
@@ -96,7 +96,7 @@
       },
       "properties": {
         "title": "Mt.Ono",
-        "description": "ono",
+        "routeKey": "ono",
         "distance": 2,
         "courseTime": 4,
         "routeName": "Yaga to Yamakita",
