@@ -18,7 +18,7 @@ export function WeatherCard({ date, grouped }: WeatherCardProps) {
         const { time } = unixToLocalDateTime({ dt: item.dt });
         const temp = Math.round(item.main.temp);
         const timeHour = parseInt(time.slice(0, 2), 10);
-        const { background, color } = resolveTimeBackground(false, timeHour);
+        const { background, color } = resolveTimeBackground({ isLandscape: false, hour: timeHour });
         const windSpeed = Math.round(item.wind.speed);
 
         return (

@@ -21,10 +21,10 @@ export function useMountainMarkers({japanMapRef, ready}: {japanMapRef: MapRef, r
       const coords = m.geometry.coordinates;
 
       // Popup(createPopupElement.js)
-      const popupEl = createPopupElement(m, () => {
+      const popupEl = createPopupElement({ m, onClick: () => {
         setSelectedMountain(m);
         setShowFocusMap(true);
-      });
+      }});
 
       const popup = new mapboxgl.Popup({ offset: 25, anchor: "top" })
         .setDOMContent(popupEl)

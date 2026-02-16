@@ -1,6 +1,14 @@
 //@/utils/applyMountainFilters.js
 
-export function applyMountainFilters({distance, courseTime, mountains}) {
+import { MountainFeature } from "@/types/mountain";
+
+interface Props {
+  distance: number;
+  courseTime: number;
+  mountains: MountainFeature[];
+}
+
+export function applyMountainFilters({distance, courseTime, mountains}: Props) {
 
     return mountains.filter(mountain => {
       if (distance && mountain.properties.distance > distance) return false;

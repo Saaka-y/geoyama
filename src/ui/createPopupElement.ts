@@ -1,6 +1,12 @@
 // ui/createPopupElement.js
+import { MountainFeature } from "@/types/mountain";
 
-export function createPopupElement(m, onClick) {
+interface Props {
+  m: MountainFeature;
+  onClick: () => void;
+}
+
+export function createPopupElement({ m, onClick }: Props) {
 
       // Popup用のDOM作成
       const popupEl = document.createElement("div");

@@ -1,6 +1,11 @@
 //@/utils/resolveTimeBackground.js
 
-export const resolveTimeBackground = (isLandscape, hour) => {
+interface Props {
+  isLandscape: boolean;
+  hour: number;
+}
+
+export const resolveTimeBackground = ({ isLandscape, hour }: Props) => {
   const isMd = typeof window !== "undefined" && window.matchMedia("(min-width: 640px)").matches;
 
   const direction = isMd || isLandscape ? "to bottom" : "to right";

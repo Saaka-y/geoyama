@@ -18,7 +18,7 @@ export function WeatherPanel() {
   const grouped = groupForecastByDate(forecast);
   const scrollRef = useAutoScrollToDate(forecast);
   // mountain info
-  const summit = selectedMountain.properties.summit;
+  const summit = selectedMountain?.properties.summit;
 
   const className = [
     "flex",
@@ -69,7 +69,7 @@ export function WeatherPanel() {
                 : "2px solid transparent"
             }}
           >
-            <WeatherDate date={date} grouped={grouped} summit={summit} />
+            <WeatherDate date={date} grouped={grouped} summit={summit ?? 0} />
             <WeatherCard date={date} grouped={grouped} />
           </div>
         ))}
