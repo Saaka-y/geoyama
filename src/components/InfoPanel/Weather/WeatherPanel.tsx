@@ -64,7 +64,7 @@ export function WeatherPanel() {
             className="snap-start p-3 flex flex-col gap-2 rounded-xl shadow-(--card-shadow) hover:shadow-(--card-shadow-hover) transition-all duration-300"
             style={{
               background: 'var(--background)',
-              border: date === selectedDate.value
+              border: selectedDate && date === selectedDate.value
                 ? "2px solid var(--primary)"
                 : "2px solid transparent"
             }}

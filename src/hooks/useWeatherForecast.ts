@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import { useMountainStore } from "@/stores/mountainStore";
 import { useFilterStore } from "@/stores/filterStore";
 import { dateToStr } from "@/utils/dateToStr";
+import { Coordinates } from "@/types/mapbox";
 
 export function useWeatherForecast() {
 
@@ -20,11 +21,10 @@ export function useWeatherForecast() {
 
     const fetchWeather = async () => {
       const { geometry } = selectedMountain;
-      const lat = geometry.coordinates[1];
-      const lon = geometry.coordinates[0];
+      const coords: Coordinates = { lat: geometry.coordinates[1], lng: geometry.coordinates[0] };
 
       try {
-        const res = await fetch(`/api/weather?lat=${lat}&lon=${lon}`);
+        const res = await fetch(`/api/weather?lat=${coords.lat}&lon=${coords.lng}`);
         const data = await res.json();
 
         // Check if API returned an error
@@ -36,14 +36,14 @@ export function useWeatherForecast() {
 
         const targetDate = new Date(selectedDate.value);
 
-        const datesToShow = [];
+        const datesToShow: string[] = [];
         for (let i = -1; i <= 1; i++) {
           const d = new Date(targetDate);
           d.setDate(d.getDate() + i);
           datesToShow.push(dateToStr(d));
         }
 
-        const filtered = data.list.filter(item =>
+        const filtered = data.list.filter((item: { dt_txt: string }) =>
           datesToShow.some(d => item.dt_txt.startsWith(d))
         );
 
