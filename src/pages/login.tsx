@@ -1,8 +1,8 @@
-// pages/login.tsx
-
+import { signIn } from "next-auth/react";
 import { useState } from "react";
 import { useRouter } from "next/router";
 import Head from "next/head";
+import Link from "next/link";
 
 export default function LoginPage() {
   const router = useRouter();
@@ -11,26 +11,24 @@ export default function LoginPage() {
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState("");
 
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setError("");
     setIsLoading(true);
 
-    // TODO: Implement actual authentication
-    // For now, just simulate login
-    setTimeout(() => {
-      if (email && password) {
-        // Store login state
-        localStorage.setItem('isLoggedIn', 'true');
-        localStorage.setItem('userEmail', email);
+    const result = await signIn("credentials", {
+      email,
+      password,
+      redirect: false,
+    });
 
-        // Redirect to home
-        router.push('/');
-      } else {
-        setError("Please enter both email and password");
-        setIsLoading(false);
-      }
-    }, 1000);
+    setIsLoading(false);
+
+    if (result?.error) {
+      setError("Invalid email or password");
+    } else {
+      router.push("/");
+    }
   };
 
   return (
@@ -40,7 +38,7 @@ export default function LoginPage() {
       </Head>
 
       <div className="min-h-screen flex items-center justify-center p-6 relative overflow-hidden">
-        {/* 背景画像 */}
+
         <div
           className="absolute inset-0 z-0"
           style={{
@@ -50,7 +48,7 @@ export default function LoginPage() {
             opacity: 0.8,
           }}
         />
-        {/* ログインフォーム */}
+
         <div
           className="w-full max-w-md relative z-10"
           style={{
@@ -60,7 +58,7 @@ export default function LoginPage() {
             boxShadow: 'var(--card-shadow)',
           }}
         >
-          {/* Logo/Title */}
+
           <div className="text-center mb-8">
             <h1 className="text-4xl font-bold mb-2" style={{ color: 'var(--text-primary)' }}>
               GeoYama
@@ -70,9 +68,9 @@ export default function LoginPage() {
             </p>
           </div>
 
-          {/* Login Form */}
+
           <form onSubmit={handleSubmit} className="space-y-5">
-            {/* Email Input */}
+
             <div>
               <label
                 htmlFor="email"
@@ -96,7 +94,7 @@ export default function LoginPage() {
               />
             </div>
 
-            {/* Password Input */}
+
             <div>
               <label
                 htmlFor="password"
@@ -162,19 +160,20 @@ export default function LoginPage() {
           <div className="mt-6 text-center text-sm" style={{ color: 'var(--text-muted)' }}>
             <p>
               Don&apos;t have an account?{' '}
-              <a
-                href="/signup"
-                className="font-semibold transition-colors"
-                style={{ color: 'var(--primary)' }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.color = 'var(--primary-hover)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.color = 'var(--primary)';
-                }}
-              >
-                Sign up
-              </a>
+              <Link href="/" passHref legacyBehavior>
+                <a
+                  className="font-semibold transition-colors"
+                  style={{ color: 'var(--primary)' }}
+                  onMouseEnter={(e) => {
+                    e.currentTarget.style.color = 'var(--primary-hover)';
+                  }}
+                  onMouseLeave={(e) => {
+                    e.currentTarget.style.color = 'var(--primary)';
+                  }}
+                >
+                  Sign up
+                </a>
+              </Link>
             </p>
           </div>
         </div>
