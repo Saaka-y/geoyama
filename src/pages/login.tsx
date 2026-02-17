@@ -39,9 +39,20 @@ export default function LoginPage() {
         <title>Login - GeoYama</title>
       </Head>
 
-      <div className="min-h-screen flex items-center justify-center p-4 bg-(--background)">
+      <div className="min-h-screen flex items-center justify-center p-6 relative overflow-hidden">
+        {/* 背景画像 */}
         <div
-          className="w-full max-w-md"
+          className="absolute inset-0 z-0"
+          style={{
+            backgroundImage: `url(/background.jpg)`,
+            backgroundSize: 'cover',
+            backgroundPosition: 'center',
+            opacity: 0.8,
+          }}
+        />
+        {/* ログインフォーム */}
+        <div
+          className="w-full max-w-md relative z-10"
           style={{
             background: 'var(--card-bg)',
             borderRadius: 'var(--card-radius)',
