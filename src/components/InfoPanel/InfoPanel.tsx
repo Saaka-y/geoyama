@@ -54,7 +54,17 @@ export function InfoPanel({ japanMapRef }: { japanMapRef: MapRef }) {
     const deltaY = currentY - startY;
     const threshold = 50;
 
-    if (deltaY > threshold) {
+    // スクロール位置判定
+    let canClose = true;
+    if (sheetState === 'half' && panelRef.current) {
+      // Filterパネル内のスクロール位置
+      const scrollable = panelRef.current.querySelector('.overflow-y-auto');
+      if (scrollable && scrollable.scrollTop > 0) {
+        canClose = false;
+      }
+    }
+
+    if (deltaY > threshold && canClose) {
       // Swiped down
       if  (sheetState === 'half') setSheetState('closed');
     } else if (deltaY < -threshold) {
