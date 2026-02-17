@@ -15,7 +15,7 @@ export function MainView({ japanMapRef, focusMapRef }: { japanMapRef: MapRef; fo
   return (
     <div className="w-screen h-dvh flex flex-col md:flex-row-reverse landscape:flex-row-reverse bg-(--background)">
       {/* Map - Full screen on mobile, right side on desktop */}
-      <div className="absolute inset-0 md:relative md:flex-2 z-0 overflow-hidden">
+      <div className="fixed inset-0 md:relative md:flex-2 z-0 overflow-hidden">
         {!showFocusMap ? (
           <JapanMapView japanMapRef={japanMapRef} />
         ) : (
@@ -26,7 +26,9 @@ export function MainView({ japanMapRef, focusMapRef }: { japanMapRef: MapRef; fo
       </div>
 
       {/* Info Panel - Bottom sheet on mobile, left panel on desktop */}
-      <InfoPanel japanMapRef={japanMapRef} />
+      <div className="relative md:static md:flex-1 z-10 overflow-y-auto">
+        <InfoPanel japanMapRef={japanMapRef} />
+      </div>
     </div>
   );
 }
