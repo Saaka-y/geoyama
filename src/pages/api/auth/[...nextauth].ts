@@ -1,6 +1,6 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "@/lib/prisma"; // 
 import bcrypt from "bcryptjs";
 
 // Extend the session user type to include 'id'
@@ -15,7 +15,6 @@ declare module "next-auth" {
     }
 }
 
-const prisma = new PrismaClient();
 
 export default NextAuth({
     providers: [
@@ -41,13 +40,13 @@ export default NextAuth({
 
                 const isPasswordValid = await bcrypt.compare(
                     credentials.password,
-                    user.password,
+                    user.passwordHash,
                 );
                 if (!isPasswordValid) {
                     throw new Error("Invalid password");
                 }
 
-                return {id: user.id, email: user.email, name: user.name}
+                return {id: user.id.toString(), email: user.email, name: user.name}
             },
         }),
     ],
