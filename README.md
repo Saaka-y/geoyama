@@ -1,5 +1,4 @@
 # GeoYama 🗻
-# Demo Images
 
 <p align="center">
   <img src="public/demo/IMG_2359.jpg" alt="Demo 1" width="300" />
@@ -8,215 +7,188 @@
   <img src="public/demo/IMG_2362.jpg" alt="Demo 4" width="300" />
 </p>
 
-外国人旅行者向けの日本登山ガイドアプリ
-#### デモ：https://geoyama.vercel.app/
+外国人旅行者向けの日本登山ガイドアプリ  
+デモ：https://geoyama.vercel.app/
 
- 新宿から日帰りで行ける山を探せる、直感的なマップベースの登山情報サービス
+新宿から日帰りで行ける山を探せる、直感的なマップベースの登山情報サービス
+
+---
 
 ## 概要
 
-フロントエンドスキルの実践を目的として作成しました。自分の好きな登山を題材に、実際に使ってみたい機能を搭載して開発しています。
+フロントエンドのUI/UXだけでなく、API設計やデータベース設計も含めた**フルスタック開発の実践**として作成しました。
+
+自分の好きな登山を題材に、「実際に使いたい」と思える体験をベースに機能設計しています。
 
 **ターゲット**: 登山好きな外国人旅行者
 
-日本の山に馴染みのない方々が、まずは行きたい山を絞れるように直感的な操作と重要な情報を表示することに重点を置いています。
+日本の山に馴染みのない方でも、直感的な操作で行き先を絞れるよう、情報の見せ方と操作性を重視しています。
 
-※ GPXデータは私が実際に歩いたものを使用しているため、掲載できる山はまだ限られています
+※ GPXデータは実際に歩いたルートを使用しているため、掲載できる山はまだ限られています。今後はoverpass turboなどを活用して、より多くの山をカバーしていく予定です。
 
 ---
 
 ## 技術スタック
 
-※元々JavaScriptで開発していましたが、途中からTypeScriptに移行しました。現在型定義は段階的に追加しています。
-
 | カテゴリ | 技術 |
 |---------|------|
-| **フレームワーク** | Next.js 16 / React 19 |
-| **言語** | TypeScript 5 | 
-| **地図** | Mapbox GL JS |
-| **状態管理** | Zustand |
-| **スタイリング** | Tailwind CSS 4 |
-| **日付処理** | Day.js |
-| **テスト** | Jest / Testing Library |
-| **リンター** | ESLint 9 |
+| フロントエンド | Next.js 16 / React 19 |
+| 言語 | TypeScript 5 |
+| バックエンド | Next.js API Routes (Node.js) |
+| データベース | SQLite / Prisma |
+| 地図 | Mapbox GL JS |
+| 状態管理 | Zustand |
+| スタイリング | Tailwind CSS 4 |
+| 日付処理 | Day.js |
+| テスト | Jest / Testing Library |
+| リンター | ESLint 9 |
 
 ---
 
-## 現在の主な機能
+## 主な機能
 
-### 情報パネルのスライド表示
-- 画面下部からスワイプで検索絞り込みや天気予報を表示
-- 海外に寄せたUIデザインを意識
+- 山の検索・フィルター
+- 各山の詳細情報（距離・標高・難易度など）
+- トレイルルートの地図表示（GeoJSON対応）
+- 駐車場・最寄り駅情報
+- 天気情報の表示
+- ログイン・山お気に入り機能
 
-### フィルター検索
-- 新宿からの所要時間で絞り込み
-- 歩行時間（コースタイム）で絞り込み
-- 日付で絞り込み（天気予報APIと連動）
+## 今後追加予定の機能
 
-### 3Dマップ表示（Mapbox GL JS）
-- 標高1,000mごとに色分けしたルート表示
-- 視覚的に標高差を把握しやすいデザイン
-
-### 天気予報API（OpenWeatherMap）
-- 指定日 ± 1日の天気を3時間ごとに表示  
-  （登山者は前後の天気も確認するため）
-- 時間帯に応じた背景グラデーションで直感的なUI
-
-### 詳細情報
-- 登山口のGoogle Mapリンク
-- 最寄り駅情報
-
-
-## 現在実装中の機能
-
-- ログイン認証機能
-- 山のお気に入り登録機能
+- 多言語対応（英語・中国語など）
+- アクセスガイド（駅・バス停から登山口まで）
+- 難易度・危険箇所の可視化
+- ユーザー投稿型の写真・レビュー
+- オフライン地図対応
 
 ---
 
-## ポイント
+## バックエンド / データ設計
 
-実際に知り合いに使ってもらいながら、以下の技術習得に重点を置いて改善を重ねました：
+Next.jsのAPIルート
+
+- API経由でのデータ取得・処理
+- 環境変数を用いた外部APIキーの管理
+- Prismaによるリレーショナルデータベース設計
+
+### データベース設計
+
+- User / Mountain / MountainGallery / UserFavorite のリレーション構造
+- 中間テーブルによるお気に入り管理（Many-to-Many）
+- 重複登録防止のためのユニーク制約
+
+## データ構成
+
+- Prisma ORMによるスキーマ管理
+- 山情報・ユーザー情報・ギャラリー画像などをDBで管理
+- ルート情報はGeoJSON形式で保存
+
+---
+
+## 技術的なポイント
 
 | テーマ | 内容 |
 |--------|------|
-| **Mapbox × React統合** | マップアニメーション、カメラ制御 |
-| **グローバル状態管理** | Zustandを使った効率的な状態管理 |
-| **データ処理** | GPX → GeoJSON変換、MapインスタンスとReactの連携 |
-| **レスポンシブ対応** | モバイル横向きにも対応 |
+| Map × React統合 | MapboxのライフサイクルとReactの同期 |
+| 状態管理 | Zustandによるシンプルかつ拡張しやすい構成 |
+| データ処理 | GPX → GeoJSON変換 |
+| レスポンシブ | モバイル横向き対応 |
 
-### react-map-gl から mapbox-gl への移行
 
-当初 `react-map-gl` を使用していましたが、以下の理由から純粋な `mapbox-gl` に移行しました：
-
-- カメラ追従やスムーズな座標移動の実装が複雑
-- 公式ドキュメントの情報が不足
-
-この経験を通じて、**MapboxのライフサイクルとReactのレンダーサイクルの同期**など、フレームワーク統合の複雑さを実感できる良い学習機会となりました。
 
 ---
-
-
-## ディレクトリ構成
-
-```
-src/
-├── components/     # UIコンポーネント
-│   ├── InfoPanel/  # 情報パネル（フィルター、天気）
-│   ├── Map/        # 地図関連コンポーネント
-│   └── ...
-├── hooks/          # カスタムフック
-├── stores/         # Zustand ストア
-├── utils/          # ユーティリティ関数
-├── api/           # API
-└── data/           # 山・ルートのJSONデータ
-```
-
----
-
-<br><br>
-
-# English Version
 
 # GeoYama 🗻
 
-A hiking guide app for Japan, designed for foreign travelers  
+A hiking guide app in Japan designed for foreign travelers  
 Demo: https://geoyama.vercel.app/
 
-> An intuitive map-based hiking information service to find day-trip mountains from Shinjuku
+An intuitive map-based service to discover day-trip mountains from Shinjuku
+
+---
 
 ## Overview
 
-This project was created to practice frontend development skills. I built it around my passion for hiking, implementing features I actually wanted to use.
+This project was built as a **full-stack application**, covering not only frontend UI/UX but also API design and database modeling.
 
-**Target Users**: Foreign travelers who love hiking
+It is based on my personal interest in hiking, with a focus on building features that I would genuinely want to use.
 
-The focus is on intuitive interaction and displaying essential information to help those unfamiliar with Japanese mountains narrow down their choices.
+**Target Users**: Foreign travelers who enjoy hiking
 
-> ※ The GPX data is from trails I've actually hiked, so the number of mountains available is still limited.
+The app is designed to help users who are unfamiliar with Japanese mountains quickly narrow down their options through intuitive interaction and well-structured information.
+
+*Note: GPX data is based on trails I have personally hiked, so the number of available mountains is currently limited. In the future, I plan to expand coverage using tools like Overpass Turbo.*
 
 ---
 
 ## Tech Stack
 
-※Originally developed in JavaScript, then migrated to TypeScript. Type definitions are being added gradually.
-
 | Category | Technology |
 |----------|------------|
-| **Framework** | Next.js 16 / React 19 |
-| **Language** | TypeScript 5 | 
-| **Map** | Mapbox GL JS |
-| **State Management** | Zustand |
-| **Styling** | Tailwind CSS 4 |
-| **Date Handling** | Day.js |
-| **Testing** | Jest / Testing Library |
-| **Linter** | ESLint 9 |
+| Frontend | Next.js 16 / React 19 |
+| Language | TypeScript 5 |
+| Backend | Next.js API Routes (Node.js) |
+| Database | SQLite / Prisma |
+| Map | Mapbox GL JS |
+| State Management | Zustand |
+| Styling | Tailwind CSS 4 |
+| Date Handling | Day.js |
+| Testing | Jest / Testing Library |
+| Linting | ESLint 9 |
 
 ---
 
-## Current Features
+## Features
 
-### Sliding Info Panel
-- Swipe up from the bottom to reveal search filters and weather forecasts
-- UI design inspired by international apps
-
-### Filter Search
-- Filter by travel time from Shinjuku
-- Filter by hiking duration (course time)
-- Filter by date (integrated with weather forecast API)
-
-### 3D Map Display (Mapbox GL JS)
-- Color-coded route display by 1,000m elevation intervals
-- Visual design that makes elevation differences easy to understand
-
-### Weather Forecast API (OpenWeatherMap)
-- Shows weather for the selected date ± 1 day, in 3-hour intervals  
-  (hikers often check weather before and after their planned date)
-- Intuitive UI with time-based background gradients
-
-### Detailed Information
-- Google Maps links to trailheads
-- Nearest station information
-
-## Features in Development
-
-- Login authentication
-- Mountain favorites/bookmarking
+- Mountain search and filtering
+- Detailed mountain information (distance, elevation, difficulty, etc.)
+- Trail route visualization using GeoJSON
+- Parking and nearest station information
+- Weather information display
+- User authentication and favorite/bookmark feature
 
 ---
 
-## Key Technical Points
+## Planned Features
 
-I focused on learning the following technologies while iterating based on feedback from friends who tested the app:
-
-| Theme | Details |
-|-------|---------|
-| **Mapbox × React Integration** | Map animations, camera control |
-| **Global State Management** | Efficient state management with Zustand |
-| **Data Processing** | GPX → GeoJSON conversion, Map instance & React coordination |
-| **Responsive Design** | Mobile landscape support |
-
-### Migration from react-map-gl to mapbox-gl
-
-Initially, I used `react-map-gl`, but migrated to pure `mapbox-gl` for the following reasons:
-
-- Complex implementation for camera tracking and smooth coordinate transitions
-- Insufficient official documentation
-
-This experience provided a great learning opportunity to understand the complexities of framework integration, such as **synchronizing Mapbox's lifecycle with React's render cycle**.
+- Multi-language support (English, Chinese, etc.)
+- Access guides (from station/bus stop to trailhead)
+- Visualization of difficulty and hazardous areas
+- User-generated photos and reviews
+- Offline map support
 
 ---
 
-## Directory Structure
+## Backend & Data Design
 
-```
-src/
-├── components/     # UI components
-│   ├── InfoPanel/  # Info panel (filters, weather)
-│   ├── Map/        # Map-related components
-│   └── ...
-├── hooks/          # Custom hooks
-├── stores/         # Zustand stores
-├── utils/          # Utility functions
-└── data/           # Mountain & route JSON data
-```
+Using Next.js API routes to separate client and server responsibilities:
+
+- Data fetching and processing via API routes
+- Secure management of external API keys using environment variables
+- Relational database design with Prisma
+
+### Database Design
+
+- Structured relationships: User / Mountain / MountainGallery / UserFavorite
+- Many-to-many relationship for favorites via intermediate table
+- Unique constraints to prevent duplicate entries
+
+---
+
+## Data Structure
+
+- Schema management using Prisma ORM
+- Mountain data, user data, and gallery images stored in the database
+- Route data stored in GeoJSON format
+
+---
+
+## Technical Highlights
+
+| Area | Details |
+|------|--------|
+| Map × React Integration | Synchronizing Mapbox lifecycle with React |
+| State Management | Scalable and simple state design using Zustand |
+| Data Processing | GPX to GeoJSON conversion |
+| Responsive Design | Mobile landscape support |
