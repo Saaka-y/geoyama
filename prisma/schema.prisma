@@ -21,6 +21,47 @@ model User {
   email     String   @unique
   name      String?
   passwordHash String
+
+  favorites UserFavorite[]
 }
 
+model Mountain {
+  id Int @id @default(autoincrement())
+  title String
+  routeKey String
+  routeName String
+  description String
+  galleries MountainGallery[] // URLs
+  distance Float // km
+  courseTime Float // hours
+  elevation Float // m
+  summit Int // m
+  fitness String // "Easy", "Moderate", "Hard"
+  carPark String? // URL
+  station String? // URL
+  longitude Float
+  latitude Float
+  routeGeojson Json?
+
+  favorites UserFavorite[] // Opposite relation field
+}
+
+model MountainGallery {
+  id Int @id @default(autoincrement())
+  url String
+  mountain Mountain @relation(fields: [mountainId], references: [id])
+  mountainId Int
+}
+
+model UserFavorite {
+  id Int @id @default(autoincrement())
+  userId Int
+  mountainId Int
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id])
+  mountain Mountain @relation(fields: [mountainId], references: [id])
+
+  @@unique([userId, mountainId])
+}
 
