@@ -1,4 +1,14 @@
 -- CreateTable
+CREATE TABLE "User" (
+    "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+    "role" TEXT NOT NULL DEFAULT 'USER',
+    "createdAt" DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "email" TEXT NOT NULL,
+    "name" TEXT,
+    "passwordHash" TEXT NOT NULL
+);
+
+-- CreateTable
 CREATE TABLE "Mountain" (
     "id" INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
     "title" TEXT NOT NULL,
@@ -13,8 +23,7 @@ CREATE TABLE "Mountain" (
     "carPark" TEXT,
     "station" TEXT,
     "longitude" REAL NOT NULL,
-    "latitude" REAL NOT NULL,
-    "routeGeojson" JSONB
+    "latitude" REAL NOT NULL
 );
 
 -- CreateTable
@@ -34,6 +43,9 @@ CREATE TABLE "UserFavorite" (
     CONSTRAINT "UserFavorite_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User" ("id") ON DELETE RESTRICT ON UPDATE CASCADE,
     CONSTRAINT "UserFavorite_mountainId_fkey" FOREIGN KEY ("mountainId") REFERENCES "Mountain" ("id") ON DELETE RESTRICT ON UPDATE CASCADE
 );
+
+-- CreateIndex
+CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "UserFavorite_userId_mountainId_key" ON "UserFavorite"("userId", "mountainId");

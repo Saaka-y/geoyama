@@ -42,7 +42,6 @@ model Mountain {
   station String? // URL
   longitude Float
   latitude Float
-  routeGeojson Json?
 
   favorites UserFavorite[] // Opposite relation field
 }
