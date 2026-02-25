@@ -1,6 +1,6 @@
 import NextAuth, { NextAuthOptions } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { prisma } from "@/lib/prisma"; // 
+import { prisma } from "@/lib/prisma"; 
 import bcrypt from "bcryptjs";
 
 // Extend the session user type to include 'id'
@@ -35,7 +35,7 @@ export default NextAuth({
                 });
 
                 if (!user) {
-                    throw new Error("No user found with the given email");
+                    return null;
                 }
 
                 const isPasswordValid = await bcrypt.compare(

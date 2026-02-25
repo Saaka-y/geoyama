@@ -16,6 +16,7 @@
   "dependencies": {
     "@mapbox/togeojson": "^0.16.2",
     "@prisma/adapter-better-sqlite3": "^7.4.0",
+    "@prisma/adapter-pg": "^7.4.1",
     "@prisma/client": "^7.4.0",
     "@xmldom/xmldom": "^0.8.11",
     "bcrypt": "^6.0.0",
@@ -25,6 +26,7 @@
     "mapbox-gl": "^3.16.0",
     "next": "^16.0.7",
     "next-auth": "^4.24.13",
+    "pg": "^8.18.0",
     "prisma": "^7.4.0",
     "react": "19.2.0",
     "react-dom": "19.2.0",
@@ -39,6 +41,7 @@
     "@testing-library/user-event": "^14.6.1",
     "@types/jest": "^30.0.0",
     "@types/node": "^25.2.3",
+    "@types/pg": "^8.16.0",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",
     "babel-plugin-react-compiler": "1.0.0",
