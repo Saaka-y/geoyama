@@ -25,7 +25,6 @@ export default function Home() {
         setIsLoggedIn(!!session);
         console.log("User authenticated:", {
             id: session?.user?.id,
-            email: session?.user?.email,
         });
     }, [session, setIsLoggedIn]);
 

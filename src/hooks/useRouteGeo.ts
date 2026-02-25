@@ -17,7 +17,6 @@ export function useRouteGeo() {
     return routes[routeKey] || { type: "FeatureCollection", features: [] };
   }, [selectedMountain]);
 
-  console.log("routeGeo:", routeGeo)
   return routeGeo;
 }
 

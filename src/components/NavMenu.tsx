@@ -22,7 +22,7 @@ export function NavMenu() {
     return (
         <>
             <button
-                className="md:hidden fixed top-4 left-4 z-50 p-2 bg-white/70 rounded-full shadow-lg"
+                className=" fixed top-4 left-4 z-50 p-2 bg-white/70 rounded-full shadow-lg"
                 onClick={() => setOpen(!open)}
                 aria-label="Open navigation menu"
             >

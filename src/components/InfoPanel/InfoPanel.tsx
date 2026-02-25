@@ -82,7 +82,7 @@ export function InfoPanel({ japanMapRef }: { japanMapRef: MapRef }) {
   return (
     <>
       {/* Desktop layout - traditional side panel */}
-      <div className="hidden md:flex landscape:flex flex-col mb-2 bg-(--card-bg) ">
+      <div className="hidden md:flex landscape:flex flex-col mb-2 h-dvh bg-(--card-bg) ">
         {/* Back Button - Desktop (top of panel) */}
         {showFocusMap && (
           <div className="px-4 pt-4 pb-3">

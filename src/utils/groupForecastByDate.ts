@@ -12,7 +12,7 @@ export function groupForecastByDate(list: WeatherForecast[]) {
     }
     grouped[date].push(item);
   }
-  console.log("Grouped Forecast:", grouped);
+
   return grouped;
 }
 
