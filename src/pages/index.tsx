@@ -23,12 +23,7 @@ export default function Home() {
 
     useEffect(() => {
         setIsLoggedIn(!!session);
-        console.log("User authenticated:", {
-            id: session?.user?.id,
-        });
     }, [session, setIsLoggedIn]);
-
-    console.log("Login status:", isLoggedIn);
 
     return <MainView japanMapRef={japanMapRef} focusMapRef={focusMapRef} />;
 }

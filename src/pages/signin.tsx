@@ -31,7 +31,6 @@ export default function LoginPage() {
                 router.push("/");
             }
         } catch (error) {
-            console.log("Login failed", error);
             alert("Network error. Please try again.");
         }
     };

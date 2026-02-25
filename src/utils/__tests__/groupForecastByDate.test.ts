@@ -14,7 +14,6 @@ jest.mock("../unixToLocalDateTime", () => ({
 }));
 
 describe("groupForecastByDate", () => {
-    // Suppress console.log in tests
     let consoleLogSpy: jest.SpyInstance<void, any[], any>;
 
     beforeEach(() => {
