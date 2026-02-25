@@ -35,13 +35,12 @@
 | フロントエンド | Next.js 16 / React 19 |
 | 言語 | TypeScript 5 |
 | バックエンド | Next.js API Routes (Node.js) |
-| データベース | SQLite / Prisma |
+| データベース | PostgreSQL (Neon) / Prisma |
 | 地図 | Mapbox GL JS |
 | 状態管理 | Zustand |
 | スタイリング | Tailwind CSS 4 |
 | 日付処理 | Day.js |
 | テスト | Jest / Testing Library |
-| リンター | ESLint 9 |
 
 ---
 
@@ -52,15 +51,13 @@
 - トレイルルートの地図表示（GeoJSON対応）
 - 駐車場・最寄り駅情報
 - 天気情報の表示
-- ログイン・山お気に入り機能
+- ログイン認証・山お気に入り機能
 
 ## 今後追加予定の機能
 
 - 多言語対応（英語・中国語など）
 - アクセスガイド（駅・バス停から登山口まで）
 - 難易度・危険箇所の可視化
-- ユーザー投稿型の写真・レビュー
-- オフライン地図対応
 
 ---
 
@@ -129,7 +126,7 @@ The app is designed to help users who are unfamiliar with Japanese mountains qui
 | Frontend | Next.js 16 / React 19 |
 | Language | TypeScript 5 |
 | Backend | Next.js API Routes (Node.js) |
-| Database | SQLite / Prisma |
+| Database | PostgreSQL (Neon) / Prisma |
 | Map | Mapbox GL JS |
 | State Management | Zustand |
 | Styling | Tailwind CSS 4 |
@@ -139,24 +136,24 @@ The app is designed to help users who are unfamiliar with Japanese mountains qui
 
 ---
 
+
 ## Features
 
 - Mountain search and filtering
 - Detailed mountain information (distance, elevation, difficulty, etc.)
-- Trail route visualization using GeoJSON
+- Trail route visualization (GeoJSON supported)
 - Parking and nearest station information
 - Weather information display
-- User authentication and favorite/bookmark feature
+- User authentication and mountain favorite feature
 
 ---
+
 
 ## Planned Features
 
 - Multi-language support (English, Chinese, etc.)
 - Access guides (from station/bus stop to trailhead)
 - Visualization of difficulty and hazardous areas
-- User-generated photos and reviews
-- Offline map support
 
 ---
 
