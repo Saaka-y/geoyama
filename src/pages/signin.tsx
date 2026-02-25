@@ -163,6 +163,16 @@ export default function LoginPage() {
                         >
                             {isLoading ? "Logging in..." : "Login"}
                         </button>
+                        {/* ゲストボタン */}
+                        <div className="mt-2 text-center">
+                            <button
+                                type="button"
+                                onClick={() => router.push("/")}
+                                className="w-full py-3 rounded-lg bg-gray-300 text-gray-800 font-semibold hover:bg-gray-400 transition-colors"
+                            >
+                                Continue as Guest
+                            </button>
+                        </div>
                     </form>
 
                     {/* Footer Links */}
@@ -173,7 +183,7 @@ export default function LoginPage() {
                         <p>
                             Don&apos;t have an account?{" "}
                             <Link
-                                href="/"
+                                href="/signup"
                                 className="font-semibold transition-colors"
                                 style={{ color: "var(--primary)" }}
                                 onMouseEnter={(e) => {

@@ -1,7 +1,7 @@
 import Head from "next/head";
 import Link from "next/link";
 import { useState } from "react";
-// import { signIn } from "next-auth/react";
+import { signIn } from "next-auth/react";
 import { useRouter } from "next/router";
 
 export default function SignupPage() {
@@ -24,6 +24,7 @@ export default function SignupPage() {
                 headers: {
                     "Content-Type": "application/json",
                 },
+                credentials: "include",
                 body: JSON.stringify({
                     email,
                     password,
@@ -34,11 +35,15 @@ export default function SignupPage() {
             if (!res.ok) {
                 const data = await res.json();
                 console.error("Signup failed:", data);
-                alert("Signup failed. Please try again.");
+                alert(`Signup failed: ${data.error || "Unknown error"}`);
             } else {
-                await router.push("/");
+                await signIn("credentials", {
+                    email,
+                    password,
+                    redirect: false,
+                });
+                router.push("/");
             }
-
         } catch (error) {
             console.error("Signup error:", error);
             alert("Network error. Please try again.");
@@ -86,7 +91,7 @@ export default function SignupPage() {
                         </p>
                     </div>
 
-                    <form className="space-y-5">
+                    <form onSubmit={handleSignup} className="space-y-5">
                         <div>
                             <label
                                 htmlFor="email"
@@ -162,7 +167,6 @@ export default function SignupPage() {
                         {/* Submit Button */}
                         <button
                             type="submit"
-                            onClick={handleSignup}
                             className="w-full py-3 rounded-lg font-semibold transition-all duration-200"
                             style={{
                                 backgroundColor: "var(--primary)",
@@ -181,6 +185,16 @@ export default function SignupPage() {
                         >
                             Sign Up
                         </button>
+                        {/* ゲストボタン */}
+                        <div className="mt-2 text-center">
+                            <button
+                                type="button"
+                                onClick={() => router.push("/")}
+                                className="w-full py-3 rounded-lg bg-gray-300 text-gray-800 font-semibold hover:bg-gray-400 transition-colors"
+                            >
+                                Continue as Guest
+                            </button>
+                        </div>
                     </form>
 
                     {/* Footer Links */}
@@ -191,7 +205,7 @@ export default function SignupPage() {
                         <p>
                             Already have an account?{" "}
                             <Link
-                                href="/login"
+                                href="/signin"
                                 className="font-semibold transition-colors"
                                 style={{ color: "var(--primary)" }}
                                 onMouseEnter={(e) => {
@@ -203,7 +217,7 @@ export default function SignupPage() {
                                         "var(--primary)";
                                 }}
                             >
-                                Login
+                                Sign in
                             </Link>
                         </p>
                     </div>

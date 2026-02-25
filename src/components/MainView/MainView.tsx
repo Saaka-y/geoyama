@@ -5,7 +5,7 @@ import { MapRef } from "@/types/mapbox";
 import { JapanMapView } from "@/components/Map/JapanMap";
 import { FocusMap } from "@/components/Map/FocusMap";
 import { InfoPanel } from "@/components/InfoPanel/InfoPanel";
-import { HamburgerMenu } from "@/components/HamburgerMenu";
+import { NavMenu } from "@/components/NavMenu";
 import MapErrorBoundary from "@/components/ErrorBoundary/MapErrorBoundary";
 
 export function MainView({
@@ -20,7 +20,7 @@ export function MainView({
 
     return (
         <div className="w-screen h-dvh flex flex-col md:flex-row-reverse landscape:flex-row-reverse bg-(--background)">
-            <HamburgerMenu />
+            <NavMenu />
 
             {/* Map - Full screen on mobile, right side on desktop */}
             <div className="fixed inset-0 md:relative md:flex-2 z-0 overflow-hidden">
