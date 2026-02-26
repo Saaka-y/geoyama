@@ -49,6 +49,7 @@ export function useApplySpotPins({ focusMapRef, features, ready }: Props) {
     });
 
     return () => {
+      if (!map) return;
       // Clean up layers and sources
       layerOrder.forEach(iconName => {
         if (map.getLayer(`${iconName}-layer`)) {
@@ -60,8 +61,7 @@ export function useApplySpotPins({ focusMapRef, features, ready }: Props) {
         if (map.hasImage(iconName)) {
           map.removeImage(iconName);
         }
-      }
-      );
+      });
     }
   }, [focusMapRef, features, ready]);
 }

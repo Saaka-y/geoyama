@@ -2,6 +2,7 @@
 import { useMapUiStore } from "@/stores/mapUiStore";
 import { useMountainStore } from "@/stores/mountainStore";
 import { useFilterStore } from "@/stores/filterStore";
+import { useUserStore } from "@/stores/userStore";
 import { MapRef } from "@/types/mapbox.d";
 import { useClearFilters } from "@/hooks/useClearFilters";
 import { useApplyFilter } from '@/hooks/useApplyFilter';
@@ -9,9 +10,10 @@ import { DistanceSelect } from '@/components/InfoPanel/Filter/DistanceSelect';
 import { CourseTimeSelect } from '@/components/InfoPanel/Filter/CourseTimeSelect';
 import { DateSelectWrapper } from '@/components/InfoPanel/Filter/DateSelectWrapper';
 import { ClearButton } from '@/components/InfoPanel/Filter/ClearButton';
+import { FavoriteToggle } from "@/components/InfoPanel/Filter/FavoriteToggle";
 
 export function Filter({ japanMapRef }: { japanMapRef: MapRef }) {
-
+  const { isLoggedIn } = useUserStore();
   const { japanMapInitialView } = useMapUiStore();
   const { dateOptions } = useFilterStore();
   const { filteredMountains } = useMountainStore();
@@ -36,12 +38,14 @@ export function Filter({ japanMapRef }: { japanMapRef: MapRef }) {
     <div className="flex flex-col items-center gap-6 px-4 py-2 pt-8 md:pt-12 landscape:pt-12">
       {/* Header */}
       <div className="w-full max-w-md">
-        <h1 className="text-2xl md:text-3xl font-bold text-(--text-primary) mb-2 tracking-tight">
+        <h1 className="text-2xl md:text-3xl font-bold text-(--text-primary) mb-4 tracking-tight">
           Find Your Mountain
         </h1>
-        <p className="text-base text-(--text-secondary) leading-relaxed">
-          Discover your best trails by distance, duration, and weather conditions!
-        </p>
+        {isLoggedIn && (
+          <div className="flex flex-row-reverse md:flex-row">
+            <FavoriteToggle />
+          </div>
+        )}
       </div>
 
       {filteredMountains.length === 0 && (
