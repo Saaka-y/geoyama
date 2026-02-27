@@ -13,6 +13,7 @@ import { useRotateMap } from "@/hooks/useRotateMap";
 import { MountainInfo } from "@/components/Map/MountainInfo";
 import { RoutePreview } from "@/components/Map/RoutePreview";
 import { CiBookmark } from "react-icons/ci";
+import { FavoriteBtn } from "../FavoriteBtn";
 
 const accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
 
@@ -98,20 +99,7 @@ export function FocusMap({ focusMapRef }: { focusMapRef: MapRef }) {
                         boxShadow: "0 2px 6px rgba(0,0,0,0.2)",
                     }}
                 >
-                    <button
-                        style={{
-                            background: "transparent",
-                            border: "none",
-                            cursor: "pointer",
-                            float: "right",
-                        }}
-                        aria-label="お気に入り登録"
-                        onClick={() => {
-                            /* お気に入り処理 */
-                        }}
-                    >
-                        <CiBookmark size={24} color="#FFD700" />
-                    </button>
+                    <FavoriteBtn />
                     <MountainInfo />
                 </div>
             )}

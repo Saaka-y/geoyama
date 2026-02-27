@@ -74,3 +74,29 @@ small {
   font-size: 0.875rem;
   color: var(--text-muted);
 }
+
+/* FavoritBtn */
+
+.favorite-btn {
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  float: right;
+  transition: all 0.2s ease;
+  color: #d3cece;
+}
+
+.favorite-btn:hover {
+  transform: scale(1.15);
+  color: #ffb700;
+  filter: drop-shadow(0 0 4px rgba(255, 183, 0, 0.6));
+}
+
+.favorite-btn:active {
+  transform: scale(0.95);
+}
+
+.favorite-filled {
+  color: #ffb700;
+  filter: drop-shadow(0 0 6px rgba(255, 183, 0, 0.7));
+}
