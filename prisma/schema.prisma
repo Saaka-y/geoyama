@@ -28,7 +28,7 @@ model User {
 model Mountain {
   id          Int               @id @default(autoincrement())
   title       String
-  routeKey    String
+  routeKey    String @unique
   routeName   String
   description String
   galleries   MountainGallery[] // URLs

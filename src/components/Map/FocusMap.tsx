@@ -6,13 +6,13 @@ import { useEffect, useState, useRef } from "react";
 import { useMapUiStore } from "@/stores/mapUiStore";
 import { useMountainStore } from "@/stores/mountainStore";
 import { MapRef } from "@/types/mapbox";
+import { fetchMountainId } from "@/services/fetchMountainId";
 import { useInitFocusView } from "@/hooks/useInitFocusView";
 import { useSpotPins } from "@/hooks/useSpotPins";
 import { useApplySpotPins } from "@/hooks/useApplySpotPins";
 import { useRotateMap } from "@/hooks/useRotateMap";
 import { MountainInfo } from "@/components/Map/MountainInfo";
 import { RoutePreview } from "@/components/Map/RoutePreview";
-import { CiBookmark } from "react-icons/ci";
 import { FavoriteBtn } from "../FavoriteBtn";
 
 const accessToken = process.env.NEXT_PUBLIC_MAPBOX_TOKEN;
@@ -76,6 +76,20 @@ export function FocusMap({ focusMapRef }: { focusMapRef: MapRef }) {
         }
     }, [center, focusMapRef, selectedMountain, showFocusMap, zoom]);
 
+    // Fetch mountainId for FavoriteBtn
+    const [mountainId, setMountainId] = useState<string | null>(null);
+    useEffect(() => {
+        async function getMountainId() {
+            if (selectedMountain?.properties.routeKey) {
+                const id = await fetchMountainId(
+                    selectedMountain.properties.routeKey,
+                );
+                setMountainId(id);
+            }
+        }
+        getMountainId();
+    }, [selectedMountain]);
+
     return (
         <>
             <div
@@ -99,7 +113,7 @@ export function FocusMap({ focusMapRef }: { focusMapRef: MapRef }) {
                         boxShadow: "0 2px 6px rgba(0,0,0,0.2)",
                     }}
                 >
-                    <FavoriteBtn />
+                    <FavoriteBtn mountainId={mountainId} />
                     <MountainInfo />
                 </div>
             )}

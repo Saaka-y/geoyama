@@ -11,14 +11,15 @@
     "test": "jest",
     "test:watch": "jest --watch",
     "audit": "npm audit",
-    "postinstall": "prisma generate"
+    "postinstall": "prisma generate",
+    "prisma:refresh": "rm -rf node_modules/.prisma && npx prisma generate"
   },
   "dependencies": {
     "@mapbox/point-geometry": "^1.1.0",
     "@mapbox/togeojson": "^0.16.2",
     "@prisma/adapter-better-sqlite3": "^7.4.0",
     "@prisma/adapter-pg": "^7.4.1",
-    "@prisma/client": "^7.4.0",
+    "@prisma/client": "^7.4.1",
     "@xmldom/xmldom": "^0.8.11",
     "bcrypt": "^6.0.0",
     "bcryptjs": "^3.0.3",

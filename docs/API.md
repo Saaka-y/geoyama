@@ -10,11 +10,12 @@ signoutはNextAuthのサインアウト機能を使用するため、APIエン�
 - PUT    /api/user/me
 - GET    /api/user/favorites
 
-## mountains
+## mountain
 - GET    /api/mountains
 - GET    /api/mountains/:id
 - GET    /api/mountains/:id/geojson
 
-## userFavorite
-- POST   /api/user/updateFavorites
+## favorite
+- GET    /api/favorites/check?userId=...&mountainId=...
+- POST   /api/favorites/toggle:userId=...&mountainId=...
 
