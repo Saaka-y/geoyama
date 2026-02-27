@@ -12,7 +12,7 @@ export interface DateOption {
 export const createDateOptions = (): DateOption[] => {
   const today = new Date();
   const days = 5;
-  const options = [];
+  const options: DateOption[] = [];
 
   for (let i = 0; i <= days; i++) {
     const date = new Date(today);

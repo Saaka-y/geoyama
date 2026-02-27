@@ -2,18 +2,17 @@ import { useState } from "react";
 import { useUserStore } from "@/stores/userStore";
 import { LiaToggleOffSolid, LiaToggleOnSolid } from "react-icons/lia";
 
-export function FavoriteToggle() {
-    const { favorite, setFavorite } = useUserStore();
-    const [showFavoite, setShowFavorite] = useState<boolean>(false);
+export function FavoriteSelect() {
+    const { favorites, setFavorites, showFavorites, setShowFavorites } = useUserStore();
 
-    const isOn = showFavoite;
+    const isOn = showFavorites;
 
     const TEXT_WIDTH = 90; // px
     const BUTTON_WIDTH = 200; // px
 
     return (
         <button
-            onClick={() => setShowFavorite(!showFavoite)}
+            onClick={() => setShowFavorites && setShowFavorites(!showFavorites)}
             style={{
                 display: "flex",
                 alignItems: "center",

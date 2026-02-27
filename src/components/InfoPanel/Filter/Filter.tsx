@@ -10,7 +10,7 @@ import { DistanceSelect } from '@/components/InfoPanel/Filter/DistanceSelect';
 import { CourseTimeSelect } from '@/components/InfoPanel/Filter/CourseTimeSelect';
 import { DateSelectWrapper } from '@/components/InfoPanel/Filter/DateSelectWrapper';
 import { ClearButton } from '@/components/InfoPanel/Filter/ClearButton';
-import { FavoriteToggle } from "@/components/InfoPanel/Filter/FavoriteToggle";
+import { FavoriteSelect } from "@/components/InfoPanel/Filter/FavoriteSelect";
 
 export function Filter({ japanMapRef }: { japanMapRef: MapRef }) {
   const { isLoggedIn } = useUserStore();
@@ -43,7 +43,7 @@ export function Filter({ japanMapRef }: { japanMapRef: MapRef }) {
         </h1>
         {isLoggedIn && (
           <div className="flex flex-row-reverse md:flex-row">
-            <FavoriteToggle />
+            <FavoriteSelect />
           </div>
         )}
       </div>
