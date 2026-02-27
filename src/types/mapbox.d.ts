@@ -23,3 +23,5 @@ export interface MapboxCamera {
   pitch?: number;
   bearing?: number;
 }
+
+declare module 'mapbox__point-geometry';
