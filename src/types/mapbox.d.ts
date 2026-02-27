@@ -1,3 +1,4 @@
+
 // Mapbox GL JS 型定義
 
 export type MapRef = React.RefObject<MapboxGL.Map | null>;
@@ -23,5 +24,3 @@ export interface MapboxCamera {
   pitch?: number;
   bearing?: number;
 }
-
-declare module 'mapbox__point-geometry';
