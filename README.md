@@ -1,16 +1,28 @@
 # GeoYama 🗻
 
-<p align="center">
-  <img src="public/demo/IMG_2359.jpg" alt="Demo 1" width="300" />
-  <img src="public/demo/IMG_2360.jpg" alt="Demo 2" width="300" />
-  <img src="public/demo/IMG_2361.jpg" alt="Demo 3" width="300" />
-  <img src="public/demo/IMG_2362.jpg" alt="Demo 4" width="300" />
-</p>
-
 外国人旅行者向けの日本登山ガイドアプリ  
 デモ：https://geoyama.vercel.app/
 
 新宿から日帰りで行ける山を探せる、直感的なマップベースの登山情報サービス
+
+---
+
+ログイン後は、お気に入り登録した山のみ表示することが可能です
+<p align="center">
+  <img src="public/demo/signIn1.jpg" alt="Demo 1" width="300" />
+  <img src="public/demo/signIn2.jpg" alt="Demo 2" width="300" />
+  <p align="center">お気に入り登録済みの山はボタンが黄色く光ります</p>
+  <img src="public/demo/signIn3.jpg" alt="Demo 3" width="300" />
+</p>
+
+ゲストで利用の場合は、お気に入り登録機能はありません
+<p align="center">
+  <img src="public/demo/IMG_2359.jpg" alt="Demo 5" width="300" />
+  <img src="public/demo/IMG_2360.jpg" alt="Demo 6" width="300" />
+  <img src="public/demo/IMG_2361.jpg" alt="Demo 7" width="300" />
+  <img src="public/demo/IMG_2362.jpg" alt="Demo 8" width="300" />
+</p>
+
 
 ---
 
@@ -40,18 +52,17 @@
 | 状態管理 | Zustand |
 | スタイリング | Tailwind CSS 4 |
 | 日付処理 | Day.js |
-| テスト | Jest / Testing Library |
 
 ---
 
 ## 主な機能
 
+- ログイン認証・山のお気に入り機能
 - 山の検索・フィルター
 - 各山の詳細情報（距離・標高・難易度など）
 - トレイルルートの地図表示（GeoJSON対応）
 - 駐車場・最寄り駅情報
 - 天気情報の表示
-- ログイン認証・山お気に入り機能
 
 ## 今後追加予定の機能
 
@@ -80,19 +91,7 @@ Next.jsのAPIルート
 - Prisma ORMによるスキーマ管理
 - 山情報・ユーザー情報・ギャラリー画像などをDBで管理
 - ルート情報はGeoJSON形式で保存
-
----
-
-## 技術的なポイント
-
-| テーマ | 内容 |
-|--------|------|
-| Map × React統合 | MapboxのライフサイクルとReactの同期 |
-| 状態管理 | Zustandによるシンプルかつ拡張しやすい構成 |
-| データ処理 | GPX → GeoJSON変換 |
-| レスポンシブ | モバイル横向き対応 |
-
-
+- UI側はAPIから必要なデータを取得して一意の値（routeKey）でルートを特定
 
 ---
 
@@ -102,6 +101,24 @@ A hiking guide app in Japan designed for foreign travelers
 Demo: https://geoyama.vercel.app/
 
 An intuitive map-based service to discover day-trip mountains from Shinjuku
+
+---
+
+After logging in, you can display only your favorited mountains.
+<p align="center">
+  <img src="public/demo/signIn1.jpg" alt="Demo 1" width="300" />
+  <img src="public/demo/signIn2.jpg" alt="Demo 2" width="300" />
+  <p align="center">Favorited mountains are highlighted in yellow.</p>
+  <img src="public/demo/signIn3.jpg" alt="Demo 3" width="300" />
+</p>
+
+If you use the app as a guest, the favorite feature is not available.
+<p align="center">
+  <img src="public/demo/IMG_2359.jpg" alt="Demo 5" width="300" />
+  <img src="public/demo/IMG_2360.jpg" alt="Demo 6" width="300" />
+  <img src="public/demo/IMG_2361.jpg" alt="Demo 7" width="300" />
+  <img src="public/demo/IMG_2362.jpg" alt="Demo 8" width="300" />
+</p>
 
 ---
 
@@ -131,23 +148,24 @@ The app is designed to help users who are unfamiliar with Japanese mountains qui
 | State Management | Zustand |
 | Styling | Tailwind CSS 4 |
 | Date Handling | Day.js |
-| Testing | Jest / Testing Library |
-| Linting | ESLint 9 |
 
 ---
 
+## Main Features
 
-## Features
-
+- User authentication and mountain favorite feature
 - Mountain search and filtering
+- Display only favorited mountains after login
 - Detailed mountain information (distance, elevation, difficulty, etc.)
 - Trail route visualization (GeoJSON supported)
 - Parking and nearest station information
 - Weather information display
-- User authentication and mountain favorite feature
+
+## Features for Guests
+
+- Favorite feature is not available for guests
 
 ---
-
 
 ## Planned Features
 
@@ -157,9 +175,9 @@ The app is designed to help users who are unfamiliar with Japanese mountains qui
 
 ---
 
-## Backend & Data Design
+## Backend / Data Design
 
-Using Next.js API routes to separate client and server responsibilities:
+Next.js API routes
 
 - Data fetching and processing via API routes
 - Secure management of external API keys using environment variables
@@ -167,17 +185,16 @@ Using Next.js API routes to separate client and server responsibilities:
 
 ### Database Design
 
-- Structured relationships: User / Mountain / MountainGallery / UserFavorite
+- User / Mountain / MountainGallery / UserFavorite relational structure
 - Many-to-many relationship for favorites via intermediate table
 - Unique constraints to prevent duplicate entries
-
----
 
 ## Data Structure
 
 - Schema management using Prisma ORM
 - Mountain data, user data, and gallery images stored in the database
 - Route data stored in GeoJSON format
+- The UI fetches data from the API and identifies routes by a unique value (routeKey)
 
 ---
 
