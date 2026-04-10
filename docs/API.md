@@ -3,7 +3,7 @@
 - POST   /api/auth/signup
 - POST   /api/auth/[...nextauth]
 
-signoutはNextAuthのサインアウト機能を使用するため、APIエンドポイントは存在しない。
+> signoutはNextAuthのサインアウト機能を使用するため、APIエンドポイントは存在しない。
 
 ## user
 - GET    /api/user/me
@@ -16,6 +16,8 @@ signoutはNextAuthのサインアウト機能を使用するため、APIエン�
 - GET    /api/mountains/:id/geojson
 
 ## favorite
-- GET    /api/favorites/check?userId=...&mountainId=...
-- POST   /api/favorites/toggle:userId=...&mountainId=...
+- GET    /api/favorites/check?mountainId=...
+- POST   /api/favorites/toggle?mountainId=...
 
+
+> `/api/favorites` はユーザーIDをクエリパラメータで受け取るのではなく、サーバー側からセッションを取得するように変更。

@@ -1,9 +1,11 @@
-import NextAuth, { NextAuthOptions } from "next-auth";
+// https://next-auth.js.org/getting-started/example
+
+import NextAuth, {NextAuthOptions} from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { prisma } from "@/lib/prisma"; 
 import bcrypt from "bcryptjs";
 
-// Extend the session user type to include 'id'
+
 declare module "next-auth" {
     interface Session {
         user: {
@@ -15,8 +17,13 @@ declare module "next-auth" {
     }
 }
 
+declare module "next-auth/jwt" {
+    interface JWT {
+        id?: string;
+    }
+}
 
-export default NextAuth({
+export const authOptions: NextAuthOptions = {
     providers: [
         CredentialsProvider({
             name: "Credentials",
@@ -50,15 +57,26 @@ export default NextAuth({
             },
         }),
     ],
+
     session: {
         strategy: "jwt",
     },
+
     callbacks: {
-        async session({ session, token, user }) {
-            if (session?.user && token?.sub) {
-                session.user.id = token.sub;
+        async jwt({ token, user }) { // 引数userにはauthorize関数で返されたユーザーオブジェクトが入る
+            if(user) {
+                token.id = user.id; // JWTのidにユーザーIDを設定
             }
-            return session;
+            return token;
+        },
+
+        async session({ session, token }) {
+            if (session.user) {
+                session.user.id = token.id;
+            }
+            return session; // ここのsessionに含まれるuserオブジェクトは、クライアント側でuseSession()を使ってアクセスできるようになる
         }
     },
-});
+};
+    
+export default NextAuth(authOptions);
