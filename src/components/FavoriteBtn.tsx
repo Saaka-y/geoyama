@@ -17,8 +17,10 @@ export function FavoriteBtn({ mountainId }: Props) {
 
     // Check if the mountain is  favorited 
     useEffect(() => {
-        if(session && mountainId) {
-            fetch(`/api/favorites/check?userId=${session.user.id}&mountainId=${mountainId}`)
+        if (session && mountainId) {
+            fetch(`/api/favorites/check?mountainId=${mountainId}`, {
+                credentials: "include",
+            })
                 .then((res) => res.json())
                 .then((data) => {
                     if (data.success) {
@@ -38,9 +40,7 @@ export function FavoriteBtn({ mountainId }: Props) {
         setIsAnimating(true);
         setTimeout(() => setIsAnimating(false), 300);
 
-        const { id: userId } = session.user;
-
-        const res = await fetchFavorites(userId!, mountainId!);
+        const res = await fetchFavorites(mountainId!);
 
         if (!res.success) {
             setIsFavorite((prev) => !prev);

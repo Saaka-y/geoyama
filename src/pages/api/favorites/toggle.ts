@@ -2,13 +2,22 @@
 
 import { NextApiResponse, NextApiRequest } from "next";
 import { prisma } from "@/lib/prisma";
+import { getServerSession } from "next-auth";
+import { authOptions } from "@/pages/api/auth/[...nextauth]";
 
 export default async function handler(
     req: NextApiRequest,
     res: NextApiResponse,
 ) {
     try {
-        const { userId, mountainId } = req.query;
+        const { mountainId } = req.query;
+        const session = await getServerSession(req, res, authOptions)
+
+        if (!session) {
+            return res.status(401).json({ error: "Unauthorized" });
+        }
+        
+        const userId = session?.user?.id;
 
         if (!userId || !mountainId) {
             return res

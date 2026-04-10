@@ -1,7 +1,7 @@
-export async function fetchFavorites(userId: string, mountainId: string) {
+export async function fetchFavorites(mountainId: string) {
     try {
         const res = await fetch(
-            `/api/favorites/toggle?userId=${userId}&mountainId=${mountainId}`,
+            `/api/favorites/toggle?mountainId=${mountainId}`,
             {
                 method: "POST",
                 headers: {
